@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optics &amp; Lasers | Flow Cytometry Hub</title>
+    <style>
+        :root { --primary: #1a5276; --primary-light: #2980b9; --primary-dark: #0e2f44; --accent: #27ae60; --accent-light: #2ecc71; --warning: #e67e22; --danger: #e74c3c; --bg: #f4f6f9; --bg-card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; --border: #dce1e8; --shadow: 0 2px 12px rgba(0,0,0,0.08); --radius: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .nav-links { display: flex; list-style: none; gap: 0; }
+        .nav-links a { color: #ccd6dd; text-decoration: none; padding: 16px 18px; display: block; font-size: 0.9rem; font-weight: 500; white-space: nowrap; transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -3px; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 60px 20px 40px; text-align: center; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
+        .content-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; margin-bottom: 30px; border-left: 4px solid var(--primary-light); }
+        .content-section.accent-green { border-left-color: var(--accent); }
+        .content-section.accent-orange { border-left-color: var(--warning); }
+        .content-section.accent-red { border-left-color: var(--danger); }
+        .content-section.accent-purple { border-left-color: #8e44ad; }
+        .content-section.accent-teal { border-left-color: #16a085; }
+        .content-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .content-section h3 { font-size: 1.15rem; color: var(--primary); margin: 20px 0 10px; }
+        .content-section p { margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
+        .content-section ul, .content-section ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; }
+        .content-section li { margin-bottom: 6px; }
+        .tip { background: #eaf7ee; border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .caution { background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .key-point { background: #eaf2f8; border-left: 3px solid var(--primary-light); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .toc { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 36px; margin-bottom: 30px; }
+        .toc h3 { color: var(--primary); margin-bottom: 14px; font-size: 1.1rem; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--primary-light); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
+        .toc a:hover { color: var(--primary); text-decoration: underline; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 16px 0; }
+        .data-table thead { background: var(--primary-dark); color: #fff; }
+        .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: #f0f4f8; }
+        .diagram-container { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 30px; margin: 20px 0; text-align: center; }
+        .diagram-container .caption { font-size: 0.85rem; color: var(--text-light); margin-top: 14px; font-style: italic; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .comparison-card { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+        .comparison-card h4 { color: var(--primary); margin-bottom: 8px; }
+        .comparison-card p { font-size: 0.88rem; color: var(--text-light); }
+        /* Spectrum */
+        .spectrum-bar { height: 30px; border-radius: 6px; margin: 10px 0; background: linear-gradient(90deg, #8b00ff 0%, #0000ff 15%, #00bfff 25%, #00ff00 40%, #ffff00 55%, #ff8c00 70%, #ff0000 85%, #8b0000 100%); position: relative; }
+        .laser-marker { position: absolute; top: -22px; transform: translateX(-50%); font-size: 0.7rem; font-weight: 700; text-align: center; }
+        .laser-marker::after { content: ''; display: block; width: 2px; height: 52px; background: rgba(0,0,0,0.6); margin: 2px auto 0; }
+        footer { background: var(--primary-dark); color: #aab7c4; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+        footer a { color: var(--accent-light); text-decoration: none; }
+        @media (max-width: 768px) { .content-section { padding: 24px 20px; } .hero h1 { font-size: 1.8rem; } .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">Flow<span>Cytometry</span>Hub</a>
+        <ul class="nav-links">
+            <li><a href="index.html#learning">Learning</a></li>
+            <li><a href="index.html#usecases">Use Cases</a></li>
+            <li><a href="index.html#instruments">Instruments</a></li>
+            <li><a href="index.html#reagents">Reagents</a></li>
+            <li><a href="index.html#protocols">Protocols</a></li>
+        </ul>
+        <a href="index.html" class="back-link">&larr; Back to Hub</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>&#128161; Optics &amp; Lasers</h1>
+    <p>A comprehensive guide to the optical systems that detect scattered light and fluorescence in flow cytometry.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rarr; <a href="index.html#learning">Learning</a> &rarr; Optics &amp; Lasers</div>
+</header>
+
+<div class="content">
+
+    <div class="toc">
+        <h3>&#128218; Table of Contents</h3>
+        <ol>
+            <li><a href="#interactions">Light&ndash;Cell Interactions</a></li>
+            <li><a href="#fsc">Forward Scatter (FSC)</a></li>
+            <li><a href="#ssc">Side Scatter (SSC)</a></li>
+            <li><a href="#lasers">Lasers in Flow Cytometry</a></li>
+            <li><a href="#collection">Optical Collection Path</a></li>
+            <li><a href="#filters">Dichroic Mirrors &amp; Filters</a></li>
+            <li><a href="#detectors">Detectors: PMTs, APDs &amp; SiPMs</a></li>
+            <li><a href="#spectral">Spectral Flow Cytometry</a></li>
+            <li><a href="#signal">Signal Processing &amp; Pulse Geometry</a></li>
+            <li><a href="#practical">Practical Considerations</a></li>
+        </ol>
+    </div>
+
+    <div class="content-section" id="interactions">
+        <h2>1. Light&ndash;Cell Interactions</h2>
+        <p>When a focused laser beam strikes a cell, three things happen simultaneously:</p>
+        <ul>
+            <li><strong>Forward scatter:</strong> Light is diffracted and refracted in the forward direction (0.5&ndash;10&deg; from the laser axis). This is primarily influenced by cell size.</li>
+            <li><strong>Side scatter:</strong> Light is reflected and refracted at ~90&deg; to the laser. This is influenced by internal cell complexity &mdash; granularity, nuclear shape, membrane irregularity.</li>
+            <li><strong>Fluorescence emission:</strong> Fluorochrome molecules on/in the cell absorb photons at the excitation wavelength and re-emit photons at a longer wavelength (Stokes shift). The intensity is proportional to the number of fluorochrome molecules present.</li>
+        </ul>
+        <div class="key-point"><strong>Stokes Shift:</strong> Fluorochromes always emit at longer wavelengths (lower energy) than their excitation wavelength. This shift is what allows optical filters to separate excitation light from fluorescence emission. Larger Stokes shifts make for easier separation.</div>
+        <h3>Elastic vs. Inelastic Scattering</h3>
+        <p><strong>Elastic scattering</strong> (FSC, SSC) preserves the photon wavelength &mdash; light is scattered but not color-shifted. <strong>Inelastic scattering</strong> (fluorescence, Raman) involves energy transfer and wavelength change. In flow cytometry, we exploit both: elastic scattering for physical characterization and inelastic fluorescence for molecular identification.</p>
+    </div>
+
+    <div class="content-section accent-green" id="fsc">
+        <h2>2. Forward Scatter (FSC)</h2>
+        <p>Forward scatter is collected by a detector positioned directly in front of the laser beam, typically offset by 0.5&ndash;10 degrees. An <strong>obscuration bar</strong> blocks the direct laser light so only scattered photons reach the detector.</p>
+        <h3>What FSC Measures</h3>
+        <ul>
+            <li>Primarily correlates with <strong>cell size</strong> (volume), but this is an approximation</li>
+            <li>Actually measures the integral of forward-angle light scattering, which depends on size, refractive index, shape, and surface smoothness</li>
+            <li>Larger cells generally produce higher FSC signals</li>
+            <li>Dead cells often have reduced FSC due to membrane compromission and volume loss</li>
+        </ul>
+        <h3>FSC Detector</h3>
+        <p>FSC is detected by a <strong>photodiode</strong> (not a PMT) because the forward scatter signal is very bright compared to fluorescence. A neutral density (ND) filter attenuates the signal to a usable range. Some instruments offer an "FSC-area" and "FSC-height" parameter derived from the pulse shape.</p>
+        <div class="tip"><strong>Tip:</strong> FSC is critical for <strong>doublet discrimination</strong>. By comparing FSC-Height vs FSC-Area (or FSC-Height vs FSC-Width), doublets can be identified because two cells stuck together have a wider pulse with disproportionate height-to-area ratio.</div>
+    </div>
+
+    <div class="content-section accent-orange" id="ssc">
+        <h2>3. Side Scatter (SSC)</h2>
+        <p>Side scatter is collected at 90&deg; to the laser beam, typically via a collection lens on the same optical bench as the fluorescence detectors.</p>
+        <h3>What Causes High vs. Low SSC</h3>
+        <table class="data-table">
+            <thead><tr><th>Cell Type</th><th>SSC Level</th><th>Reason</th></tr></thead>
+            <tbody>
+                <tr><td>Lymphocytes</td><td>Low</td><td>Small, round, minimal cytoplasmic granules</td></tr>
+                <tr><td>Monocytes</td><td>Intermediate</td><td>Larger, kidney-shaped nucleus, some granules</td></tr>
+                <tr><td>Granulocytes (Neutrophils)</td><td>High</td><td>Multi-lobed nucleus, abundant cytoplasmic granules</td></tr>
+                <tr><td>Eosinophils</td><td>Very High</td><td>Large, dense eosinophilic granules</td></tr>
+                <tr><td>Platelets / RBC debris</td><td>Very Low</td><td>Very small, no nucleus</td></tr>
+            </tbody>
+        </table>
+        <p>SSC is detected by a <strong>PMT</strong> (or APD on some instruments) because the signal is weaker than FSC. It uses a bandpass filter centered on the laser wavelength (e.g., 488/10 BP for a 488 nm laser).</p>
+    </div>
+
+    <div class="content-section accent-red" id="lasers">
+        <h2>4. Lasers in Flow Cytometry</h2>
+        <p>Modern flow cytometers use solid-state diode-pumped lasers. The choice and number of lasers determines which fluorochromes can be excited and therefore how many markers can be measured simultaneously.</p>
+
+        <div class="diagram-container">
+            <h4 style="color: var(--primary); margin-bottom: 20px;">Common Laser Lines &amp; the Visible Spectrum</h4>
+            <div style="position: relative; margin: 40px auto 10px; max-width: 700px;">
+                <div class="spectrum-bar">
+                    <div class="laser-marker" style="left: 4%; color: #7700aa;">UV<br>355nm</div>
+                    <div class="laser-marker" style="left: 14%; color: #6600cc;">Violet<br>405nm</div>
+                    <div class="laser-marker" style="left: 32%; color: #0066ff;">Blue<br>488nm</div>
+                    <div class="laser-marker" style="left: 46%; color: #558800;">Y-G<br>561nm</div>
+                    <div class="laser-marker" style="left: 68%; color: #cc0000;">Red<br>633nm</div>
+                    <div class="laser-marker" style="left: 92%; color: #660000;">NIR<br>808nm</div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-light); max-width: 700px; margin: 8px auto 0;">
+                <span>350 nm</span><span>450</span><span>550</span><span>650</span><span>750</span><span>850 nm</span>
+            </div>
+            <div class="caption">Common laser wavelengths used in flow cytometry. Most instruments include blue (488 nm); additional lasers expand the number of usable fluorochromes.</div>
+        </div>
+
+        <table class="data-table">
+            <thead><tr><th>Laser</th><th>Wavelength</th><th>Key Fluorochromes Excited</th><th>Notes</th></tr></thead>
+            <tbody>
+                <tr><td><strong>UV</strong></td><td>355 nm</td><td>DAPI, Hoechst, BUV395, BUV496, BUV563, BUV661, BUV737, BUV805, Indo-1</td><td>Expensive; needed for high-parameter panels and some viability/calcium dyes</td></tr>
+                <tr><td><strong>Violet</strong></td><td>405 nm</td><td>BV421, BV480, BV510, BV605, BV650, BV711, BV750, BV786, eFluor 450, Pacific Blue, LIVE/DEAD Fixable Violet</td><td>Became standard; excites the largest range of polymer dyes</td></tr>
+                <tr><td><strong>Blue</strong></td><td>488 nm</td><td>FITC, PE, PerCP, PerCP-Cy5.5, PI, CFSE, Calcein AM, SYTO dyes</td><td>Universal laser; present on virtually every cytometer</td></tr>
+                <tr><td><strong>Yellow-Green</strong></td><td>561 nm</td><td>PE (optimal), PE-tandems, mCherry, dsRed, tdTomato, EtBr, 7-AAD</td><td>Dramatically improves PE excitation efficiency vs 488 nm; important for dim PE signals</td></tr>
+                <tr><td><strong>Red</strong></td><td>633 nm</td><td>APC, APC-Cy7, APC-H7, APC-Fire 750, Alexa Fluor 647/700, DRAQ5, LIVE/DEAD Fixable Far Red</td><td>Essential for APC-conjugated antibodies; minimal autofluorescence</td></tr>
+                <tr><td><strong>Near-IR</strong></td><td>808 nm</td><td>Select NIR dyes, APC-Fire 810</td><td>Newest addition; further expands panel capacity</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Beam Shaping</h3>
+        <p>Raw laser output is typically a circular Gaussian beam. For flow cytometry, this is reshaped into an <strong>elliptical beam spot</strong> (~20 &times; 60&ndash;80 &micro;m) using cylindrical lenses. The wide axis is perpendicular to the flow to ensure all cells are illuminated regardless of minor lateral positioning variations. The narrow axis is along the flow direction to improve pulse resolution.</p>
+
+        <h3>Spatial vs. Temporal Separation</h3>
+        <p>When multiple lasers are used, they must interrogate cells at different points or times to avoid signal mixing:</p>
+        <ul>
+            <li><strong>Spatially separated:</strong> Lasers are physically aimed at different points along the flow stream (separated by ~100&ndash;200 &micro;m). Electronic delay circuitry re-associates signals from the same cell. (Most common approach.)</li>
+            <li><strong>Temporally separated:</strong> Lasers pulse on/off in rapid sequence at the same interrogation point. Less common; used in some older instruments.</li>
+            <li><strong>Collinear:</strong> Multiple laser beams are focused onto the same interrogation point, but their emissions are separated by wavelength. Used in some spectral systems.</li>
+        </ul>
+    </div>
+
+    <div class="content-section accent-purple" id="collection">
+        <h2>5. Optical Collection Path</h2>
+        <p>After light is scattered or emitted by a cell, it must be efficiently collected and routed to the correct detectors. The optical collection system consists of:</p>
+        <ol>
+            <li><strong>Collection lens:</strong> A high-NA (numerical aperture) lens positioned at 90&deg; to the laser captures fluorescence and SSC. Typical NA: 1.0&ndash;1.3 (with gel-coupling).</li>
+            <li><strong>Fiber optics (some instruments):</strong> Multi-mode optical fibers route collected light from the flow cell to a remote detector array. This allows the optical bench to be mechanically decoupled from the flow cell.</li>
+            <li><strong>Dichroic mirror array:</strong> A series of dichroic mirrors and bandpass filters splits the collected light into discrete wavelength bands, each directed to its own detector.</li>
+        </ol>
+        <div class="key-point"><strong>Optical Bench Layout:</strong> In a typical 4-laser instrument, there are 4 separate detector arrays (one per laser). Each array contains 3&ndash;10+ dichroic/filter/PMT modules arranged in sequence. Light enters the array and hits the first dichroic, which reflects shorter wavelengths to a detector and transmits longer wavelengths onward. This cascade continues until all wavelength bands are separated.</div>
+    </div>
+
+    <div class="content-section accent-teal" id="filters">
+        <h2>6. Dichroic Mirrors &amp; Optical Filters</h2>
+        <p>Optical filters are the critical components that determine which wavelengths of light reach each detector. Understanding filter nomenclature is essential for configuring instruments and designing panels.</p>
+
+        <h3>Filter Types</h3>
+        <table class="data-table">
+            <thead><tr><th>Filter Type</th><th>Abbreviation</th><th>Function</th><th>Example</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Bandpass (BP)</strong></td><td>BP or /</td><td>Transmits a narrow range of wavelengths; blocks everything else</td><td>525/50 BP = transmits 500&ndash;550 nm (center: 525 nm, bandwidth: 50 nm)</td></tr>
+                <tr><td><strong>Longpass (LP)</strong></td><td>LP</td><td>Transmits wavelengths above the cutoff; blocks shorter</td><td>600 LP = transmits &ge;600 nm</td></tr>
+                <tr><td><strong>Shortpass (SP)</strong></td><td>SP</td><td>Transmits wavelengths below the cutoff; blocks longer</td><td>500 SP = transmits &le;500 nm</td></tr>
+                <tr><td><strong>Dichroic Mirror</strong></td><td>DM or DLP</td><td>Reflects shorter wavelengths, transmits longer (or vice versa); placed at 45&deg;</td><td>550 DLP reflects &lt;550 nm, transmits &gt;550 nm</td></tr>
+                <tr><td><strong>Notch Filter</strong></td><td>NF</td><td>Blocks a narrow range while transmitting everything else</td><td>488 NF blocks laser scatter light</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Reading Filter Notation</h3>
+        <p>When you see a detector described as <strong>"525/50 BP"</strong>, this means:</p>
+        <ul>
+            <li>Center wavelength: 525 nm</li>
+            <li>Bandwidth: 50 nm (i.e., &plusmn;25 nm from center)</li>
+            <li>Transmission window: 500 nm to 550 nm</li>
+            <li>Common use: FITC detection (emission peak ~519 nm)</li>
+        </ul>
+        <div class="tip"><strong>Tip:</strong> When choosing between two bandpass filters for a fluorochrome, consider the trade-off: wider bandwidth collects more photons (brighter signal) but also more spectral overlap (more compensation needed). Narrower bandwidth gives cleaner signal but dimmer. For dim markers, prefer wider BP. For multicolor panels with many overlapping dyes, prefer narrower BP.</div>
+    </div>
+
+    <div class="content-section" id="detectors">
+        <h2>7. Detectors: PMTs, APDs &amp; SiPMs</h2>
+        <p>Detectors convert photons into electrical signals. The choice of detector technology impacts sensitivity, dynamic range, and noise characteristics.</p>
+
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h4>PMT (Photomultiplier Tube)</h4>
+                <p><strong>How it works:</strong> Photons hit a photocathode, releasing electrons via the photoelectric effect. These electrons are amplified through a series of dynodes (typically 8&ndash;12 stages), each multiplying the electron count by 3&ndash;6&times;. Total gain: 10<sup>5</sup>&ndash;10<sup>7</sup>.</p>
+                <p><strong>Pros:</strong> Excellent signal-to-noise, wide dynamic range, well-established technology, adjustable gain via voltage.</p>
+                <p><strong>Cons:</strong> Lower quantum efficiency (15&ndash;30%), physically large, higher cost.</p>
+                <p><strong>Used in:</strong> BD, Sony, Bio-Rad, most traditional instruments.</p>
+            </div>
+            <div class="comparison-card">
+                <h4>APD (Avalanche Photodiode)</h4>
+                <p><strong>How it works:</strong> Semiconductor detector where photon-generated electrons trigger an avalanche multiplication effect. Gain: 50&ndash;500&times;.</p>
+                <p><strong>Pros:</strong> Higher quantum efficiency (60&ndash;85%), compact size, better red sensitivity, lower operating voltage.</p>
+                <p><strong>Cons:</strong> Lower internal gain (requires more electronic amplification), can be noisier at very low light levels.</p>
+                <p><strong>Used in:</strong> Beckman Coulter CytoFLEX platform.</p>
+            </div>
+            <div class="comparison-card">
+                <h4>SiPM (Silicon Photomultiplier)</h4>
+                <p><strong>How it works:</strong> Array of thousands of single-photon avalanche diodes (SPADs) operating in Geiger mode. Each SPAD fires independently; total output is proportional to photon count.</p>
+                <p><strong>Pros:</strong> Extremely compact, high quantum efficiency, single-photon sensitivity, no high voltage needed.</p>
+                <p><strong>Cons:</strong> Newer technology in cytometry, temperature-sensitive, higher dark count rate.</p>
+                <p><strong>Used in:</strong> Emerging in next-gen instruments.</p>
+            </div>
+        </div>
+
+        <h3>PMT Voltage Optimization</h3>
+        <p>Setting the correct PMT voltage is critical. Too low: dim populations fall below detection threshold. Too high: bright populations saturate the detector and data is clipped.</p>
+        <p>The <strong>"Peak 2" method</strong> (or similar bead-based approaches) uses multi-intensity calibration beads to set PMT voltages at the optimal point where dim populations are resolved from noise while bright populations remain on-scale.</p>
+    </div>
+
+    <div class="content-section accent-green" id="spectral">
+        <h2>8. Spectral Flow Cytometry</h2>
+        <p>Spectral flow cytometry represents a paradigm shift from traditional filter-based detection. Instead of using dichroic mirrors and bandpass filters to isolate discrete wavelength bands, spectral instruments capture the <strong>entire emission spectrum</strong> of each cell using dispersive optics.</p>
+
+        <h3>How It Works</h3>
+        <ol>
+            <li>Fluorescence from each laser is collected by a single optical fiber or lens.</li>
+            <li>A prism or diffraction grating disperses the light into a continuous spectrum.</li>
+            <li>A linear array of 32&ndash;64+ detectors captures the full spectrum simultaneously.</li>
+            <li>Mathematical <strong>spectral unmixing</strong> algorithms (rather than compensation) deconvolve the contributions of each fluorochrome based on their known reference spectra.</li>
+        </ol>
+
+        <h3>Advantages Over Conventional</h3>
+        <ul>
+            <li><strong>More fluorochromes per panel:</strong> Spectral unmixing can resolve dyes with similar emission peaks that would be impossible with bandpass filters.</li>
+            <li><strong>Autofluorescence extraction:</strong> Cell autofluorescence is treated as an additional "fluorochrome" with its own spectral signature. It can be unmixed and removed, improving resolution of dim markers.</li>
+            <li><strong>No filter changes:</strong> The optical configuration is fixed. All dyes are detected simultaneously without needing to swap filter sets.</li>
+            <li><strong>Better use of the full spectrum:</strong> Every photon contributes to the unmixing solution, improving overall sensitivity.</li>
+        </ul>
+
+        <h3>Spectral Instrument Leaders</h3>
+        <ul>
+            <li><strong>Cytek Aurora / Northern Lights:</strong> Pioneer of affordable full-spectrum profiling (FSP). Up to 5 lasers, 64 detectors.</li>
+            <li><strong>Sony ID7000:</strong> Up to 7 lasers, 186 detectors. Highest detector count available.</li>
+            <li><strong>BD FACSDiscover S8:</strong> SpectralFX technology with 8 lasers. Combines spectral with CellView imaging.</li>
+            <li><strong>BD FACSymphony A5 SE:</strong> Spectral-enabled FACSymphony platform. Live spectral unmixing.</li>
+            <li><strong>Thermo Fisher Attune Xenith:</strong> Hybrid spectral + conventional modes on acoustic-focusing platform.</li>
+        </ul>
+    </div>
+
+    <div class="content-section accent-orange" id="signal">
+        <h2>9. Signal Processing &amp; Pulse Geometry</h2>
+        <p>When a cell passes through the laser beam, it generates a brief pulse of light (typically 1&ndash;10 &micro;s duration). The electronics capture three measurements from each pulse:</p>
+        <ul>
+            <li><strong>Height (H):</strong> The peak intensity of the pulse. Proportional to the brightest point of the cell passing through the laser.</li>
+            <li><strong>Width (W):</strong> The time duration of the pulse. Related to the transit time of the cell through the beam &mdash; influenced by cell size and flow velocity.</li>
+            <li><strong>Area (A):</strong> The integrated area under the pulse curve (Height &times; Width). Represents the total signal from the entire cell. Most commonly used for fluorescence quantitation.</li>
+        </ul>
+        <div class="key-point"><strong>Doublet Discrimination:</strong> For a single cell, Height and Area scale linearly. When two cells pass through together (doublet), the Area approximately doubles but the Height stays roughly the same (the pulse is wider, not taller). Plotting Height vs. Area reveals doublets as events that deviate from the diagonal &mdash; essential for accurate DNA cell cycle analysis and any application requiring single-cell resolution.</div>
+
+        <h3>Analog-to-Digital Conversion (ADC)</h3>
+        <p>The analog electrical signal from detectors is digitized by an ADC. Modern instruments use 16&ndash;24 bit ADCs, providing:</p>
+        <ul>
+            <li><strong>16-bit:</strong> 65,536 channels of resolution (2<sup>16</sup>)</li>
+            <li><strong>18&ndash;24 bit:</strong> Finer resolution for spreading and dim signal detection (up to 16 million channels)</li>
+        </ul>
+        <p>Higher bit-depth ADCs allow better resolution of dim populations and reduce digitization noise.</p>
+
+        <h3>Linear vs. Logarithmic Amplification</h3>
+        <p><strong>Linear:</strong> Equal spacing between values. Best for scatter parameters and DNA content (cell cycle).</p>
+        <p><strong>Logarithmic:</strong> Compresses the upper range and expands the lower range. Traditionally used for fluorescence because expression levels can span 4&ndash;5 decades. In modern digital instruments, data is collected in linear mode and log transformation is applied in software.</p>
+    </div>
+
+    <div class="content-section accent-red" id="practical">
+        <h2>10. Practical Considerations</h2>
+
+        <h3>Optical Alignment</h3>
+        <p>Proper optical alignment is crucial for optimal performance. Signs of misalignment include:</p>
+        <ul>
+            <li>Poor CV on QC beads (&gt;3% for mid-range beads)</li>
+            <li>Low signal intensity despite correct PMT voltages</li>
+            <li>Asymmetric or double-peaked bead histograms</li>
+            <li>Poor doublet discrimination (FSC-H vs FSC-A not forming a tight diagonal)</li>
+        </ul>
+        <p>Most modern instruments have fixed or factory-aligned optics that don't require user alignment. Cuvette-based instruments (CytoFLEX, FACSymphony A-series) are more alignment-stable than jet-in-air systems.</p>
+
+        <h3>Minimizing Spectral Overlap in Panel Design</h3>
+        <ol>
+            <li>Place the brightest fluorochrome on the dimmest antigen, and vice versa.</li>
+            <li>Avoid pairing fluorochromes with heavy spillover on channels measuring dim markers.</li>
+            <li>Use online panel design tools: <strong>FluoroFinder</strong>, <strong>BD Horizon Spectrum Viewer</strong>, <strong>BioLegend Spectra Analyzer</strong>, <strong>Cytek Full Spectrum Viewer</strong>.</li>
+            <li>Consider tandem dye degradation &mdash; PE-Cy7, APC-Cy7, and other tandems can break down with fixation, light exposure, or over time, creating spectral anomalies.</li>
+            <li>Run FMO controls (see Compensation &amp; Controls page) to set accurate gating boundaries.</li>
+        </ol>
+
+        <h3>Choosing Filter Sets</h3>
+        <p>If your instrument allows filter swaps, consider:</p>
+        <ul>
+            <li>Use the bandpass filter that maximizes the <strong>stain index</strong> (separation between positive and negative divided by 2&times; the standard deviation of the negative).</li>
+            <li>For closely spaced dyes, use narrower bandpass filters to minimize cross-talk.</li>
+            <li>For rare or dim populations, use wider bandpass filters to capture more photons.</li>
+        </ul>
+
+        <div class="tip"><strong>Pro Tip:</strong> Always run <strong>single-stained controls</strong> and <strong>QC beads</strong> on the same day and with the same settings as your experiment. Optical performance can drift with laser warm-up, temperature changes, and alignment micro-shifts. Consistent QC is the foundation of reproducible flow cytometry data.</div>
+    </div>
+
+</div>
+
+<footer>
+    <p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p>
+    <p style="margin-top: 8px;">Flow Cytometry Hub &mdash; A comprehensive educational resource for flow cytometry.</p>
+</footer>
+
+</body>
+</html>

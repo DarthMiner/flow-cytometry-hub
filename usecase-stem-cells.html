@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stem Cell Research | Flow Cytometry Hub</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --primary-dark: #0e2f44;
+            --accent: #27ae60;
+            --accent-light: #2ecc71;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --bg: #f4f6f9;
+            --bg-card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 60px 20px 40px; text-align: center; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
+        .content-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; margin-bottom: 30px; border-left: 4px solid var(--primary-light); }
+        .content-section.accent-green { border-left-color: var(--accent); }
+        .content-section.accent-orange { border-left-color: var(--warning); }
+        .content-section.accent-red { border-left-color: var(--danger); }
+        .content-section.accent-purple { border-left-color: #8e44ad; }
+        .content-section.accent-teal { border-left-color: #16a085; }
+        .content-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .content-section h3 { font-size: 1.15rem; color: var(--primary); margin: 20px 0 10px; }
+        .content-section p { margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
+        .content-section ul, .content-section ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; }
+        .content-section li { margin-bottom: 6px; }
+        .tip { background: #eaf7ee; border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .caution { background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .key-point { background: #eaf2f8; border-left: 3px solid var(--primary-light); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .toc { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 36px; margin-bottom: 30px; }
+        .toc h3 { color: var(--primary); margin-bottom: 14px; font-size: 1.1rem; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--primary-light); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
+        .toc a:hover { color: var(--primary); text-decoration: underline; }
+        .diagram-container { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 30px; margin: 20px 0; text-align: center; }
+        .diagram-container .caption { font-size: 0.85rem; color: var(--text-light); margin-top: 14px; font-style: italic; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .comparison-card { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+        .comparison-card h4 { color: var(--primary); margin-bottom: 8px; }
+        .comparison-card p { font-size: 0.88rem; color: var(--text-light); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 16px 0; }
+        .data-table thead { background: var(--primary-dark); color: #fff; }
+        .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: #f0f4f8; }
+        footer { background: var(--primary-dark); color: #aab7c4; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+        footer a { color: var(--accent-light); text-decoration: none; }
+        @media (max-width: 768px) {
+            .content-section { padding: 24px 20px; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">Flow Cytometry <span>Hub</span></a>
+        <a href="index.html" class="back-link">&larr; Back to Main</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>&#129656; Stem Cell Research</h1>
+    <p>Identifying, characterizing, and isolating stem cell populations by flow cytometry for research and clinical transplantation.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rarr; <a href="index.html#usecases">Use Cases</a> &rarr; Stem Cell Research</div>
+</header>
+
+<main class="content">
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#intro">Introduction to Stem Cells in Flow Cytometry</a></li>
+            <li><a href="#hsc">Hematopoietic Stem Cells (HSCs)</a></li>
+            <li><a href="#cd34">CD34 Enumeration (Clinical)</a></li>
+            <li><a href="#msc">Mesenchymal Stem/Stromal Cells (MSCs)</a></li>
+            <li><a href="#ipsc">iPSC &amp; ESC Characterization</a></li>
+            <li><a href="#csc">Cancer Stem Cells</a></li>
+            <li><a href="#sorting">Stem Cell Sorting &amp; Enrichment</a></li>
+            <li><a href="#functional">Functional Stem Cell Assays by Flow</a></li>
+            <li><a href="#differentiation">Differentiation Tracking &amp; Lineage Analysis</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ol>
+    </div>
+
+    <div class="content-section" id="intro">
+        <h2>1. Introduction to Stem Cells in Flow Cytometry</h2>
+        <p>Stem cells are defined by two cardinal properties: self-renewal (the ability to divide and produce daughter cells that retain stemness) and potency (the ability to differentiate into specialized cell types). The major categories of stem cells studied by flow cytometry include:</p>
+        <ul>
+            <li><strong>Hematopoietic Stem Cells (HSCs)</strong> &mdash; give rise to all blood cell lineages; clinically transplanted</li>
+            <li><strong>Mesenchymal Stem/Stromal Cells (MSCs)</strong> &mdash; differentiate into bone, cartilage, fat; used in regenerative medicine</li>
+            <li><strong>Induced Pluripotent Stem Cells (iPSCs)</strong> &mdash; reprogrammed somatic cells with ESC-like pluripotency</li>
+            <li><strong>Embryonic Stem Cells (ESCs)</strong> &mdash; derived from the inner cell mass of blastocysts</li>
+            <li><strong>Tissue-specific progenitors</strong> &mdash; neural, intestinal, muscle satellite cells, and others</li>
+        </ul>
+        <p>Flow cytometry is essential for stem cell research because stem cells are rare and reside within heterogeneous populations. Multiparameter analysis enables their precise identification, quantification, and physical isolation for downstream functional studies.</p>
+        <div class="key-point"><strong>Key Concept:</strong> No single marker defines any stem cell population. Stem cell identification always requires a combination of positive and negative markers, often arranged as a hierarchical gating strategy. A cell is identified as a stem cell by what it expresses <em>and</em> what it lacks.</div>
+    </div>
+
+    <div class="content-section accent-green" id="hsc">
+        <h2>2. Hematopoietic Stem Cells (HSCs)</h2>
+        <p>HSCs sit at the apex of the hematopoietic hierarchy and give rise to all blood cell types. The classical model defines a differentiation cascade:</p>
+        <p><strong>LT-HSC &rarr; ST-HSC &rarr; MPP &rarr; CMP / CLP &rarr; committed progenitors &rarr; mature cells</strong></p>
+        <p>Long-term HSCs (LT-HSCs) have unlimited self-renewal capacity and can reconstitute the entire blood system upon transplantation. Short-term HSCs (ST-HSCs) have limited self-renewal. Multipotent progenitors (MPPs) have lost self-renewal but retain multilineage differentiation potential.</p>
+
+        <h3>Human HSC Markers</h3>
+        <table class="data-table">
+            <thead><tr><th>Population</th><th>Human Phenotype</th><th>Mouse Phenotype</th><th>Functional Test</th></tr></thead>
+            <tbody>
+                <tr><td>LT-HSC</td><td>Lin&minus; CD34+ CD38&minus; CD45RA&minus; CD90+ CD49f+</td><td>Lin&minus; Sca-1+ c-Kit+ (LSK) CD150+ CD48&minus; CD34&minus;</td><td>Serial transplantation (engrafts &gt;16 weeks)</td></tr>
+                <tr><td>ST-HSC</td><td>Lin&minus; CD34+ CD38&minus; CD45RA&minus; CD90&minus;</td><td>LSK CD150+ CD48&minus; CD34+</td><td>Primary transplant engraftment (4&ndash;12 weeks)</td></tr>
+                <tr><td>MPP</td><td>Lin&minus; CD34+ CD38&minus; CD45RA&minus; CD90&minus; CD49f&minus;</td><td>LSK CD150&minus; CD48&minus;</td><td>Multilineage colonies in vitro</td></tr>
+                <tr><td>CMP</td><td>Lin&minus; CD34+ CD38+ CD123lo CD45RA&minus;</td><td>Lin&minus; Sca-1&minus; c-Kit+ CD34+ Fc&gamma;RII/IIIlo</td><td>Myeloid colony assays</td></tr>
+                <tr><td>CLP</td><td>Lin&minus; CD34+ CD38+ CD10+ CD45RA+</td><td>Lin&minus; IL-7R&alpha;+ Sca-1lo c-Kitlo</td><td>B/T/NK cell generation</td></tr>
+            </tbody>
+        </table>
+
+        <h3>The Lineage-Negative (Lin&minus;) Gate</h3>
+        <p>The Lin&minus; gate is critical for HSC identification. A cocktail of antibodies against mature lineage markers (CD2, CD3, CD14, CD16, CD19, CD56, CD235a) is used in a single fluorescence channel (the &ldquo;dump channel&rdquo;). All Lin+ cells are excluded, enriching for the rare progenitor and stem cell compartment that constitutes only 1&ndash;5% of bone marrow mononuclear cells.</p>
+
+        <h3>Side Population (SP) Assay</h3>
+        <p>HSCs can be identified functionally by their ability to efflux Hoechst 33342 dye via ABCG2/BCRP transporters. When Hoechst fluorescence is visualized on a bivariate plot (Hoechst Blue vs. Hoechst Red), the SP appears as a &ldquo;tail&rdquo; off the main population. This population is highly enriched for HSCs. The SP assay requires careful temperature control (37&deg;C staining) and a verapamil or fumitremorgin C control to define the SP gate.</p>
+    </div>
+
+    <div class="content-section accent-orange" id="cd34">
+        <h2>3. CD34 Enumeration (Clinical)</h2>
+        <p>CD34 enumeration is the most widely performed clinical flow cytometry test for stem cells. It determines when to harvest mobilized peripheral blood stem cells (PBSCs) for autologous or allogeneic transplantation and measures the adequacy of collected grafts.</p>
+
+        <h3>ISHAGE Protocol</h3>
+        <p>The International Society for Hematotherapy and Graft Engineering (ISHAGE) developed a standardized single-platform protocol using sequential Boolean gating:</p>
+        <ol>
+            <li>Gate CD45+ events on CD45 vs. SSC plot</li>
+            <li>Gate CD34+ events from CD45+ population</li>
+            <li>Backgate CD34+ to confirm they fall in the CD45 dim / SSC low region</li>
+            <li>Exclude dead cells (7-AAD or DAPI)</li>
+            <li>Calculate absolute count using TruCount or Flow-Count beads</li>
+        </ol>
+
+        <table class="data-table">
+            <thead><tr><th>Source</th><th>Typical CD34+ Frequency</th><th>Collection Method</th><th>Target Dose</th></tr></thead>
+            <tbody>
+                <tr><td>Steady-state bone marrow</td><td>1&ndash;3% of MNCs</td><td>BM aspiration</td><td>&ge;2 &times; 10<sup>6</sup>/kg</td></tr>
+                <tr><td>G-CSF mobilized PB</td><td>0.1&ndash;1% of WBC at peak</td><td>Leukapheresis</td><td>&ge;2 &times; 10<sup>6</sup>/kg (optimal &ge;5 &times; 10<sup>6</sup>/kg)</td></tr>
+                <tr><td>Cord blood</td><td>0.5&ndash;2% of MNCs</td><td>Collection at delivery</td><td>&ge;1.7 &times; 10<sup>5</sup>/kg</td></tr>
+                <tr><td>Plerixafor-mobilized</td><td>0.5&ndash;3% of WBC</td><td>Leukapheresis</td><td>&ge;2 &times; 10<sup>6</sup>/kg</td></tr>
+            </tbody>
+        </table>
+
+        <div class="caution"><strong>Caution:</strong> CD34 enumeration must follow the ISHAGE gating strategy precisely. Improper gating&mdash;such as not requiring the Boolean AND of CD45dim, CD34+, and low SSC&mdash;leads to inaccurate counts that can affect clinical decisions on harvest timing or graft adequacy. Always include the backgating verification step.</div>
+    </div>
+
+    <div class="content-section accent-red" id="msc">
+        <h2>4. Mesenchymal Stem/Stromal Cells (MSCs)</h2>
+        <p>MSCs are multipotent cells found in bone marrow, adipose tissue, umbilical cord (Wharton&rsquo;s jelly), dental pulp, and other tissues. They can differentiate into osteoblasts, chondrocytes, and adipocytes, and are widely studied for regenerative medicine and immunomodulatory therapy.</p>
+
+        <h3>ISCT Minimum Criteria for MSC Identification</h3>
+        <p>The International Society for Cellular Therapy (ISCT) established minimum criteria in 2006 that include surface marker expression:</p>
+        <table class="data-table">
+            <thead><tr><th>Category</th><th>Markers</th><th>Required Expression</th></tr></thead>
+            <tbody>
+                <tr><td>Positive (&ge;95%)</td><td>CD73 (ecto-5&prime;-nucleotidase)</td><td>Must be positive</td></tr>
+                <tr><td>Positive (&ge;95%)</td><td>CD90 (Thy-1)</td><td>Must be positive</td></tr>
+                <tr><td>Positive (&ge;95%)</td><td>CD105 (endoglin)</td><td>Must be positive</td></tr>
+                <tr><td>Negative (&le;2%)</td><td>CD45, CD34, CD14 or CD11b</td><td>Must be negative</td></tr>
+                <tr><td>Negative (&le;2%)</td><td>CD79a or CD19, HLA-DR</td><td>Must be negative</td></tr>
+            </tbody>
+        </table>
+        <p>Additional useful markers include CD29, CD44, CD166, and STRO-1, though these are not part of the minimum criteria. MSC identity should also be confirmed by tri-lineage differentiation assays (osteogenic, adipogenic, chondrogenic).</p>
+        <div class="tip"><strong>Tip:</strong> MSCs lose CD105 expression with extended passage number and can acquire CD34 positivity under certain culture conditions. Always assess MSC phenotype at each passage and before therapeutic use to ensure they still meet ISCT criteria.</div>
+    </div>
+
+    <div class="content-section accent-teal" id="ipsc">
+        <h2>5. iPSC &amp; ESC Characterization</h2>
+        <p>Pluripotent stem cells&mdash;both embryonic stem cells (ESCs) and induced pluripotent stem cells (iPSCs)&mdash;can differentiate into any cell type of the three germ layers. Flow cytometry is used to assess pluripotency marker expression, monitor reprogramming efficiency, and perform quality control.</p>
+
+        <h3>Pluripotency Markers</h3>
+        <ul>
+            <li><strong>Surface markers (live-cell compatible):</strong> TRA-1-60, TRA-1-81, SSEA-3, SSEA-4</li>
+            <li><strong>Intracellular markers (require fix/perm):</strong> Oct4 (POU5F1), Nanog, Sox2, Rex1</li>
+        </ul>
+        <p>TRA-1-60 and SSEA-4 are the most commonly used surface markers for identifying human pluripotent stem cells by flow cytometry. They enable live-cell sorting of pluripotent populations without requiring fixation.</p>
+
+        <h3>Monitoring Reprogramming Efficiency</h3>
+        <p>During iPSC generation from fibroblasts or PBMCs, flow cytometry tracks the progressive acquisition of pluripotency markers. Typical kinetics: SSEA-4 appears early (day 7&ndash;10), followed by TRA-1-60 (day 14&ndash;21), with full pluripotency marker acquisition by day 21&ndash;28. Reprogramming efficiency is typically reported as the percentage of TRA-1-60+ colonies or TRA-1-60+/SSEA-4+ cells.</p>
+
+        <div class="tip"><strong>Tip:</strong> TRA-1-60 is the most reliable single surface marker for human pluripotency. Unlike SSEA-4, which can also be expressed on some feeder cells and differentiated cell types, TRA-1-60 is highly specific to undifferentiated pluripotent cells. Use it as your primary marker for live sorting of iPSC/ESC populations.</div>
+
+        <h3>Differentiation Tracking</h3>
+        <p>As pluripotent cells differentiate, they lose TRA-1-60 and SSEA-4 expression and gain lineage-specific markers. Monitoring the loss of pluripotency markers confirms successful directed differentiation and helps identify residual undifferentiated cells that could form teratomas upon transplantation.</p>
+    </div>
+
+    <div class="content-section accent-purple" id="csc">
+        <h2>6. Cancer Stem Cells</h2>
+        <p>The cancer stem cell (CSC) hypothesis proposes that tumors contain a subpopulation of cells with stem-like properties&mdash;self-renewal and the ability to initiate tumor growth. These cells may be responsible for tumor recurrence and therapy resistance.</p>
+
+        <table class="data-table">
+            <thead><tr><th>Cancer Type</th><th>CSC Markers</th><th>Functional Assay</th></tr></thead>
+            <tbody>
+                <tr><td>Breast cancer</td><td>CD44+/CD24&minus;/low, ALDH+</td><td>Tumor formation in NOD/SCID mice (100&ndash;500 cells)</td></tr>
+                <tr><td>AML</td><td>CD34+/CD38&minus;, CD123+</td><td>Engraftment in immunodeficient mice</td></tr>
+                <tr><td>Colon cancer</td><td>CD133+ (Prominin-1), LGR5+, EpCAM+</td><td>Organoid formation, xenograft</td></tr>
+                <tr><td>Glioblastoma</td><td>CD133+, CD15+, ALDH+</td><td>Neurosphere formation, intracranial transplant</td></tr>
+                <tr><td>Pancreatic cancer</td><td>CD44+/CD24+/EpCAM+</td><td>Tumor initiation in mice</td></tr>
+                <tr><td>Liver cancer (HCC)</td><td>CD133+, CD90+, EpCAM+</td><td>Serial transplantation</td></tr>
+            </tbody>
+        </table>
+
+        <div class="key-point"><strong>Important Note:</strong> The CSC concept remains controversial. Surface marker expression may reflect a cellular state (influenced by microenvironment, culture conditions, or EMT status) rather than a fixed cell identity. CD133, for example, can be re-expressed by non-stem cells under hypoxia. Functional assays (limiting dilution transplantation) remain the gold standard for validating CSC identity.</div>
+    </div>
+
+    <div class="content-section" id="sorting">
+        <h2>7. Stem Cell Sorting &amp; Enrichment</h2>
+        <p>Isolating viable stem cells for downstream functional studies, transplantation, or culture requires specialized sorting considerations due to the rarity and fragility of most stem cell populations.</p>
+
+        <h3>Sorting Considerations</h3>
+        <ul>
+            <li><strong>Nozzle size:</strong> Use 100 &mu;m (20&ndash;30 psi) for most stem cells; 130 &mu;m for very large cells or organoids</li>
+            <li><strong>Sort mode:</strong> Purity mode for downstream culture; single-cell mode for clonal analysis or plate sorting</li>
+            <li><strong>Collection buffer:</strong> Complete medium with 20&ndash;50% FBS to cushion cells</li>
+            <li><strong>Temperature:</strong> Keep sample at 4&deg;C during sort; collect into pre-warmed media for immediate culture</li>
+            <li><strong>Expected viability:</strong> &gt;90% for HSCs and MSCs when sorted properly</li>
+        </ul>
+
+        <h3>Enrichment Methods Compared</h3>
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h4>MACS (Magnetic Beads)</h4>
+                <p><strong>Purity:</strong> 70&ndash;95%<br><strong>Speed:</strong> 10<sup>8</sup>&ndash;10<sup>9</sup> cells/hour<br><strong>Viability:</strong> &gt;95%<br><strong>Best for:</strong> Pre-enrichment before FACS, large-scale clinical processing</p>
+            </div>
+            <div class="comparison-card">
+                <h4>FACS Sorting</h4>
+                <p><strong>Purity:</strong> &gt;98%<br><strong>Speed:</strong> 10<sup>4</sup>&ndash;10<sup>5</sup> cells/hour<br><strong>Viability:</strong> 85&ndash;95%<br><strong>Best for:</strong> High-purity isolation, multiparameter sorts, single-cell deposition</p>
+            </div>
+            <div class="comparison-card">
+                <h4>Immunodensity</h4>
+                <p><strong>Purity:</strong> 50&ndash;85%<br><strong>Speed:</strong> 10<sup>8</sup> cells/hour<br><strong>Viability:</strong> &gt;95%<br><strong>Best for:</strong> Negative selection (removing unwanted cells), no equipment needed</p>
+            </div>
+        </div>
+
+        <div class="tip"><strong>Tip:</strong> For rare stem cell populations (&lt;1%), use a two-step strategy: first enrich by MACS (CD34 microbeads, EasySep) to achieve 50&ndash;80% purity, then FACS-sort the enriched fraction. This dramatically reduces sort time and improves yield compared to sorting from the unfractionated sample.</div>
+    </div>
+
+    <div class="content-section accent-green" id="functional">
+        <h2>8. Functional Stem Cell Assays by Flow</h2>
+        <p>Surface markers alone cannot confirm stem cell function. Several functional flow cytometry assays exploit unique metabolic or transport properties of stem cells.</p>
+
+        <h3>ALDEFLUOR Assay (ALDH Activity)</h3>
+        <p>Aldehyde dehydrogenase (ALDH) is highly active in HSCs and many CSC populations. The ALDEFLUOR assay uses BODIPY-aminoacetaldehyde (BAAA), which is converted to the fluorescent BODIPY-aminoacetate (BAA) and retained in cells with high ALDH activity. The critical control is DEAB (diethylaminobenzaldehyde), a specific ALDH inhibitor that defines the negative gate.</p>
+
+        <h3>Side Population (SP) Assay</h3>
+        <p>The SP assay exploits ABCG2/BCRP-mediated efflux of Hoechst 33342 dye. Stem cells efflux the dye efficiently, appearing as a &ldquo;side population&rdquo; when Hoechst fluorescence is detected simultaneously in blue (450/40 nm) and red (675LP nm) channels.</p>
+
+        <div class="caution"><strong>Caution:</strong> The Side Population assay is highly sensitive to Hoechst 33342 dye concentration (typically 5 &mu;g/mL), staining time (exactly 90 minutes at 37&deg;C), and staining temperature. Even small deviations produce dramatically different results. Always include verapamil (50 &mu;M) or fumitremorgin C (10 &mu;M) as the negative control&mdash;the SP gate is defined as the region that disappears with the inhibitor.</div>
+
+        <h3>Rhodamine 123 Efflux</h3>
+        <p>Similar to the SP assay, Rhodamine 123 (Rho123) efflux identifies cells with high P-glycoprotein (MDR1) activity. HSCs are Rho123-low (efficient efflux). This assay can be combined with surface markers and is simpler than the SP assay, though less specific for primitive HSCs.</p>
+    </div>
+
+    <div class="content-section accent-orange" id="differentiation">
+        <h2>9. Differentiation Tracking &amp; Lineage Analysis</h2>
+        <p>Flow cytometry monitors differentiation by tracking the progressive loss of stem cell markers and acquisition of lineage-specific markers over time.</p>
+
+        <h3>Hematopoietic Differentiation</h3>
+        <table class="data-table">
+            <thead><tr><th>Lineage</th><th>Early Markers</th><th>Mature Markers</th></tr></thead>
+            <tbody>
+                <tr><td>Erythroid</td><td>CD71 (transferrin receptor), CD36</td><td>CD235a (Glycophorin A), hemoglobinization</td></tr>
+                <tr><td>Myeloid / Monocyte</td><td>CD33, CD13</td><td>CD14, CD11b, CD16</td></tr>
+                <tr><td>Granulocyte</td><td>CD33, CD13</td><td>CD66b, CD16, CD15</td></tr>
+                <tr><td>Megakaryocyte</td><td>CD41 (GPIIb)</td><td>CD42b (GPIb&alpha;), CD61</td></tr>
+                <tr><td>B lymphocyte</td><td>CD19, CD10</td><td>CD20, surface Ig</td></tr>
+                <tr><td>T lymphocyte</td><td>CD7, CD2</td><td>CD3, CD4 or CD8</td></tr>
+            </tbody>
+        </table>
+
+        <h3>iPSC Directed Differentiation Monitoring</h3>
+        <p>During directed differentiation of iPSCs, flow cytometry is used at key time points to assess differentiation efficiency:</p>
+        <ul>
+            <li><strong>Definitive endoderm:</strong> CXCR4+/c-Kit+/SOX17+ (day 3&ndash;5)</li>
+            <li><strong>Cardiomyocyte:</strong> cTnT+ (cardiac troponin T), NKX2.5+ (day 8&ndash;15)</li>
+            <li><strong>Neural progenitor:</strong> Nestin+, PAX6+, SOX1+ (day 7&ndash;14)</li>
+            <li><strong>Hematopoietic:</strong> CD34+/CD43+ from hemogenic endothelium (day 8&ndash;12)</li>
+        </ul>
+    </div>
+
+    <div class="content-section accent-red" id="troubleshooting">
+        <h2>10. Troubleshooting Stem Cell Flow Cytometry</h2>
+
+        <table class="data-table">
+            <thead><tr><th>Problem</th><th>Possible Cause</th><th>Solution</th></tr></thead>
+            <tbody>
+                <tr><td>Dim CD34 staining</td><td>Wrong antibody clone; antigen damage during processing; expired reagent</td><td>Use validated clone (8G12 or 581); minimize enzymatic digestion time; titrate antibody</td></tr>
+                <tr><td>Low viability after processing</td><td>Harsh RBC lysis; excessive centrifugation; prolonged processing time</td><td>Use ACK lysis (gentler than FACS Lysing Solution); centrifuge at 300g; process within 24h</td></tr>
+                <tr><td>Ambiguous MSC phenotype</td><td>Extended passage; contaminating hematopoietic cells; culture-induced changes</td><td>Assess at low passage (P2&ndash;P5); include CD45 negative gate; validate at each passage</td></tr>
+                <tr><td>Side Population not resolved</td><td>Incorrect Hoechst concentration or temperature; old dye stock</td><td>Use freshly prepared 5 &mu;g/mL Hoechst at exactly 37&deg;C for 90 min; use fresh dye aliquot</td></tr>
+                <tr><td>ALDEFLUOR false positives</td><td>DEAB control not prepared properly; dead cells autofluoresce</td><td>Ensure DEAB tube is prepared immediately alongside test tube; add viability dye</td></tr>
+                <tr><td>Cell clumping during sort</td><td>Dead cells releasing DNA; high cell concentration</td><td>Add DNase I (100 U/mL); filter through 35 &mu;m strainer; keep cells at 5&ndash;10 &times; 10<sup>6</sup>/mL</td></tr>
+                <tr><td>Low CD34+ yield after sort</td><td>Rare population; cells lost on tube walls; sort abort rate too high</td><td>Pre-enrich with MACS; pre-coat tubes with FBS; check sort purity and reduce coincidence rate</td></tr>
+            </tbody>
+        </table>
+
+        <div class="tip"><strong>Tip:</strong> When working with bone marrow or cord blood, always lyse RBCs with ammonium chloride (ACK) buffer rather than FACS Lysing Solution. Harsher lysing solutions can damage CD34+ cells, reduce their viability, and artificially lower CD34 counts. If using Ficoll density gradient separation, be aware that some HSCs pellet with the RBC fraction.</div>
+    </div>
+
+</main>
+
+<footer>
+    <p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p>
+    <p style="margin-top: 8px;">Flow Cytometry Hub &mdash; A comprehensive educational resource for flow cytometry.</p>
+</footer>
+
+</body>
+</html>

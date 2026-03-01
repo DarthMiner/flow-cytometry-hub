@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compensation &amp; Controls | Flow Cytometry Hub</title>
+    <style>
+        :root { --primary: #1a5276; --primary-light: #2980b9; --primary-dark: #0e2f44; --accent: #27ae60; --accent-light: #2ecc71; --warning: #e67e22; --danger: #e74c3c; --bg: #f4f6f9; --bg-card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; --border: #dce1e8; --shadow: 0 2px 12px rgba(0,0,0,0.08); --radius: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .nav-links { display: flex; list-style: none; gap: 0; }
+        .nav-links a { color: #ccd6dd; text-decoration: none; padding: 16px 18px; display: block; font-size: 0.9rem; font-weight: 500; white-space: nowrap; transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -3px; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 60px 20px 40px; text-align: center; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
+        .content-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; margin-bottom: 30px; border-left: 4px solid var(--primary-light); }
+        .content-section.accent-green { border-left-color: var(--accent); }
+        .content-section.accent-orange { border-left-color: var(--warning); }
+        .content-section.accent-red { border-left-color: var(--danger); }
+        .content-section.accent-purple { border-left-color: #8e44ad; }
+        .content-section.accent-teal { border-left-color: #16a085; }
+        .content-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .content-section h3 { font-size: 1.15rem; color: var(--primary); margin: 20px 0 10px; }
+        .content-section p { margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
+        .content-section ul, .content-section ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; }
+        .content-section li { margin-bottom: 6px; }
+        .tip { background: #eaf7ee; border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .caution { background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .key-point { background: #eaf2f8; border-left: 3px solid var(--primary-light); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .danger-box { background: #fdedec; border-left: 3px solid var(--danger); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .toc { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 36px; margin-bottom: 30px; }
+        .toc h3 { color: var(--primary); margin-bottom: 14px; font-size: 1.1rem; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--primary-light); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
+        .toc a:hover { color: var(--primary); text-decoration: underline; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 16px 0; }
+        .data-table thead { background: var(--primary-dark); color: #fff; }
+        .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: #f0f4f8; }
+        .diagram-container { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 30px; margin: 20px 0; text-align: center; }
+        .diagram-container .caption { font-size: 0.85rem; color: var(--text-light); margin-top: 14px; font-style: italic; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin: 20px 0; }
+        .comparison-card { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+        .comparison-card h4 { color: var(--primary); margin-bottom: 8px; text-align: center; }
+        .comparison-card p { font-size: 0.88rem; color: var(--text-light); }
+        /* Spectrum overlap diagram */
+        .spectra-container { position: relative; height: 200px; max-width: 500px; margin: 10px auto; }
+        .spectrum-curve { position: absolute; bottom: 30px; border-radius: 50%; opacity: 0.4; }
+        .spectrum-axis { position: absolute; bottom: 28px; left: 0; right: 0; height: 2px; background: var(--text); }
+        .spectrum-axis-label { position: absolute; bottom: 5px; font-size: 0.75rem; color: var(--text-light); }
+        footer { background: var(--primary-dark); color: #aab7c4; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+        footer a { color: var(--accent-light); text-decoration: none; }
+        @media (max-width: 768px) { .content-section { padding: 24px 20px; } .hero h1 { font-size: 1.8rem; } .nav-links { display: none; } }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">Flow<span>Cytometry</span>Hub</a>
+        <ul class="nav-links">
+            <li><a href="index.html#learning">Learning</a></li>
+            <li><a href="index.html#usecases">Use Cases</a></li>
+            <li><a href="index.html#instruments">Instruments</a></li>
+            <li><a href="index.html#reagents">Reagents</a></li>
+            <li><a href="index.html#protocols">Protocols</a></li>
+        </ul>
+        <a href="index.html" class="back-link">&larr; Back to Hub</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>&#9881; Compensation &amp; Controls</h1>
+    <p>Master the art and science of spectral compensation, essential controls, and panel design for accurate multicolor flow cytometry.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rarr; <a href="index.html#learning">Learning</a> &rarr; Compensation &amp; Controls</div>
+</header>
+
+<div class="content">
+
+    <div class="toc">
+        <h3>&#128218; Table of Contents</h3>
+        <ol>
+            <li><a href="#why">Why Compensation Is Needed</a></li>
+            <li><a href="#physics">The Physics of Spectral Overlap</a></li>
+            <li><a href="#controls">Compensation Controls</a></li>
+            <li><a href="#matrix">The Compensation Matrix</a></li>
+            <li><a href="#fmo">FMO Controls</a></li>
+            <li><a href="#isotype">Isotype Controls: Uses &amp; Limitations</a></li>
+            <li><a href="#other">Other Essential Controls</a></li>
+            <li><a href="#practice">Compensation in Practice</a></li>
+            <li><a href="#troubleshooting">Troubleshooting Compensation</a></li>
+            <li><a href="#spectral">Spectral Unmixing vs. Traditional Compensation</a></li>
+            <li><a href="#panel">Panel Design Considerations</a></li>
+        </ol>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="content-section" id="why">
+        <h2>1. Why Compensation Is Needed</h2>
+        <p>Every fluorochrome has a broad emission spectrum. While we select bandpass filters to capture the emission peak, the "tails" of the emission curve extend into neighboring detector channels. This spectral spillover means that a bright FITC+ cell will also register signal in the PE detector &mdash; even though it has no PE on it.</p>
+        <p><strong>Compensation</strong> is the mathematical process of subtracting this spillover so that the signal in each channel reflects only the fluorochrome intended for that channel.</p>
+
+        <div class="diagram-container">
+            <h4 style="color: var(--primary); margin-bottom: 10px;">Spectral Overlap: FITC &amp; PE Emission</h4>
+            <div style="position: relative; height: 220px; max-width: 520px; margin: 0 auto;">
+                <!-- FITC curve -->
+                <div style="position: absolute; bottom: 30px; left: 60px; width: 200px; height: 150px; background: radial-gradient(ellipse at 40% 100%, rgba(80,200,80,0.5) 0%, rgba(80,200,80,0) 70%); border-radius: 100px 100px 0 0;"></div>
+                <!-- PE curve -->
+                <div style="position: absolute; bottom: 30px; left: 180px; width: 220px; height: 160px; background: radial-gradient(ellipse at 40% 100%, rgba(255,165,0,0.5) 0%, rgba(255,165,0,0) 70%); border-radius: 100px 100px 0 0;"></div>
+                <!-- Overlap region label -->
+                <div style="position: absolute; bottom: 115px; left: 210px; font-size: 0.78rem; font-weight: 700; color: #c0392b; background: rgba(255,255,255,0.85); padding: 2px 8px; border-radius: 4px;">Spillover Region</div>
+                <div style="position: absolute; bottom: 100px; left: 245px; width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 10px solid #c0392b;"></div>
+                <!-- FITC label -->
+                <div style="position: absolute; bottom: 170px; left: 90px; font-size: 0.82rem; font-weight: 700; color: #27ae60;">FITC</div>
+                <div style="position: absolute; bottom: 155px; left: 83px; font-size: 0.72rem; color: var(--text-light);">Em: 519 nm</div>
+                <!-- PE label -->
+                <div style="position: absolute; bottom: 180px; left: 300px; font-size: 0.82rem; font-weight: 700; color: #e67e22;">PE</div>
+                <div style="position: absolute; bottom: 165px; left: 290px; font-size: 0.72rem; color: var(--text-light);">Em: 578 nm</div>
+                <!-- Filter boxes -->
+                <div style="position: absolute; bottom: 32px; left: 95px; width: 50px; height: 20px; background: rgba(80,200,80,0.3); border: 2px solid #27ae60; border-radius: 3px; font-size: 0.65rem; text-align: center; line-height: 16px; font-weight: 600; color: #1e8449;">525/50</div>
+                <div style="position: absolute; bottom: 32px; left: 250px; width: 50px; height: 20px; background: rgba(255,165,0,0.3); border: 2px solid #e67e22; border-radius: 3px; font-size: 0.65rem; text-align: center; line-height: 16px; font-weight: 600; color: #b9770e;">575/26</div>
+                <!-- Axis -->
+                <div style="position: absolute; bottom: 28px; left: 30px; right: 30px; height: 2px; background: var(--text);"></div>
+                <div style="position: absolute; bottom: 8px; left: 30px; font-size: 0.72rem; color: var(--text-light);">450 nm</div>
+                <div style="position: absolute; bottom: 8px; left: 47%; font-size: 0.72rem; color: var(--text-light);">550 nm</div>
+                <div style="position: absolute; bottom: 8px; right: 30px; font-size: 0.72rem; color: var(--text-light);">700 nm</div>
+            </div>
+            <div class="caption">FITC emission (green) extends into the PE detection window (orange box). This spillover must be mathematically removed through compensation. The bandpass filter notation indicates center wavelength / bandwidth.</div>
+        </div>
+
+        <div class="key-point"><strong>Key Concept:</strong> Compensation does NOT remove signal &mdash; it mathematically subtracts the percentage of spillover. After proper compensation, a FITC-only stained cell should have a median fluorescence of approximately zero in the PE channel.</div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="content-section accent-green" id="physics">
+        <h2>2. The Physics of Spectral Overlap</h2>
+        <p>Several physical factors determine how much spectral overlap occurs between two fluorochromes:</p>
+
+        <h3>Emission Spectrum Shape</h3>
+        <p>All fluorochromes have a characteristic emission spectrum with a peak wavelength and a shape determined by the molecule's electronic structure. Small organic dyes (FITC, PE, APC) tend to have narrower spectra. Polymer dyes (BV, BUV, Spark dyes) can be engineered with narrower emission. Tandem dyes (PE-Cy7, APC-Cy7) have complex spectra with potential for lot-to-lot variation.</p>
+
+        <h3>Stokes Shift</h3>
+        <p>The Stokes shift is the difference between excitation and emission peak wavelengths. Larger Stokes shifts mean the emission is further from the laser line, reducing interference. For example:</p>
+        <ul>
+            <li><strong>FITC:</strong> Excitation 494 nm, Emission 519 nm &rarr; Stokes shift: 25 nm (small)</li>
+            <li><strong>Pacific Blue:</strong> Excitation 401 nm, Emission 452 nm &rarr; Stokes shift: 51 nm (moderate)</li>
+            <li><strong>PE:</strong> Excitation 565 nm, Emission 578 nm &rarr; Stokes shift: 13 nm (very small &mdash; but PE is extremely bright, compensating for the narrow shift)</li>
+        </ul>
+
+        <h3>Bandpass Filter Width</h3>
+        <p>Wider bandpass filters capture more photons (higher sensitivity) but also capture more spillover from adjacent fluorochromes. The choice of filter width is a trade-off between brightness and spectral purity. In high-parameter panels, narrower filters are often used to minimize cross-talk, even though some signal is sacrificed.</p>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="content-section accent-orange" id="controls">
+        <h2>3. Compensation Controls</h2>
+        <p>Compensation is calculated from <strong>single-stained controls</strong> &mdash; samples where only ONE fluorochrome is present. The software measures how much of that single fluorochrome's signal spills into every other channel.</p>
+
+        <h3>Requirements for Valid Compensation Controls</h3>
+        <table class="data-table">
+            <thead><tr><th>Requirement</th><th>Why It Matters</th><th>What Happens If Violated</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Must be at least as bright as the sample</strong></td><td>Compensation is calculated as a ratio of spillover to primary signal. Dim controls give unreliable ratios.</td><td>Under-compensation of bright populations; data distortion</td></tr>
+                <tr><td><strong>Must use the SAME fluorochrome</strong></td><td>Different fluorochromes conjugated to the same protein have different emission spectra</td><td>Wrong spillover coefficients; systematic compensation error</td></tr>
+                <tr><td><strong>Must have a clear negative population</strong></td><td>Software needs both positive and negative to calculate the spillover percentage</td><td>Software cannot calculate matrix; error or wrong values</td></tr>
+                <tr><td><strong>Collected at the same instrument settings</strong></td><td>PMT voltages, threshold, and filter configuration affect spillover percentages</td><td>Compensation values don't match experimental data</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Cells vs. Beads for Compensation</h3>
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h4>Compensation Beads</h4>
+                <p><strong>Examples:</strong> BD CompBeads (anti-mouse Ig &kappa;), UltraComp eBeads (Invitrogen), OneComp eBeads</p>
+                <p><strong>Pros:</strong> Consistent; bright; no need for precious sample; easy to prepare; available for most species</p>
+                <p><strong>Cons:</strong> Cannot be used for dyes that don't bind beads (viability dyes, CFSE, intracellular dyes); may not perfectly match cellular autofluorescence</p>
+                <p><strong>Best for:</strong> Surface antibody conjugates</p>
+            </div>
+            <div class="comparison-card">
+                <h4>Cells for Compensation</h4>
+                <p><strong>Examples:</strong> Aliquots of your experimental cells stained with single antibodies</p>
+                <p><strong>Pros:</strong> Autofluorescence matches the sample; required for viability dyes, CFSE, intracellular dyes, fluorescent proteins</p>
+                <p><strong>Cons:</strong> Uses precious sample; may be dim for some markers; requires positive expression of the target antigen</p>
+                <p><strong>Best for:</strong> Amine-reactive viability dyes, tandem dyes with known lot variation, fluorescent proteins (GFP, mCherry)</p>
+            </div>
+        </div>
+
+        <div class="caution"><strong>Critical Rule:</strong> Amine-reactive fixable viability dyes (e.g., LIVE/DEAD Fixable, Zombie dyes) must ALWAYS be compensated using cells (a mix of live and dead cells), NOT beads. These dyes bind proteins on all cells &mdash; beads don't have the same binding characteristics.</div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="content-section accent-red" id="matrix">
+        <h2>4. The Compensation Matrix</h2>
+        <p>The compensation matrix is a mathematical representation of all pairwise spillover coefficients between channels. For an <em>n</em>-color panel, it's an <em>n &times; n</em> matrix.</p>
+
+        <h3>How It's Calculated</h3>
+        <ol>
+            <li>For each single-stained control, the software identifies the positive and negative populations.</li>
+            <li>It calculates the <strong>spillover coefficient</strong> for each secondary channel: the ratio of median fluorescence in the secondary channel to median fluorescence in the primary channel (for the positive population, after subtracting the negative).</li>
+            <li>These coefficients are assembled into a <strong>spillover matrix</strong> (S).</li>
+            <li>The <strong>compensation matrix</strong> (M) is the inverse of the spillover matrix: M = S<sup>&minus;1</sup>.</li>
+            <li>Compensated data = M &times; raw data (applied to each event).</li>
+        </ol>
+
+        <h3>Understanding Spillover Values</h3>
+        <p>A spillover value of 25% from FITC into PE means that 25% of the FITC signal in the FITC channel also appears in the PE channel. After compensation, this 25% is subtracted from the PE channel for any given event based on its FITC signal.</p>
+
+        <div class="diagram-container">
+            <h4 style="color: var(--primary); margin-bottom: 14px;">Compensation Effect on Dot Plots</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 500px; margin: 0 auto;">
+                <!-- Before -->
+                <div>
+                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--danger); margin-bottom: 8px;">Before Compensation</div>
+                    <div style="position: relative; width: 180px; height: 180px; border-left: 2px solid var(--text); border-bottom: 2px solid var(--text); margin: 0 auto;">
+                        <!-- FITC+ population shifted up in PE -->
+                        <div style="position: absolute; bottom: 20px; left: 15px; width: 40px; height: 40px; background: rgba(41,128,185,0.4); border-radius: 50%;"></div>
+                        <div style="position: absolute; bottom: 80px; right: 20px; width: 35px; height: 50px; background: rgba(231,76,60,0.4); border-radius: 50%; transform: rotate(-30deg);"></div>
+                        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: var(--text-light);">FITC &rarr;</div>
+                        <div style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%) rotate(-90deg); font-size: 0.7rem; color: var(--text-light);">PE &rarr;</div>
+                        <div style="position: absolute; top: 5px; right: 5px; font-size: 0.65rem; color: #e74c3c; font-weight: 600;">FITC+ shifted<br>up in PE!</div>
+                    </div>
+                </div>
+                <!-- After -->
+                <div>
+                    <div style="font-size: 0.85rem; font-weight: 700; color: var(--accent); margin-bottom: 8px;">After Compensation</div>
+                    <div style="position: relative; width: 180px; height: 180px; border-left: 2px solid var(--text); border-bottom: 2px solid var(--text); margin: 0 auto;">
+                        <!-- Properly compensated -->
+                        <div style="position: absolute; bottom: 20px; left: 15px; width: 40px; height: 40px; background: rgba(41,128,185,0.4); border-radius: 50%;"></div>
+                        <div style="position: absolute; bottom: 20px; right: 20px; width: 35px; height: 45px; background: rgba(39,174,96,0.4); border-radius: 50%;"></div>
+                        <div style="position: absolute; bottom: -18px; left: 50%; transform: translateX(-50%); font-size: 0.7rem; color: var(--text-light);">FITC &rarr;</div>
+                        <div style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%) rotate(-90deg); font-size: 0.7rem; color: var(--text-light);">PE &rarr;</div>
+                        <div style="position: absolute; top: 5px; right: 5px; font-size: 0.65rem; color: #27ae60; font-weight: 600;">FITC+ now<br>centered on PE axis</div>
+                    </div>
+                </div>
+            </div>
+            <div class="caption">Left: Before compensation, FITC-positive cells appear falsely positive in PE due to spectral spillover. Right: After proper compensation, FITC-positive cells are centered on the PE axis (median PE &asymp; 0).</div>
+        </div>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="content-section accent-teal" id="fmo">
+        <h2>5. FMO Controls (Fluorescence Minus One)</h2>
+        <p>An FMO control contains <strong>all the fluorochromes in your panel except one</strong>. It reveals the combined effect of spectral spillover from all other channels into the channel of interest.</p>
+
+        <h3>Why FMOs Are Essential</h3>
+        <p>Even after perfect compensation, there is residual <strong>spillover spreading</strong> &mdash; the variance (noise) introduced by compensating bright signals. This spreading shifts and broadens populations in the compensated channel. FMOs show you exactly where the "negative" boundary falls for each marker in the context of your full panel.</p>
+
+        <h3>When to Use FMOs</h3>
+        <ul>
+            <li><strong>Always</strong> for markers with continuous expression (no clear positive/negative separation)</li>
+            <li><strong>Always</strong> for high-parameter panels (&ge;8 colors) where cumulative spillover spreading is significant</li>
+            <li><strong>Always</strong> when publishing &mdash; reviewers increasingly expect FMO-based gating</li>
+            <li><strong>Optional</strong> for markers with clearly bimodal expression (e.g., CD4, CD8 on T cells) where the positive population is unambiguous</li>
+        </ul>
+
+        <h3>How to Use FMOs for Gating</h3>
+        <ol>
+            <li>Acquire the FMO sample (all colors minus marker X).</li>
+            <li>Apply your gating hierarchy to the FMO data.</li>
+            <li>On the plot for marker X, the FMO shows the maximum background in that channel from all other fluorochromes.</li>
+            <li>Set your gate boundary at the upper edge of the FMO distribution (typically the 99th or 99.5th percentile).</li>
+            <li>Apply this gate position to your fully stained sample.</li>
+        </ol>
+
+        <div class="diagram-container">
+            <h4 style="color: var(--primary); margin-bottom: 10px;">FMO Gating Concept</h4>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 480px; margin: 0 auto; text-align: left;">
+                <div style="padding: 14px; background: #fef5e7; border-radius: 8px;">
+                    <div style="font-size: 0.82rem; font-weight: 700; color: var(--warning); margin-bottom: 6px;">FMO (all colors MINUS CD25)</div>
+                    <div style="font-size: 0.82rem; color: var(--text-light);">Shows maximum background in CD25 channel from spillover. Gate boundary set at the edge of this distribution.</div>
+                </div>
+                <div style="padding: 14px; background: #eaf7ee; border-radius: 8px;">
+                    <div style="font-size: 0.82rem; font-weight: 700; color: var(--accent); margin-bottom: 6px;">Full Stain (all colors INCLUDING CD25)</div>
+                    <div style="font-size: 0.82rem; color: var(--text-light);">Apply the same gate position from FMO. Events above the gate are truly CD25-positive.</div>
+                </div>
+            </div>
+            <div class="caption">FMO controls establish the boundary between "negative" and "positive" for each marker in the context of spillover spreading from all other panel fluorochromes.</div>
+        </div>
+
+        <div class="tip"><strong>Practical Tip:</strong> For large panels (12+ colors), preparing individual FMOs for every marker is expensive and sample-intensive. Prioritize FMOs for: (1) markers with continuous expression, (2) channels receiving the most spillover, and (3) markers critical to your conclusions. For clearly bimodal markers, the internal negative population often suffices.</div>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="content-section accent-purple" id="isotype">
+        <h2>6. Isotype Controls: Uses &amp; Limitations</h2>
+        <p>Isotype controls are antibodies of the <strong>same isotype, host species, and fluorochrome</strong> as the test antibody but with no known target antigen. They were traditionally used to assess non-specific antibody binding.</p>
+
+        <h3>The Controversy</h3>
+        <p>Isotype controls have fallen out of favor for several reasons:</p>
+        <ul>
+            <li>They only measure non-specific Fc-receptor binding, not spillover spreading (which FMOs address better)</li>
+            <li>Isotype control antibodies and test antibodies are rarely at the exact same concentration, making comparisons unreliable</li>
+            <li>Non-specific binding depends on the clone, not just the isotype</li>
+            <li>They waste precious sample and add cost without providing reliable gating information</li>
+        </ul>
+
+        <h3>When Isotype Controls ARE Appropriate</h3>
+        <ul>
+            <li>Measuring intracellular cytokines where both stimulated and unstimulated conditions exist (the unstimulated serves as a biological negative, but isotype can help if background is high)</li>
+            <li>Working with cell types known to have high Fc-receptor expression (macrophages, B cells) where non-specific binding is a genuine concern &mdash; though Fc block is a better solution</li>
+            <li>Required by specific regulatory assay validation protocols</li>
+        </ul>
+
+        <div class="danger-box"><strong>Bottom Line:</strong> For setting gating boundaries in multicolor panels, <strong>FMO controls are superior to isotype controls</strong>. FMOs account for spillover spreading, which is typically the dominant source of background in high-parameter experiments. Isotypes do not.</div>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="content-section" id="other">
+        <h2>7. Other Essential Controls</h2>
+        <table class="data-table">
+            <thead><tr><th>Control Type</th><th>Purpose</th><th>When Required</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Unstained cells</strong></td><td>Establishes autofluorescence baseline; verifies PMT voltage settings are appropriate</td><td>Every experiment</td></tr>
+                <tr><td><strong>Viability dye control</strong></td><td>Heat-killed + live cell mixture to verify viability dye is working and to set compensation for that dye</td><td>Every experiment using fixable viability dye</td></tr>
+                <tr><td><strong>Biological positive control</strong></td><td>A sample known to express the marker of interest (e.g., activated PBMCs for cytokine staining)</td><td>Especially for stimulation-dependent markers (ICS, phospho-flow)</td></tr>
+                <tr><td><strong>Biological negative control</strong></td><td>Unstimulated cells or cells known to lack expression</td><td>Stimulation assays; confirms specificity</td></tr>
+                <tr><td><strong>Fc block</strong></td><td>Anti-CD16/CD32 (mouse) or Human TruStain FcX blocks Fc receptors to prevent non-specific antibody binding</td><td>Any staining involving monocytes, macrophages, DCs, B cells, or any Fc-receptor expressing cells</td></tr>
+                <tr><td><strong>Autofluorescence control</strong></td><td>Identifies channels with high autofluorescence for your specific cell type (important for macrophages, some tumor cells)</td><td>New cell types; spectral cytometry (used as a reference spectrum)</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="content-section accent-green" id="practice">
+        <h2>8. Compensation in Practice</h2>
+
+        <h3>Step-by-Step Guide</h3>
+        <ol>
+            <li><strong>Set PMT voltages</strong> using QC beads (CS&T or equivalent). Ensure voltages are optimized for your panel before acquiring compensation controls.</li>
+            <li><strong>Prepare single-stained controls:</strong> One tube per fluorochrome, plus an unstained tube. Use beads for antibody conjugates and cells for viability dyes / direct stains.</li>
+            <li><strong>Acquire controls</strong> with the same settings (voltages, threshold) as the experiment. Collect &ge;5,000 positive events per control.</li>
+            <li><strong>Calculate compensation</strong> in software (BD FACSDiva, FlowJo, SpectroFlo). Software identifies positive/negative populations and computes the spillover matrix.</li>
+            <li><strong>Verify:</strong> After applying compensation, check that:
+                <ul>
+                    <li>Each single-stained positive population has median ~0 in all other channels</li>
+                    <li>No population is obviously tilted (under- or over-compensated)</li>
+                </ul>
+            </li>
+            <li><strong>Apply</strong> the compensation matrix to your experimental data.</li>
+        </ol>
+
+        <h3>Common Pitfalls</h3>
+        <table class="data-table">
+            <thead><tr><th>Pitfall</th><th>Consequence</th><th>Prevention</th></tr></thead>
+            <tbody>
+                <tr><td>Compensation control dimmer than sample</td><td>Under-compensation of bright populations</td><td>Use brightly staining beads; always check single-stain brightness</td></tr>
+                <tr><td>Wrong bead type (anti-mouse bead for anti-human Ab)</td><td>No binding; empty "positive" peak; compensation fails</td><td>Match bead capture antibody to your primary antibody host/isotype</td></tr>
+                <tr><td>Using beads for viability dye compensation</td><td>Wrong spillover values; dye binds differently to beads vs cells</td><td>Always use cells (live + dead mix) for viability dye compensation</td></tr>
+                <tr><td>Tandem dye lot variation</td><td>Different lots have different emission spectra; compensation from one lot won't work for another</td><td>Use the same lot for controls and sample; re-compensate when lot changes</td></tr>
+                <tr><td>PMT voltages changed after compensation</td><td>Spillover percentages change with voltage; compensation no longer valid</td><td>Finalize voltages BEFORE acquiring compensation controls</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Section 9 -->
+    <div class="content-section accent-orange" id="troubleshooting">
+        <h2>9. Troubleshooting Compensation</h2>
+
+        <h3>Recognizing Under- and Over-Compensation</h3>
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h4 style="color: var(--danger);">Under-Compensated</h4>
+                <p>The positive population in channel A is <strong>shifted upward</strong> (too high) in channel B. The spillover hasn't been fully subtracted.</p>
+                <p><strong>Looks like:</strong> Diagonal tilt up-and-right on bivariate plot. False positives.</p>
+                <p><strong>Fix:</strong> Increase the compensation value for channel A &rarr; channel B.</p>
+            </div>
+            <div class="comparison-card">
+                <h4 style="color: var(--primary-light);">Over-Compensated</h4>
+                <p>The positive population in channel A is <strong>shifted downward</strong> (too negative) in channel B. Too much signal was subtracted.</p>
+                <p><strong>Looks like:</strong> Diagonal tilt down-and-right on bivariate plot. Populations pushed below zero.</p>
+                <p><strong>Fix:</strong> Decrease the compensation value for channel A &rarr; channel B.</p>
+            </div>
+        </div>
+
+        <h3>The Spillover Spreading Matrix (SSM)</h3>
+        <p>The SSM quantifies how much <strong>variance (noise)</strong> each fluorochrome adds to every other channel after compensation. It's more informative than the compensation matrix alone because it accounts for both the spillover percentage AND the brightness of the spillover.</p>
+        <ul>
+            <li>High SSM values between two channels mean using both fluorochromes simultaneously will degrade resolution in one or both channels.</li>
+            <li>Use the SSM to guide panel design: avoid putting dim markers in channels with high incoming spillover spreading.</li>
+            <li>The SSM is calculated from single-stained controls and is available in FlowJo and some other software.</li>
+        </ul>
+
+        <h3>Tandem Dye Issues</h3>
+        <p>Tandem dyes (PE-Cy7, PE-Cy5.5, APC-Cy7, APC-Fire 750, BV711, etc.) consist of two covalently linked fluorochromes where energy transfer occurs from the donor to the acceptor. Problems arise when:</p>
+        <ul>
+            <li><strong>Degradation:</strong> Light exposure, fixation, or heat can break the tandem bond, causing the donor (PE or APC) to emit at its native wavelength instead of transferring energy to the acceptor (Cy7). This shows up as unexpected signal in the PE or APC channel.</li>
+            <li><strong>Lot variation:</strong> Different manufacturing lots may have different conjugation efficiency, altering the emission spectrum.</li>
+            <li><strong>Solution:</strong> Protect tandems from light. Use the same lot for compensation and sample. Re-compensate for each new lot. Consider replacing problematic tandems with polymer dyes (BV, BUV, Spark) that don't degrade.</li>
+        </ul>
+    </div>
+
+    <!-- Section 10 -->
+    <div class="content-section accent-red" id="spectral">
+        <h2>10. Spectral Unmixing vs. Traditional Compensation</h2>
+        <p>Spectral flow cytometers (Cytek Aurora, Sony ID7000, BD FACSDiscover S8) use a fundamentally different approach to resolve fluorochromes.</p>
+
+        <table class="data-table">
+            <thead><tr><th>Feature</th><th>Traditional Compensation</th><th>Spectral Unmixing</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Detection</strong></td><td>Each channel has one dedicated detector + bandpass filter</td><td>Full spectrum captured across 32&ndash;186 detectors</td></tr>
+                <tr><td><strong>Reference</strong></td><td>Single-stain controls measure pairwise spillover</td><td>Single-stain controls define the full reference spectrum of each fluorochrome</td></tr>
+                <tr><td><strong>Math</strong></td><td>Matrix inversion of spillover coefficients</td><td>Ordinary least squares (OLS) or weighted least squares (WLS) fitting of reference spectra to each event's measured spectrum</td></tr>
+                <tr><td><strong>Autofluorescence</strong></td><td>Treated as noise; not removed</td><td>Modeled as an additional "fluorochrome" with its own reference spectrum; can be extracted</td></tr>
+                <tr><td><strong>Similar dyes</strong></td><td>Difficult to use dyes with similar emission peaks</td><td>Can resolve spectrally similar dyes because the full spectral shape differs even when peaks overlap</td></tr>
+                <tr><td><strong>Spreading</strong></td><td>Spillover spreading limits panel size</td><td>Generally less spreading; higher parameter capacity</td></tr>
+            </tbody>
+        </table>
+
+        <div class="key-point"><strong>Practical Impact:</strong> Spectral unmixing allows the use of fluorochrome combinations that would be impossible with traditional compensation (e.g., FITC + BB515, or multiple BV dyes on the same laser). This has enabled 40+ color panels on spectral instruments.</div>
+    </div>
+
+    <!-- Section 11 -->
+    <div class="content-section accent-purple" id="panel">
+        <h2>11. Panel Design Considerations</h2>
+        <p>Good panel design is the single most important factor in multicolor flow cytometry success. A poorly designed panel will produce data that no amount of compensation or analysis can rescue.</p>
+
+        <h3>The Golden Rules</h3>
+        <ol>
+            <li><strong>Brightest fluorochrome &rarr; Dimmest antigen:</strong> Low-abundance markers need the brightest dyes (PE, APC) to be detectable. High-abundance markers (CD3, CD45) can use dimmer dyes (FITC, BV510, Pacific Blue).</li>
+            <li><strong>Minimize spillover in critical channels:</strong> If resolving CD25 (dim, continuous) is important, avoid pairing it with a fluorochrome that has heavy spillover into the CD25 channel.</li>
+            <li><strong>Co-expressed markers can share spillover:</strong> If two markers are always co-expressed on the same cells, spillover between their channels is less problematic because you don't need to resolve combinations of positive/negative.</li>
+            <li><strong>Use dump channels wisely:</strong> Lineage exclusion markers (e.g., CD3, CD14, CD19 in a "dump" gate) can all be on the same fluorochrome to save channels.</li>
+            <li><strong>Watch tandem dye placement:</strong> Avoid placing tandem dyes on channels adjacent to their donor fluorochrome (e.g., don't pair PE-Cy7 and PE on co-expressed markers if possible).</li>
+        </ol>
+
+        <h3>Panel Design Tools</h3>
+        <table class="data-table">
+            <thead><tr><th>Tool</th><th>Provider</th><th>Key Features</th></tr></thead>
+            <tbody>
+                <tr><td><strong>FluoroFinder</strong></td><td>FluoroFinder.com</td><td>Multi-vendor panel builder; instrument-specific configurations; community-shared panels; comprehensive spectra database</td></tr>
+                <tr><td><strong>Spectrum Viewer</strong></td><td>BD Biosciences</td><td>BD-focused; excitation/emission overlay; filter set visualization; BD Horizon dye spectra</td></tr>
+                <tr><td><strong>Spectra Analyzer</strong></td><td>BioLegend</td><td>Extensive dye database; instrument-specific; cross-laser excitation visualization</td></tr>
+                <tr><td><strong>Full Spectrum Viewer</strong></td><td>Cytek Biosciences</td><td>Spectral cytometry-optimized; similarity index calculations; aurora/northern lights specific</td></tr>
+                <tr><td><strong>Panel Designer</strong></td><td>Thermo Fisher</td><td>Attune-specific configurations; Invitrogen dye portfolio; compatibility checking</td></tr>
+            </tbody>
+        </table>
+
+        <div class="tip"><strong>Workflow:</strong> (1) List your markers ranked by expression level (high to low). (2) List available fluorochromes ranked by brightness (bright to dim). (3) Assign brightest dyes to dimmest markers. (4) Check pairwise spillover using a panel design tool. (5) Run FMO controls to validate gating. (6) Iterate if needed.</div>
+    </div>
+
+</div>
+
+<footer>
+    <p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p>
+    <p style="margin-top: 8px;">Flow Cytometry Hub &mdash; A comprehensive educational resource for flow cytometry.</p>
+</footer>
+
+</body>
+</html>

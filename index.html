@@ -1,0 +1,2622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow Cytometry Hub | Comprehensive Resource Center</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --primary-dark: #0e2f44;
+            --accent: #27ae60;
+            --accent-light: #2ecc71;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --bg: #f4f6f9;
+            --bg-card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        /* Navigation */
+        .top-nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: var(--primary-dark);
+            border-bottom: 3px solid var(--accent);
+            padding: 0;
+        }
+        .nav-container {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; align-items: center;
+            padding: 0 20px;
+        }
+        .nav-logo {
+            color: #fff; font-size: 1.3rem; font-weight: 700;
+            padding: 14px 0; margin-right: 30px; white-space: nowrap;
+            text-decoration: none;
+        }
+        .nav-logo span { color: var(--accent-light); }
+        .nav-links {
+            display: flex; list-style: none; gap: 0;
+            overflow-x: auto;
+        }
+        .nav-links a {
+            color: #ccd6dd; text-decoration: none;
+            padding: 16px 18px; display: block;
+            font-size: 0.9rem; font-weight: 500;
+            white-space: nowrap;
+            transition: all 0.2s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -3px;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #fff;
+            background: rgba(255,255,255,0.08);
+            border-bottom-color: var(--accent-light);
+        }
+        .hamburger {
+            display: none; background: none; border: none;
+            color: #fff; font-size: 1.5rem; cursor: pointer;
+            margin-left: auto; padding: 10px;
+        }
+
+        /* Hero */
+        .hero {
+            margin-top: 56px;
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%);
+            color: #fff; padding: 80px 20px 60px; text-align: center;
+            position: relative; overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(46,204,113,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(41,128,185,0.15) 0%, transparent 50%);
+        }
+        .hero h1 { font-size: 2.8rem; margin-bottom: 16px; position: relative; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; position: relative; }
+
+        /* Section layout */
+        .section {
+            max-width: 1400px; margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .section-header {
+            text-align: center; margin-bottom: 50px;
+        }
+        .section-header h2 {
+            font-size: 2rem; color: var(--primary);
+            margin-bottom: 12px;
+        }
+        .section-header p {
+            color: var(--text-light); font-size: 1.05rem;
+            max-width: 700px; margin: 0 auto;
+        }
+        .section-divider {
+            border: none;
+            border-top: 2px solid var(--border);
+            margin: 0;
+        }
+
+        /* Cards Grid */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+        }
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            transition: all 0.3s;
+            border-left: 4px solid var(--primary-light);
+        }
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+        .card h3 {
+            font-size: 1.2rem; color: var(--primary);
+            margin-bottom: 10px; display: flex;
+            align-items: center; gap: 10px;
+        }
+        .card h3 .icon { font-size: 1.4rem; }
+        .card p { color: var(--text-light); font-size: 0.95rem; }
+        .card ul {
+            margin-top: 10px; padding-left: 20px;
+            color: var(--text-light); font-size: 0.93rem;
+        }
+        .card ul li { margin-bottom: 4px; }
+        .card.accent-green { border-left-color: var(--accent); }
+        .card.accent-orange { border-left-color: var(--warning); }
+        .card.accent-red { border-left-color: var(--danger); }
+        .details-link {
+            display: inline-block; margin-top: 14px;
+            padding: 7px 18px;
+            background: var(--primary-light); color: #fff;
+            border-radius: 6px; font-size: 0.88rem;
+            font-weight: 600; text-decoration: none;
+            transition: all 0.2s;
+        }
+        .details-link:hover { background: var(--primary); transform: translateY(-1px); }
+
+        /* Instruments Table */
+        .table-wrapper {
+            overflow-x: auto;
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        table {
+            width: 100%; border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+        thead { background: var(--primary-dark); color: #fff; }
+        th { padding: 14px 16px; text-align: left; font-weight: 600; white-space: nowrap; }
+        td { padding: 12px 16px; border-bottom: 1px solid var(--border); }
+        tbody tr:hover { background: #f0f4f8; }
+        tbody tr:last-child td { border-bottom: none; }
+        .badge {
+            display: inline-block; padding: 2px 10px;
+            border-radius: 20px; font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .badge-analyzer { background: #d5f5e3; color: #1e8449; }
+        .badge-sorter { background: #d6eaf8; color: #1a5276; }
+        .badge-spectral { background: #fdebd0; color: #b9770e; }
+        .badge-imaging { background: #fadbd8; color: #922b21; }
+        .badge-mass { background: #e8daef; color: #6c3483; }
+
+        /* Protocol Cards */
+        .protocol-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        .protocol-card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+        .protocol-header {
+            padding: 18px 24px;
+            color: #fff; font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            display: flex; justify-content: space-between;
+            align-items: center;
+        }
+        .protocol-header .toggle-icon {
+            font-size: 1.2rem; transition: transform 0.3s;
+        }
+        .protocol-header.open .toggle-icon {
+            transform: rotate(180deg);
+        }
+        .protocol-body {
+            padding: 0 24px;
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s;
+        }
+        .protocol-body.open {
+            max-height: 2000px;
+            padding: 20px 24px;
+        }
+        .protocol-body h4 {
+            color: var(--primary); margin: 14px 0 6px;
+            font-size: 0.95rem;
+        }
+        .protocol-body h4:first-child { margin-top: 0; }
+        .protocol-body ol, .protocol-body ul {
+            padding-left: 22px; font-size: 0.93rem;
+            color: var(--text); margin-bottom: 8px;
+        }
+        .protocol-body li { margin-bottom: 5px; }
+        .protocol-body .tip {
+            background: #eaf7ee; border-left: 3px solid var(--accent);
+            padding: 10px 14px; margin: 10px 0;
+            border-radius: 4px; font-size: 0.9rem;
+        }
+        .protocol-body .caution {
+            background: #fef5e7; border-left: 3px solid var(--warning);
+            padding: 10px 14px; margin: 10px 0;
+            border-radius: 4px; font-size: 0.9rem;
+        }
+
+        /* Color themes for protocols */
+        .proto-blue .protocol-header { background: var(--primary); }
+        .proto-green .protocol-header { background: #27ae60; }
+        .proto-orange .protocol-header { background: #e67e22; }
+        .proto-red .protocol-header { background: #c0392b; }
+        .proto-purple .protocol-header { background: #8e44ad; }
+        .proto-teal .protocol-header { background: #16a085; }
+        .proto-navy .protocol-header { background: #2c3e50; }
+
+        /* Reagent Tables */
+        .reagent-section {
+            margin-bottom: 40px;
+        }
+        .reagent-section h3 {
+            font-size: 1.3rem; color: var(--primary);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--border);
+        }
+        /* Instrument links */
+        td a {
+            color: var(--primary);
+            text-decoration: none;
+            border-bottom: 1px dotted var(--primary-light);
+            transition: all 0.2s;
+        }
+        td a:hover {
+            color: var(--primary-light);
+            border-bottom-style: solid;
+        }
+        td a strong {
+            color: inherit;
+        }
+
+        /* Use-case list */
+        .usecase-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .usecase-item {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 24px;
+            border-top: 4px solid var(--primary-light);
+            transition: all 0.3s;
+        }
+        .usecase-item:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-2px);
+        }
+        .usecase-item h4 {
+            color: var(--primary); margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+        .usecase-item p { font-size: 0.93rem; color: var(--text-light); }
+
+        /* Diagram / Learning Section */
+        .diagram-box {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .flow-diagram {
+            display: flex; align-items: center;
+            justify-content: center; flex-wrap: wrap;
+            gap: 8px; margin: 20px 0;
+        }
+        .flow-step {
+            background: var(--primary);
+            color: #fff; padding: 12px 20px;
+            border-radius: 8px; font-weight: 600;
+            font-size: 0.9rem; min-width: 120px;
+        }
+        .flow-arrow { font-size: 1.4rem; color: var(--primary-light); font-weight: 700; }
+
+        /* Scatter plot mock */
+        .scatter-container {
+            display: inline-block;
+            position: relative;
+            width: 320px; height: 280px;
+            border-left: 2px solid var(--text);
+            border-bottom: 2px solid var(--text);
+            margin: 20px auto;
+        }
+        .scatter-container .axis-label-x {
+            position: absolute; bottom: -30px;
+            left: 50%; transform: translateX(-50%);
+            font-size: 0.85rem; font-weight: 600;
+        }
+        .scatter-container .axis-label-y {
+            position: absolute; left: -40px; top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+            font-size: 0.85rem; font-weight: 600;
+        }
+        .scatter-container .quadrant-label {
+            position: absolute; font-size: 0.75rem;
+            color: var(--text-light); font-weight: 600;
+        }
+        .dot {
+            position: absolute;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+
+        /* Two col layout */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* Spectrum bar */
+        .spectrum-bar {
+            height: 30px;
+            border-radius: 6px;
+            margin: 10px 0;
+            background: linear-gradient(90deg,
+                #8b00ff 0%, #0000ff 15%, #00bfff 25%,
+                #00ff00 40%, #ffff00 55%, #ff8c00 70%,
+                #ff0000 85%, #8b0000 100%);
+        }
+        .spectrum-labels {
+            display: flex; justify-content: space-between;
+            font-size: 0.8rem; color: var(--text-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark); color: #aab7c4;
+            padding: 30px 20px; text-align: center;
+            font-size: 0.9rem;
+        }
+        footer a { color: var(--accent-light); text-decoration: none; }
+
+        /* Tabs */
+        .tab-container { margin-bottom: 30px; }
+        .tab-buttons {
+            display: flex; gap: 4px; flex-wrap: wrap;
+            margin-bottom: 0;
+        }
+        .tab-btn {
+            padding: 10px 22px;
+            background: #e8ecf1;
+            border: none; cursor: pointer;
+            font-size: 0.92rem; font-weight: 600;
+            color: var(--text-light);
+            border-radius: 8px 8px 0 0;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { background: #d5dce4; }
+        .tab-btn.active {
+            background: var(--bg-card);
+            color: var(--primary);
+            box-shadow: 0 -2px 6px rgba(0,0,0,0.06);
+        }
+        .tab-panel {
+            display: none;
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 0 var(--radius) var(--radius) var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .tab-panel.active { display: block; }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .two-col { grid-template-columns: 1fr; }
+            .hero h1 { font-size: 2rem; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex; flex-direction: column;
+                position: absolute; top: 100%; left: 0; right: 0;
+                background: var(--primary-dark);
+                border-top: 1px solid rgba(255,255,255,0.1);
+            }
+            .nav-links.open a { padding: 14px 20px; }
+            .hamburger { display: block; }
+        }
+
+        /* Protocols grid */
+        .protocol-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+            gap: 20px;
+        }
+        @media (max-width: 500px) {
+            .protocol-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Quick links at top of section */
+        .quick-links {
+            display: flex; flex-wrap: wrap;
+            gap: 10px; margin-bottom: 30px;
+            justify-content: center;
+        }
+        .quick-link {
+            padding: 8px 18px;
+            background: var(--primary-light);
+            color: #fff; border-radius: 20px;
+            text-decoration: none; font-size: 0.88rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .quick-link:hover { background: var(--primary); }
+
+        /* Numbered steps */
+        .step-list { counter-reset: step-counter; list-style: none; padding: 0; }
+        .step-list li {
+            counter-increment: step-counter;
+            padding: 8px 0 8px 40px;
+            position: relative;
+            font-size: 0.93rem;
+        }
+        .step-list li::before {
+            content: counter(step-counter);
+            position: absolute; left: 0; top: 6px;
+            width: 28px; height: 28px;
+            background: var(--primary-light);
+            color: #fff; border-radius: 50%;
+            display: flex; align-items: center;
+            justify-content: center;
+            font-size: 0.82rem; font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Top Navigation -->
+<nav class="top-nav">
+    <div class="nav-container">
+        <a href="#" class="nav-logo">Flow<span>Cytometry</span>Hub</a>
+        <button class="hamburger" onclick="document.querySelector('.nav-links').classList.toggle('open')">&#9776;</button>
+        <ul class="nav-links">
+            <li><a href="#learning" class="active">Learning</a></li>
+            <li><a href="#usecases">Use Cases</a></li>
+            <li><a href="#instruments">Instruments</a></li>
+            <li><a href="#reagents">Reagents</a></li>
+            <li><a href="#protocols">Protocols</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+    <h1>Flow Cytometry Resource Center</h1>
+    <p>Your comprehensive guide to flow cytometry technology &mdash; from fundamentals and instrument selection to reagents and step-by-step protocols.</p>
+</header>
+
+<!-- ============================================================ -->
+<!-- SECTION 1: LEARNING FLOW CYTOMETRY -->
+<!-- ============================================================ -->
+<div id="learning" class="section">
+    <div class="section-header">
+        <h2>Learning Flow Cytometry</h2>
+        <p>Master the principles, optics, and data analysis techniques that power modern single-cell analysis.</p>
+    </div>
+
+    <!-- What is Flow Cytometry -->
+    <div class="diagram-box">
+        <h3 style="color: var(--primary); margin-bottom: 10px; font-size: 1.3rem;">What is Flow Cytometry?</h3>
+        <p style="max-width: 800px; margin: 0 auto 20px; color: var(--text-light);">
+            Flow cytometry is a laser-based technology that measures physical and chemical characteristics of cells or particles as they flow in a fluid stream through a beam of light. Each cell is interrogated individually, enabling rapid multiparameter analysis of thousands of events per second.
+        </p>
+        <div class="flow-diagram">
+            <div class="flow-step">Sample Preparation</div>
+            <span class="flow-arrow">&rarr;</span>
+            <div class="flow-step">Fluidics System</div>
+            <span class="flow-arrow">&rarr;</span>
+            <div class="flow-step">Laser Interrogation</div>
+            <span class="flow-arrow">&rarr;</span>
+            <div class="flow-step">Light Detection</div>
+            <span class="flow-arrow">&rarr;</span>
+            <div class="flow-step">Data Analysis</div>
+        </div>
+    </div>
+
+    <!-- Core Concepts -->
+    <div class="two-col" style="margin-bottom: 40px;">
+        <div class="card">
+            <h3><span class="icon">&#128300;</span> Fluidics &amp; Hydrodynamic Focusing</h3>
+            <p>Cells in suspension are injected into a sheath fluid stream. Hydrodynamic focusing aligns cells into a single-file line so each passes through the laser beam one at a time. The core stream diameter (~10 &micro;m) determines the interrogation precision.</p>
+            <ul>
+                <li><strong>Sheath fluid:</strong> Usually phosphate-buffered saline (PBS)</li>
+                <li><strong>Differential pressure</strong> between sample and sheath controls flow rate</li>
+                <li><strong>Higher sample pressure</strong> = faster acquisition but less precise alignment</li>
+            </ul>
+            <a href="learn-fluidics.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="card accent-green">
+            <h3><span class="icon">&#128161;</span> Optics &amp; Lasers</h3>
+            <p>When a cell passes through the laser, light is scattered and fluorescent molecules are excited. Optical filters and mirrors direct different wavelengths to specific detectors (PMTs or APDs).</p>
+            <ul>
+                <li><strong>Forward Scatter (FSC):</strong> Proportional to cell size</li>
+                <li><strong>Side Scatter (SSC):</strong> Proportional to internal complexity/granularity</li>
+                <li><strong>Fluorescence channels:</strong> Detect emission from fluorescent labels</li>
+                <li><strong>Bandpass filters</strong> isolate specific wavelength ranges</li>
+            </ul>
+            <a href="learn-optics.html" class="details-link">Learn More &rarr;</a>
+        </div>
+    </div>
+
+    <div class="two-col" style="margin-bottom: 40px;">
+        <div class="card accent-orange">
+            <h3><span class="icon">&#128202;</span> Data Analysis &amp; Gating</h3>
+            <p>Flow cytometry data is typically displayed as dot plots, histograms, or contour plots. Gating is the process of selecting specific populations of interest.</p>
+            <ul>
+                <li><strong>Dot plots:</strong> Display two parameters simultaneously (e.g., FSC vs. SSC)</li>
+                <li><strong>Histograms:</strong> Single-parameter frequency distributions</li>
+                <li><strong>Gating strategies:</strong> Sequential gates to identify subpopulations</li>
+                <li><strong>Compensation:</strong> Mathematical correction for spectral overlap between fluorochromes</li>
+                <li><strong>Common software:</strong> FlowJo, FCS Express, Kaluza, Cytobank</li>
+            </ul>
+            <a href="learn-data-analysis.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="card accent-red">
+            <h3><span class="icon">&#9881;</span> Compensation &amp; Controls</h3>
+            <p>Fluorochrome emission spectra overlap, causing signal spillover into adjacent detectors. Compensation corrects this mathematically using single-stained controls.</p>
+            <ul>
+                <li><strong>Single-stain controls:</strong> One fluorochrome per tube/bead</li>
+                <li><strong>FMO controls:</strong> "Fluorescence Minus One" for gating boundaries</li>
+                <li><strong>Isotype controls:</strong> Assess non-specific antibody binding</li>
+                <li><strong>Unstained control:</strong> Sets baseline autofluorescence</li>
+                <li><strong>Compensation matrix:</strong> Applied during or after acquisition</li>
+            </ul>
+            <a href="learn-compensation.html" class="details-link">Learn More &rarr;</a>
+        </div>
+    </div>
+
+    <!-- Visual: Scatter Plot Example -->
+    <div class="diagram-box">
+        <h3 style="color: var(--primary); margin-bottom: 6px;">Understanding Scatter Plots: FSC vs SSC</h3>
+        <p style="color: var(--text-light); margin-bottom: 10px;">A typical FSC vs SSC plot of whole blood showing major leukocyte populations</p>
+        <div class="scatter-container" id="scatterPlot">
+            <span class="axis-label-x">Forward Scatter (FSC) &rarr; Size</span>
+            <span class="axis-label-y">Side Scatter (SSC) &rarr; Granularity</span>
+            <span class="quadrant-label" style="left: 30px; bottom: 40px; color: #e74c3c;">Lymphocytes</span>
+            <span class="quadrant-label" style="left: 130px; bottom: 100px; color: #2980b9;">Monocytes</span>
+            <span class="quadrant-label" style="right: 30px; top: 30px; color: #27ae60;">Granulocytes</span>
+        </div>
+    </div>
+
+    <!-- Emission Spectrum -->
+    <div class="diagram-box">
+        <h3 style="color: var(--primary); margin-bottom: 6px;">The Fluorescence Spectrum</h3>
+        <p style="color: var(--text-light); margin-bottom: 10px;">Fluorochromes absorb light at one wavelength (excitation) and emit at a longer wavelength (emission). Panel design requires careful selection to minimize spectral overlap.</p>
+        <div class="spectrum-bar"></div>
+        <div class="spectrum-labels">
+            <span>400 nm (Violet)</span>
+            <span>500 nm (Blue/Green)</span>
+            <span>600 nm (Yellow/Orange)</span>
+            <span>700 nm (Red)</span>
+            <span>800 nm (NIR)</span>
+        </div>
+    </div>
+
+    <!-- Key Terminology -->
+    <h3 style="color: var(--primary); margin-bottom: 16px; font-size: 1.3rem;">Key Terminology</h3>
+    <div class="card-grid" style="margin-bottom: 0;">
+        <div class="card">
+            <h3>Event</h3>
+            <p>A single particle or cell detected by the cytometer. Each event generates a set of parameter measurements.</p>
+        </div>
+        <div class="card accent-green">
+            <h3>Fluorochrome / Fluorophore</h3>
+            <p>A molecule that absorbs light at a specific wavelength and emits light at a longer wavelength. Conjugated to antibodies or used as direct stains.</p>
+        </div>
+        <div class="card accent-orange">
+            <h3>PMT (Photomultiplier Tube)</h3>
+            <p>A detector that converts photons into an electrical signal. Each fluorescence channel has a dedicated PMT with a bandpass filter.</p>
+        </div>
+        <div class="card accent-red">
+            <h3>MFI (Mean/Median Fluorescence Intensity)</h3>
+            <p>A measure of the average brightness of a population. Used to quantify expression levels of markers.</p>
+        </div>
+        <div class="card">
+            <h3>Gating</h3>
+            <p>The process of defining regions on plots to isolate specific cell populations for analysis. Gates can be rectangular, polygonal, or elliptical.</p>
+        </div>
+        <div class="card accent-green">
+            <h3>Panel Design</h3>
+            <p>The strategic selection and combination of fluorochromes and antibodies to measure multiple markers simultaneously with minimal spectral overlap.</p>
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- SECTION 2: USE CASES -->
+<!-- ============================================================ -->
+<div id="usecases" class="section">
+    <div class="section-header">
+        <h2>Flow Cytometry Use Cases</h2>
+        <p>From clinical diagnostics to cutting-edge research, flow cytometry enables powerful applications across the life sciences.</p>
+    </div>
+
+    <div class="usecase-grid">
+        <div class="usecase-item">
+            <h4>&#127973; Immunophenotyping</h4>
+            <p>Identification and quantification of immune cell subsets using surface and intracellular markers. Critical for monitoring HIV/AIDS (CD4 counts), diagnosing leukemias/lymphomas, and characterizing immune responses.</p>
+            <a href="usecase-immunophenotyping.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="usecase-item" style="border-top-color: var(--accent);">
+            <h4>&#128300; Cell Cycle Analysis</h4>
+            <p>Measurement of DNA content using dyes like propidium iodide or DAPI to determine the proportion of cells in G0/G1, S, and G2/M phases. Essential for studying cell proliferation and drug effects.</p>
+            <a href="usecase-cell-cycle.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="usecase-item" style="border-top-color: var(--warning);">
+            <h4>&#9760;&#65039; Apoptosis Detection</h4>
+            <p>Detection of programmed cell death using Annexin V/PI staining, caspase activity assays, or mitochondrial membrane potential dyes. Key for drug screening and toxicology studies.</p>
+            <a href="usecase-apoptosis.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="usecase-item" style="border-top-color: var(--danger);">
+            <h4>&#127981; Cell Sorting (FACS)</h4>
+            <p>Fluorescence-Activated Cell Sorting physically separates specific populations into collection tubes based on fluorescent labeling. Enables downstream culture, genomics, or functional assays on purified populations.</p>
+            <a href="usecase-cell-sorting.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="usecase-item" style="border-top-color: #8e44ad;">
+            <h4>&#129516; Intracellular Cytokine Staining</h4>
+            <p>Detection of cytokines (IFN-&gamma;, TNF-&alpha;, IL-2, etc.) produced by individual cells after stimulation. Requires fixation and permeabilization. Critical for T cell functional studies and vaccine development.</p>
+            <a href="usecase-ics.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="usecase-item" style="border-top-color: #16a085;">
+            <h4>&#127758; Microbiology &amp; Virology</h4>
+            <p>Analysis of bacterial populations, viral load quantification, antimicrobial susceptibility testing, and characterization of microbial communities in environmental or clinical samples.</p>
+            <a href="usecase-microbiology.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="usecase-item">
+            <h4>&#128172; Signal Transduction / Phospho-Flow</h4>
+            <p>Measurement of intracellular phosphorylated proteins (pSTAT, pERK, pAKT) to study signaling pathway activation at the single-cell level in response to stimuli or drugs.</p>
+            <a href="usecase-phospho-flow.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="usecase-item" style="border-top-color: var(--accent);">
+            <h4>&#129656; Stem Cell Research</h4>
+            <p>Identification and isolation of stem cell populations (HSCs, MSCs, iPSCs) based on surface markers (CD34, CD133, CD90). Enables quality control and enrichment for transplantation or differentiation studies.</p>
+            <a href="usecase-stem-cells.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="usecase-item" style="border-top-color: var(--warning);">
+            <h4>&#128167; Platelet &amp; RBC Analysis</h4>
+            <p>Characterization of platelet activation markers (CD62P, PAC-1), reticulocyte counting, detection of paroxysmal nocturnal hemoglobinuria (PNH), and fetal-maternal hemorrhage quantification.</p>
+            <a href="usecase-platelets-rbc.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="usecase-item" style="border-top-color: var(--danger);">
+            <h4>&#127981; Clinical Diagnostics</h4>
+            <p>Routine clinical applications include complete blood count differentials, CD4/CD8 monitoring, HLA cross-matching, leukemia/lymphoma classification (WHO criteria), and minimal residual disease (MRD) detection.</p>
+            <a href="usecase-clinical-diagnostics.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="usecase-item" style="border-top-color: #8e44ad;">
+            <h4>&#128296; Drug Discovery &amp; Screening</h4>
+            <p>High-throughput screening of compound libraries for effects on cell viability, proliferation, receptor binding, and intracellular signaling. Multiplexed bead-based assays (CBA, Luminex) for cytokine profiling.</p>
+            <a href="usecase-drug-discovery.html" class="details-link">Learn More &rarr;</a>
+        </div>
+        <div class="usecase-item" style="border-top-color: #16a085;">
+            <h4>&#127793; Environmental &amp; Marine Biology</h4>
+            <p>Quantification and characterization of phytoplankton, algae, and marine microorganisms. Water quality monitoring, assessment of microbial diversity, and detection of harmful algal blooms.</p>
+            <a href="usecase-environmental.html" class="details-link">Learn More &rarr;</a>
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- SECTION 3: INSTRUMENTS -->
+<!-- ============================================================ -->
+<div id="instruments" class="section">
+    <div class="section-header">
+        <h2>Flow Cytometry Instruments</h2>
+        <p>A comprehensive directory of current flow cytometry instruments on the market, organized by manufacturer. Click any instrument name to visit the vendor product page.</p>
+    </div>
+
+    <!-- Instrument Categories -->
+    <h3 style="color: var(--primary); margin-bottom: 16px; font-size: 1.2rem;">Instrument Categories</h3>
+    <div class="card-grid" style="margin-bottom: 40px;">
+        <div class="card">
+            <h3><span class="icon">&#128300;</span> Analyzers</h3>
+            <p>Measure fluorescence and scatter but do not sort cells. Ideal for immunophenotyping, cell counting, and multicolor analysis. Generally lower cost and easier to operate.</p>
+        </div>
+        <div class="card accent-green">
+            <h3><span class="icon">&#9878;</span> Cell Sorters</h3>
+            <p>Physically isolate specific populations using electrostatic deflection or microfluidic valves. Enable downstream culture, genomics, or functional assays. Require more training and biosafety considerations.</p>
+        </div>
+        <div class="card accent-orange">
+            <h3><span class="icon">&#127752;</span> Spectral Analyzers</h3>
+            <p>Capture the full emission spectrum instead of using bandpass filters. Enable more fluorochromes per panel and better unmixing of overlapping spectra. Represent the latest generation of cytometry.</p>
+        </div>
+        <div class="card accent-red">
+            <h3><span class="icon">&#128247;</span> Imaging / Mass Cytometers</h3>
+            <p>Imaging cytometers combine flow cytometry with microscopy. Mass cytometers (CyTOF) use metal-tagged antibodies and time-of-flight mass spectrometry for 40+ parameter analysis with zero spectral overlap.</p>
+        </div>
+    </div>
+
+    <!-- Quick jump links for vendors -->
+    <div class="quick-links" style="margin-bottom: 30px;">
+        <a href="#vendor-bd" class="quick-link">BD Biosciences</a>
+        <a href="#vendor-beckman" class="quick-link">Beckman Coulter</a>
+        <a href="#vendor-cytek" class="quick-link">Cytek</a>
+        <a href="#vendor-thermo" class="quick-link">Thermo Fisher</a>
+        <a href="#vendor-sony" class="quick-link">Sony Biotechnology</a>
+        <a href="#vendor-agilent" class="quick-link">Agilent</a>
+        <a href="#vendor-biorad" class="quick-link">Bio-Rad</a>
+        <a href="#vendor-miltenyi" class="quick-link">Miltenyi Biotec</a>
+        <a href="#vendor-standard" class="quick-link">Standard BioTools</a>
+        <a href="#vendor-sartorius" class="quick-link">Sartorius</a>
+        <a href="#vendor-sysmex" class="quick-link">Sysmex</a>
+        <a href="#vendor-stratedigm" class="quick-link">Stratedigm</a>
+        <a href="#vendor-apogee" class="quick-link">Apogee Flow</a>
+    </div>
+
+    <!-- ==================== BD BIOSCIENCES ==================== -->
+    <div class="reagent-section" id="vendor-bd">
+        <h3>BD Biosciences</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">Industry leader with 50+ years of flow cytometry expertise. Offers the broadest portfolio spanning clinical diagnostics, high-parameter research, and cell sorting.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.bdbiosciences.com/en-us/products/instruments/flow-cytometers/research-cell-sorters/bd-facsdiscover-s8" target="_blank" rel="noopener"><strong>BD FACSDiscover S8</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Analyzer</span></td>
+                        <td>Up to 8</td>
+                        <td>High-parameter</td>
+                        <td>SpectralFX Technology + CellView Image Technology; sub-cellular resolution</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.bdbiosciences.com/en-us/products/instruments/flow-cytometers/research-cell-analyzers/bd-facssymphony-a5-se" target="_blank" rel="noopener"><strong>BD FACSymphony A5 SE</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Analyzer</span></td>
+                        <td>Up to 5</td>
+                        <td>High-parameter</td>
+                        <td>Spectral flow cytometry; full visible spectrum; autofluorescence unmixing</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.bdbiosciences.com/en-us/products/instruments/flow-cytometers/research-cell-analyzers/bd-facssymphony-a5" target="_blank" rel="noopener"><strong>BD FACSymphony A5</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>Up to 5</td>
+                        <td>50 parameters</td>
+                        <td>Ultimate high-parameter system; identifies rare cell types</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.bdbiosciences.com/en-us/products/instruments/flow-cytometers/research-cell-analyzers/bd-facssymphony-a3" target="_blank" rel="noopener"><strong>BD FACSymphony A3</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>Up to 3</td>
+                        <td>30 parameters</td>
+                        <td>High-parameter exploration; 28 colors; deep phenotyping</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.bdbiosciences.com/en-us/products/instruments/flow-cytometers/research-cell-analyzers/bd-facssymphony-a1" target="_blank" rel="noopener"><strong>BD FACSymphony A1</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>Up to 3</td>
+                        <td>16 colors</td>
+                        <td>Compact benchtop; entry-level high-parameter; optional small particle module</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.bdbiosciences.com/en-us/products/instruments/flow-cytometers/clinical-cell-analyzers/facslyric" target="_blank" rel="noopener"><strong>BD FACSLyric</strong></a></td>
+                        <td><span class="badge badge-analyzer">Clinical Analyzer</span></td>
+                        <td>Up to 6</td>
+                        <td>12 colors</td>
+                        <td>Clinical workhorse; IVD; automated QC; BD FACSuite software</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.bdbiosciences.com/en-us/products/instruments/flow-cytometers/research-cell-sorters/bd-facssymphony-s6" target="_blank" rel="noopener"><strong>BD FACSymphony S6</strong></a></td>
+                        <td><span class="badge badge-sorter">Sorter</span></td>
+                        <td>Up to 6</td>
+                        <td>60 parameters</td>
+                        <td>High-parameter sorting; cutting-edge optics; 6-way sorting</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.bdbiosciences.com/en-us/products/instruments/flow-cytometers/research-cell-sorters/bd-facsmelody" target="_blank" rel="noopener"><strong>BD FACSMelody</strong></a></td>
+                        <td><span class="badge badge-sorter">Sorter</span></td>
+                        <td>Up to 3</td>
+                        <td>9 colors</td>
+                        <td>Personal benchtop 4-way sorter; easy to use; temperature control</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://www.bdbiosciences.com/en-us/products/instruments/flow-cytometers" target="_blank" rel="noopener">bdbiosciences.com/instruments</a></p>
+    </div>
+
+    <!-- ==================== BECKMAN COULTER ==================== -->
+    <div class="reagent-section" id="vendor-beckman">
+        <h3>Beckman Coulter Life Sciences</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">Pioneer in flow cytometry, now centered on the CytoFLEX platform with avalanche photodiode (APD) detectors for superior sensitivity in a compact design.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.beckman.com/flow-cytometry/research-flow-cytometers/cytoflex" target="_blank" rel="noopener"><strong>CytoFLEX</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>Up to 3</td>
+                        <td>13 colors</td>
+                        <td>Compact benchtop; APD detectors; high sensitivity; entry-level</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.beckman.com/flow-cytometry/research-flow-cytometers/cytoflex-s" target="_blank" rel="noopener"><strong>CytoFLEX S</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>Up to 4</td>
+                        <td>13 colors</td>
+                        <td>Expanded research capabilities; 4th laser option; CytExpert software</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.beckman.com/flow-cytometry/research-flow-cytometers/cytoflex-lx" target="_blank" rel="noopener"><strong>CytoFLEX LX</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>Up to 6</td>
+                        <td>21 colors</td>
+                        <td>High-parameter benchtop; 6-laser capability; reduced spectral overlap</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.beckman.com/flow-cytometry/research-flow-cytometers/cytoflex-nano" target="_blank" rel="noopener"><strong>CytoFLEX nano</strong></a></td>
+                        <td><span class="badge badge-analyzer">Nanoparticle Analyzer</span></td>
+                        <td>Specialized</td>
+                        <td>6 FL + 5 SSC</td>
+                        <td>Nanoparticle detection down to 40 nm; purpose-built for EVs and viruses</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.beckman.com/flow-cytometry/research-flow-cytometers/cytoflex-mosaic" target="_blank" rel="noopener"><strong>CytoFLEX mosaic</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Module</span></td>
+                        <td>Add-on</td>
+                        <td>Up to 88 channels</td>
+                        <td>Modular spectral detection for CytoFLEX LX/S; dual unmixing algorithms; nanoparticle (&ge;80 nm)</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.beckman.com/flow-cytometry/cell-sorters/cytoflex-srt" target="_blank" rel="noopener"><strong>CytoFLEX SRT</strong></a></td>
+                        <td><span class="badge badge-sorter">Sorter</span></td>
+                        <td>Up to 4</td>
+                        <td>15 colors</td>
+                        <td>Benchtop sorter; gentle microfluidic sorting; integrated biosafety</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.beckman.com/flow-cytometry/clinical-flow-cytometers/dxflex" target="_blank" rel="noopener"><strong>DxFLEX</strong></a></td>
+                        <td><span class="badge badge-analyzer">Clinical Analyzer</span></td>
+                        <td>Up to 3</td>
+                        <td>13 colors</td>
+                        <td>IVD clinical; FDA 510(k) cleared; APD detectors; simplified compensation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://www.beckman.com/flow-cytometry" target="_blank" rel="noopener">beckman.com/flow-cytometry</a></p>
+    </div>
+
+    <!-- ==================== CYTEK BIOSCIENCES ==================== -->
+    <div class="reagent-section" id="vendor-cytek">
+        <h3>Cytek Biosciences</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">Leader in full-spectrum profiling (FSP) technology. Also markets Amnis imaging and Guava easyCyte product lines acquired from Luminex/DiaSorin in 2023.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://cytekbio.com/pages/aurora-evo" target="_blank" rel="noopener"><strong>Aurora Evo</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Analyzer</span></td>
+                        <td>Up to 5</td>
+                        <td>40+ colors</td>
+                        <td>Newest flagship (2025); 2x faster throughput; built-in small particle detection; harmonized</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://cytekbio.com/pages/aurora" target="_blank" rel="noopener"><strong>Aurora</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Analyzer</span></td>
+                        <td>Up to 5</td>
+                        <td>40+ colors</td>
+                        <td>Flagship full-spectrum profiling; 64 detectors; SpectroFlo; 2,600+ publications</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://cytekbio.com/pages/northern-lights" target="_blank" rel="noopener"><strong>Northern Lights</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Analyzer</span></td>
+                        <td>1&ndash;3</td>
+                        <td>24+ colors</td>
+                        <td>Value spectral; expandable lasers; single optical config; CLC clinical version</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://cytekbio.com/pages/aurora-cs" target="_blank" rel="noopener"><strong>Aurora CS</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Sorter</span></td>
+                        <td>Up to 5</td>
+                        <td>40+ colors</td>
+                        <td>Full-spectrum cell sorting; SpectroFlo software; gentle sorting</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://cytekbio.com/pages/muse-micro" target="_blank" rel="noopener"><strong>Muse Micro</strong></a></td>
+                        <td><span class="badge badge-analyzer">Compact Analyzer</span></td>
+                        <td>1</td>
+                        <td>5 parameters</td>
+                        <td>Affordable entry-level; 488 nm laser; pre-optimized assay kits; drug discovery award winner</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://cytekbio.com/pages/easycyte" target="_blank" rel="noopener"><strong>Guava easyCyte</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>Up to 3</td>
+                        <td>14 parameters</td>
+                        <td>Microcapillary fluidics; absolute cell counting; walkaway 96-sample automation</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://cytekbio.com/pages/imagestream" target="_blank" rel="noopener"><strong>Amnis ImageStream X Mk II</strong></a></td>
+                        <td><span class="badge badge-imaging">Imaging</span></td>
+                        <td>Up to 5</td>
+                        <td>12 channels</td>
+                        <td>Imaging flow cytometry; 60x magnification; EV uptake imaging; IDEAS software</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://cytekbio.com/" target="_blank" rel="noopener">cytekbio.com</a></p>
+    </div>
+
+    <!-- ==================== THERMO FISHER ==================== -->
+    <div class="reagent-section" id="vendor-thermo">
+        <h3>Thermo Fisher Scientific</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">Known for acoustic-focusing Attune platform and the high-end Bigfoot spectral sorter. Recently launched the Attune Xenith spectral analyzer.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.thermofisher.com/us/en/home/life-science/cell-analysis/flow-cytometry/flow-cytometers/attune-nxt-flow-cytometer/models/xenith.html" target="_blank" rel="noopener"><strong>Attune Xenith</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Analyzer</span></td>
+                        <td>Up to 4</td>
+                        <td>Spectral + conventional</td>
+                        <td>Newest (2025); spectral unmixing + conventional modes; acoustic focusing; automation</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.thermofisher.com/us/en/home/life-science/cell-analysis/flow-cytometry/flow-cytometers/attune-nxt-flow-cytometer/models/cytpix.html" target="_blank" rel="noopener"><strong>Attune CytPix</strong></a></td>
+                        <td><span class="badge badge-imaging">Analyzer + Imaging</span></td>
+                        <td>Up to 4</td>
+                        <td>14 colors</td>
+                        <td>Acoustic focusing + brightfield camera; AI image analysis; 6,000 images/sec</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.thermofisher.com/us/en/home/life-science/cell-analysis/flow-cytometry/flow-cytometers/attune-nxt-flow-cytometer/models/nxt.html" target="_blank" rel="noopener"><strong>Attune NxT</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>Up to 4</td>
+                        <td>16 parameters</td>
+                        <td>Acoustic focusing workhorse; no-clog; high throughput; autosampler</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.thermofisher.com/us/en/home/life-science/cell-analysis/flow-cytometry/flow-cytometers/bigfoot-spectral-cell-sorter.html" target="_blank" rel="noopener"><strong>Bigfoot Spectral Cell Sorter</strong></a></td>
+                        <td><span class="badge badge-sorter">Spectral Sorter</span></td>
+                        <td>Up to 9</td>
+                        <td>60 detectors</td>
+                        <td>High-speed sorting (70K eps); 6-way; spectral + conventional; 1536-well plate sorting</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://www.thermofisher.com/us/en/home/life-science/cell-analysis/flow-cytometry/flow-cytometers.html" target="_blank" rel="noopener">thermofisher.com/flow-cytometers</a></p>
+    </div>
+
+    <!-- ==================== SONY BIOTECHNOLOGY ==================== -->
+    <div class="reagent-section" id="vendor-sony">
+        <h3>Sony Biotechnology</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">Pioneer in spectral flow cytometry and microfluidic chip-based sorting with patented CoreFinder automation. Broadest sorter lineup on the market.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.sonybiotechnology.com/instruments/id7000-spectral-cell-analyzer" target="_blank" rel="noopener"><strong>ID7000 Spectral Cell Analyzer</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Analyzer</span></td>
+                        <td>Up to 7</td>
+                        <td>44+ colors (186 detectors)</td>
+                        <td>Highest detector count; 320&ndash;808 nm laser range; standardization mode; autosampler</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.sonybiotechnology.com/instruments/sa3800-spectral-analyzer" target="_blank" rel="noopener"><strong>SA3800 Spectral Cell Analyzer</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Analyzer</span></td>
+                        <td>Up to 4</td>
+                        <td>34 data points (32-ch PMT)</td>
+                        <td>Prism-based collection; automated startup/QC; global standardization; 384-well plates</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.sonybiotechnology.com/instruments/sp6800" target="_blank" rel="noopener"><strong>SP6800 Spectral Cell Analyzer</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Analyzer</span></td>
+                        <td>3</td>
+                        <td>16+ colors (66 data points)</td>
+                        <td>Compact spectral; 32-ch PMT; FCS Express included; standardization mode</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.sonybiotechnology.com/instruments/fp7000-spectral-cell-sorter" target="_blank" rel="noopener"><strong>FP7000 Spectral Cell Sorter</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Sorter</span></td>
+                        <td>Up to 6</td>
+                        <td>44+ colors (182 PMTs)</td>
+                        <td>High-parameter spectral sorting; 6-way; 25K eps; CoreFinder; Class 1 laser</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.sonybiotechnology.com/instruments/ma900-multi-application-cell-sorter" target="_blank" rel="noopener"><strong>MA900 Multi-Application Cell Sorter</strong></a></td>
+                        <td><span class="badge badge-sorter">Sorter</span></td>
+                        <td>4</td>
+                        <td>14 parameters</td>
+                        <td>Versatile 4-way sorter; chip-based; automated setup; multi-application flexibility</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.sonybiotechnology.com/instruments/sh800s-cell-sorter" target="_blank" rel="noopener"><strong>SH800S Cell Sorter</strong></a></td>
+                        <td><span class="badge badge-sorter">Sorter</span></td>
+                        <td>Up to 4</td>
+                        <td>8 parameters</td>
+                        <td>Benchtop chip sorter; highest automation; CoreFinder; 2-way tube + plate sorting</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.sonybiotechnology.com/instruments/fx500-exchangeable-fluidics-cell-sorter" target="_blank" rel="noopener"><strong>FX500 Exchangeable Fluidics Cell Sorter</strong></a></td>
+                        <td><span class="badge badge-sorter">Sorter</span></td>
+                        <td>Up to 3</td>
+                        <td>6 FL parameters</td>
+                        <td>Fully replaceable fluidics path; zero carryover; NSF49 biosafety; CoreFinder</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.sonybiotechnology.com/instruments/cgx10-cell-isolation-system" target="_blank" rel="noopener"><strong>CGX10 Cell Isolation System</strong></a></td>
+                        <td><span class="badge badge-sorter">GMP Cell Sorter</span></td>
+                        <td>Closed system</td>
+                        <td>Multi-marker</td>
+                        <td>Fully closed GMP-compliant; cell therapy manufacturing; 100K eps enrichment; sterile consumables</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://www.sonybiotechnology.com/instruments" target="_blank" rel="noopener">sonybiotechnology.com/instruments</a></p>
+    </div>
+
+    <!-- ==================== AGILENT ==================== -->
+    <div class="reagent-section" id="vendor-agilent">
+        <h3>Agilent Technologies</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">NovoCyte platform known for ease-of-use, fixed optical alignment, and volumetric-based absolute cell counting without beads. Celebrating 10 years of the NovoCyte platform.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.agilent.com/en/product/research-flow-cytometry/flow-cytometers/flow-cytometer-systems/novocyte-opteon-spectral-flow-cytometer-systems-3-5-lasers-4486563" target="_blank" rel="noopener"><strong>NovoCyte Opteon</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral Analyzer</span></td>
+                        <td>3&ndash;5</td>
+                        <td>40+ markers (73 detectors)</td>
+                        <td>Newest; spectral flow cytometry; flexible panel design; NovoExpress software</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.agilent.com/en/product/research-flow-cytometry/flow-cytometers/flow-cytometer-systems/novocyte-penteon-flow-cytometer-1270342" target="_blank" rel="noopener"><strong>NovoCyte Penteon</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>5 (UV/V/B/Y/R)</td>
+                        <td>30 FL channels</td>
+                        <td>5-laser high-parameter; 30 independent detectors; high-end multicolor panels</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.agilent.com/en/product/research-flow-cytometry/flow-cytometers/flow-cytometer-systems/novocyte-quanteon-flow-cytometer-systems-4-lasers-984692" target="_blank" rel="noopener"><strong>NovoCyte Quanteon</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>4</td>
+                        <td>25 FL channels</td>
+                        <td>4-laser; 7.2 log dynamic range; proprietary PMT technology; demanding panels</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.agilent.com/en/product/research-flow-cytometry/flow-cytometers/flow-cytometer-systems/novocyte-advanteon-flow-cytometer-1270335" target="_blank" rel="noopener"><strong>NovoCyte Advanteon</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>1&ndash;3</td>
+                        <td>Up to 17 parameters</td>
+                        <td>Advanced mid-range; sophisticated multicolor assays; simple operation</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.agilent.com/en/product/research-flow-cytometry/flow-cytometers/flow-cytometer-systems/novocyte-flow-cytometer-systems-1-3-lasers-984681" target="_blank" rel="noopener"><strong>NovoCyte</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>1&ndash;3</td>
+                        <td>Up to 17 parameters</td>
+                        <td>Budget-friendly entry; exchangeable filters; volumetric counting; NovoSampler</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://www.agilent.com/en/product/research-flow-cytometry/flow-cytometers/flow-cytometer-systems" target="_blank" rel="noopener">agilent.com/flow-cytometer-systems</a></p>
+    </div>
+
+    <!-- ==================== BIO-RAD ==================== -->
+    <div class="reagent-section" id="vendor-biorad">
+        <h3>Bio-Rad Laboratories</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">Offers the ZE5 Cell Analyzer platform with flexible laser configurations and Everest software. The S3e Cell Sorter has been discontinued but remains supported.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.bio-rad.com/en-us/product/ze5-cell-analyzer?ID=OC62Q015" target="_blank" rel="noopener"><strong>ZE5 Cell Analyzer</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>3&ndash;5</td>
+                        <td>Up to 30 parameters</td>
+                        <td>Flexible configs (3&ndash;5 laser); Everest software; SPD option; 21 CFR Part 11; plate loader; 22-hr run time</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://www.bio-rad.com/en-us/category/flow-cytometers?ID=MC3PCU15" target="_blank" rel="noopener">bio-rad.com/flow-cytometers</a></p>
+    </div>
+
+    <!-- ==================== MILTENYI BIOTEC ==================== -->
+    <div class="reagent-section" id="vendor-miltenyi">
+        <h3>Miltenyi Biotec</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">MACSQuant platform integrates flow cytometry with MACS magnetic cell separation, offering unique autolabeling and column integration capabilities.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.miltenyibiotec.com/US-en/products/macsquant-x.html" target="_blank" rel="noopener"><strong>MACSQuant X</strong></a></td>
+                        <td><span class="badge badge-analyzer">HTS Analyzer</span></td>
+                        <td>3</td>
+                        <td>16 channels</td>
+                        <td>High-throughput screening; thousands of samples/day; maximum speed and reliability</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.miltenyibiotec.com/US-en/products/macs-flow-cytometry/flow-cytometers/macsquant-analyzer-16.html" target="_blank" rel="noopener"><strong>MACSQuant Analyzer 16</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>3</td>
+                        <td>16 parameters</td>
+                        <td>Advanced immunophenotyping; compact; automated data acquisition</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.miltenyibiotec.com/US-en/products/macsquant-analyzer-10.html" target="_blank" rel="noopener"><strong>MACSQuant Analyzer 10</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>3</td>
+                        <td>10 channels</td>
+                        <td>Digital benchtop; robust fluidics; MACS column integration; GMP-ready</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.miltenyibiotec.com/US-en/products/macs-flow-cytometry/flow-cytometers.html" target="_blank" rel="noopener"><strong>MACSQuant VYB</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>3</td>
+                        <td>10 detectors (8 colors)</td>
+                        <td>Violet-Yellow-Blue laser config; fluorescent protein detection; compact</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://www.miltenyibiotec.com/US-en/products/macs-flow-cytometry/flow-cytometers.html" target="_blank" rel="noopener">miltenyibiotec.com/flow-cytometers</a></p>
+    </div>
+
+    <!-- ==================== STANDARD BIOTOOLS ==================== -->
+    <div class="reagent-section" id="vendor-standard">
+        <h3>Standard BioTools (formerly Fluidigm)</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">Pioneered mass cytometry (CyTOF) technology using metal-tagged antibodies and time-of-flight mass spectrometry. Zero spectral overlap enables 50+ simultaneous markers.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.standardbio.com/products/instruments/cytof-xt" target="_blank" rel="noopener"><strong>CyTOF XT PRO</strong></a></td>
+                        <td><span class="badge badge-mass">Mass Cytometry</span></td>
+                        <td>N/A (ICP-TOF-MS)</td>
+                        <td>50+ metals</td>
+                        <td>Newest (2025); 4x faster throughput; 21 CFR Part 11 compliance; clinical trial optimized</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.standardbio.com/products/instruments/cytof-xt" target="_blank" rel="noopener"><strong>CyTOF XT</strong></a></td>
+                        <td><span class="badge badge-mass">Mass Cytometry</span></td>
+                        <td>N/A (ICP-TOF-MS)</td>
+                        <td>50+ metals</td>
+                        <td>4th-gen CyTOF; fully automated; 13-sample carousel; no compensation needed</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.standardbio.com/products/instruments/hyperion-xti" target="_blank" rel="noopener"><strong>Hyperion XTi Imaging System</strong></a></td>
+                        <td><span class="badge badge-imaging">Imaging Mass Cytometry</span></td>
+                        <td>N/A (laser ablation)</td>
+                        <td>40+ metals</td>
+                        <td>Whole slide imaging; 40-slide autoloader; dual imaging/flow modes; tissue analysis</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://www.standardbio.com/products/instruments" target="_blank" rel="noopener">standardbio.com/instruments</a></p>
+    </div>
+
+    <!-- ==================== SARTORIUS ==================== -->
+    <div class="reagent-section" id="vendor-sartorius">
+        <h3>Sartorius</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">Purpose-built iQue platform for high-throughput screening (HTS) by cytometry. Processes 96-well plates in 5 minutes using patented air-gap sampling.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.sartorius.com/en/products/high-throughput-cytometry/high-throughput-cytometry-instruments/ique5" target="_blank" rel="noopener"><strong>iQue 5</strong></a></td>
+                        <td><span class="badge badge-analyzer">HTS Analyzer</span></td>
+                        <td>3&ndash;4</td>
+                        <td>25 colors (27 channels)</td>
+                        <td>Newest (2025); improved fluidics; auto-clog detection; 96/384-well plates</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.sartorius.com/en/products/high-throughput-cytometry/high-throughput-cytometry-instruments" target="_blank" rel="noopener"><strong>iQue 3</strong></a></td>
+                        <td><span class="badge badge-analyzer">HTS Analyzer</span></td>
+                        <td>Up to 3</td>
+                        <td>Multiple configs</td>
+                        <td>Fastest sample acquisition; 96/384/1536-well plates; robotics integration; Forecyt software</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://www.sartorius.com/en/products/flow-cytometry" target="_blank" rel="noopener">sartorius.com/flow-cytometry</a></p>
+    </div>
+
+    <!-- ==================== SYSMEX ==================== -->
+    <div class="reagent-section" id="vendor-sysmex">
+        <h3>Sysmex</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">Clinical diagnostics leader combining flow cytometry with automated sample preparation. Also offers compact CyFlow analyzers for research and industrial applications.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.sysmex.com/en-us/lab-solutions/flow-cytometry/instruments/sysmex-xf-1600" target="_blank" rel="noopener"><strong>XF-1600</strong></a></td>
+                        <td><span class="badge badge-analyzer">Clinical Analyzer</span></td>
+                        <td>Multiple</td>
+                        <td>10 colors</td>
+                        <td>Clinical IVD; pairs with PS-10 for full walkaway automation; XN-Series fluidics heritage</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.sysmex.com/en-us/lab-solutions/flow-cytometry/instruments/sysmex-ps-10" target="_blank" rel="noopener"><strong>PS-10 Sample Preparation System</strong></a></td>
+                        <td><span class="badge badge-analyzer">Sample Prep</span></td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>Automated antibody staining, incubation, and transfer to XF-1600; barcoded rotors</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.sysmex-europe.com/products/flow-cytometry/clinical-flow-cytometry/" target="_blank" rel="noopener"><strong>CyFlow Cube 6 V2m</strong></a></td>
+                        <td><span class="badge badge-analyzer">Compact Analyzer</span></td>
+                        <td>Up to 2</td>
+                        <td>6 parameters</td>
+                        <td>Ultra-compact desktop; research and industrial applications; DNA ploidy analysis</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.sysmex-europe.com/products/flow-cytometry/clinical-flow-cytometry/" target="_blank" rel="noopener"><strong>CyFlow Ploidy Analyzer</strong></a></td>
+                        <td><span class="badge badge-analyzer">Specialized Analyzer</span></td>
+                        <td>1</td>
+                        <td>DNA content</td>
+                        <td>Dedicated plant/animal ploidy; agriculture; aquaculture; compact</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://www.sysmex.com/en-us/lab-solutions/flow-cytometry/instruments" target="_blank" rel="noopener">sysmex.com/flow-cytometry</a></p>
+    </div>
+
+    <!-- ==================== STRATEDIGM ==================== -->
+    <div class="reagent-section" id="vendor-stratedigm">
+        <h3>Stratedigm</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">Silicon Valley manufacturer of customizable, upgradeable benchtop flow cytometers. Anti-Obsolescence Guarantee ensures long instrument lifecycle.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://stratedigm.com/s1000eon-flow-cytometer/" target="_blank" rel="noopener"><strong>S1000EON Spectra</strong></a></td>
+                        <td><span class="badge badge-spectral">Spectral + Conventional</span></td>
+                        <td>Up to 6</td>
+                        <td>30 parameters</td>
+                        <td>Newest; dual spectral + conventional modes; scalable; Flowraissance upgrade path</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://stratedigm.com/s1000eon-flow-cytometer/" target="_blank" rel="noopener"><strong>S1000EON</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>Up to 6</td>
+                        <td>30 parameters</td>
+                        <td>5-decade dynamic range; microparticle mode (0.2&ndash;7 &micro;m); laser-trimming technology</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://stratedigm.com/" target="_blank" rel="noopener"><strong>S1200Ex</strong></a></td>
+                        <td><span class="badge badge-analyzer">Analyzer</span></td>
+                        <td>3</td>
+                        <td>12 colors</td>
+                        <td>Complete analysis system; CellCapTure software; A600 plate loader compatible</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://stratedigm.com/" target="_blank" rel="noopener">stratedigm.com</a></p>
+    </div>
+
+    <!-- ==================== APOGEE FLOW SYSTEMS ==================== -->
+    <div class="reagent-section" id="vendor-apogee">
+        <h3>Apogee Flow Systems</h3>
+        <p style="color: var(--text-light); margin-bottom: 16px;">British manufacturer specializing in nano flow cytometry for small particles. Reference system for extracellular vesicle, virus, and nanoparticle analysis worldwide.</p>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Instrument</th>
+                        <th>Type</th>
+                        <th>Lasers</th>
+                        <th>Max Parameters</th>
+                        <th>Key Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="https://www.apogeeflow.com/products.php" target="_blank" rel="noopener"><strong>A60 Micro-PLUS</strong></a></td>
+                        <td><span class="badge badge-analyzer">Nanoparticle Analyzer</span></td>
+                        <td>Up to 3</td>
+                        <td>3 FSC + 9 FL</td>
+                        <td>Resolves 100 nm silica beads by scatter; reference for EV/virus studies; triple FSC</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.apogeeflow.com/products.php" target="_blank" rel="noopener"><strong>A50 Micro</strong></a></td>
+                        <td><span class="badge badge-analyzer">Nanoparticle Analyzer</span></td>
+                        <td>Up to 3</td>
+                        <td>Multiple FL</td>
+                        <td>EV analysis in liquid biopsies; sensitive standard tool; custom configurations</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://www.apogeeflow.com/products.php" target="_blank" rel="noopener"><strong>Kairos cLDEP Sorter</strong></a></td>
+                        <td><span class="badge badge-sorter">Nanoparticle Sorter</span></td>
+                        <td>Module add-on</td>
+                        <td>N/A</td>
+                        <td>First cLDEP particle sorter; electric field sorting; no moving parts; 10x faster than piezo; biohazard safe</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 8px; font-size: 0.88rem; color: var(--text-light);">Vendor website: <a href="https://www.apogeeflow.com/" target="_blank" rel="noopener">apogeeflow.com</a></p>
+    </div>
+
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- SECTION 4: REAGENTS -->
+<!-- ============================================================ -->
+<div id="reagents" class="section">
+    <div class="section-header">
+        <h2>Flow Cytometry Reagents</h2>
+        <p>Comprehensive reference for fluorochromes, dyes, and staining reagents used in flow cytometry applications.</p>
+    </div>
+
+    <div class="quick-links" style="justify-content: center; margin-bottom: 20px;">
+        <a href="fluorophore-guide.html" class="quick-link" style="background: linear-gradient(135deg, #1a5276, #2980b9); font-size: 0.9rem; padding: 8px 20px;">&#127752; Comprehensive Fluorophore Selection Guide</a>
+        <a href="spectrum-viewer.html" class="quick-link" style="background: linear-gradient(135deg, #8e44ad, #9b59b6); font-size: 0.9rem; padding: 8px 20px;">&#128202; Interactive Spectrum Viewer Tool</a>
+    </div>
+
+    <!-- Tabs for reagent categories -->
+    <div class="tab-container">
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="switchTab(event, 'fluorochromes')">Common Fluorochromes</button>
+            <button class="tab-btn" onclick="switchTab(event, 'viability')">Viability Dyes</button>
+            <button class="tab-btn" onclick="switchTab(event, 'dna-dyes')">DNA/Cell Cycle Dyes</button>
+            <button class="tab-btn" onclick="switchTab(event, 'functional')">Functional Probes</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tandem')">Tandem Dyes &amp; Polymers</button>
+        </div>
+
+        <!-- FLUOROCHROMES TAB -->
+        <div class="tab-panel active" id="fluorochromes">
+            <h3 style="color: var(--primary); margin-bottom: 12px;">Common Fluorochromes by Laser Line</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Fluorochrome</th>
+                            <th>Excitation (nm)</th>
+                            <th>Emission (nm)</th>
+                            <th>Laser</th>
+                            <th>Brightness</th>
+                            <th>Common Use</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>FITC</strong></td><td>488</td><td>520</td><td>Blue (488)</td><td>Medium</td><td>General immunophenotyping; widely available conjugates</td></tr>
+                        <tr><td><strong>PE (R-Phycoerythrin)</strong></td><td>488/565</td><td>575</td><td>Blue/Yellow-Green</td><td>Very Bright</td><td>Low-expression markers; excellent signal-to-noise</td></tr>
+                        <tr><td><strong>PerCP</strong></td><td>488</td><td>678</td><td>Blue (488)</td><td>Medium</td><td>CD4/CD8 panels; no tandem instability</td></tr>
+                        <tr><td><strong>PerCP-Cy5.5</strong></td><td>488</td><td>695</td><td>Blue (488)</td><td>Medium</td><td>Multicolor panels; extended red emission</td></tr>
+                        <tr><td><strong>APC (Allophycocyanin)</strong></td><td>633/640</td><td>660</td><td>Red (633)</td><td>Bright</td><td>Low-expression markers; minimal autofluorescence channel</td></tr>
+                        <tr><td><strong>APC-Cy7</strong></td><td>633/640</td><td>785</td><td>Red (633)</td><td>Bright</td><td>High-parameter panels; far-red detection</td></tr>
+                        <tr><td><strong>Alexa Fluor 488</strong></td><td>488</td><td>519</td><td>Blue (488)</td><td>Bright</td><td>FITC alternative; more photostable</td></tr>
+                        <tr><td><strong>Alexa Fluor 647</strong></td><td>633</td><td>668</td><td>Red (633)</td><td>Bright</td><td>APC alternative; excellent photostability</td></tr>
+                        <tr><td><strong>Alexa Fluor 700</strong></td><td>633</td><td>723</td><td>Red (633)</td><td>Medium</td><td>Red laser panels; minimal PE spillover</td></tr>
+                        <tr><td><strong>Pacific Blue</strong></td><td>405</td><td>455</td><td>Violet (405)</td><td>Medium</td><td>Violet laser panels; dump channel markers</td></tr>
+                        <tr><td><strong>BV421 (Brilliant Violet 421)</strong></td><td>405</td><td>421</td><td>Violet (405)</td><td>Very Bright</td><td>Low-expression markers on violet laser</td></tr>
+                        <tr><td><strong>BV510</strong></td><td>405</td><td>510</td><td>Violet (405)</td><td>Bright</td><td>Viability or dump channel; green emission off violet</td></tr>
+                        <tr><td><strong>BV605</strong></td><td>405</td><td>605</td><td>Violet (405)</td><td>Very Bright</td><td>High-parameter panels; excellent resolution</td></tr>
+                        <tr><td><strong>BV711</strong></td><td>405</td><td>711</td><td>Violet (405)</td><td>Bright</td><td>Deep phenotyping panels</td></tr>
+                        <tr><td><strong>BV786</strong></td><td>405</td><td>786</td><td>Violet (405)</td><td>Bright</td><td>Far-red off violet laser; high-parameter panels</td></tr>
+                        <tr><td><strong>BUV395</strong></td><td>355</td><td>395</td><td>UV (355)</td><td>Bright</td><td>UV laser panels; minimal spectral overlap</td></tr>
+                        <tr><td><strong>BUV737</strong></td><td>355</td><td>737</td><td>UV (355)</td><td>Bright</td><td>Extended UV panels; BD-exclusive</td></tr>
+                        <tr><td><strong>PE-Cy5</strong></td><td>488/565</td><td>667</td><td>Blue/Yellow-Green</td><td>Bright</td><td>Legacy panels; tandem dye</td></tr>
+                        <tr><td><strong>PE-Cy7</strong></td><td>488/565</td><td>785</td><td>Blue/Yellow-Green</td><td>Very Bright</td><td>High-expression markers; far-red from blue laser</td></tr>
+                        <tr><td><strong>Cy5</strong></td><td>633</td><td>670</td><td>Red (633)</td><td>Medium</td><td>Nucleic acid labeling; general research</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- VIABILITY DYES TAB -->
+        <div class="tab-panel" id="viability">
+            <h3 style="color: var(--primary); margin-bottom: 12px;">Viability Dyes</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dye</th>
+                            <th>Type</th>
+                            <th>Excitation</th>
+                            <th>Emission</th>
+                            <th>Fixable?</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Propidium Iodide (PI)</strong></td><td>Membrane-impermeant</td><td>535</td><td>617</td><td>No</td><td>Classic dead-cell exclusion; intercalates DNA; not compatible with fixation</td></tr>
+                        <tr><td><strong>7-AAD</strong></td><td>Membrane-impermeant</td><td>488</td><td>647</td><td>No</td><td>Less spectral overlap with FITC/PE than PI; rapid staining</td></tr>
+                        <tr><td><strong>DAPI</strong></td><td>Membrane-impermeant</td><td>360</td><td>460</td><td>No</td><td>Requires UV or violet laser; AT-base pair selective</td></tr>
+                        <tr><td><strong>SYTOX Blue</strong></td><td>Membrane-impermeant</td><td>444</td><td>480</td><td>No</td><td>High-affinity nucleic acid stain; low background</td></tr>
+                        <tr><td><strong>SYTOX Green</strong></td><td>Membrane-impermeant</td><td>488</td><td>523</td><td>No</td><td>Bright; simple protocol; use at low concentration</td></tr>
+                        <tr><td><strong>LIVE/DEAD Fixable Violet</strong></td><td>Amine-reactive</td><td>405</td><td>452</td><td>Yes</td><td>Reacts with free amines; dead cells stain brighter after fixation</td></tr>
+                        <tr><td><strong>LIVE/DEAD Fixable Aqua</strong></td><td>Amine-reactive</td><td>405</td><td>526</td><td>Yes</td><td>Popular fixable dye; violet laser; good for intracellular staining protocols</td></tr>
+                        <tr><td><strong>LIVE/DEAD Fixable Near-IR</strong></td><td>Amine-reactive</td><td>633</td><td>750</td><td>Yes</td><td>Red laser excitation; minimal panel interference</td></tr>
+                        <tr><td><strong>Zombie Aqua</strong></td><td>Amine-reactive</td><td>405</td><td>516</td><td>Yes</td><td>BioLegend fixable dye; excellent discrimination; cost-effective</td></tr>
+                        <tr><td><strong>Zombie NIR</strong></td><td>Amine-reactive</td><td>633</td><td>746</td><td>Yes</td><td>Near-infrared; minimal panel conflict; fixable</td></tr>
+                        <tr><td><strong>eFluor 780</strong></td><td>Amine-reactive</td><td>633</td><td>780</td><td>Yes</td><td>Thermo Fisher fixable viability; APC-Cy7 channel</td></tr>
+                        <tr><td><strong>Calcein AM</strong></td><td>Enzymatic (live-cell)</td><td>488</td><td>515</td><td>No</td><td>Only live cells convert to fluorescent calcein; measures esterase activity</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- DNA DYES TAB -->
+        <div class="tab-panel" id="dna-dyes">
+            <h3 style="color: var(--primary); margin-bottom: 12px;">DNA &amp; Cell Cycle Dyes</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dye</th>
+                            <th>Excitation</th>
+                            <th>Emission</th>
+                            <th>Mechanism</th>
+                            <th>Cell Cycle Use</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Propidium Iodide</strong></td><td>535</td><td>617</td><td>DNA intercalator</td><td>Yes (fixed cells)</td><td>Requires RNase treatment; stoichiometric binding to dsDNA</td></tr>
+                        <tr><td><strong>DAPI</strong></td><td>360</td><td>460</td><td>Minor groove binder</td><td>Yes</td><td>AT-preferring; requires UV/violet laser; compatible with many fluorochromes</td></tr>
+                        <tr><td><strong>Hoechst 33342</strong></td><td>350</td><td>461</td><td>Minor groove binder</td><td>Yes (live cells)</td><td>Cell-permeable; used for side population sorting; UV laser required</td></tr>
+                        <tr><td><strong>Hoechst 33258</strong></td><td>352</td><td>461</td><td>Minor groove binder</td><td>Yes</td><td>Similar to 33342 but less cell-permeable; often used with fixed cells</td></tr>
+                        <tr><td><strong>DRAQ5</strong></td><td>633</td><td>681</td><td>DNA intercalator</td><td>Yes (live cells)</td><td>Cell-permeable; red laser; far-red emission; no RNase needed</td></tr>
+                        <tr><td><strong>DRAQ7</strong></td><td>633</td><td>681</td><td>DNA intercalator</td><td>Viability only</td><td>Cell-impermeant version of DRAQ5; dead-cell discriminator</td></tr>
+                        <tr><td><strong>FxCycle Violet</strong></td><td>405</td><td>440</td><td>DNA binding</td><td>Yes</td><td>Violet laser; no RNase needed; Thermo Fisher product</td></tr>
+                        <tr><td><strong>SYTOX Green</strong></td><td>488</td><td>523</td><td>Nucleic acid stain</td><td>Limited</td><td>Primarily viability; can show DNA content in permeabilized cells</td></tr>
+                        <tr><td><strong>BrdU / EdU</strong></td><td>Various</td><td>Various</td><td>Thymidine analog incorporation</td><td>S-phase specific</td><td>Requires antibody (BrdU) or click chemistry (EdU) detection</td></tr>
+                        <tr><td><strong>Ki-67 antibody</strong></td><td>Various</td><td>Various</td><td>Protein marker</td><td>Proliferation marker</td><td>Absent in G0; present in G1, S, G2, M; requires fixation/permeabilization</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- FUNCTIONAL PROBES TAB -->
+        <div class="tab-panel" id="functional">
+            <h3 style="color: var(--primary); margin-bottom: 12px;">Functional Probes &amp; Indicators</h3>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Probe</th>
+                            <th>Function Measured</th>
+                            <th>Excitation</th>
+                            <th>Emission</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>CFSE / CellTrace Violet</strong></td><td>Cell proliferation (division tracking)</td><td>488 / 405</td><td>521 / 450</td><td>Diluted by half with each division; track up to 8 generations</td></tr>
+                        <tr><td><strong>Fluo-4 AM</strong></td><td>Intracellular calcium</td><td>488</td><td>516</td><td>Increases fluorescence with Ca<sup>2+</sup> binding; real-time kinetics</td></tr>
+                        <tr><td><strong>Indo-1</strong></td><td>Intracellular calcium (ratiometric)</td><td>355</td><td>405/485</td><td>UV excitation; ratio of bound/free forms; requires UV laser</td></tr>
+                        <tr><td><strong>JC-1</strong></td><td>Mitochondrial membrane potential</td><td>488</td><td>530/590</td><td>Green monomer (depolarized) vs red aggregate (polarized); ratiometric</td></tr>
+                        <tr><td><strong>MitoTracker Red</strong></td><td>Mitochondrial mass/potential</td><td>488/579</td><td>599</td><td>Fixable; accumulates in active mitochondria</td></tr>
+                        <tr><td><strong>TMRE / TMRM</strong></td><td>Mitochondrial membrane potential</td><td>488</td><td>575</td><td>Non-ratiometric; lost upon depolarization; use at low [nM] range</td></tr>
+                        <tr><td><strong>CM-H2DCFDA (DCF)</strong></td><td>Reactive oxygen species (ROS)</td><td>488</td><td>529</td><td>Oxidized by ROS to fluorescent DCF; broad ROS detection</td></tr>
+                        <tr><td><strong>MitoSOX Red</strong></td><td>Mitochondrial superoxide</td><td>488/510</td><td>580</td><td>Selective for mitochondrial superoxide; oxidized product binds DNA</td></tr>
+                        <tr><td><strong>Annexin V conjugates</strong></td><td>Early apoptosis (PS exposure)</td><td>Various</td><td>Various</td><td>Binds phosphatidylserine; requires Ca<sup>2+</sup>; combine with viability dye</td></tr>
+                        <tr><td><strong>FLICA (FAM-VAD-FMK)</strong></td><td>Active caspases</td><td>488</td><td>530</td><td>Cell-permeable; binds active caspases irreversibly; fixable</td></tr>
+                        <tr><td><strong>DiOC6</strong></td><td>Mitochondrial membrane potential</td><td>488</td><td>501</td><td>Green fluorescence; lost upon depolarization</td></tr>
+                        <tr><td><strong>LysoTracker Red</strong></td><td>Lysosomal content</td><td>488/577</td><td>590</td><td>Acidotropic probe; accumulates in acidic organelles</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TANDEM DYES TAB -->
+        <div class="tab-panel" id="tandem">
+            <h3 style="color: var(--primary); margin-bottom: 12px;">Tandem Dyes &amp; Polymer Dyes</h3>
+            <p style="margin-bottom: 16px; color: var(--text-light);">Tandem dyes use fluorescence resonance energy transfer (FRET) from a donor fluorochrome to an acceptor, enabling detection of multiple markers from a single laser. Polymer dyes (Brilliant Violet, Brilliant UV, Super Bright) are synthetic polymers with tunable emission spectra.</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Dye</th>
+                            <th>Type</th>
+                            <th>Excitation</th>
+                            <th>Emission</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>PE-Cy5</strong></td><td>Tandem</td><td>488</td><td>667</td><td>PE donor &rarr; Cy5 acceptor; sensitive to degradation</td></tr>
+                        <tr><td><strong>PE-Cy7</strong></td><td>Tandem</td><td>488</td><td>785</td><td>Very bright; PE donor &rarr; Cy7 acceptor; light/heat sensitive</td></tr>
+                        <tr><td><strong>APC-Cy7</strong></td><td>Tandem</td><td>633</td><td>785</td><td>APC donor &rarr; Cy7 acceptor; avoid prolonged light exposure</td></tr>
+                        <tr><td><strong>APC-R700</strong></td><td>Tandem</td><td>633</td><td>719</td><td>BD-specific; more photostable than APC-Cy7</td></tr>
+                        <tr><td><strong>PerCP-Cy5.5</strong></td><td>Tandem</td><td>488</td><td>695</td><td>PerCP donor &rarr; Cy5.5 acceptor; relatively photostable</td></tr>
+                        <tr><td><strong>PE-CF594</strong></td><td>Tandem</td><td>488</td><td>594</td><td>BD Horizon dye; better stability than PE-Texas Red</td></tr>
+                        <tr><td><strong>BV421</strong></td><td>Polymer</td><td>405</td><td>421</td><td>Brilliant Violet series; exceptionally bright</td></tr>
+                        <tr><td><strong>BV510</strong></td><td>Polymer</td><td>405</td><td>510</td><td>Good viability/dump channel dye off violet laser</td></tr>
+                        <tr><td><strong>BV605</strong></td><td>Polymer</td><td>405</td><td>605</td><td>One of the brightest BV dyes; ideal for low-expression markers</td></tr>
+                        <tr><td><strong>BV711</strong></td><td>Polymer</td><td>405</td><td>711</td><td>Far-red off violet; high-parameter panels</td></tr>
+                        <tr><td><strong>BV786</strong></td><td>Polymer</td><td>405</td><td>786</td><td>NIR off violet; can replace APC-Cy7 in some panels</td></tr>
+                        <tr><td><strong>BUV395</strong></td><td>Polymer</td><td>355</td><td>395</td><td>BD Horizon UV; requires UV laser</td></tr>
+                        <tr><td><strong>BUV496</strong></td><td>Polymer</td><td>355</td><td>496</td><td>UV laser; good spread with BUV395</td></tr>
+                        <tr><td><strong>BUV661</strong></td><td>Polymer</td><td>355</td><td>661</td><td>UV excitation; red emission; high-dimensional panels</td></tr>
+                        <tr><td><strong>BUV737</strong></td><td>Polymer</td><td>355</td><td>737</td><td>Far-red from UV; minimal cross-laser spillover</td></tr>
+                        <tr><td><strong>BUV805</strong></td><td>Polymer</td><td>355</td><td>805</td><td>NIR from UV; expanding panel capacity</td></tr>
+                        <tr><td><strong>Super Bright 436</strong></td><td>Polymer</td><td>405</td><td>436</td><td>Thermo Fisher polymer dye; violet laser</td></tr>
+                        <tr><td><strong>Super Bright 600</strong></td><td>Polymer</td><td>405</td><td>600</td><td>Bright; similar channel to BV605</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="tip" style="margin-top: 16px; background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; border-radius: 4px;">
+                <strong>Important:</strong> When using multiple polymer dyes (BV, BUV, Super Bright) in the same panel, use a Brilliant Stain Buffer to prevent dye-to-dye interactions that cause aberrant staining.
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ============================================================ -->
+<!-- SECTION 5: PROTOCOLS -->
+<!-- ============================================================ -->
+<div id="protocols" class="section">
+    <div class="section-header">
+        <h2>Common Flow Cytometry Protocols</h2>
+        <p>Step-by-step guides for the 20 most commonly used flow cytometry protocols. Click any protocol to expand the full procedure.</p>
+    </div>
+
+    <div class="quick-links">
+        <a href="#proto-1" class="quick-link">Viability</a>
+        <a href="#proto-2" class="quick-link">Surface Staining</a>
+        <a href="#proto-3" class="quick-link">Cell Cycle (PI)</a>
+        <a href="#proto-4" class="quick-link">Apoptosis</a>
+        <a href="#proto-5" class="quick-link">Intracellular Cytokine</a>
+        <a href="#proto-6" class="quick-link">Phospho-Flow</a>
+        <a href="#proto-7" class="quick-link">CFSE Proliferation</a>
+        <a href="#proto-8" class="quick-link">Treg Staining</a>
+        <a href="#proto-9" class="quick-link">FoxP3 Nuclear</a>
+        <a href="#proto-10" class="quick-link">Compensation Beads</a>
+        <a href="#proto-11" class="quick-link">ROS Detection</a>
+        <a href="#proto-12" class="quick-link">Mitochondrial Potential</a>
+        <a href="#proto-13" class="quick-link">Calcium Flux</a>
+        <a href="#proto-14" class="quick-link">Cell Sorting Prep</a>
+        <a href="#proto-15" class="quick-link">Bacterial Viability</a>
+        <a href="#proto-16" class="quick-link">DNA Ploidy</a>
+        <a href="#proto-17" class="quick-link">BrdU Incorporation</a>
+        <a href="#proto-18" class="quick-link">Multiplex Bead Assay</a>
+        <a href="#proto-19" class="quick-link">Whole Blood Lysis</a>
+        <a href="#proto-20" class="quick-link">Fixable Viability</a>
+    </div>
+
+    <div class="protocol-grid">
+
+        <!-- Protocol 1: Viability Staining (PI/7-AAD) -->
+        <div class="protocol-card proto-blue" id="proto-1">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                1. Viability Staining (PI / 7-AAD)
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Discriminate live from dead cells using membrane-impermeant DNA dyes that only enter cells with compromised membranes.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>Propidium Iodide (PI, 1 mg/mL stock) or 7-AAD (0.1 mg/mL)</li>
+                    <li>FACS buffer (PBS + 2% FBS + 0.1% sodium azide)</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Harvest cells and wash 1x in FACS buffer.</li>
+                    <li>Resuspend at 1 &times; 10<sup>6</sup> cells/mL in FACS buffer.</li>
+                    <li>Complete surface staining if needed (add antibodies, incubate 20 min at 4&deg;C, wash).</li>
+                    <li>Add PI to a final concentration of 0.5&ndash;1 &micro;g/mL (or 7-AAD at 5 &micro;L per test).</li>
+                    <li>Incubate 5&ndash;10 minutes at room temperature in the dark.</li>
+                    <li>Do <strong>not</strong> wash after adding viability dye.</li>
+                    <li>Acquire on cytometer within 30 minutes.</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> PI and 7-AAD are not compatible with fixation. For fixed samples, use a fixable amine-reactive viability dye (see Protocol 20).</div>
+            </div>
+        </div>
+
+        <!-- Protocol 2: Surface Antibody Staining -->
+        <div class="protocol-card proto-green" id="proto-2">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                2. Surface Antibody Staining
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Label cell surface antigens with fluorochrome-conjugated antibodies for immunophenotyping.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>Fluorochrome-conjugated antibodies (titrated to optimal concentration)</li>
+                    <li>FACS buffer, Fc block (anti-CD16/CD32 or Human TruStain FcX)</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Prepare single-cell suspension; count and assess viability.</li>
+                    <li>Aliquot 0.5&ndash;1 &times; 10<sup>6</sup> cells per tube/well.</li>
+                    <li>Add Fc block (if applicable) and incubate 10 min at 4&deg;C.</li>
+                    <li>Add pre-titrated antibody cocktail.</li>
+                    <li>Incubate 20&ndash;30 minutes at 4&deg;C in the dark.</li>
+                    <li>Wash 2x with 2 mL FACS buffer, centrifuge at 400 &times; g, 5 min.</li>
+                    <li>Resuspend in 200&ndash;300 &micro;L FACS buffer.</li>
+                    <li>Add viability dye if desired. Acquire on cytometer.</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> Always titrate antibodies to find the optimal concentration. More antibody is not always better &mdash; excess can increase background.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 3: Cell Cycle (PI) -->
+        <div class="protocol-card proto-orange" id="proto-3">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                3. Cell Cycle Analysis (PI/RNase)
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Quantify DNA content to determine cell cycle distribution (G0/G1, S, G2/M phases).</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>70% ethanol (ice-cold)</li>
+                    <li>PI staining solution: 50 &micro;g/mL PI + 100 &micro;g/mL RNase A in PBS</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Harvest cells (minimum 0.5 &times; 10<sup>6</sup>), wash 1x in PBS.</li>
+                    <li>Fix by adding ice-cold 70% ethanol dropwise while vortexing gently.</li>
+                    <li>Incubate at &minus;20&deg;C for at least 2 hours (or overnight).</li>
+                    <li>Wash 2x in PBS to remove ethanol.</li>
+                    <li>Resuspend in 0.5 mL PI/RNase staining solution.</li>
+                    <li>Incubate 30 minutes at 37&deg;C in the dark.</li>
+                    <li>Acquire at low flow rate (collect &ge;10,000 events on singlet gate).</li>
+                    <li>Use doublet discrimination (FSC-H vs FSC-A) to exclude aggregates.</li>
+                </ol>
+                <div class="caution"><strong>Caution:</strong> Doublet discrimination is essential. Cell clumps will appear as G2/M events and skew results. Use pulse geometry gating (FSC-H vs FSC-W or FSC-H vs FSC-A).</div>
+            </div>
+        </div>
+
+        <!-- Protocol 4: Apoptosis (Annexin V / PI) -->
+        <div class="protocol-card proto-red" id="proto-4">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                4. Apoptosis Detection (Annexin V / PI)
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Distinguish early apoptotic (Annexin V+/PI&minus;), late apoptotic/necrotic (Annexin V+/PI+), and viable (Annexin V&minus;/PI&minus;) cells.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>Annexin V conjugate (FITC, PE, or APC)</li>
+                    <li>Propidium Iodide (PI) or 7-AAD</li>
+                    <li>Annexin V Binding Buffer (10 mM HEPES, 140 mM NaCl, 2.5 mM CaCl<sub>2</sub>, pH 7.4)</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Harvest cells and wash 1x in cold PBS.</li>
+                    <li>Wash 1x in Annexin V Binding Buffer.</li>
+                    <li>Resuspend 1 &times; 10<sup>5</sup>&ndash;10<sup>6</sup> cells in 100 &micro;L Binding Buffer.</li>
+                    <li>Add 5 &micro;L Annexin V conjugate and 5 &micro;L PI (or 7-AAD).</li>
+                    <li>Incubate 15 minutes at RT in the dark.</li>
+                    <li>Add 400 &micro;L Binding Buffer. Do not wash.</li>
+                    <li>Acquire within 1 hour (PI/7-AAD signal degrades over time).</li>
+                </ol>
+                <div class="caution"><strong>Caution:</strong> Calcium is essential for Annexin V binding. Always use Annexin V Binding Buffer &mdash; never PBS or FACS buffer for this assay.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 5: Intracellular Cytokine Staining -->
+        <div class="protocol-card proto-purple" id="proto-5">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                5. Intracellular Cytokine Staining (ICS)
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Detect cytokine production (IFN-&gamma;, TNF-&alpha;, IL-2, IL-4, IL-17, etc.) by individual cells after stimulation.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>Stimulation agents: PMA (50 ng/mL) + ionomycin (1 &micro;g/mL) or antigen-specific peptides</li>
+                    <li>Protein transport inhibitor: Brefeldin A (GolgiPlug, 1 &micro;L/mL) or Monensin (GolgiStop)</li>
+                    <li>Fixation/Perm kit (BD Cytofix/Cytoperm or equivalent)</li>
+                    <li>Surface and intracellular antibodies</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Stimulate cells with PMA/ionomycin (or antigen) for 4&ndash;6 hours at 37&deg;C.</li>
+                    <li>Add Brefeldin A or Monensin after the first hour of stimulation (or at time 0).</li>
+                    <li>After stimulation, wash cells and perform surface staining (20 min, 4&deg;C).</li>
+                    <li>Wash and add fixable viability dye (see Protocol 20).</li>
+                    <li>Fix cells: add 250 &micro;L Cytofix/Cytoperm, incubate 20 min at 4&deg;C.</li>
+                    <li>Wash 2x with 1x Perm/Wash buffer.</li>
+                    <li>Add intracellular antibodies in Perm/Wash buffer, incubate 30 min at 4&deg;C.</li>
+                    <li>Wash 2x with Perm/Wash buffer, resuspend in FACS buffer.</li>
+                    <li>Acquire. Include unstimulated control and FMO controls.</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> Always include an unstimulated control to set the cytokine-positive gate. FMO controls are superior to isotype controls for defining positive populations.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 6: Phospho-Flow -->
+        <div class="protocol-card proto-teal" id="proto-6">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                6. Phospho-Flow (Intracellular Phosphoprotein)
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Measure phosphorylation of intracellular signaling proteins (pSTAT1, pSTAT3, pSTAT5, pERK, pS6, pAKT) at single-cell resolution.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>BD Phosflow Fix Buffer I (or 1.5% PFA) and Perm Buffer III (or 90% methanol)</li>
+                    <li>Phospho-specific antibodies (BD Phosflow or Cell Signaling Technology)</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Stimulate cells with cytokine/growth factor at 37&deg;C for optimal time (1&ndash;30 min depending on target).</li>
+                    <li>Immediately fix: add pre-warmed Fix Buffer I (or 1.5% PFA), vortex, incubate 10 min at 37&deg;C.</li>
+                    <li>Chill on ice 1 min. Centrifuge 600 &times; g, 5 min.</li>
+                    <li>Permeabilize: resuspend in ice-cold Perm Buffer III (or 90% methanol), vortex, incubate 30 min on ice.</li>
+                    <li>Wash 2x in FACS buffer (staining buffer).</li>
+                    <li>Stain with phospho-specific antibodies and surface markers (30&ndash;60 min at RT).</li>
+                    <li>Wash 2x, resuspend in FACS buffer. Acquire.</li>
+                </ol>
+                <div class="caution"><strong>Caution:</strong> Methanol permeabilization destroys many surface epitopes and fluorescent proteins (e.g., GFP). Test antibody compatibility with the fixation/permeabilization method beforehand.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 7: CFSE Proliferation -->
+        <div class="protocol-card proto-navy" id="proto-7">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                7. CFSE / CellTrace Proliferation Tracking
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Track cell division by labeling cells with a fluorescent dye that is halved with each division, creating distinct peaks for each generation.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>CFSE (5 mM stock in DMSO) or CellTrace Violet (5 mM stock)</li>
+                    <li>Warm complete medium, PBS</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Wash cells 2x in PBS (remove serum &mdash; proteins quench CFSE labeling).</li>
+                    <li>Resuspend at 1&ndash;10 &times; 10<sup>6</sup>/mL in PBS.</li>
+                    <li>Add CFSE to 2&ndash;5 &micro;M final (or CellTrace Violet to 2.5&ndash;5 &micro;M).</li>
+                    <li>Incubate 10&ndash;20 min at 37&deg;C in the dark.</li>
+                    <li>Quench by adding 5 volumes warm complete medium. Incubate 5 min.</li>
+                    <li>Wash 2x in complete medium.</li>
+                    <li>Culture cells with stimulation for 3&ndash;7 days.</li>
+                    <li>Harvest, perform surface staining, add viability dye, and acquire.</li>
+                    <li>Analyze proliferation peaks using FlowJo Proliferation modeling.</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> Include a Day 0 sample (labeled but not stimulated) to set the undivided peak position. CellTrace Violet has better resolution than CFSE for many applications.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 8: Treg Staining -->
+        <div class="protocol-card proto-blue" id="proto-8">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                8. Regulatory T Cell (Treg) Staining
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Identify regulatory T cells (CD4+CD25+FoxP3+ or CD4+CD25+CD127low) in blood or tissue samples.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>Surface antibodies: anti-CD3, anti-CD4, anti-CD25, anti-CD127</li>
+                    <li>Intracellular: anti-FoxP3, anti-CTLA-4, anti-Helios (optional)</li>
+                    <li>FoxP3/Transcription Factor Staining Buffer Set (eBioscience or equivalent)</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Perform surface staining for CD3, CD4, CD25, CD127 (20 min, 4&deg;C).</li>
+                    <li>Add fixable viability dye, incubate 15 min.</li>
+                    <li>Wash cells. Fix and permeabilize using FoxP3 Fix/Perm buffer (30 min&ndash;overnight, 4&deg;C).</li>
+                    <li>Wash 2x in 1x Permeabilization Buffer.</li>
+                    <li>Add anti-FoxP3 (and other intranuclear markers) in Perm Buffer. Incubate 30&ndash;45 min at RT.</li>
+                    <li>Wash 2x in Perm Buffer, resuspend in FACS buffer. Acquire.</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> The FoxP3 staining kit requires a specific fixation/permeabilization buffer that differs from the Cytofix/Cytoperm used for cytokines. Do not interchange these kits.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 9: FoxP3 Nuclear Staining -->
+        <div class="protocol-card proto-green" id="proto-9">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                9. FoxP3 / Transcription Factor Nuclear Staining
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Detect nuclear transcription factors (FoxP3, T-bet, GATA-3, ROR&gamma;t, Bcl-6, Eomes, Ki-67) requiring nuclear permeabilization.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>eBioscience FoxP3/Transcription Factor Staining Buffer Set (cat# 00-5523-00) or Tonbo kit</li>
+                    <li>Transcription factor antibodies</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Complete all surface staining and viability staining first.</li>
+                    <li>Wash cells. Add 1 mL Fix/Perm working solution. Vortex immediately.</li>
+                    <li>Incubate 30 min to overnight at 4&deg;C in the dark.</li>
+                    <li>Wash 2x with 1x Permeabilization Buffer (centrifuge 400&ndash;600 &times; g, 5 min).</li>
+                    <li>Add intranuclear antibodies diluted in 1x Permeabilization Buffer.</li>
+                    <li>Incubate 30 min at RT in the dark.</li>
+                    <li>Wash 2x with 1x Permeabilization Buffer.</li>
+                    <li>Resuspend in FACS buffer. Acquire or store at 4&deg;C protected from light (up to 24 h).</li>
+                </ol>
+                <div class="caution"><strong>Caution:</strong> Many surface markers are destroyed by the nuclear perm buffer. Always stain surface markers before fixation/permeabilization. Test each antibody clone for compatibility.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 10: Compensation Controls -->
+        <div class="protocol-card proto-orange" id="proto-10">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                10. Compensation Bead Controls
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Generate single-stained controls for accurate compensation (spectral overlap correction) using antibody-capture beads.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>Compensation beads (e.g., BD CompBeads, UltraComp eBeads, OneComp eBeads, or ArC Amine Reactive beads for viability dyes)</li>
+                    <li>One antibody conjugate per tube (same clone/fluorochrome as in the panel)</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Add one drop (~50 &micro;L) of positive and negative beads to each tube.</li>
+                    <li>Add the recommended volume of each single antibody to its respective tube.</li>
+                    <li>Incubate 15&ndash;20 min at RT in the dark.</li>
+                    <li>Add 2 mL FACS buffer. Centrifuge 300 &times; g, 5 min. Decant.</li>
+                    <li>Resuspend in 300 &micro;L FACS buffer.</li>
+                    <li>For viability dyes: use ArC beads (amine-reactive) or dedicate a cell aliquot.</li>
+                    <li>Acquire each comp tube on the cytometer using the same voltages as the experiment.</li>
+                    <li>Calculate compensation matrix in software (FACSDiva, SpectroFlo, FlowJo).</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> Comp beads must be at least as bright as the cells. If a bead is dimmer than the stained cell population, use stained cells as the comp control for that channel.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 11: ROS Detection -->
+        <div class="protocol-card proto-red" id="proto-11">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                11. Reactive Oxygen Species (ROS) Detection
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Measure intracellular ROS production using oxidation-sensitive fluorescent probes.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>CM-H2DCFDA (General Oxidative Stress Indicator, 10 mM stock in DMSO)</li>
+                    <li>MitoSOX Red (for mitochondrial superoxide, 5 mM stock in DMSO)</li>
+                    <li>Positive control: H<sub>2</sub>O<sub>2</sub> (100&ndash;500 &micro;M) or menadione</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Wash cells 1x in warm PBS (no phenol red, no serum).</li>
+                    <li>Load with CM-H2DCFDA (2&ndash;10 &micro;M) or MitoSOX Red (5 &micro;M) in warm PBS.</li>
+                    <li>Incubate 20&ndash;30 min at 37&deg;C in the dark.</li>
+                    <li>Wash 1x in warm complete medium or PBS + 2% FBS.</li>
+                    <li>Optionally treat with stimuli/inhibitors for desired time.</li>
+                    <li>Add viability dye (e.g., SYTOX Blue or DAPI). Acquire immediately.</li>
+                </ol>
+                <div class="caution"><strong>Caution:</strong> DCF-based probes are irreversible indicators and can be oxidized by many cellular processes besides ROS. Include antioxidant controls (NAC, catalase) to confirm ROS specificity.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 12: Mitochondrial Membrane Potential -->
+        <div class="protocol-card proto-purple" id="proto-12">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                12. Mitochondrial Membrane Potential (JC-1 / TMRE)
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Assess mitochondrial membrane potential (&Delta;&psi;m) as an indicator of mitochondrial health, early apoptosis, or metabolic state.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>JC-1 (200 &micro;M stock in DMSO) or TMRE (10 mM stock in DMSO)</li>
+                    <li>CCCP or FCCP (50 mM stock) as depolarization positive control</li>
+                </ul>
+                <h4>Procedure (JC-1)</h4>
+                <ol>
+                    <li>Prepare CCCP-treated positive control: pre-incubate cells with 50 &micro;M CCCP for 5 min at 37&deg;C.</li>
+                    <li>Add JC-1 to all samples at 2 &micro;M final concentration.</li>
+                    <li>Incubate 20&ndash;30 min at 37&deg;C, 5% CO<sub>2</sub>, in the dark.</li>
+                    <li>Wash 2x in warm PBS.</li>
+                    <li>Resuspend in 300 &micro;L PBS. Acquire immediately.</li>
+                    <li>Measure green fluorescence (FL1, ~530 nm, monomers) and red fluorescence (FL2, ~590 nm, aggregates).</li>
+                    <li>Calculate red/green ratio: higher ratio = healthy &Delta;&psi;m, lower ratio = depolarized.</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> TMRE is used at much lower concentrations (10&ndash;50 nM) in non-quench mode. Loss of signal indicates depolarization. TMRE is simpler to analyze than JC-1.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 13: Calcium Flux -->
+        <div class="protocol-card proto-teal" id="proto-13">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                13. Calcium Flux Measurement
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Measure real-time intracellular calcium mobilization in response to receptor stimulation using ratiometric or single-wavelength calcium indicators.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>Indo-1 AM (ratiometric, requires UV laser) or Fluo-4 AM (single-wavelength, 488 nm)</li>
+                    <li>Pluronic F-127 (to aid dye loading); stimulant (anti-CD3, thapsigargin, ionomycin)</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Resuspend cells at 5 &times; 10<sup>6</sup>/mL in warm RPMI + 2% FBS.</li>
+                    <li>Add Indo-1 AM (1&ndash;5 &micro;M) or Fluo-4 AM (1&ndash;2 &micro;M) with 0.02% Pluronic F-127.</li>
+                    <li>Incubate 30 min at 37&deg;C in the dark with periodic mixing.</li>
+                    <li>Wash 2x in warm RPMI + 2% FBS.</li>
+                    <li>Allow dye de-esterification: incubate 30 min at 37&deg;C in media.</li>
+                    <li>Perform surface staining if needed (keep at 37&deg;C).</li>
+                    <li>Begin acquisition and record baseline (30&ndash;60 sec).</li>
+                    <li>Add stimulant (without stopping acquisition) and record for 3&ndash;5 min.</li>
+                    <li>Add ionomycin (1 &micro;g/mL) as positive control to verify dye loading.</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> Indo-1 provides ratiometric measurement (bound/free) which is independent of dye concentration and cell size. Fluo-4 is easier to set up but is non-ratiometric.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 14: Cell Sorting Preparation -->
+        <div class="protocol-card proto-navy" id="proto-14">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                14. Cell Sorting Sample Preparation
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Prepare samples optimally for FACS sorting to maximize yield, viability, and purity of sorted populations.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>Sort buffer: PBS + 1&ndash;2% FBS + 1 mM EDTA (sterile, filtered)</li>
+                    <li>Cell strainer (40&ndash;70 &micro;m), DNase I (optional)</li>
+                    <li>Collection tubes with media (for viability)</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Prepare single-cell suspension (aim for &ge;10 &times; 10<sup>6</sup> cells for rare populations).</li>
+                    <li>If clumping is present, add DNase I (10&ndash;100 &micro;g/mL) during processing.</li>
+                    <li>Filter through 40 &micro;m cell strainer immediately before staining.</li>
+                    <li>Perform surface antibody staining at optimal titrated concentrations.</li>
+                    <li>Add viability dye (DAPI or SYTOX Blue preferred for sorting &mdash; no fixation needed).</li>
+                    <li>Wash and resuspend in sort buffer at 10&ndash;20 &times; 10<sup>6</sup>/mL.</li>
+                    <li>Filter again through 40 &micro;m strainer into a sort tube (cap with strainer).</li>
+                    <li>Keep cells on ice. Prepare collection tubes: add 0.5&ndash;1 mL FBS or complete medium.</li>
+                    <li>Sort. Post-sort, re-analyze a small aliquot to verify purity (&gt;95%).</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> EDTA in the sort buffer prevents cell clumping. Avoid sodium azide in sort buffer if cells will be cultured after sorting. Keep everything sterile for downstream culture.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 15: Bacterial Viability -->
+        <div class="protocol-card proto-blue" id="proto-15">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                15. Bacterial Viability Assessment
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Determine bacterial viability and quantify live vs. dead bacteria in a sample using nucleic acid dyes.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>SYTO 9 (cell-permeant green, labels all bacteria)</li>
+                    <li>Propidium Iodide (labels membrane-compromised bacteria, displaces SYTO 9)</li>
+                    <li>LIVE/DEAD BacLight kit (Thermo Fisher L7012) or equivalent</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Harvest bacteria at mid-log phase. Wash 1x in 0.85% NaCl or PBS.</li>
+                    <li>Adjust to ~10<sup>6</sup>&ndash;10<sup>7</sup> bacteria/mL.</li>
+                    <li>Add SYTO 9 (5 &micro;M) and PI (30 &micro;M) from BacLight kit.</li>
+                    <li>Incubate 15 min at RT in the dark.</li>
+                    <li>Acquire at low flow rate (bacteria are small &mdash; adjust FSC threshold).</li>
+                    <li>Gate on bacteria using FSC/SSC (may need log scale on both axes).</li>
+                    <li>Live bacteria: SYTO 9-bright, PI-dim. Dead: PI-bright, SYTO 9-dim.</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> Lower the FSC threshold significantly for bacteria (they are 10&ndash;100x smaller than mammalian cells). Use counting beads for absolute quantification.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 16: DNA Ploidy -->
+        <div class="protocol-card proto-green" id="proto-16">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                16. DNA Ploidy Analysis (Clinical)
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Determine DNA ploidy (diploid vs. aneuploid) and calculate DNA index in tumor samples for prognostic assessment.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>DAPI (4 &micro;g/mL in staining buffer) or PI/RNase solution</li>
+                    <li>Normal diploid reference cells (chicken/trout erythrocytes or normal lymphocytes)</li>
+                    <li>Detergent-based nuclear isolation buffer (for FFPE: pepsin digestion buffer)</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>For fresh tissue: mince, disaggregate, and filter to single nuclei/cells.</li>
+                    <li>For FFPE tissue: deparaffinize, rehydrate, pepsin digest (0.5% pepsin in 0.9% NaCl, pH 1.5, 30 min, 37&deg;C).</li>
+                    <li>Filter through 50 &micro;m mesh. Wash nuclei in PBS.</li>
+                    <li>Add internal diploid reference standard.</li>
+                    <li>Stain with DAPI or PI/RNase (same as cell cycle protocol).</li>
+                    <li>Acquire &ge;20,000 nuclei at low flow rate.</li>
+                    <li>Calculate DNA Index = (G0/G1 peak channel of tumor) / (G0/G1 peak channel of reference).</li>
+                    <li>DI = 1.0 is diploid; DI &ne; 1.0 is aneuploid.</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Protocol 17: BrdU Incorporation -->
+        <div class="protocol-card proto-orange" id="proto-17">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                17. BrdU / EdU Incorporation Assay
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Identify cells actively synthesizing DNA (S-phase) by incorporation of the thymidine analog BrdU or EdU, providing more specific proliferation data than Ki-67 alone.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>BrdU (10 mM stock) or EdU (10 mM stock, Click-iT kit)</li>
+                    <li>For BrdU: anti-BrdU antibody (FITC or APC), DNase I, Fix/Perm buffers</li>
+                    <li>For EdU: Click-iT reaction cocktail (azide-fluorochrome, CuSO4, ascorbic acid)</li>
+                </ul>
+                <h4>Procedure (BrdU)</h4>
+                <ol>
+                    <li>Pulse cells with 10 &micro;M BrdU for 1&ndash;4 hours at 37&deg;C.</li>
+                    <li>Harvest cells. Perform surface staining.</li>
+                    <li>Fix with BD Cytofix/Cytoperm (30 min, 4&deg;C). Wash in Perm/Wash.</li>
+                    <li>Re-fix in Cytofix/Cytoperm Plus (10 min, 4&deg;C). Wash.</li>
+                    <li>Re-fix in Cytofix/Cytoperm (5 min, 4&deg;C). Wash.</li>
+                    <li>Treat with DNase I (300 &micro;g/mL in DPBS) for 1 h at 37&deg;C to expose BrdU epitopes.</li>
+                    <li>Wash. Add anti-BrdU antibody (20 min, RT). Wash.</li>
+                    <li>Add 7-AAD or DAPI for total DNA content. Acquire.</li>
+                </ol>
+                <h4>EdU Alternative</h4>
+                <p>EdU (5-ethynyl-2'-deoxyuridine) uses click chemistry instead of antibodies, eliminating the need for DNase denaturation. This results in better preservation of cell morphology and surface markers.</p>
+                <div class="tip"><strong>Tip:</strong> EdU is generally preferred over BrdU for new experiments because it doesn't require DNA denaturation, preserves epitopes better, and is faster.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 18: Multiplex Bead Assay -->
+        <div class="protocol-card proto-red" id="proto-18">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                18. Multiplex Cytokine Bead Array (CBA)
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Quantify multiple soluble analytes (cytokines, chemokines) simultaneously from serum, plasma, or culture supernatants using bead-based immunoassays analyzed on a flow cytometer.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>BD CBA Flex Set or LEGENDplex (BioLegend) kit for analytes of interest</li>
+                    <li>Standards, detection reagents, wash buffer</li>
+                    <li>V-bottom 96-well plate or tubes</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Reconstitute lyophilized standards. Prepare serial dilutions (typically 8-point).</li>
+                    <li>Mix capture beads for all analytes together. Vortex well.</li>
+                    <li>Add 25 &micro;L mixed capture beads to each well.</li>
+                    <li>Add 25 &micro;L of standards or samples.</li>
+                    <li>Incubate 1&ndash;2 hours at RT with shaking (or overnight at 4&deg;C).</li>
+                    <li>Add 25 &micro;L detection antibody cocktail. Incubate 1 h at RT.</li>
+                    <li>Add 25 &micro;L SA-PE (streptavidin-PE). Incubate 30 min at RT.</li>
+                    <li>Wash 2x with wash buffer. Resuspend in 200 &micro;L.</li>
+                    <li>Acquire on cytometer. Analyze with FCAP Array or LEGENDplex software.</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> Run at least 300 events per bead population for reliable quantification. Vortex bead mixtures thoroughly before each use &mdash; beads settle quickly.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 19: Whole Blood Lysis -->
+        <div class="protocol-card proto-purple" id="proto-19">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                19. Whole Blood Lyse/Stain Protocol
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Perform immunophenotyping directly from whole blood using a lyse/stain or stain/lyse approach, avoiding density gradient separation and preserving all leukocyte populations.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>EDTA or heparin anticoagulated whole blood (fresh, &lt;24 h)</li>
+                    <li>RBC lysis buffer: BD FACS Lysing Solution, ACK Lysis Buffer, or 1x ammonium chloride solution</li>
+                    <li>Fluorochrome-conjugated antibodies</li>
+                </ul>
+                <h4>Procedure (Stain-Lyse-Wash)</h4>
+                <ol>
+                    <li>Aliquot 100 &micro;L whole blood per tube.</li>
+                    <li>Add Fc block if needed (5 min, RT).</li>
+                    <li>Add pre-titrated antibody cocktail. Vortex gently.</li>
+                    <li>Incubate 15&ndash;20 min at RT in the dark.</li>
+                    <li>Add 2 mL 1x BD FACS Lysing Solution. Vortex.</li>
+                    <li>Incubate 10 min at RT (until clear/transparent).</li>
+                    <li>Centrifuge 300 &times; g, 5 min. Decant supernatant.</li>
+                    <li>Wash 1x in 2 mL FACS buffer.</li>
+                    <li>Resuspend in 300 &micro;L FACS buffer. Acquire.</li>
+                </ol>
+                <div class="tip"><strong>Tip:</strong> If lysis is incomplete (remaining RBCs), repeat lysis step once. For intracellular staining, BD FACS Lysing Solution simultaneously lyses and fixes. Follow with permeabilization.</div>
+            </div>
+        </div>
+
+        <!-- Protocol 20: Fixable Viability Dye -->
+        <div class="protocol-card proto-teal" id="proto-20">
+            <div class="protocol-header" onclick="toggleProtocol(this)">
+                20. Fixable Viability Dye Staining
+                <span class="toggle-icon">&#9660;</span>
+            </div>
+            <div class="protocol-body">
+                <h4>Purpose</h4>
+                <p>Discriminate live from dead cells using amine-reactive fixable viability dyes, compatible with downstream fixation and permeabilization protocols.</p>
+                <h4>Materials</h4>
+                <ul>
+                    <li>Fixable viability dye: LIVE/DEAD Fixable (Aqua, Violet, Near-IR, etc.), Zombie dyes, eFluor viability dyes</li>
+                    <li>PBS (protein-free &mdash; no FBS, no BSA)</li>
+                    <li>FACS buffer (for post-staining washes)</li>
+                </ul>
+                <h4>Procedure</h4>
+                <ol>
+                    <li>Harvest cells and wash 2x in PBS (protein-free). This is critical &mdash; proteins will quench the dye.</li>
+                    <li>Resuspend cells at 1 &times; 10<sup>6</sup>/mL in PBS.</li>
+                    <li>Add fixable viability dye at recommended dilution (typically 1:500&ndash;1:1000).</li>
+                    <li>Incubate 15&ndash;20 min at 4&deg;C or RT in the dark.</li>
+                    <li>Wash 1x in FACS buffer (protein will now stop the reaction).</li>
+                    <li>Proceed to surface staining, then fixation/permeabilization as needed.</li>
+                    <li>The viability signal is preserved through fixation and permeabilization.</li>
+                </ol>
+                <div class="caution"><strong>Caution:</strong> Fixable viability dyes MUST be used in protein-free PBS. Even small amounts of BSA or FBS will dramatically reduce dead/live discrimination. Wash cells thoroughly before staining.</div>
+            </div>
+        </div>
+
+    </div><!-- end protocol-grid -->
+
+    <!-- External Protocol Resources -->
+    <div style="margin-top: 50px;">
+        <div class="section-header">
+            <h2>&#127760; External Protocol Resources</h2>
+            <p>Curated links to published flow cytometry protocols from university core facilities, reagent vendors, and protocol repositories. These resources complement the protocols above with detailed, step-by-step guides.</p>
+        </div>
+
+        <div class="tab-container">
+            <div class="tab-buttons">
+                <button class="tab-btn active" onclick="switchTab(event, 'ext-universities')">University Core Facilities</button>
+                <button class="tab-btn" onclick="switchTab(event, 'ext-vendors')">Vendor Protocols</button>
+                <button class="tab-btn" onclick="switchTab(event, 'ext-repositories')">Repositories &amp; Journals</button>
+                <button class="tab-btn" onclick="switchTab(event, 'ext-general')">General Multi-Protocol Resources</button>
+            </div>
+
+            <!-- University Core Facilities -->
+            <div id="ext-universities" class="tab-panel active">
+                <h3 style="color: var(--primary); margin-bottom: 16px;">University &amp; Institutional Core Facility Protocols</h3>
+                <table>
+                    <thead>
+                        <tr><th>Institution</th><th>Protocol Topics</th><th>Link</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Yale University</strong> &ndash; Flow Cytometry Facility</td>
+                            <td>Surface staining, intracellular cytokine staining, general sample prep</td>
+                            <td><a href="https://medicine.yale.edu/immuno/flowcore/protocols/analysis/" target="_blank" rel="noopener">Surface Staining</a> &bull; <a href="https://medicine.yale.edu/immuno/flowcore/protocols/cytokines/" target="_blank" rel="noopener">ICS Protocol</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>University of Iowa</strong> &ndash; Flow Cytometry Facility</td>
+                            <td>Comprehensive staining protocols, ICS (2 methods), surface + intracellular combined</td>
+                            <td><a href="https://flowcytometry.medicine.uiowa.edu/analysis-vs-cell-sorting-whats-difference/staining-protocols" target="_blank" rel="noopener">All Protocols</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>University of Arizona</strong> &ndash; Flow Cytometry Core</td>
+                            <td>Intracellular cytokine staining with permeabilization options</td>
+                            <td><a href="https://cores.arizona.edu/facilities/flowcytometry/resources/intracellular-cytokine-staining" target="_blank" rel="noopener">ICS Protocol</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>UAMS</strong> &ndash; Flow Cytometry Core</td>
+                            <td>Immunophenotyping, PI cell cycle, BrdU staining, Annexin V apoptosis, intracellular cytokines</td>
+                            <td><a href="https://medicine.uams.edu/mbim/research-cores/flow-cytometry-core-facility/protocols-and-reagents/immunofluorescence-staining-for-immunotyping/" target="_blank" rel="noopener">All Protocols</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>UC San Diego</strong> &ndash; Moores Cancer Center Flow Core</td>
+                            <td>Cell cycle PI staining, general flow protocols</td>
+                            <td><a href="https://moorescancercenter.ucsd.edu/research/shared-resources/flow-cytometry/protocols.html" target="_blank" rel="noopener">All Protocols</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>University of Virginia</strong> &ndash; Flow Cytometry Facility</td>
+                            <td>PI cell cycle, intracellular cytokine staining, general protocols</td>
+                            <td><a href="https://med.virginia.edu/flow-cytometry-facility/equipment/resources1/protocols/dna-content-for-cell-cycle-analysis-of-fixed-cells-with-propidium-iodide/" target="_blank" rel="noopener">Cell Cycle (PI)</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>University of Michigan</strong> &ndash; Flow Cytometry Core</td>
+                            <td>BrdU/PI cell proliferation, CFSE assays, training resources</td>
+                            <td><a href="https://brcf.medicine.umich.edu/cores/flow-cytometry/training-education/instruction-forms/cell-proliferation-by-flow-cytometry-brdu-and-pi/" target="_blank" rel="noopener">BrdU/PI Proliferation</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>UT Health San Antonio</strong> &ndash; Flow Cytometry Core</td>
+                            <td>Cell cycle PI protocol with instrument cleaning notes</td>
+                            <td><a href="https://wp.uthscsa.edu/flow-cytometry/resource/cell-cycle-protocol/" target="_blank" rel="noopener">Cell Cycle Protocol</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>San Diego State University</strong> &ndash; Flow Core</td>
+                            <td>Comprehensive protocol collection, counting beads, sample prep</td>
+                            <td><a href="https://flow.sdsu.edu/protocols/" target="_blank" rel="noopener">All Protocols</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>UAB</strong> &ndash; Rheumatology / Flow Core</td>
+                            <td>Phospho-flow (pSTAT) staining for human PBMCs</td>
+                            <td><a href="https://www.uab.edu/medicine/rheumatology/images/Phospho-Flow_Cytometry_staining_pSTAT.pdf" target="_blank" rel="noopener">Phospho-Flow (PDF)</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Vendor Protocols -->
+            <div id="ext-vendors" class="tab-panel">
+                <h3 style="color: var(--primary); margin-bottom: 16px;">Reagent &amp; Instrument Vendor Protocols</h3>
+                <table>
+                    <thead>
+                        <tr><th>Vendor</th><th>Protocol Topics</th><th>Link</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>BD Biosciences</strong></td>
+                            <td>Comprehensive protocol hub: surface staining, ICS, Phosflow, Treg, cell cycle, compensation</td>
+                            <td><a href="https://www.bdbiosciences.com/en-us/resources/protocols/flow-cytometry" target="_blank" rel="noopener">All BD Protocols</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>BD Biosciences</strong> &ndash; Phosflow</td>
+                            <td>Phospho-protein detection (pSTAT, pERK, pAKT) in human PBMCs, whole blood, adherent cells</td>
+                            <td><a href="https://www.bdbiosciences.com/en-gb/resources/protocols/human-pbmcs" target="_blank" rel="noopener">Phosflow Protocols</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>BioLegend</strong></td>
+                            <td>Surface staining, intracellular staining, phospho-flow, Zombie viability dyes, Annexin V</td>
+                            <td><a href="https://www.biolegend.com/en-us/technical-protocols" target="_blank" rel="noopener">All BioLegend Protocols</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>BioLegend</strong> &ndash; Intracellular Staining</td>
+                            <td>Detailed ICS protocol with Cyto-Fast Fix/Perm buffers</td>
+                            <td><a href="https://www.biolegend.com/Admin/Public/Download.aspx?file=Files/Files/BioLegend/media_assets/support_protocol/Intracellular_Staining_Protocol_082615.pdf" target="_blank" rel="noopener">ICS Protocol (PDF)</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Thermo Fisher / Invitrogen</strong></td>
+                            <td>Comprehensive flow cytometry protocol hub: viability, surface, intracellular, apoptosis, cell cycle</td>
+                            <td><a href="https://www.thermofisher.com/us/en/home/references/protocols/cell-and-tissue-analysis/flow-cytometry-protocol.html" target="_blank" rel="noopener">All Thermo Fisher Protocols</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Thermo Fisher</strong> &ndash; Annexin V Apoptosis</td>
+                            <td>Step-by-step Annexin V / PI apoptosis staining protocol</td>
+                            <td><a href="https://www.thermofisher.com/us/en/home/references/protocols/cell-and-tissue-analysis/protocols/annexin-v-staining-flow-cytometry.html" target="_blank" rel="noopener">Annexin V Protocol</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Thermo Fisher</strong> &ndash; Viability Staining</td>
+                            <td>Fixable viability dye staining, whole blood lysis, cell prep</td>
+                            <td><a href="https://www.thermofisher.com/us/en/home/references/protocols/cell-and-tissue-analysis/protocols/viability-staining-flow-cytometry.html" target="_blank" rel="noopener">Viability Protocol</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Thermo Fisher</strong> &ndash; Intracellular Antigens</td>
+                            <td>ICS and nuclear antigen staining with eBioscience FoxP3 buffer set</td>
+                            <td><a href="https://www.thermofisher.com/us/en/home/references/protocols/cell-and-tissue-analysis/protocols/staining-intracellular-antigens-flow-cytometry.html" target="_blank" rel="noopener">Intracellular Staining</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Miltenyi Biotec</strong></td>
+                            <td>Flow cytometry applications, MACSQuant protocols, Inside Stain kits, cell phenotyping</td>
+                            <td><a href="https://www.miltenyibiotec.com/US-en/applications/flow-cytometry-applications.html" target="_blank" rel="noopener">Miltenyi Applications</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Beckman Coulter</strong></td>
+                            <td>CytoFLEX optimization, flow cytometry basics and educational resources</td>
+                            <td><a href="https://www.beckman.com/resources/technologies/flow-cytometry-basics" target="_blank" rel="noopener">Flow Cytometry Basics</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Repositories -->
+            <div id="ext-repositories" class="tab-panel">
+                <h3 style="color: var(--primary); margin-bottom: 16px;">Protocol Repositories &amp; Journal Resources</h3>
+                <table>
+                    <thead>
+                        <tr><th>Source</th><th>Description</th><th>Link</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>protocols.io</strong> &ndash; Intracellular Flow Cytometry</td>
+                            <td>Community-shared ICS protocol with step-by-step detail, DOI-citable</td>
+                            <td><a href="https://www.protocols.io/view/intracellular-flow-cytometry-staining-protocol-tknekve" target="_blank" rel="noopener">ICS on protocols.io</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>protocols.io</strong> &ndash; Cell Cycle on CytoFLEX S</td>
+                            <td>PI cell cycle analysis protocol specific to Beckman Coulter CytoFLEX S</td>
+                            <td><a href="https://www.protocols.io/view/basic-instructions-for-running-cell-cycle-analysis-cv67w9hn" target="_blank" rel="noopener">Cell Cycle Protocol</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Current Protocols</strong> &ndash; Microbial Viability</td>
+                            <td>Comprehensive protocol for estimating microbial viability using flow cytometry</td>
+                            <td><a href="https://currentprotocols.onlinelibrary.wiley.com/doi/10.1002/cpcy.72" target="_blank" rel="noopener">Microbial Viability</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Current Protocols</strong> &ndash; High-Parameter Overnight Staining</td>
+                            <td>Optimized overnight staining protocol for improved high-parameter flow cytometry</td>
+                            <td><a href="https://currentprotocols.onlinelibrary.wiley.com/doi/10.1002/cpz1.589" target="_blank" rel="noopener">Overnight Staining</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>STAR Protocols</strong> &ndash; Blood/Marrow Flow Cytometry</td>
+                            <td>Detailed human blood and bone marrow immunophenotyping protocols</td>
+                            <td><a href="https://star-protocols.cell.com/protocols/1100" target="_blank" rel="noopener">Blood/Marrow Protocols</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>PMC / PubMed</strong> &ndash; Annexin V Apoptosis Protocol</td>
+                            <td>Peer-reviewed protocol for apoptosis assay by flow cytometry using Annexin V</td>
+                            <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC4943750/" target="_blank" rel="noopener">Annexin V Protocol</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>PMC</strong> &ndash; Phospho-Flow in Adherent Cells</td>
+                            <td>Detailed phospho-protein analysis protocol for adherent cell lines</td>
+                            <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7853998/" target="_blank" rel="noopener">Phospho-Flow (Adherent)</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>PMC</strong> &ndash; Bead-Based Multiplex Assays</td>
+                            <td>Review of multiplex bead array (CBA/Luminex) protocols for diagnostic microbiology</td>
+                            <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7122293/" target="_blank" rel="noopener">Multiplex Bead Assays</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>PMC</strong> &ndash; Bacterial Viability by Flow Cytometry</td>
+                            <td>Safe bacterial viability protocol with fixation step for biosafety</td>
+                            <td><a href="https://pubmed.ncbi.nlm.nih.gov/37786349/" target="_blank" rel="noopener">Bacterial Viability</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>PMC</strong> &ndash; LIVE/DEAD BacLight + Flow Cytometry</td>
+                            <td>Assessment of bacterial viability using LIVE/DEAD BacLight kit with flow cytometry</td>
+                            <td><a href="https://pubmed.ncbi.nlm.nih.gov/17384309/" target="_blank" rel="noopener">BacLight Protocol</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- General Multi-Protocol Resources -->
+            <div id="ext-general" class="tab-panel">
+                <h3 style="color: var(--primary); margin-bottom: 16px;">Comprehensive Multi-Protocol Resources</h3>
+                <table>
+                    <thead>
+                        <tr><th>Resource</th><th>Description</th><th>Link</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>PMC &ndash; Guidelines for Flow Cytometry in Immunological Studies (3rd Edition)</strong></td>
+                            <td>The definitive community reference: covers instrument setup, controls, viability staining, surface/intracellular staining, spectral cytometry, high-dimensional analysis, and reporting standards. Over 100 pages of best practices.</td>
+                            <td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11115438/" target="_blank" rel="noopener">Full Guidelines</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Colibri Cytometry &ndash; Protocol Collection</strong></td>
+                            <td>Community-driven protocol collection covering common flow cytometry applications</td>
+                            <td><a href="https://www.colibri-cytometry.com/protocols" target="_blank" rel="noopener">Colibri Protocols</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Thermo Fisher &ndash; Apoptosis Protocol Collection</strong></td>
+                            <td>Comprehensive apoptosis resource: Annexin V, caspase activity, mitochondrial potential, TUNEL, chromatin condensation</td>
+                            <td><a href="https://www.thermofisher.com/us/en/home/references/protocols/cell-and-tissue-analysis/apoptosis-protocol.html" target="_blank" rel="noopener">Apoptosis Protocols</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>NCI Frederick &ndash; Miltenyi Flow Cytometry Phenotyping</strong></td>
+                            <td>GMP-grade cell phenotyping protocol using MACSQuant with 8-color immunophenotyping</td>
+                            <td><a href="https://frederick.cancer.gov/sites/default/files/2022-03/Cell_Phenotyping_by_Flow_Cytometry_Using_the_Miltenyi_Biotec_8-Color_Immunophenotyping_Kit_0.pdf" target="_blank" rel="noopener">NCI Protocol (PDF)</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>BD Biosciences &ndash; Intracellular Flow Cytometry Brochure</strong></td>
+                            <td>Comprehensive guide covering ICS, Phosflow, transcription factors, and FoxP3 staining with BD reagents</td>
+                            <td><a href="https://www.bdbiosciences.com/content/dam/bdb/marketing-documents/Intracellular_brochure.pdf" target="_blank" rel="noopener">BD ICS Guide (PDF)</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>BioLegend &ndash; Multicolor Flow Cytometry Guide</strong></td>
+                            <td>Panel design, fluorophore selection, antibody titration, and multicolor staining best practices</td>
+                            <td><a href="https://www.biolegend.com/Files/Images/BioLegend/literature/images/02-0006-05_Multicolor%20flow.pdf" target="_blank" rel="noopener">Multicolor Guide (PDF)</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Footer -->
+<footer>
+    <p>Flow Cytometry Hub &mdash; A comprehensive educational resource for flow cytometry.</p>
+    <p style="margin-top: 8px;">This content is for educational purposes only. Always follow manufacturer protocols and institutional biosafety guidelines.</p>
+</footer>
+
+<script>
+    // Scatter plot dot generation
+    function generateScatterPlot() {
+        const container = document.getElementById('scatterPlot');
+        const populations = [
+            { cx: 80, cy: 220, r: 35, count: 60, color: '#e74c3c' },   // Lymphocytes (small, low SSC)
+            { cx: 160, cy: 150, r: 30, count: 35, color: '#2980b9' },  // Monocytes (medium)
+            { cx: 230, cy: 50, r: 40, count: 50, color: '#27ae60' },   // Granulocytes (large, high SSC)
+        ];
+        populations.forEach(pop => {
+            for (let i = 0; i < pop.count; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                const angle = Math.random() * 2 * Math.PI;
+                const dist = Math.random() * pop.r;
+                const x = pop.cx + Math.cos(angle) * dist;
+                const y = pop.cy + Math.sin(angle) * dist;
+                dot.style.left = x + 'px';
+                dot.style.top = y + 'px';
+                dot.style.backgroundColor = pop.color;
+                container.appendChild(dot);
+            }
+        });
+    }
+    generateScatterPlot();
+
+    // Tab switching
+    function switchTab(e, tabId) {
+        const container = e.target.closest('.tab-container');
+        container.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        container.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        e.target.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+    }
+
+    // Protocol accordion
+    function toggleProtocol(header) {
+        const body = header.nextElementSibling;
+        const isOpen = body.classList.contains('open');
+        // Close all others optionally (comment out for multi-open)
+        // document.querySelectorAll('.protocol-body').forEach(b => b.classList.remove('open'));
+        // document.querySelectorAll('.protocol-header').forEach(h => h.classList.remove('open'));
+        body.classList.toggle('open');
+        header.classList.toggle('open');
+    }
+
+    // Active nav link highlighting on scroll
+    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 100;
+            if (window.scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + current) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

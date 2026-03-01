@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intracellular Cytokine Staining | Flow Cytometry Hub</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --primary-dark: #0e2f44;
+            --accent: #27ae60;
+            --accent-light: #2ecc71;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --bg: #f4f6f9;
+            --bg-card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 60px 20px 40px; text-align: center; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
+        .content-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; margin-bottom: 30px; border-left: 4px solid var(--primary-light); }
+        .content-section.accent-green { border-left-color: var(--accent); }
+        .content-section.accent-orange { border-left-color: var(--warning); }
+        .content-section.accent-red { border-left-color: var(--danger); }
+        .content-section.accent-purple { border-left-color: #8e44ad; }
+        .content-section.accent-teal { border-left-color: #16a085; }
+        .content-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .content-section h3 { font-size: 1.15rem; color: var(--primary); margin: 20px 0 10px; }
+        .content-section p { margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
+        .content-section ul, .content-section ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; }
+        .content-section li { margin-bottom: 6px; }
+        .tip { background: #eaf7ee; border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .caution { background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .key-point { background: #eaf2f8; border-left: 3px solid var(--primary-light); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .toc { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 36px; margin-bottom: 30px; }
+        .toc h3 { color: var(--primary); margin-bottom: 14px; font-size: 1.1rem; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--primary-light); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
+        .toc a:hover { color: var(--primary); text-decoration: underline; }
+        .diagram-container { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 30px; margin: 20px 0; text-align: center; }
+        .diagram-container .caption { font-size: 0.85rem; color: var(--text-light); margin-top: 14px; font-style: italic; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .comparison-card { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+        .comparison-card h4 { color: var(--primary); margin-bottom: 8px; }
+        .comparison-card p { font-size: 0.88rem; color: var(--text-light); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 16px 0; }
+        .data-table thead { background: var(--primary-dark); color: #fff; }
+        .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: #f0f4f8; }
+        footer { background: var(--primary-dark); color: #aab7c4; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+        footer a { color: var(--accent-light); text-decoration: none; }
+        @media (max-width: 768px) {
+            .content-section { padding: 24px 20px; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav"><div class="nav-container">
+    <a href="index.html" class="nav-logo">Flow Cytometry <span>Hub</span></a>
+    <a href="index.html" class="back-link">&larr; Back to Main</a>
+</div></nav>
+
+<header class="hero">
+    <h1>&#129516; Intracellular Cytokine Staining</h1>
+    <p>Detecting cytokine production at the single-cell level to evaluate immune function, T cell responses, and vaccine immunogenicity.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &gt; Use Cases &gt; Intracellular Cytokines</div>
+</header>
+
+<main class="content">
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#introduction">Introduction to ICS</a></li>
+            <li><a href="#stimulation">Stimulation Strategies</a></li>
+            <li><a href="#inhibitors">Protein Transport Inhibitors</a></li>
+            <li><a href="#fixperm">Fixation &amp; Permeabilization</a></li>
+            <li><a href="#targets">Common Cytokine Targets</a></li>
+            <li><a href="#panel">Panel Design for ICS</a></li>
+            <li><a href="#protocol">Protocol Walkthrough</a></li>
+            <li><a href="#controls">Controls for ICS</a></li>
+            <li><a href="#applications">Applications of ICS</a></li>
+            <li><a href="#troubleshooting">Troubleshooting ICS</a></li>
+        </ol>
+    </div>
+
+    <!-- Section 1: Introduction (no accent) -->
+    <section id="introduction" class="content-section">
+        <h2>1. Introduction to ICS</h2>
+        <p>Intracellular cytokine staining (ICS) is a flow cytometry technique that detects cytokine proteins accumulated inside individual cells. By blocking the secretion of cytokines using protein transport inhibitors during an <em>in vitro</em> stimulation, cytokine molecules are trapped within the endoplasmic reticulum and Golgi apparatus, where they accumulate to levels detectable by fluorochrome-conjugated antibodies.</p>
+        <p>After stimulation and inhibitor treatment, cells are fixed to lock the cytokines in place, then permeabilized to allow antibody access to the intracellular compartment. Because surface markers can be stained simultaneously, ICS uniquely identifies which cell subsets (CD4<sup>+</sup> T cells, CD8<sup>+</sup> T cells, NK cells, etc.) are producing specific cytokines.</p>
+
+        <h3>Single-Cell Resolution Advantage</h3>
+        <p>Unlike bulk assays such as ELISA or multiplex bead arrays (Luminex), ICS resolves cytokine production on a per-cell basis. This enables the identification of polyfunctional cells&mdash;individual cells co-producing two or more cytokines simultaneously&mdash;which are strongly associated with protective immunity in infections and vaccination.</p>
+
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h4>ICS (Flow Cytometry)</h4>
+                <p>Single-cell resolution. Identifies producing cell phenotype. Detects polyfunctionality. Requires fixation/permeabilization. Measures <strong>capacity</strong> to produce cytokines.</p>
+            </div>
+            <div class="comparison-card">
+                <h4>ELISPOT / FluoroSpot</h4>
+                <p>Single-cell enumeration. No phenotyping. High sensitivity for rare events. Limited multiplexing (1&ndash;3 analytes). Measures secreted product from individual cells.</p>
+            </div>
+            <div class="comparison-card">
+                <h4>Multiplex Bead Assay</h4>
+                <p>Bulk supernatant measurement. No cell identification. High multiplexing (&gt;40 analytes). Cannot distinguish producing cell type. Measures cumulative secretion.</p>
+            </div>
+        </div>
+
+        <div class="key-point"><strong>Key Point:</strong> ICS measures the <em>capacity</em> of a cell to produce cytokines upon stimulation, not its ongoing secretion <em>in vivo</em>. The cytokine accumulation seen is an artifact of transport inhibition during culture, and the frequency of cytokine-positive cells reflects the potential of the immune compartment rather than the real-time secretory state.</div>
+    </section>
+
+    <!-- Section 2: Stimulation Strategies (green) -->
+    <section id="stimulation" class="content-section accent-green">
+        <h2>2. Stimulation Strategies</h2>
+        <p>The stimulation step is the foundation of ICS. Cells must be activated <em>in vitro</em> to induce cytokine transcription and translation. The choice of stimulus determines whether you are measuring antigen-specific or total functional responses.</p>
+
+        <h3>Antigen-Specific Stimulation</h3>
+        <p>Peptide pools consisting of overlapping 15-mer peptides (typically 11 amino acid overlap) spanning an entire protein antigen are the gold standard for detecting antigen-specific T cell responses. These peptides bind directly to MHC molecules on antigen-presenting cells within the PBMC culture without requiring processing, enabling presentation on both MHC class I (via cross-presentation and direct binding of embedded 9&ndash;10-mer epitopes) and MHC class II molecules.</p>
+
+        <h3>Polyclonal Stimulation</h3>
+        <p>Polyclonal stimuli activate T cells irrespective of antigen specificity and serve as positive controls to verify that cells are capable of responding. These include pharmacological agents (PMA plus ionomycin), antibody-based crosslinkers (anti-CD3/CD28), and superantigens (staphylococcal enterotoxin B).</p>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>Stimulus</th><th>Specificity</th><th>Duration</th><th>Expected Response</th><th>Use Case</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Peptide pools (15-mers)</td><td>Antigen-specific</td><td>6&ndash;16 h</td><td>0.01&ndash;5% of CD4/CD8</td><td>Vaccine trials, infection monitoring</td></tr>
+                <tr><td>Whole protein antigen</td><td>Antigen-specific (CD4 biased)</td><td>6&ndash;16 h</td><td>0.01&ndash;2% of CD4</td><td>CD4 response screening</td></tr>
+                <tr><td>PMA + ionomycin</td><td>Polyclonal (TCR-independent)</td><td>4&ndash;5 h</td><td>20&ndash;80% of T cells</td><td>Positive control, functional capacity</td></tr>
+                <tr><td>Anti-CD3/CD28 beads</td><td>Polyclonal (TCR-dependent)</td><td>6&ndash;16 h</td><td>5&ndash;30% of T cells</td><td>Positive control, costimulation studies</td></tr>
+                <tr><td>SEB (superantigen)</td><td>Polyclonal (V&beta;-restricted)</td><td>6&ndash;16 h</td><td>5&ndash;20% of T cells</td><td>Positive control, preserves CD4/CD8</td></tr>
+            </tbody>
+        </table>
+
+        <div class="caution"><strong>Caution:</strong> PMA activates protein kinase C independently of TCR signaling and causes rapid downregulation of CD4 and CD8 surface expression. If phenotyping by CD4/CD8 is essential, either stain these markers before stimulation, use SEB or anti-CD3/CD28 as the positive control, or include a chemokine receptor (e.g., CXCR3, CCR4) to infer subset identity.</div>
+    </section>
+
+    <!-- Section 3: Protein Transport Inhibitors (orange) -->
+    <section id="inhibitors" class="content-section accent-orange">
+        <h2>3. Protein Transport Inhibitors</h2>
+        <p>Protein transport inhibitors are essential for trapping cytokines inside the cell. Without them, newly synthesized cytokines are rapidly secreted and cannot be detected by intracellular staining. Two inhibitors are widely used, each blocking a different step in the secretory pathway.</p>
+
+        <h3>Brefeldin A (BFA / GolgiPlug&trade;)</h3>
+        <p>Brefeldin A inhibits the GBF1&ndash;Arf1 complex required for COPI coat assembly, thereby blocking anterograde transport from the endoplasmic reticulum to the Golgi apparatus. Cytokine proteins accumulate in the ER, producing bright intracellular staining. BFA is the most commonly used inhibitor for ICS and is generally preferred for cytokine detection.</p>
+
+        <h3>Monensin (GolgiStop&trade;)</h3>
+        <p>Monensin is a carboxylic ionophore that disrupts the pH gradient across the trans-Golgi network membranes, blocking protein transit through the Golgi and subsequent secretion. It tends to produce somewhat lower cytokine accumulation than BFA but better preserves certain surface markers that traffic through the Golgi (such as CD69 and some chemokine receptors).</p>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>Inhibitor</th><th>Mechanism</th><th>Working Concentration</th><th>Duration</th><th>Effect on Surface Markers</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Brefeldin A (GolgiPlug)</td><td>Blocks ER &rarr; Golgi transport (inhibits Arf1/COPI)</td><td>1&ndash;10 &micro;g/mL (typically 1&times; BD)</td><td>4&ndash;16 h with stimulation</td><td>Can reduce CD69, some chemokine receptors</td></tr>
+                <tr><td>Monensin (GolgiStop)</td><td>Disrupts trans-Golgi pH gradient (ionophore)</td><td>2&ndash;3 &micro;M (typically 1&times; BD)</td><td>4&ndash;16 h with stimulation</td><td>Better preservation of CD69, surface markers</td></tr>
+                <tr><td>BFA + Monensin combined</td><td>Dual blockade of ER-Golgi and trans-Golgi</td><td>Standard concentrations of each</td><td>4&ndash;12 h</td><td>Used when staining both cytokines and CD107a</td></tr>
+            </tbody>
+        </table>
+
+        <div class="tip"><strong>Tip:</strong> Add the protein transport inhibitor at the same time as the stimulus (or within the first 1&ndash;2 hours). If added too late, early-produced cytokines will have already been secreted and will be lost from detection. For short stimulations (4&ndash;6 h), adding inhibitor at time zero is standard practice.</div>
+    </section>
+
+    <!-- Section 4: Fixation & Permeabilization (red) -->
+    <section id="fixperm" class="content-section accent-red">
+        <h2>4. Fixation &amp; Permeabilization</h2>
+        <p>After stimulation and cytokine accumulation, cells must be fixed to crosslink proteins in place and then permeabilized to allow fluorochrome-conjugated antibodies to penetrate the cell membrane and bind intracellular targets. The choice of fixation/permeabilization system depends on the intracellular targets of interest.</p>
+
+        <h3>Order of Operations</h3>
+        <ol>
+            <li><strong>Surface staining</strong> &mdash; Stain viability dye and fixation-sensitive surface markers on live cells first.</li>
+            <li><strong>Fixation</strong> &mdash; Crosslink proteins with paraformaldehyde (PFA) or commercial fixation buffer.</li>
+            <li><strong>Permeabilization</strong> &mdash; Use detergent-based buffer to create pores in the cell membrane.</li>
+            <li><strong>Intracellular staining</strong> &mdash; Stain cytokines (and other intracellular targets) in permeabilization buffer.</li>
+            <li><strong>Wash and acquire</strong> &mdash; Wash in perm buffer, then resuspend in staining buffer for acquisition.</li>
+        </ol>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>Buffer System</th><th>Fixation Agent</th><th>Permeabilization Agent</th><th>Compatible Targets</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>BD Cytofix/Cytoperm</td><td>Paraformaldehyde</td><td>Saponin-based</td><td>Cytokines, phospho-proteins (some), CD107a</td></tr>
+                <tr><td>eBioscience IC Fix/Perm</td><td>Paraformaldehyde</td><td>Saponin-based</td><td>Cytokines, general intracellular proteins</td></tr>
+                <tr><td>eBioscience FoxP3 Buffer</td><td>Paraformaldehyde + detergent</td><td>Methanol-free permeabilization</td><td>Transcription factors (FoxP3, T-bet, ROR&gamma;t), cytokines</td></tr>
+                <tr><td>Methanol (90%)</td><td>Dehydration-based</td><td>Lipid extraction</td><td>Phospho-proteins (optimal), not ideal for cytokines</td></tr>
+                <tr><td>BD Phosflow</td><td>Paraformaldehyde (higher %)</td><td>Methanol or saponin</td><td>Phospho-signaling proteins (pSTAT, pERK)</td></tr>
+            </tbody>
+        </table>
+
+        <div class="caution"><strong>Caution:</strong> Fixation with PFA can destroy or alter epitopes on certain surface markers, particularly PE-conjugated tandem dyes and some protein epitopes. Always validate that your surface antibody clones perform well post-fixation. Notably, BV421 and BV711 are generally stable through fixation, while PE-Cy7 and PerCP-Cy5.5 can degrade. Viability dyes (amine-reactive, e.g., LIVE/DEAD) must be applied <strong>before</strong> fixation to function correctly.</div>
+    </section>
+
+    <!-- Section 5: Common Cytokine Targets (teal) -->
+    <section id="targets" class="content-section accent-teal">
+        <h2>5. Common Cytokine Targets</h2>
+        <p>The cytokines measured by ICS provide a functional fingerprint of the immune response. Different T helper subsets and effector cell types produce characteristic cytokine profiles that define their role in immunity.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>Cytokine</th><th>Primary Producing Cells</th><th>Th Subset</th><th>Common Clone</th><th>Functional Significance</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>IFN-&gamma;</td><td>CD4, CD8, NK, NKT</td><td>Th1</td><td>B27 (BD), 4S.B3</td><td>Antiviral/antibacterial immunity, macrophage activation</td></tr>
+                <tr><td>TNF-&alpha;</td><td>CD4, CD8, monocytes, NK</td><td>Th1 (also broad)</td><td>MAb11</td><td>Pro-inflammatory, synergizes with IFN-&gamma; for pathogen clearance</td></tr>
+                <tr><td>IL-2</td><td>CD4 (primarily), CD8</td><td>Th1 / Tfh</td><td>MQ1-17H12, 5344.111</td><td>T cell proliferation and survival, memory maintenance</td></tr>
+                <tr><td>IL-4</td><td>CD4, basophils, NKT</td><td>Th2</td><td>8D4-8, MP4-25D2</td><td>B cell class switching to IgE, Th2 differentiation</td></tr>
+                <tr><td>IL-17A</td><td>CD4, CD8 (&gamma;&delta; T cells)</td><td>Th17</td><td>BL168, eBio64DEC17</td><td>Neutrophil recruitment, mucosal barrier defense</td></tr>
+                <tr><td>IL-10</td><td>Treg, Tr1, monocytes, B cells</td><td>Treg / Tr1</td><td>JES3-9D7</td><td>Immunosuppression, resolution of inflammation</td></tr>
+                <tr><td>Granzyme B</td><td>CD8, NK cells</td><td>CTL (not Th-restricted)</td><td>GB11</td><td>Cytotoxic granule enzyme, target cell apoptosis</td></tr>
+                <tr><td>Perforin</td><td>CD8, NK cells</td><td>CTL (not Th-restricted)</td><td>&delta;G9</td><td>Pore-forming protein for granzyme delivery</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Polyfunctional T Cells &amp; Boolean Gating</h3>
+        <p>Cells producing multiple cytokines simultaneously (e.g., IFN-&gamma;<sup>+</sup> TNF-&alpha;<sup>+</sup> IL-2<sup>+</sup>) are termed polyfunctional and are considered higher-quality effectors. Boolean gating in software such as FlowJo or SPICE decomposes all possible combinations of cytokine-positive gates to enumerate each functional subset. In vaccine studies, the proportion of polyfunctional T cells often correlates with protective efficacy better than the total frequency of any single cytokine-producing population.</p>
+
+        <div class="key-point"><strong>Key Point:</strong> When reporting polyfunctionality, use Boolean combination gates (e.g., IFN-&gamma;<sup>+</sup>TNF-&alpha;<sup>+</sup>IL-2<sup>+</sup>, IFN-&gamma;<sup>+</sup>TNF-&alpha;<sup>+</sup>IL-2<sup>&minus;</sup>, etc.) and visualize with pie charts or SPICE analysis. Background subtraction from the unstimulated control should be applied to each Boolean subset independently.</div>
+    </section>
+
+    <!-- Section 6: Panel Design for ICS (purple) -->
+    <section id="panel" class="content-section accent-purple">
+        <h2>6. Panel Design for ICS</h2>
+        <p>A well-designed ICS panel balances phenotyping markers with functional readouts. Because intracellular cytokines are typically dim, assign them to bright fluorochromes (PE, APC, BV421) and place highly expressed surface markers on dimmer channels.</p>
+
+        <h3>Example 12-Color ICS Panel</h3>
+        <table class="data-table">
+            <thead>
+                <tr><th>Fluorochrome</th><th>Marker</th><th>Type</th><th>Purpose</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>BUV395</td><td>CD3</td><td>Surface</td><td>T cell lineage gate</td></tr>
+                <tr><td>BUV737</td><td>CD8</td><td>Surface</td><td>Cytotoxic T cell identification</td></tr>
+                <tr><td>BV785</td><td>CD4</td><td>Surface</td><td>Helper T cell identification</td></tr>
+                <tr><td>BV711</td><td>CD45RA</td><td>Surface</td><td>Naive vs memory discrimination</td></tr>
+                <tr><td>BV510</td><td>Viability dye</td><td>Viability</td><td>Dead cell exclusion</td></tr>
+                <tr><td>FITC</td><td>CD107a (LAMP-1)</td><td>Surface (during stim)</td><td>Degranulation marker</td></tr>
+                <tr><td>PerCP-Cy5.5</td><td>CCR7</td><td>Surface</td><td>Memory subset definition (with CD45RA)</td></tr>
+                <tr><td>PE</td><td>IL-2</td><td>Intracellular</td><td>Proliferative cytokine, dim &rarr; bright channel</td></tr>
+                <tr><td>PE-Cy7</td><td>TNF-&alpha;</td><td>Intracellular</td><td>Pro-inflammatory cytokine</td></tr>
+                <tr><td>APC</td><td>IFN-&gamma;</td><td>Intracellular</td><td>Th1 effector cytokine</td></tr>
+                <tr><td>AF700</td><td>IL-17A</td><td>Intracellular</td><td>Th17 effector cytokine</td></tr>
+                <tr><td>BV421</td><td>Granzyme B</td><td>Intracellular</td><td>Cytotoxic function</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Memory Subset Markers</h3>
+        <p>Combining CD45RA and CCR7 defines four canonical memory subsets: naive (CD45RA<sup>+</sup>CCR7<sup>+</sup>), central memory (CD45RA<sup>&minus;</sup>CCR7<sup>+</sup>), effector memory (CD45RA<sup>&minus;</sup>CCR7<sup>&minus;</sup>), and terminally differentiated effector memory re-expressing CD45RA (TEMRA; CD45RA<sup>+</sup>CCR7<sup>&minus;</sup>). This stratification reveals which memory compartment is the source of cytokine production.</p>
+
+        <div class="tip"><strong>Tip:</strong> CD107a (LAMP-1) must be added to the culture at the time of stimulation, not during the surface stain step. As cytotoxic granules fuse with the plasma membrane during degranulation, CD107a transiently appears on the cell surface. The antibody captures this exposure in real time. Add anti-CD107a antibody together with stimulus and transport inhibitor at the beginning of the incubation.</div>
+    </section>
+
+    <!-- Section 7: Protocol Walkthrough (no accent) -->
+    <section id="protocol" class="content-section">
+        <h2>7. Protocol Walkthrough</h2>
+        <p>Below is a standard ICS protocol for PBMCs. Timings can be adjusted depending on the stimulus and experimental needs, but the sequence of steps is critical.</p>
+
+        <div class="diagram-container">
+            <strong>ICS Timeline Overview</strong><br><br>
+            <span style="font-size:0.92rem;">
+                <strong>0 h</strong> &mdash; Thaw PBMCs, rest overnight (optional) or proceed directly<br>
+                <strong>0&ndash;1 h</strong> &mdash; Count cells, plate at 1&times;10<sup>6</sup> per well in 96-well plate<br>
+                <strong>1 h</strong> &mdash; Add stimulus + BFA/monensin + anti-CD107a antibody<br>
+                <strong>7 h</strong> &mdash; Stimulation complete (6 h incubation at 37 &deg;C, 5% CO<sub>2</sub>)<br>
+                <strong>7&ndash;7.5 h</strong> &mdash; Wash, stain viability dye and surface markers (4 &deg;C, 20 min)<br>
+                <strong>7.5&ndash;8 h</strong> &mdash; Fix cells (Cytofix, RT, 20 min)<br>
+                <strong>8&ndash;8.5 h</strong> &mdash; Permeabilize and stain intracellular cytokines (Cytoperm, 4 &deg;C, 30 min)<br>
+                <strong>8.5&ndash;9 h</strong> &mdash; Wash in perm buffer &times;2, resuspend in staining buffer<br>
+                <strong>9 h</strong> &mdash; Acquire on cytometer (or store at 4 &deg;C protected from light, acquire within 24 h)
+            </span>
+            <div class="caption">Standard ICS timeline for a 6-hour peptide pool stimulation using BD Cytofix/Cytoperm. An optional overnight rest of thawed PBMCs (12&ndash;18 h) before stimulation can improve viability and reduce background.</div>
+        </div>
+
+        <h3>Detailed Steps</h3>
+        <ol>
+            <li><strong>Thaw PBMCs:</strong> Thaw cryopreserved PBMCs rapidly in a 37 &deg;C water bath. Wash in warm complete RPMI (10% FBS, 1% pen/strep). Rest overnight at 37 &deg;C if viability is a concern, or use fresh PBMCs directly.</li>
+            <li><strong>Plate and stimulate:</strong> Resuspend at 10&times;10<sup>6</sup>/mL. Add 100 &micro;L per well of a 96-well U-bottom plate (1&times;10<sup>6</sup> cells/well). Add peptide pool (1&ndash;2 &micro;g/mL per peptide), BFA (or monensin), and anti-CD107a-FITC simultaneously.</li>
+            <li><strong>Incubate:</strong> 37 &deg;C, 5% CO<sub>2</sub> for 6 hours (can extend to 12&ndash;16 h for some antigens; always include inhibitor for full duration).</li>
+            <li><strong>Harvest and wash:</strong> Add 2 mM EDTA to disrupt cell clusters. Transfer to V-bottom plate. Wash once with PBS.</li>
+            <li><strong>Viability stain:</strong> Stain with amine-reactive viability dye (e.g., LIVE/DEAD Fixable Blue or BV510 Zombie dye) in PBS for 15 min at room temperature.</li>
+            <li><strong>Surface stain:</strong> Without washing, add surface antibody cocktail in staining buffer (PBS + 1% BSA + 0.1% NaN<sub>3</sub>) for 20 min at 4 &deg;C.</li>
+            <li><strong>Fix:</strong> Wash, then add 100 &micro;L BD Cytofix for 20 min at room temperature (or 4 &deg;C for some protocols). Wash with 1&times; BD Perm/Wash buffer.</li>
+            <li><strong>Intracellular stain:</strong> Add cytokine antibody cocktail diluted in 1&times; Perm/Wash buffer. Incubate 30 min at 4 &deg;C in the dark.</li>
+            <li><strong>Wash and resuspend:</strong> Wash twice with Perm/Wash, resuspend in 200 &micro;L staining buffer. Acquire on flow cytometer, collecting a minimum of 100,000 live CD3<sup>+</sup> events for robust statistics.</li>
+        </ol>
+    </section>
+
+    <!-- Section 8: Controls for ICS (green) -->
+    <section id="controls" class="content-section accent-green">
+        <h2>8. Controls for ICS</h2>
+        <p>Rigorous controls are essential in ICS because background cytokine production is inherent in any live-cell culture system. Without proper controls, it is impossible to distinguish true antigen-specific responses from non-specific activation.</p>
+
+        <h3>Essential Controls</h3>
+        <ul>
+            <li><strong>Unstimulated (negative) control:</strong> Cells treated identically (same media, inhibitor, incubation time) but without antigen. This defines the baseline cytokine production and must be included for every donor and condition. The net response is calculated by subtracting the unstimulated frequency from the stimulated frequency.</li>
+            <li><strong>Positive control (PMA/ionomycin or SEB):</strong> Verifies that cells are viable and functionally capable of producing cytokines. A failed positive control indicates a technical problem with the cells, reagents, or protocol.</li>
+            <li><strong>Fluorescence Minus One (FMO) controls:</strong> For each cytokine channel, an FMO (all fluorochromes present except the cytokine of interest) defines the boundary between positive and negative populations. FMOs are critical because fixation/permeabilization increases autofluorescence and spectral spillover.</li>
+            <li><strong>Single-color compensation controls:</strong> Stained with each individual fluorochrome to calculate the spectral spillover matrix. Use compensation beads (e.g., BD CompBeads or UltraComp eBeads) matched to the antibody host species.</li>
+            <li><strong>Isotype controls (optional):</strong> Less informative than FMOs for gating purposes, but can be included to assess non-specific binding of antibodies within the intracellular compartment.</li>
+        </ul>
+
+        <div class="key-point"><strong>Key Point:</strong> The unstimulated control is the single most critical control in any ICS experiment. Always report antigen-specific responses as the net frequency (stimulated minus unstimulated). Background cytokine production of 0.01&ndash;0.05% is typical for IFN-&gamma; in healthy donors. Statistical methods such as MIMOSA, COMPASS, or Fisher&rsquo;s exact test can formally determine whether a net response is significantly above background.</div>
+    </section>
+
+    <!-- Section 9: Applications of ICS (orange) -->
+    <section id="applications" class="content-section accent-orange">
+        <h2>9. Applications of ICS</h2>
+        <p>ICS is one of the most widely used functional assays in immunology, with applications spanning basic research, clinical trials, diagnostics, and drug development.</p>
+
+        <h3>Vaccine Immunogenicity</h3>
+        <p>ICS is the primary assay for measuring T cell immunogenicity in clinical vaccine trials. It has been central to the evaluation of vaccine candidates for HIV (RV144, HVTN studies), COVID-19 (mRNA and adenoviral vector vaccines), tuberculosis (MVA85A, BCG revaccination), and many other pathogens. Regulatory agencies (FDA, EMA) accept ICS data as evidence of cellular immune responses in vaccine licensure submissions.</p>
+
+        <h3>Infectious Disease Monitoring</h3>
+        <p>ICS can be used as a confirmatory or research-grade follow-up to clinical assays such as the QuantiFERON-TB test. While QuantiFERON measures bulk IFN-&gamma; release, ICS identifies whether the responding cells are CD4<sup>+</sup> or CD8<sup>+</sup>, defines their memory phenotype, and assesses polyfunctionality&mdash;providing a deeper characterization of the anti-mycobacterial immune response.</p>
+
+        <h3>Tumor Immunology</h3>
+        <p>ICS characterizes tumor-infiltrating lymphocytes (TILs) and circulating tumor-specific T cells. Measuring cytokine production (IFN-&gamma;, TNF-&alpha;, Granzyme B) after stimulation with tumor-associated peptides or neoantigens helps evaluate the functional status of anti-tumor immunity and may predict response to checkpoint immunotherapy.</p>
+
+        <h3>Autoimmune Disease</h3>
+        <p>Profiling the Th1/Th2/Th17/Treg balance via ICS helps characterize the immunopathology of autoimmune conditions. Elevated IL-17A<sup>+</sup> CD4<sup>+</sup> T cells are found in psoriasis, rheumatoid arthritis, and multiple sclerosis, while deficits in IL-10-producing regulatory cells may contribute to loss of tolerance.</p>
+
+        <h3>Drug Immunotoxicology</h3>
+        <p>ICS assays evaluate whether therapeutic compounds suppress or enhance immune function. In preclinical and clinical pharmacology, ICS-based stimulation assays can detect drug-induced immunosuppression (reduced cytokine capacity) or inappropriate immune activation (cytokine storm risk assessment).</p>
+    </section>
+
+    <!-- Section 10: Troubleshooting ICS (red) -->
+    <section id="troubleshooting" class="content-section accent-red">
+        <h2>10. Troubleshooting ICS</h2>
+        <p>ICS involves multiple sequential steps, and problems at any stage can compromise results. Below are common issues encountered during ICS experiments and strategies for resolving them.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>Problem</th><th>Likely Cause</th><th>Solution</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>No cytokine staining in positive control</td><td>Inactive transport inhibitor; expired reagents; cells non-viable</td><td>Test new BFA/monensin lot; check cell viability before stimulation; verify PMA/ionomycin activity with fresh aliquot</td></tr>
+                <tr><td>High background in unstimulated control</td><td>Non-specific activation during culture; endotoxin contamination; prolonged incubation</td><td>Reduce stimulation time; test media for endotoxin; ensure sterile technique; rest cells overnight before stimulation</td></tr>
+                <tr><td>Dim cytokine staining (low MFI)</td><td>Insufficient permeabilization; antibody titration too low; BFA added too late</td><td>Ensure perm buffer is fresh; titrate antibody; add BFA at time of stimulation; try a brighter fluorochrome</td></tr>
+                <tr><td>Loss of surface marker staining</td><td>Fixation destroyed epitope; tandem dye degradation</td><td>Stain sensitive markers pre-fixation; validate clones post-fix; avoid PE-Cy7 for fixation-sensitive panels</td></tr>
+                <tr><td>CD4/CD8 not visible after PMA stimulation</td><td>PMA-induced receptor internalization</td><td>Use SEB or anti-CD3/CD28 instead; stain CD4/CD8 before stimulation</td></tr>
+                <tr><td>High event loss / low viability</td><td>Over-fixation; harsh pipetting; too many washes</td><td>Fix for recommended time only; use gentle resuspension; minimize wash steps; add DNase if clumping occurs</td></tr>
+                <tr><td>Difficulty resolving cytokine-positive from negative</td><td>Poor compensation; no FMO controls; high autofluorescence</td><td>Run FMOs in fixed/permed cells; recompensate with matched controls; reduce perm time to lower autofluorescence</td></tr>
+                <tr><td>Inconsistent results between experiments</td><td>Variable PBMC quality; reagent lot changes; timing differences</td><td>Standardize thaw protocol; qualify each PBMC lot; use pre-mixed antibody cocktails; strictly control incubation times</td></tr>
+            </tbody>
+        </table>
+
+        <div class="tip"><strong>Tip:</strong> Dim cytokine staining is the most frequently encountered problem in ICS. Before troubleshooting other variables, first verify that (1) the protein transport inhibitor was added at the time of stimulation, (2) the permeabilization buffer is fresh and at working concentration, and (3) the antibody has been properly titrated using stimulated cells (not unstimulated) as the positive reference for titration.</div>
+    </section>
+
+</main>
+
+<footer>
+    <p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p>
+    <p style="margin-top: 8px;">Flow Cytometry Hub &mdash; A comprehensive educational resource for flow cytometry.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microbiology &amp; Virology | Flow Cytometry Hub</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --primary-dark: #0e2f44;
+            --accent: #27ae60;
+            --accent-light: #2ecc71;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --bg: #f4f6f9;
+            --bg-card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 60px 20px 40px; text-align: center; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
+        .content-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; margin-bottom: 30px; border-left: 4px solid var(--primary-light); }
+        .content-section.accent-green { border-left-color: var(--accent); }
+        .content-section.accent-orange { border-left-color: var(--warning); }
+        .content-section.accent-red { border-left-color: var(--danger); }
+        .content-section.accent-purple { border-left-color: #8e44ad; }
+        .content-section.accent-teal { border-left-color: #16a085; }
+        .content-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .content-section h3 { font-size: 1.15rem; color: var(--primary); margin: 20px 0 10px; }
+        .content-section p { margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
+        .content-section ul, .content-section ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; }
+        .content-section li { margin-bottom: 6px; }
+        .tip { background: #eaf7ee; border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .caution { background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .key-point { background: #eaf2f8; border-left: 3px solid var(--primary-light); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .toc { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 36px; margin-bottom: 30px; }
+        .toc h3 { color: var(--primary); margin-bottom: 14px; font-size: 1.1rem; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--primary-light); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
+        .toc a:hover { color: var(--primary); text-decoration: underline; }
+        .diagram-container { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 30px; margin: 20px 0; text-align: center; }
+        .diagram-container .caption { font-size: 0.85rem; color: var(--text-light); margin-top: 14px; font-style: italic; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .comparison-card { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+        .comparison-card h4 { color: var(--primary); margin-bottom: 8px; }
+        .comparison-card p { font-size: 0.88rem; color: var(--text-light); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 16px 0; }
+        .data-table thead { background: var(--primary-dark); color: #fff; }
+        .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: #f0f4f8; }
+        footer { background: var(--primary-dark); color: #aab7c4; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+        footer a { color: var(--accent-light); text-decoration: none; }
+        @media (max-width: 768px) {
+            .content-section { padding: 24px 20px; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav"><div class="nav-container"><a href="index.html" class="nav-logo">Flow Cytometry <span>Hub</span></a><a href="index.html" class="back-link">&larr; Back to Main</a></div></nav>
+
+<header class="hero">
+    <h1>&#127758; Microbiology &amp; Virology</h1>
+    <p>Applying flow cytometry to bacterial analysis, viral quantification, antimicrobial susceptibility, and microbial community characterization.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &gt; <a href="index.html">Use Cases</a> &gt; Microbiology &amp; Virology</div>
+</header>
+
+<main class="content">
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#introduction">Introduction: Flow Cytometry for Microorganisms</a></li>
+            <li><a href="#instrument-setup">Instrument Setup for Microbial Flow Cytometry</a></li>
+            <li><a href="#viability-enumeration">Bacterial Viability &amp; Enumeration</a></li>
+            <li><a href="#ast">Antimicrobial Susceptibility Testing by Flow</a></li>
+            <li><a href="#viral">Viral Quantification &amp; Analysis</a></li>
+            <li><a href="#phage">Phage Analysis &amp; Phage Therapy Monitoring</a></li>
+            <li><a href="#food-water">Food &amp; Water Safety Applications</a></li>
+            <li><a href="#community">Microbial Community Analysis</a></li>
+            <li><a href="#fungal-parasitic">Fungal &amp; Parasitic Analysis</a></li>
+            <li><a href="#troubleshooting">Troubleshooting Microbial Flow Cytometry</a></li>
+        </ol>
+    </div>
+
+    <!-- Section 1: Introduction (no accent) -->
+    <section id="introduction" class="content-section">
+        <h2>1. Introduction: Flow Cytometry for Microorganisms</h2>
+        <p>Flow cytometry has become an indispensable tool in microbiology, enabling rapid single-cell analysis of bacteria, archaea, fungi, and viruses. Unlike traditional culture-based methods, which may require 24&ndash;72 hours for colony enumeration, flow cytometry delivers quantitative results within minutes and can detect viable but non-culturable (VBNC) organisms that are invisible to plate counting.</p>
+        <h3>Why Microorganisms Are Challenging</h3>
+        <p>Bacteria typically range from 0.2&ndash;5 &mu;m in diameter, making them 10&ndash;100 times smaller than mammalian cells (10&ndash;30 &mu;m). This small size produces extremely low forward scatter (FSC) and side scatter (SSC) signals that often fall within the electronic noise of conventional instruments. Viruses (30&ndash;200 nm) present even greater detection challenges and require specialized high-sensitivity platforms.</p>
+        <div class="key-point"><strong>Key Point:</strong> Bacteria are 10&ndash;100&times; smaller than mammalian cells. Standard cytometer settings will not resolve them from electronic noise. You must lower the detection threshold and trigger on fluorescence rather than scatter to reliably detect microorganisms.</div>
+        <h3>Advantages Over Culture-Based Methods</h3>
+        <ul>
+            <li><strong>Speed:</strong> Results in minutes to hours rather than days</li>
+            <li><strong>Single-cell resolution:</strong> Heterogeneity within populations is preserved</li>
+            <li><strong>Multiparameter analysis:</strong> Viability, DNA content, metabolic state, and surface markers simultaneously</li>
+            <li><strong>VBNC detection:</strong> Identifies cells that are alive but fail to grow on agar</li>
+            <li><strong>High throughput:</strong> Thousands of events per second, enabling statistically robust analysis</li>
+        </ul>
+        <h3>Core Instrument Requirements</h3>
+        <p>Successful microbial flow cytometry requires instruments with high sensitivity in the small-particle range, low-noise electronics, and the ability to trigger on fluorescence channels. Dedicated microbiology cytometers (e.g., BD Accuri C6 Plus, Beckman Coulter CytoFLEX, Thermo Fisher Attune NxT) offer features such as volumetric counting, violet side scatter (VSSC), and adjustable threshold settings that are essential for microbial work.</p>
+    </section>
+
+    <!-- Section 2: Instrument Setup (green) -->
+    <section id="instrument-setup" class="content-section accent-green">
+        <h2>2. Instrument Setup for Microbial Flow Cytometry</h2>
+        <p>Proper instrument configuration is critical for reproducible microbial data. The default settings optimized for mammalian cell immunophenotyping will not resolve bacteria from background noise.</p>
+        <h3>Threshold &amp; Trigger Settings</h3>
+        <p>The single most important adjustment is to change the threshold (trigger) parameter from FSC to a fluorescence channel. When all events are stained with a nucleic acid dye (e.g., SYTO 9 or SYBR Green I), triggering on the corresponding fluorescence channel eliminates unstained debris and electronic noise while retaining true bacterial events.</p>
+        <h3>Voltage Optimization</h3>
+        <p>FSC and SSC detector voltages must be increased substantially compared to mammalian settings. Run fluorescent reference beads (0.5 &mu;m and 1.0 &mu;m) and adjust voltages until beads are clearly resolved above the noise floor. SSC gains may need to be near maximum on some instruments.</p>
+        <h3>Sheath Fluid Filtration</h3>
+        <p>Standard sheath fluid may contain particles that overlap with bacteria in size and scatter. Use 0.1 &mu;m or 0.22 &mu;m filtered sheath fluid for all microbial applications. Many laboratories prepare their own particle-free saline (0.85% NaCl, sterile filtered) as a sheath source.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>Parameter</th><th>Mammalian Cell Settings</th><th>Bacterial Settings</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Threshold / Trigger</td><td>FSC (default)</td><td>Fluorescence (FL1 or FL3)</td></tr>
+                <tr><td>FSC Voltage</td><td>200&ndash;350 V</td><td>400&ndash;600 V</td></tr>
+                <tr><td>SSC Voltage</td><td>250&ndash;400 V</td><td>450&ndash;650 V (near max)</td></tr>
+                <tr><td>Flow Rate</td><td>Medium&ndash;High</td><td>Low&ndash;Medium (reduce coincidence)</td></tr>
+                <tr><td>Sheath Fluid</td><td>Standard</td><td>0.1&ndash;0.22 &mu;m filtered</td></tr>
+                <tr><td>Bead Standards</td><td>6&ndash;10 &mu;m calibration beads</td><td>0.2&ndash;1.0 &mu;m fluorescent beads</td></tr>
+                <tr><td>Sample Prep</td><td>Single-cell suspension</td><td>Vortex + dilute to &lt;10<sup>6</sup>/mL</td></tr>
+            </tbody>
+        </table>
+        <div class="tip"><strong>Tip:</strong> Always run a filtered-water blank before samples. If more than 50&ndash;100 events/sec appear in the blank, your sheath or sample lines may be contaminated. Clean the fluidics system before proceeding.</div>
+    </section>
+
+    <!-- Section 3: Bacterial Viability (orange) -->
+    <section id="viability-enumeration" class="content-section accent-orange">
+        <h2>3. Bacterial Viability &amp; Enumeration</h2>
+        <p>Determining how many bacteria are present and what fraction are alive is the most common application of microbial flow cytometry. Fluorescent nucleic acid dyes partition bacterial populations into live and dead fractions based on membrane integrity or metabolic activity.</p>
+        <h3>Membrane Integrity Assays</h3>
+        <p>The most widely used approach combines a membrane-permeant dye (stains all cells) with a membrane-impermeant dye (stains only compromised cells). The LIVE/DEAD BacLight kit (SYTO 9 + propidium iodide) is the gold standard, producing green-fluorescent live cells and red-fluorescent dead cells.</p>
+        <h3>Metabolic Activity Dyes</h3>
+        <p>Membrane integrity does not always correlate with metabolic competence. Dyes such as 5-cyano-2,3-ditolyl tetrazolium chloride (CTC) are reduced by active electron transport chains to form fluorescent formazan crystals, identifying cells with active respiration. Fluorescein diacetate (FDA) is cleaved by intracellular esterases, marking metabolically active cells.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>Dye / Kit</th><th>What It Measures</th><th>Protocol Summary</th><th>Ex / Em (nm)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>SYTO 9 + PI (BacLight)</td><td>Membrane integrity (live/dead)</td><td>Mix 1:1 dyes, stain 15 min RT in dark</td><td>480/500 &amp; 535/617</td></tr>
+                <tr><td>SYBR Green I + PI</td><td>Total count + membrane integrity</td><td>SYBR 1:10,000, PI 10 &mu;g/mL, 15 min</td><td>497/520 &amp; 535/617</td></tr>
+                <tr><td>CTC (tetrazolium)</td><td>Respiratory activity</td><td>5 mM CTC, incubate 1&ndash;4 h at 37&deg;C</td><td>450/630</td></tr>
+                <tr><td>FDA (fluorescein diacetate)</td><td>Esterase activity (metabolic)</td><td>10 &mu;g/mL FDA, 30 min at 37&deg;C</td><td>490/514</td></tr>
+                <tr><td>DiBAC<sub>4</sub>(3)</td><td>Membrane potential</td><td>1 &mu;g/mL, 5 min equilibration</td><td>490/516</td></tr>
+                <tr><td>DAPI</td><td>Total DNA content (all cells)</td><td>1 &mu;g/mL, 5 min RT</td><td>360/460</td></tr>
+            </tbody>
+        </table>
+
+        <div class="tip"><strong>Tip:</strong> For absolute bacterial counts, use volumetric counting (available on instruments like the BD Accuri C6) or add a known concentration of fluorescent counting beads. This converts event rates into cells/mL without requiring external calibration curves.</div>
+    </section>
+
+    <!-- Section 4: AST (red) -->
+    <section id="ast" class="content-section accent-red">
+        <h2>4. Antimicrobial Susceptibility Testing by Flow</h2>
+        <p>Traditional antimicrobial susceptibility testing (AST) relies on overnight culture, delaying targeted therapy by 18&ndash;24 hours. Flow cytometry-based AST can deliver results in 1&ndash;4 hours by measuring the physiological effects of antibiotics on bacterial cells at the single-cell level.</p>
+        <h3>Principle of Rapid AST</h3>
+        <p>Bacteria are exposed to antibiotics at defined concentrations for a short incubation (typically 1&ndash;4 hours). Viability or damage is then assessed using membrane integrity dyes (PI), membrane potential dyes (DiBAC<sub>4</sub>(3)), or nucleic acid content changes. Susceptible organisms show increased dye uptake, reduced counts, or altered scatter profiles relative to untreated controls.</p>
+        <h3>MIC Determination</h3>
+        <p>By testing a range of antibiotic concentrations in parallel, the minimum inhibitory concentration (MIC) can be estimated within hours. Each concentration tube is stained and analyzed; the lowest concentration producing a significant shift in viability markers defines the flow-MIC. Correlation with broth microdilution MICs has been reported as &gt;90% categorical agreement for many drug&ndash;organism combinations.</p>
+        <h3>Protocol Outline</h3>
+        <ol>
+            <li>Prepare a standardized inoculum (0.5 McFarland, ~1.5 &times; 10<sup>8</sup> CFU/mL)</li>
+            <li>Distribute into tubes with serial antibiotic dilutions plus a growth control</li>
+            <li>Incubate at 35&ndash;37&deg;C for 1&ndash;4 hours (drug-dependent)</li>
+            <li>Stain with PI or DiBAC<sub>4</sub>(3) for 10&ndash;15 minutes</li>
+            <li>Acquire on cytometer; compare fluorescence histograms to untreated control</li>
+        </ol>
+        <div class="caution"><strong>Caution:</strong> Flow cytometry-based AST is currently a research tool and is <strong>not FDA-cleared</strong> for clinical diagnostic use. Results should be confirmed by standard reference methods (CLSI broth microdilution or disk diffusion) before guiding patient therapy.</div>
+    </section>
+
+    <!-- Section 5: Viral Quantification (teal) -->
+    <section id="viral" class="content-section accent-teal">
+        <h2>5. Viral Quantification &amp; Analysis</h2>
+        <p>Viruses range from approximately 30 nm (parvoviruses) to 200+ nm (poxviruses), placing most well below the detection limit of conventional flow cytometers. However, advances in high-sensitivity instrumentation have opened the door to direct viral particle analysis.</p>
+        <div class="key-point"><strong>Key Point:</strong> Most conventional flow cytometers cannot detect individual viruses. Dedicated high-sensitivity platforms with optimized optics and low background noise are required for single-virus detection.</div>
+        <h3>High-Sensitivity Instruments</h3>
+        <p>Instruments engineered for small particle detection include the Beckman Coulter CytoFLEX (with violet side scatter, VSSC), Thermo Fisher Attune NxT (with flat-top laser illumination), and the nanoFCM (dedicated nanoscale flow cytometer). These platforms achieve detection limits down to 40&ndash;100 nm depending on the virus and labeling strategy.</p>
+        <h3>Fluorescent Labeling of Viruses</h3>
+        <p>Because viral scatter signals alone are rarely sufficient, fluorescent labeling is essential. Common approaches include:</p>
+        <ul>
+            <li><strong>Nucleic acid dyes:</strong> SYBR Green I, SYBR Gold, or SYTOX Green stain viral genomes (DNA or RNA)</li>
+            <li><strong>Lipophilic dyes:</strong> FM 4-64, DiO, or DiI label enveloped viruses via their lipid membranes</li>
+            <li><strong>Antibody staining:</strong> Fluorochrome-conjugated antibodies target specific surface proteins (e.g., HIV gp120)</li>
+            <li><strong>Genetically encoded reporters:</strong> GFP-tagged viral capsid or envelope proteins</li>
+        </ul>
+        <h3>Applications in HIV Reservoir Studies</h3>
+        <p>Flow virometry is increasingly applied to HIV research. Fluorescent labeling of HIV particles allows quantification of viral surface protein heterogeneity, host-derived markers incorporated into the viral envelope, and maturation state&mdash;information not available from bulk PCR-based viral load assays.</p>
+    </section>
+
+    <!-- Section 6: Phage Analysis (purple) -->
+    <section id="phage" class="content-section accent-purple">
+        <h2>6. Phage Analysis &amp; Phage Therapy Monitoring</h2>
+        <p>Bacteriophages (phages) are viruses that specifically infect bacteria. With the global rise of antimicrobial resistance, phage therapy has re-emerged as a viable treatment strategy, and flow cytometry offers powerful tools for phage research and clinical monitoring.</p>
+        <h3>Detecting Phage Particles</h3>
+        <p>Phages typically range from 20&ndash;200 nm. Like other viruses, they require high-sensitivity instruments and fluorescent nucleic acid staining (SYBR Green I or SYBR Gold) for reliable detection by flow cytometry. Stained phage populations appear as discrete clusters above background noise on fluorescence vs. SSC plots.</p>
+        <h3>Phage&ndash;Host Interaction Studies</h3>
+        <p>Flow cytometry enables real-time monitoring of phage infection dynamics at the single-cell level:</p>
+        <ul>
+            <li><strong>Adsorption kinetics:</strong> Fluorescently labeled phages binding to bacterial surfaces can be tracked over time</li>
+            <li><strong>Lysis monitoring:</strong> Bacterial counts and viability decline as lytic phages replicate and lyse host cells</li>
+            <li><strong>Lysogeny detection:</strong> Reporter phages carrying fluorescent genes (GFP, mCherry) identify lysogenized bacteria</li>
+            <li><strong>Burst size estimation:</strong> Combining cell counts with free phage quantification over a time course</li>
+        </ul>
+        <h3>Phage Therapy Monitoring</h3>
+        <p>In clinical phage therapy, flow cytometry can rapidly assess therapeutic efficacy by tracking target bacterial counts and viability in patient specimens during treatment, providing faster feedback than culture-based methods.</p>
+    </section>
+
+    <!-- Section 7: Food & Water Safety (no accent) -->
+    <section id="food-water" class="content-section">
+        <h2>7. Food &amp; Water Safety Applications</h2>
+        <p>Rapid detection of microbial contamination in food products and water supplies is critical for public health. Flow cytometry dramatically reduces time-to-result compared to standard culture enrichment protocols, making it ideal for quality control and regulatory compliance.</p>
+        <h3>Food Pathogen Detection</h3>
+        <p>After a brief enrichment step (2&ndash;6 hours), target organisms can be labeled with fluorescent antibodies or nucleic acid dyes and detected by flow cytometry. Immunomagnetic separation (IMS) prior to staining concentrates target bacteria and removes food matrix debris.</p>
+        <h3>Water Quality Monitoring</h3>
+        <p>Flow cytometry is increasingly adopted for routine drinking water quality monitoring. Total cell counts (TCC) using SYBR Green I staining provide a rapid and sensitive measure of microbial load, often replacing heterotrophic plate counts (HPC) in modern water utilities.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>Application</th><th>Target Organisms</th><th>Staining Strategy</th><th>Detection Limit</th><th>Time</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Poultry rinse</td><td><em>Salmonella</em> spp.</td><td>Anti-Salmonella FITC Ab + PI</td><td>10<sup>3</sup> CFU/mL</td><td>4&ndash;6 h (with enrichment)</td></tr>
+                <tr><td>Fresh produce</td><td><em>E. coli</em> O157:H7</td><td>IMS + anti-O157 PE Ab</td><td>10<sup>2</sup> CFU/g</td><td>6&ndash;8 h (with enrichment)</td></tr>
+                <tr><td>Dairy products</td><td><em>Listeria monocytogenes</em></td><td>Anti-Listeria Ab + SYTO 9</td><td>10<sup>3</sup> CFU/mL</td><td>4&ndash;6 h (with enrichment)</td></tr>
+                <tr><td>Drinking water</td><td>Total bacteria (TCC)</td><td>SYBR Green I (1:10,000)</td><td>10<sup>2</sup> cells/mL</td><td>15&ndash;30 min</td></tr>
+                <tr><td>Ballast water (IMO D-2)</td><td>Organisms &ge;10 &mu;m, &lt;50 &mu;m</td><td>FDA + CMFDA viability</td><td>10 viable cells/mL</td><td>30&ndash;60 min</td></tr>
+                <tr><td>Recreational water</td><td><em>Enterococcus</em>, coliforms</td><td>Species-specific Ab + PI</td><td>10<sup>2</sup> CFU/100 mL</td><td>2&ndash;4 h</td></tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Section 8: Microbial Community Analysis (green) -->
+    <section id="community" class="content-section accent-green">
+        <h2>8. Microbial Community Analysis</h2>
+        <p>Complex microbial communities in soil, water, biofilms, and the human microbiome contain hundreds to thousands of species. Flow cytometry provides a culture-independent approach to characterizing these communities at the single-cell level.</p>
+        <h3>Community Fingerprinting</h3>
+        <p>When stained with a nucleic acid dye, different bacterial populations within a community produce characteristic clusters on fluorescence vs. scatter plots based on their cell size, DNA content, and nucleic acid accessibility. These multiparameter fingerprints serve as signatures for community composition and can detect shifts in response to environmental changes or perturbations.</p>
+        <h3>FISH-Flow: Fluorescence In Situ Hybridization by Flow Cytometry</h3>
+        <p>Combining fluorescence in situ hybridization (FISH) with flow cytometry (FISH-Flow) allows phylogenetic identification and quantification of specific taxa within complex communities. Ribosomal RNA-targeted oligonucleotide probes labeled with fluorochromes hybridize to intracellular 16S rRNA, identifying bacteria at the genus or species level without the need for cultivation.</p>
+        <h3>DNA Content &amp; Growth Rate Estimation</h3>
+        <p>Bacterial DNA content, measured by stoichiometric DNA staining (DAPI or PicoGreen), reflects replication status. Fast-growing cells contain multiple genome copies due to overlapping replication rounds, while stationary-phase cells have a single chromosome. The distribution of DNA content in a population provides an estimate of average community growth rate&mdash;a metric difficult to obtain by any other method.</p>
+        <h3>Cell Sorting for Downstream &ldquo;-omics&rdquo;</h3>
+        <p>Fluorescence-activated cell sorting (FACS) enables physical separation of defined subpopulations from complex communities. Sorted fractions can be subjected to whole-genome amplification, metagenomics, metatranscriptomics, or single-cell sequencing, linking phylogenetic identity to functional potential.</p>
+    </section>
+
+    <!-- Section 9: Fungal & Parasitic (orange) -->
+    <section id="fungal-parasitic" class="content-section accent-orange">
+        <h2>9. Fungal &amp; Parasitic Analysis</h2>
+        <p>Beyond bacteria and viruses, flow cytometry is applied to eukaryotic microorganisms including yeasts, molds, and parasites. These organisms are generally larger than bacteria, making detection by scatter alone more feasible.</p>
+        <h3>Yeast Cell Cycle Analysis</h3>
+        <p><em>Saccharomyces cerevisiae</em> and <em>Candida</em> species can be analyzed for DNA content using propidium iodide (after RNase treatment) or SYTOX Green. The resulting histograms reveal G1, S, and G2/M populations, enabling cell cycle studies in response to antifungal agents or environmental stress.</p>
+        <h3>Antifungal Susceptibility</h3>
+        <p>Analogous to bacterial AST, flow cytometry detects antifungal effects within 2&ndash;6 hours. After exposure to azoles, echinocandins, or amphotericin B, yeast cells are assessed for membrane integrity (PI uptake), metabolic activity (FUN-1 dye), or oxidative stress (DCFH-DA). This approach is faster than standard CLSI broth microdilution (24&ndash;48 h for yeasts).</p>
+        <h3>Malaria Detection</h3>
+        <p>Malaria parasites (<em>Plasmodium</em> spp.) reside within red blood cells (RBCs), which are naturally devoid of nuclei and DNA. Staining whole blood with nucleic acid dyes (e.g., SYBR Green I, Hoechst 33342, or thiazole orange) causes infected RBCs to fluoresce due to parasite DNA, while uninfected RBCs remain non-fluorescent. This enables rapid quantification of parasitemia.</p>
+        <div class="tip"><strong>Tip:</strong> Because mature mammalian RBCs lack nuclei, any DNA-positive event in the RBC gate strongly suggests intracellular parasites. However, reticulocytes (immature RBCs) contain residual RNA and may produce false positives&mdash;use an RNA-specific counterstain or gate on reticulocyte markers to exclude them.</div>
+        <h3><em>Cryptosporidium</em> &amp; <em>Giardia</em> Detection</h3>
+        <p>EPA Method 1623.1 for drinking water analysis uses immunomagnetic separation followed by fluorescent antibody staining and microscopy. Flow cytometry can serve as a rapid screening step, identifying antibody-positive oocysts (<em>Cryptosporidium</em>, 4&ndash;6 &mu;m) and cysts (<em>Giardia</em>, 8&ndash;14 &mu;m) based on fluorescence and scatter, with suspicious events sorted for confirmatory microscopy.</p>
+    </section>
+
+    <!-- Section 10: Troubleshooting (red) -->
+    <section id="troubleshooting" class="content-section accent-red">
+        <h2>10. Troubleshooting Microbial Flow Cytometry</h2>
+        <p>Microbial flow cytometry presents unique challenges that can confound data interpretation. The table below summarizes common problems and their solutions.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>Problem</th><th>Likely Cause</th><th>Solution</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>High background events in blank</td><td>Contaminated sheath fluid or tubing</td><td>Filter sheath through 0.1 &mu;m; clean fluidics with bleach then DI water</td></tr>
+                <tr><td>Bacteria not visible on FSC/SSC</td><td>Threshold set on FSC; voltages too low</td><td>Switch threshold to fluorescence channel; increase FSC/SSC voltages</td></tr>
+                <tr><td>Poor live/dead discrimination</td><td>Suboptimal dye concentrations or timing</td><td>Titrate dyes; use heat-killed control; ensure 15 min staining in dark</td></tr>
+                <tr><td>Excessive coincidence (doublets)</td><td>Sample concentration too high</td><td>Dilute to &lt;10<sup>6</sup> cells/mL; reduce flow rate to low</td></tr>
+                <tr><td>Clumping / aggregation</td><td>Biofilm, mucus, or fixation artifacts</td><td>Vortex, sonicate briefly (bath, not probe), or filter through 40 &mu;m strainer</td></tr>
+                <tr><td>Variable counts between runs</td><td>No absolute counting reference</td><td>Add counting beads or use volumetric counting instrument</td></tr>
+                <tr><td>SYBR Green background too high</td><td>Dye concentration too high or old stock</td><td>Reduce to 1:20,000 dilution; prepare fresh working stock</td></tr>
+                <tr><td>Autofluorescence interference</td><td>Photosynthetic pigments in cyanobacteria or algae</td><td>Use red-excited dyes (e.g., SYTO 62); gate on chlorophyll-negative events</td></tr>
+                <tr><td>Loss of events during washing</td><td>Small cells lost in centrifugation pellet</td><td>Centrifuge at higher g-force (&ge;10,000 &times; g, 5 min); use no-wash protocols</td></tr>
+                <tr><td>Inconsistent viability results</td><td>Sample age or temperature changes</td><td>Analyze within 30 min of staining; keep at room temperature</td></tr>
+            </tbody>
+        </table>
+
+        <div class="caution"><strong>Caution:</strong> Sheath fluid contamination is the number one source of false-positive events in microbial flow cytometry. Always run a filtered-water blank at the start of each session and between sample groups. If blank event rates exceed ~100 events/sec on fluorescence trigger, do not proceed&mdash;clean the fluidics system thoroughly before acquiring samples.</div>
+
+        <h3>Quality Control Checklist</h3>
+        <ul>
+            <li>Run 0.1 &mu;m filtered water blank: &lt;100 events/sec on fluorescence trigger</li>
+            <li>Run fluorescent bead standards: verify detector voltages and CV values</li>
+            <li>Include a known live culture as positive control for viability dyes</li>
+            <li>Include a heat-killed (70&deg;C, 30 min) sample as dead control</li>
+            <li>Use counting beads or volumetric mode for every absolute count experiment</li>
+            <li>Record sheath fluid lot number and filtration date for traceability</li>
+        </ul>
+    </section>
+
+</main>
+
+<footer><p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p><p style="margin-top: 8px;">Flow Cytometry Hub &mdash; A comprehensive educational resource for flow cytometry.</p></footer></body></html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analysis &amp; Gating | Flow Cytometry Hub</title>
+    <style>
+        :root { --primary: #1a5276; --primary-light: #2980b9; --primary-dark: #0e2f44; --accent: #27ae60; --accent-light: #2ecc71; --warning: #e67e22; --danger: #e74c3c; --bg: #f4f6f9; --bg-card: #ffffff; --text: #2c3e50; --text-light: #7f8c8d; --border: #dce1e8; --shadow: 0 2px 12px rgba(0,0,0,0.08); --radius: 10px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .nav-links { display: flex; list-style: none; gap: 0; }
+        .nav-links a { color: #ccd6dd; text-decoration: none; padding: 16px 18px; display: block; font-size: 0.9rem; font-weight: 500; white-space: nowrap; transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -3px; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 60px 20px 40px; text-align: center; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
+        .content-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; margin-bottom: 30px; border-left: 4px solid var(--primary-light); }
+        .content-section.accent-green { border-left-color: var(--accent); }
+        .content-section.accent-orange { border-left-color: var(--warning); }
+        .content-section.accent-red { border-left-color: var(--danger); }
+        .content-section.accent-purple { border-left-color: #8e44ad; }
+        .content-section.accent-teal { border-left-color: #16a085; }
+        .content-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .content-section h3 { font-size: 1.15rem; color: var(--primary); margin: 20px 0 10px; }
+        .content-section p { margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
+        .content-section ul, .content-section ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; }
+        .content-section li { margin-bottom: 6px; }
+        .tip { background: #eaf7ee; border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .caution { background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .key-point { background: #eaf2f8; border-left: 3px solid var(--primary-light); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .toc { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 36px; margin-bottom: 30px; }
+        .toc h3 { color: var(--primary); margin-bottom: 14px; font-size: 1.1rem; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--primary-light); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
+        .toc a:hover { color: var(--primary); text-decoration: underline; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 16px 0; }
+        .data-table thead { background: var(--primary-dark); color: #fff; }
+        .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: #f0f4f8; }
+        .diagram-container { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 30px; margin: 20px 0; text-align: center; }
+        .diagram-container .caption { font-size: 0.85rem; color: var(--text-light); margin-top: 14px; font-style: italic; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .comparison-card { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+        .comparison-card h4 { color: var(--primary); margin-bottom: 8px; }
+        .comparison-card p { font-size: 0.88rem; color: var(--text-light); }
+        /* Gate diagram */
+        .gate-flow { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin: 16px 0; }
+        .gate-step { background: var(--primary); color: #fff; padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; min-width: 130px; text-align: center; }
+        .gate-step.alt { background: var(--accent); }
+        .gate-step.warn { background: var(--warning); }
+        .gate-arrow { font-size: 1.2rem; color: var(--primary-light); font-weight: 700; }
+        footer { background: var(--primary-dark); color: #aab7c4; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+        footer a { color: var(--accent-light); text-decoration: none; }
+        @media (max-width: 768px) { .content-section { padding: 24px 20px; } .hero h1 { font-size: 1.8rem; } .nav-links { display: none; } .gate-flow { flex-direction: column; } }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">Flow<span>Cytometry</span>Hub</a>
+        <ul class="nav-links">
+            <li><a href="index.html#learning">Learning</a></li>
+            <li><a href="index.html#usecases">Use Cases</a></li>
+            <li><a href="index.html#instruments">Instruments</a></li>
+            <li><a href="index.html#reagents">Reagents</a></li>
+            <li><a href="index.html#protocols">Protocols</a></li>
+        </ul>
+        <a href="index.html" class="back-link">&larr; Back to Hub</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>&#128202; Data Analysis &amp; Gating</h1>
+    <p>A comprehensive guide to interpreting flow cytometry data &mdash; from FCS files and plot types to advanced high-dimensional analysis.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rarr; <a href="index.html#learning">Learning</a> &rarr; Data Analysis</div>
+</header>
+
+<div class="content">
+
+    <div class="toc">
+        <h3>&#128218; Table of Contents</h3>
+        <ol>
+            <li><a href="#fcs">The FCS File Format</a></li>
+            <li><a href="#displays">Display Types</a></li>
+            <li><a href="#scaling">Scaling &amp; Transformation</a></li>
+            <li><a href="#gating">Gating Strategies</a></li>
+            <li><a href="#common-gates">Common Gating Hierarchies</a></li>
+            <li><a href="#statistics">Statistical Measures</a></li>
+            <li><a href="#qc">Quality Control</a></li>
+            <li><a href="#highdim">High-Dimensional Analysis</a></li>
+            <li><a href="#batch">Batch Analysis &amp; Standardization</a></li>
+            <li><a href="#software">Software Overview</a></li>
+            <li><a href="#reporting">Reporting &amp; Publication Standards</a></li>
+        </ol>
+    </div>
+
+    <div class="content-section" id="fcs">
+        <h2>1. The FCS File Format</h2>
+        <p>Flow cytometry data is stored in the <strong>Flow Cytometry Standard (FCS)</strong> file format, maintained by the International Society for Advancement of Cytometry (ISAC). The current standard is FCS 3.1 (released 2010).</p>
+        <h3>File Structure</h3>
+        <p>An FCS file has four segments:</p>
+        <ol>
+            <li><strong>HEADER:</strong> Fixed 256-byte block with byte offsets pointing to the other segments. Includes version string (e.g., "FCS3.1").</li>
+            <li><strong>TEXT:</strong> Key-value pairs containing metadata &mdash; parameter names ($PnN), channel counts ($TOT), acquisition date, laser settings, detector voltages, compensation matrix, etc. Delimited by a chosen separator character.</li>
+            <li><strong>DATA:</strong> The actual measurements. List-mode data where each row is one event and each column is one parameter. Stored as integers (for older files) or floating-point values. Typical parameters: FSC-A, FSC-H, SSC-A, SSC-H, FL1-A, FL2-A, etc., plus a Time parameter.</li>
+            <li><strong>ANALYSIS:</strong> Optional segment for gating results (rarely used; most analysis is done externally in software like FlowJo).</li>
+        </ol>
+        <div class="key-point"><strong>Key Metadata Keywords:</strong> $TOT (total events), $PAR (number of parameters), $PnN (parameter name for channel n), $PnS (short name), $PnR (range), $PnB (bits), $PnE (amplification), $SPILLOVER or $COMP (compensation matrix).</div>
+    </div>
+
+    <div class="content-section accent-green" id="displays">
+        <h2>2. Display Types</h2>
+        <p>Choosing the right plot type is critical for identifying populations, setting gates, and presenting results.</p>
+        <table class="data-table">
+            <thead><tr><th>Plot Type</th><th>Parameters</th><th>Best For</th><th>Limitations</th></tr></thead>
+            <tbody>
+                <tr><td><strong>Dot Plot</strong></td><td>2</td><td>Exploring data; identifying outliers; seeing every event</td><td>Overplotting at high event counts (dense regions appear solid)</td></tr>
+                <tr><td><strong>Density / Pseudocolor Plot</strong></td><td>2</td><td>Resolving dense populations; publication figures</td><td>Colors can obscure rare events; color scales need context</td></tr>
+                <tr><td><strong>Contour Plot</strong></td><td>2</td><td>Clean population boundaries; publication</td><td>Rare events (&lt;1%) may be invisible between contour lines</td></tr>
+                <tr><td><strong>Zebra Plot</strong></td><td>2</td><td>Hybrid of contour and dot plot; shows rare events as dots outside contour lines</td><td>Can be busy with complex data</td></tr>
+                <tr><td><strong>Histogram</strong></td><td>1</td><td>Single parameter expression; overlays; comparing conditions</td><td>Only shows one dimension; misses relationships between parameters</td></tr>
+                <tr><td><strong>Overlay Histogram</strong></td><td>1</td><td>Comparing staining intensity across samples or conditions</td><td>More than 3&ndash;4 overlays becomes difficult to read</td></tr>
+            </tbody>
+        </table>
+        <div class="tip"><strong>Tip:</strong> For publications, pseudocolor or contour plots are preferred over dot plots because they better represent population density. Always include axis labels with the parameter name and fluorochrome/marker.</div>
+    </div>
+
+    <div class="content-section accent-orange" id="scaling">
+        <h2>3. Scaling &amp; Transformation</h2>
+        <p>Flow cytometry data spans many orders of magnitude (from near-zero background to bright positive staining). Proper scaling is essential to visualize and gate data correctly.</p>
+
+        <h3>Linear Scale</h3>
+        <p>Values are displayed with equal spacing. Best for: scatter parameters (FSC, SSC), DNA content (cell cycle), and any parameter where the populations don't span more than ~1 decade.</p>
+
+        <h3>Logarithmic Scale</h3>
+        <p>Traditional 4-decade log scale compresses upper values and expands lower values. Good for most fluorescence parameters where positive and negative populations span several decades. <strong>Problem:</strong> Log scale cannot display zero or negative values &mdash; events get piled up on the axis.</p>
+
+        <h3>Biexponential (Logicle / Hyperlog)</h3>
+        <p>Modern flow cytometry's most important data transformation. Biexponential display behaves linearly near zero (and below zero) and logarithmically at higher values. This is critical because:</p>
+        <ul>
+            <li><strong>Compensated data often contains negative values</strong> (spillover subtraction can push events below zero)</li>
+            <li>On log scale, these events pile up at the axis, distorting populations and making gating impossible</li>
+            <li>Biexponential correctly displays the full range including the negative tail of unstained populations</li>
+        </ul>
+        <div class="caution"><strong>Common Mistake:</strong> Using log scale for compensated multi-color data will cause axis compression artifacts. Always use biexponential transformation for compensated fluorescence data. Most modern software (FlowJo, FCS Express) applies this by default.</div>
+
+        <h3>Transformation Parameters</h3>
+        <p>Biexponential transforms have adjustable parameters (width, positive/negative decades) that control the linear-to-log transition. In FlowJo, these are the "T" (top of scale) and "W" (width of linear range) parameters. If populations look compressed against the axis, try adjusting the width parameter.</p>
+    </div>
+
+    <div class="content-section accent-red" id="gating">
+        <h2>4. Gating Strategies</h2>
+        <p>Gating is the process of selecting subsets of events for analysis. Gates are drawn on plots as regions (rectangles, polygons, ellipses, or quadrants) that define populations of interest.</p>
+
+        <h3>The Standard Gating Hierarchy</h3>
+        <p>Almost every flow cytometry analysis follows this core gating sequence before any marker-specific analysis:</p>
+
+        <div class="diagram-container">
+            <h4 style="color: var(--primary); margin-bottom: 14px;">Universal Pre-Gating Hierarchy</h4>
+            <div class="gate-flow">
+                <div class="gate-step">1. Time Gate<br><span style="font-weight: 400; font-size: 0.78rem;">Remove fluidic artifacts</span></div>
+                <span class="gate-arrow">&rarr;</span>
+                <div class="gate-step alt">2. Scatter Gate<br><span style="font-weight: 400; font-size: 0.78rem;">FSC vs SSC: exclude debris</span></div>
+                <span class="gate-arrow">&rarr;</span>
+                <div class="gate-step warn">3. Singlet Gate<br><span style="font-weight: 400; font-size: 0.78rem;">FSC-H vs FSC-A</span></div>
+                <span class="gate-arrow">&rarr;</span>
+                <div class="gate-step">4. Live/Dead Gate<br><span style="font-weight: 400; font-size: 0.78rem;">Viability dye negative</span></div>
+                <span class="gate-arrow">&rarr;</span>
+                <div class="gate-step alt">5. Lineage Gate<br><span style="font-weight: 400; font-size: 0.78rem;">Population of interest</span></div>
+            </div>
+            <div class="caption">Standard pre-gating sequence. Steps 1&ndash;4 should be applied to virtually every experiment before analyzing markers of interest.</div>
+        </div>
+
+        <h3>Gate Types</h3>
+        <ul>
+            <li><strong>Rectangular gate:</strong> Simple box on a bivariate plot. Fast to draw, easy to describe. Good for clearly separated populations.</li>
+            <li><strong>Polygon gate:</strong> Free-form shape that follows population contours. More accurate for irregularly shaped populations.</li>
+            <li><strong>Elliptical gate:</strong> Oval shape; good for roughly circular populations. Some software can auto-fit ellipses.</li>
+            <li><strong>Quadrant gate:</strong> Divides a bivariate plot into 4 quadrants. Common for two-color panels (e.g., CD4 vs CD8). Only appropriate when populations are clearly separated.</li>
+            <li><strong>Boolean gates:</strong> Combine gates logically:
+                <ul>
+                    <li><strong>AND:</strong> Events in both Gate A and Gate B</li>
+                    <li><strong>OR:</strong> Events in Gate A or Gate B (or both)</li>
+                    <li><strong>NOT:</strong> Events NOT in Gate A (complement / exclusion)</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>Singlet Discrimination Deep Dive</h3>
+        <p>Cell doublets (two cells stuck together) cause false positive events. They appear between populations on dot plots and corrupt statistics. Singlet discrimination removes them:</p>
+        <ul>
+            <li><strong>FSC-H vs FSC-A:</strong> Single cells fall on a tight diagonal. Doublets have disproportionately high area relative to height (wider pulse). Gate on the diagonal.</li>
+            <li><strong>SSC-H vs SSC-W:</strong> Alternative approach using side scatter pulse geometry. Particularly useful for DNA cell cycle analysis where FSC may be affected by cell cycle stage.</li>
+            <li>For best results, gate on <strong>both</strong> FSC and SSC singlet gates sequentially.</li>
+        </ul>
+    </div>
+
+    <div class="content-section accent-purple" id="common-gates">
+        <h2>5. Common Gating Hierarchies</h2>
+        <p>Below are standard gating strategies for the most commonly analyzed cell populations. All assume you've already applied the pre-gating hierarchy (time, scatter, singlets, live/dead).</p>
+
+        <h3>T Cell Subsets</h3>
+        <div class="gate-flow">
+            <div class="gate-step">CD3+<br><span style="font-weight: 400; font-size: 0.78rem;">T lymphocytes</span></div>
+            <span class="gate-arrow">&rarr;</span>
+            <div class="gate-step alt">CD4+ vs CD8+<br><span style="font-weight: 400; font-size: 0.78rem;">Helper vs Cytotoxic</span></div>
+            <span class="gate-arrow">&rarr;</span>
+            <div class="gate-step warn">CD45RA vs CCR7<br><span style="font-weight: 400; font-size: 0.78rem;">Na&iuml;ve/CM/EM/EMRA</span></div>
+        </div>
+        <p>CD3+CD4+ = helper T cells. CD3+CD8+ = cytotoxic T cells. Further subdivision by memory markers: CCR7+CD45RA+ (na&iuml;ve), CCR7+CD45RA&minus; (central memory), CCR7&minus;CD45RA&minus; (effector memory), CCR7&minus;CD45RA+ (TEMRA).</p>
+
+        <h3>B Cells</h3>
+        <div class="gate-flow">
+            <div class="gate-step">CD19+ or CD20+<br><span style="font-weight: 400; font-size: 0.78rem;">B lymphocytes</span></div>
+            <span class="gate-arrow">&rarr;</span>
+            <div class="gate-step alt">CD27 vs IgD<br><span style="font-weight: 400; font-size: 0.78rem;">Na&iuml;ve/Memory/Switched</span></div>
+        </div>
+
+        <h3>NK Cells</h3>
+        <div class="gate-flow">
+            <div class="gate-step">CD3&minus;<br><span style="font-weight: 400; font-size: 0.78rem;">Exclude T cells</span></div>
+            <span class="gate-arrow">&rarr;</span>
+            <div class="gate-step alt">CD56+ and/or CD16+<br><span style="font-weight: 400; font-size: 0.78rem;">NK cells</span></div>
+        </div>
+        <p>CD56<sup>bright</sup>CD16<sup>dim/&minus;</sup> = regulatory/cytokine-producing NK. CD56<sup>dim</sup>CD16+ = cytotoxic NK.</p>
+
+        <h3>Monocyte Subsets</h3>
+        <div class="gate-flow">
+            <div class="gate-step">CD14 vs CD16<br><span style="font-weight: 400; font-size: 0.78rem;">On HLA-DR+ gate</span></div>
+        </div>
+        <p>CD14++CD16&minus; = classical (85%). CD14++CD16+ = intermediate (5%). CD14+CD16++ = non-classical (10%).</p>
+
+        <h3>Dendritic Cells</h3>
+        <div class="gate-flow">
+            <div class="gate-step">Lin&minus; HLA-DR+<br><span style="font-weight: 400; font-size: 0.78rem;">Exclude lineage markers</span></div>
+            <span class="gate-arrow">&rarr;</span>
+            <div class="gate-step alt">CD11c vs CD123<br><span style="font-weight: 400; font-size: 0.78rem;">mDC vs pDC</span></div>
+        </div>
+        <p>Lineage cocktail (dump channel): CD3, CD14, CD16, CD19, CD20, CD56. Lin&minus;HLA-DR+CD11c+ = myeloid DC. Lin&minus;HLA-DR+CD123+ = plasmacytoid DC.</p>
+    </div>
+
+    <div class="content-section accent-teal" id="statistics">
+        <h2>6. Statistical Measures</h2>
+        <table class="data-table">
+            <thead><tr><th>Statistic</th><th>Definition</th><th>When to Use</th></tr></thead>
+            <tbody>
+                <tr><td><strong>% Positive</strong></td><td>Fraction of events within a gate, as percentage of parent population</td><td>Reporting frequency of cell subsets</td></tr>
+                <tr><td><strong>MFI (Mean)</strong></td><td>Arithmetic mean fluorescence intensity of a gated population</td><td>Expression level comparison; sensitive to outliers</td></tr>
+                <tr><td><strong>MFI (Median)</strong></td><td>Median fluorescence intensity; 50th percentile value</td><td>Preferred for skewed distributions (most flow data); robust to outliers</td></tr>
+                <tr><td><strong>gMFI (Geometric Mean)</strong></td><td>Geometric mean; equivalent to mean of log-transformed data</td><td>Log-normally distributed data; traditional flow metric</td></tr>
+                <tr><td><strong>CV (%)</strong></td><td>Coefficient of variation = (SD/Mean) &times; 100%</td><td>Instrument QC (bead CV); assessing population spread</td></tr>
+                <tr><td><strong>Robust CV (rCV)</strong></td><td>CV calculated from the median and robust SD (84.13th &minus; 50th percentile)</td><td>More stable for non-Gaussian data; used by some QC software</td></tr>
+                <tr><td><strong>Stain Index</strong></td><td>(MFI<sub>pos</sub> &minus; MFI<sub>neg</sub>) / (2 &times; SD<sub>neg</sub>)</td><td>Evaluating antibody titration; comparing reagent performance; panel optimization</td></tr>
+            </tbody>
+        </table>
+        <div class="tip"><strong>Tip:</strong> Always report <strong>median</strong> (not mean) fluorescence intensity for compensated flow cytometry data. Compensation spreads populations asymmetrically, making the arithmetic mean a poor measure of central tendency. Median is robust to this spreading effect.</div>
+    </div>
+
+    <div class="content-section" id="qc">
+        <h2>7. Quality Control</h2>
+        <h3>The Time Parameter</h3>
+        <p>The time parameter records the acquisition time of each event. Plotting any fluorescence parameter vs. time reveals fluidic instabilities:</p>
+        <ul>
+            <li><strong>Spikes:</strong> Air bubbles or partial clogs</li>
+            <li><strong>Gradual drift:</strong> Laser warm-up, temperature change, or failing pressure regulation</li>
+            <li><strong>Sudden shifts:</strong> Clog release, pressure change, sample tube running empty</li>
+        </ul>
+        <p>Apply a <strong>time gate</strong> to exclude unstable regions before any analysis.</p>
+
+        <h3>QC Beads</h3>
+        <table class="data-table">
+            <thead><tr><th>Bead Type</th><th>Purpose</th><th>Frequency</th></tr></thead>
+            <tbody>
+                <tr><td><strong>CS&amp;T Beads (BD)</strong></td><td>Daily QC; sets PMT voltages; tracks instrument performance over time via Levey-Jennings plots</td><td>Daily (before experiments)</td></tr>
+                <tr><td><strong>Rainbow Beads (Spherotech)</strong></td><td>Multi-peak beads spanning 3&ndash;4 decades; verify linearity and PMT response</td><td>Daily or weekly</td></tr>
+                <tr><td><strong>MESF Beads</strong></td><td>Molecules of Equivalent Soluble Fluorochrome; quantitate absolute fluorescence</td><td>For quantitative studies</td></tr>
+                <tr><td><strong>ABC Beads (Quantum Simply Cellular)</strong></td><td>Antibody Binding Capacity; quantitate antibody molecules per cell</td><td>For receptor density quantitation</td></tr>
+                <tr><td><strong>Compensation Beads</strong></td><td>Anti-Ig capture beads for single-stain compensation controls</td><td>Every experiment with multiple colors</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="content-section accent-green" id="highdim">
+        <h2>8. High-Dimensional Analysis</h2>
+        <p>As panels grow beyond 15&ndash;20 parameters, manual sequential gating becomes impractical and biased. High-dimensional computational tools offer unbiased population discovery.</p>
+
+        <table class="data-table">
+            <thead><tr><th>Algorithm</th><th>Type</th><th>What It Does</th><th>Common Software</th></tr></thead>
+            <tbody>
+                <tr><td><strong>tSNE</strong></td><td>Dimensionality reduction</td><td>Non-linear projection of high-dimensional data to 2D. Preserves local structure; similar cells cluster together. Good for visualization.</td><td>FlowJo, Cytobank, OMIQ, R</td></tr>
+                <tr><td><strong>UMAP</strong></td><td>Dimensionality reduction</td><td>Similar to tSNE but faster and better at preserving global structure. Increasingly preferred over tSNE.</td><td>FlowJo, OMIQ, Python, R</td></tr>
+                <tr><td><strong>FlowSOM</strong></td><td>Clustering</td><td>Self-Organizing Map + hierarchical clustering. Groups events into metaclusters representing cell populations. Fast; handles millions of events.</td><td>R (FlowSOM package), OMIQ, Cytobank</td></tr>
+                <tr><td><strong>PhenoGraph</strong></td><td>Clustering</td><td>k-nearest neighbor graph-based clustering. Often produces more granular clusters than FlowSOM. Good for rare populations.</td><td>R, Python, OMIQ</td></tr>
+                <tr><td><strong>SPADE</strong></td><td>Tree visualization</td><td>Spanning-tree Progression of Density-normalized Events. Creates a tree structure showing population relationships.</td><td>Cytobank, R</td></tr>
+                <tr><td><strong>Diffusion Map</strong></td><td>Trajectory analysis</td><td>Reveals differentiation trajectories and developmental pathways.</td><td>R (destiny), Python (scanpy)</td></tr>
+                <tr><td><strong>PCA</strong></td><td>Dimensionality reduction</td><td>Linear projection; finds axes of maximum variance. Good for initial exploration and removing correlated dimensions.</td><td>All platforms</td></tr>
+            </tbody>
+        </table>
+
+        <div class="caution"><strong>Important:</strong> tSNE and UMAP are <strong>visualization tools</strong>, not clustering tools. You should NOT draw gates on tSNE/UMAP plots &mdash; they distort distances and densities. Use them to discover populations, then define those populations using the original marker space.</div>
+    </div>
+
+    <div class="content-section accent-orange" id="batch">
+        <h2>9. Batch Analysis &amp; Standardization</h2>
+        <h3>Cross-Sample Normalization</h3>
+        <p>When comparing MFI values across experiments, dates, or sites, raw MFI is unreliable because it depends on instrument-specific factors (PMT voltage, laser power, optical alignment). Solutions:</p>
+        <ul>
+            <li><strong>MESF (Molecules of Equivalent Soluble Fluorochrome):</strong> Convert MFI to standardized fluorescence units using MESF calibration beads. Instrument-independent.</li>
+            <li><strong>ABC (Antibody Binding Capacity):</strong> Quantitate actual receptor density per cell using Quantum Simply Cellular beads. Gold standard for comparing expression across instruments and sites.</li>
+            <li><strong>Normalize to reference sample:</strong> Include the same reference sample (e.g., frozen PBMCs from a single healthy donor) across all experiments. Express results as fold-change relative to reference.</li>
+        </ul>
+
+        <h3>Batch Effects</h3>
+        <p>Common sources of batch effects include: reagent lot changes (especially tandem dyes), instrument service/recalibration, operator differences, sample processing time variations, and ambient temperature. Mitigate by: randomizing sample order, including internal controls, and using harmonization algorithms (e.g., CytoNorm, CytofBatchAdjust for CyTOF).</p>
+    </div>
+
+    <div class="content-section accent-red" id="software">
+        <h2>10. Software Overview</h2>
+        <table class="data-table">
+            <thead><tr><th>Software</th><th>Type</th><th>Platform</th><th>Key Features</th></tr></thead>
+            <tbody>
+                <tr><td><strong>FlowJo</strong> (BD)</td><td>Desktop</td><td>Mac/Windows</td><td>Industry standard; intuitive gating; tSNE/UMAP/FlowSOM built-in; extensive plugin ecosystem; workspace sharing</td></tr>
+                <tr><td><strong>FCS Express</strong> (De Novo)</td><td>Desktop</td><td>Windows</td><td>Direct export to PowerPoint; batch analysis; GxP compliance module; image cytometry support</td></tr>
+                <tr><td><strong>Kaluza</strong> (Beckman Coulter)</td><td>Desktop</td><td>Windows</td><td>Radar plots; optimized for CytoFLEX data; merge/overlay capabilities</td></tr>
+                <tr><td><strong>Cytobank</strong></td><td>Cloud</td><td>Browser</td><td>Collaborative cloud platform; viSNE, SPADE, FlowSOM; ideal for multi-site studies</td></tr>
+                <tr><td><strong>OMIQ</strong></td><td>Cloud</td><td>Browser</td><td>Modern cloud platform; opt-SNE, FlowSOM, PhenoGraph, UMAP; AI-assisted gating</td></tr>
+                <tr><td><strong>SpectroFlo</strong> (Cytek)</td><td>Acquisition + Analysis</td><td>Windows</td><td>Spectral unmixing; reference spectrum management; spectral cytometry-optimized</td></tr>
+                <tr><td><strong>R (flowCore/openCyto)</strong></td><td>Programming</td><td>Cross-platform</td><td>Full programmatic control; reproducible pipelines; integration with Bioconductor</td></tr>
+                <tr><td><strong>Python (FlowCytometryTools, CytoFlow)</strong></td><td>Programming</td><td>Cross-platform</td><td>Machine learning integration; scripting; Jupyter notebooks</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="content-section accent-purple" id="reporting">
+        <h2>11. Reporting &amp; Publication Standards</h2>
+        <h3>MIFlowCyt (Minimum Information about Flow Cytometry)</h3>
+        <p>MIFlowCyt is the ISAC-endorsed reporting standard for flow cytometry experiments. When publishing, your methods section should include:</p>
+        <ul>
+            <li><strong>Instrument:</strong> Manufacturer, model, laser configuration, detector configuration</li>
+            <li><strong>Software:</strong> Acquisition and analysis software with version numbers</li>
+            <li><strong>Sample preparation:</strong> Cell source, processing steps, staining conditions (time, temperature, concentrations)</li>
+            <li><strong>Antibodies/reagents:</strong> Target, clone, fluorochrome, vendor, catalog number, lot number, titrated concentration</li>
+            <li><strong>Controls:</strong> List all controls used (unstained, single-stains, FMOs, isotypes, biological controls)</li>
+            <li><strong>Gating strategy:</strong> Show the full gating hierarchy as a figure or supplementary figure. Number of events collected.</li>
+            <li><strong>Compensation:</strong> How compensation was performed (beads vs cells, software used)</li>
+            <li><strong>Data transformation:</strong> Scaling method (log, biexponential, linear)</li>
+        </ul>
+
+        <h3>Figure Preparation</h3>
+        <ul>
+            <li>Use pseudocolor or contour plots (not dot plots) for publication</li>
+            <li>Label axes with both the fluorochrome AND the marker name (e.g., "CD4 BV421")</li>
+            <li>Show the gating hierarchy in supplementary materials</li>
+            <li>Include the number of events displayed and the parent gate</li>
+            <li>Use consistent axis scaling across comparison panels</li>
+            <li>Export plots as high-resolution (300+ DPI) vector graphics when possible</li>
+        </ul>
+        <div class="key-point"><strong>Data Sharing:</strong> ISAC encourages depositing raw FCS files in public repositories like <strong>FlowRepository</strong> (flowrepository.org) and <strong>ImmPort</strong> (immport.org). Include the FlowRepository ID in your publication for reproducibility.</div>
+    </div>
+
+</div>
+
+<footer>
+    <p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p>
+    <p style="margin-top: 8px;">Flow Cytometry Hub &mdash; A comprehensive educational resource for flow cytometry.</p>
+</footer>
+
+</body>
+</html>

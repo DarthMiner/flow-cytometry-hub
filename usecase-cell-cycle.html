@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cell Cycle Analysis | Flow Cytometry Hub</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --primary-dark: #0e2f44;
+            --accent: #27ae60;
+            --accent-light: #2ecc71;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --bg: #f4f6f9;
+            --bg-card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .nav-links { display: flex; list-style: none; gap: 0; }
+        .nav-links a { color: #ccd6dd; text-decoration: none; padding: 16px 18px; display: block; font-size: 0.9rem; font-weight: 500; white-space: nowrap; transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -3px; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 60px 20px 40px; text-align: center; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
+        .content-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; margin-bottom: 30px; border-left: 4px solid var(--primary-light); }
+        .content-section.accent-green { border-left-color: var(--accent); }
+        .content-section.accent-orange { border-left-color: var(--warning); }
+        .content-section.accent-red { border-left-color: var(--danger); }
+        .content-section.accent-purple { border-left-color: #8e44ad; }
+        .content-section.accent-teal { border-left-color: #16a085; }
+        .content-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .content-section h3 { font-size: 1.15rem; color: var(--primary); margin: 20px 0 10px; }
+        .content-section p { margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
+        .content-section ul, .content-section ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; }
+        .content-section li { margin-bottom: 6px; }
+        .tip { background: #eaf7ee; border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .caution { background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .key-point { background: #eaf2f8; border-left: 3px solid var(--primary-light); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .toc { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 36px; margin-bottom: 30px; }
+        .toc h3 { color: var(--primary); margin-bottom: 14px; font-size: 1.1rem; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--primary-light); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
+        .toc a:hover { color: var(--primary); text-decoration: underline; }
+        .diagram-container { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 30px; margin: 20px 0; text-align: center; }
+        .diagram-container .caption { font-size: 0.85rem; color: var(--text-light); margin-top: 14px; font-style: italic; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .comparison-card { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+        .comparison-card h4 { color: var(--primary); margin-bottom: 8px; }
+        .comparison-card p { font-size: 0.88rem; color: var(--text-light); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 16px 0; }
+        .data-table thead { background: var(--primary-dark); color: #fff; }
+        .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: #f0f4f8; }
+        .histogram-bar { display: inline-block; vertical-align: bottom; margin: 0 1px; background: var(--primary-light); border-radius: 2px 2px 0 0; }
+        .histogram-wrapper { display: flex; align-items: flex-end; justify-content: center; height: 180px; gap: 1px; padding: 0 10px; border-bottom: 2px solid var(--text); border-left: 2px solid var(--text); position: relative; }
+        .histogram-label { position: absolute; font-size: 0.75rem; color: var(--text); font-weight: 600; }
+        .axis-label { font-size: 0.8rem; color: var(--text-light); margin-top: 6px; }
+        footer { background: var(--primary-dark); color: #aab7c4; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+        footer a { color: var(--accent-light); text-decoration: none; }
+        @media (max-width: 768px) {
+            .content-section { padding: 24px 20px; }
+            .hero h1 { font-size: 1.8rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="top-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">&#127981; Flow Cytometry <span>Hub</span></a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#learning">Learning</a></li>
+            <li><a href="index.html#usecases" class="active">Use Cases</a></li>
+            <li><a href="index.html#references">References</a></li>
+        </ul>
+        <a href="index.html#usecases" class="back-link">&larr; All Use Cases</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+    <h1>&#128300; Cell Cycle Analysis</h1>
+    <p>Measuring DNA content to determine cell cycle phase distribution using propidium iodide, DAPI, and other DNA-binding dyes.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rsaquo; <a href="index.html#usecases">Use Cases</a> &rsaquo; Cell Cycle Analysis</div>
+</header>
+
+<!-- Main Content -->
+<main class="content">
+
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h3>&#128218; Table of Contents</h3>
+        <ol>
+            <li><a href="#introduction">Introduction to Cell Cycle Analysis</a></li>
+            <li><a href="#dyes">DNA-Binding Dyes</a></li>
+            <li><a href="#preparation">Sample Preparation Protocols</a></li>
+            <li><a href="#instrument">Instrument Setup &amp; Acquisition</a></li>
+            <li><a href="#histogram">The DNA Histogram</a></li>
+            <li><a href="#modeling">Cell Cycle Modeling &amp; Software</a></li>
+            <li><a href="#brdu-edu">BrdU &amp; EdU Incorporation Assays</a></li>
+            <li><a href="#ki67">Ki-67 and Other Proliferation Markers</a></li>
+            <li><a href="#applications">Applications &amp; Experimental Considerations</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ol>
+    </div>
+
+    <!-- Section 1: Introduction (no accent) -->
+    <section id="introduction" class="content-section">
+        <h2>1. Introduction to Cell Cycle Analysis</h2>
+        <p>The cell cycle is the ordered sequence of events by which a cell duplicates its genome and divides into two daughter cells. Flow cytometry enables rapid quantification of the proportion of cells in each phase by measuring DNA content on a per-cell basis.</p>
+        <h3>Phases of the Cell Cycle</h3>
+        <ul>
+            <li><strong>G0 (Quiescent):</strong> Cells have exited the cycle and are in a resting state. DNA content is 2N (diploid).</li>
+            <li><strong>G1 (Gap 1):</strong> Active cell growth and preparation for DNA synthesis. DNA content remains 2N.</li>
+            <li><strong>S (Synthesis):</strong> Active DNA replication. DNA content increases progressively from 2N toward 4N.</li>
+            <li><strong>G2 (Gap 2):</strong> Post-replication preparation for mitosis. DNA content is 4N (tetraploid).</li>
+            <li><strong>M (Mitosis):</strong> Active cell division. DNA content is 4N until cytokinesis produces two 2N daughters.</li>
+        </ul>
+        <div class="key-point">
+            <strong>&#128161; Key Point:</strong> Standard DNA content analysis alone cannot distinguish G0 from G1 (both 2N) or G2 from M (both 4N). Additional markers such as Ki-67 or phospho-Histone H3 are needed to resolve these sub-populations.
+        </div>
+        <p>Because dye binding is stoichiometric&mdash;the amount of fluorescence is directly proportional to the amount of DNA&mdash;cells in G2/M emit approximately twice the fluorescence of cells in G0/G1, and S-phase cells produce intermediate values.</p>
+    </section>
+
+    <!-- Section 2: DNA-Binding Dyes (green) -->
+    <section id="dyes" class="content-section accent-green">
+        <h2>2. DNA-Binding Dyes</h2>
+        <p>The choice of DNA-binding dye depends on instrument configuration, whether live or fixed cells are needed, and whether multicolor co-staining is planned. Below is a comparison of the most commonly used dyes.</p>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Dye</th>
+                    <th>Binding Mode</th>
+                    <th>Ex (nm)</th>
+                    <th>Em (nm)</th>
+                    <th>Fixation Req.</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Propidium Iodide (PI)</td>
+                    <td>Intercalation</td>
+                    <td>535</td>
+                    <td>617</td>
+                    <td>Yes</td>
+                    <td>Most common; requires RNase treatment</td>
+                </tr>
+                <tr>
+                    <td>DAPI</td>
+                    <td>Minor groove (AT)</td>
+                    <td>360</td>
+                    <td>460</td>
+                    <td>Yes/No</td>
+                    <td>UV laser required; AT-preference may bias results</td>
+                </tr>
+                <tr>
+                    <td>Hoechst 33342</td>
+                    <td>Minor groove (AT)</td>
+                    <td>350</td>
+                    <td>461</td>
+                    <td>No</td>
+                    <td>Cell-permeable; suitable for live cells and sorting</td>
+                </tr>
+                <tr>
+                    <td>DRAQ5</td>
+                    <td>Intercalation</td>
+                    <td>646</td>
+                    <td>681</td>
+                    <td>No</td>
+                    <td>Far-red; cell-permeable; leaves other channels free</td>
+                </tr>
+                <tr>
+                    <td>7-AAD</td>
+                    <td>Intercalation (GC)</td>
+                    <td>546</td>
+                    <td>647</td>
+                    <td>Yes</td>
+                    <td>Excluded by live cells; used as viability marker too</td>
+                </tr>
+                <tr>
+                    <td>SYTOX Green</td>
+                    <td>Intercalation</td>
+                    <td>504</td>
+                    <td>523</td>
+                    <td>Yes</td>
+                    <td>Bright green emission; impermeant to live cells</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="caution">
+            <strong>&#9888;&#65039; Caution:</strong> Propidium iodide intercalates into double-stranded nucleic acids indiscriminately&mdash;it binds RNA as well as DNA. RNase A treatment (typically 100&ndash;200 &micro;g/mL) is essential for accurate DNA content measurement when using PI.
+        </div>
+    </section>
+
+    <!-- Section 3: Sample Preparation (orange) -->
+    <section id="preparation" class="content-section accent-orange">
+        <h2>3. Sample Preparation Protocols</h2>
+        <p>Proper fixation and staining are critical for obtaining sharp, well-resolved DNA histograms. The most widely used method involves cold ethanol fixation followed by PI/RNase staining.</p>
+        <h3>Ethanol Fixation Protocol</h3>
+        <ol>
+            <li>Harvest cells and wash once in cold PBS. Pellet at 300 &times; g for 5 minutes.</li>
+            <li>Resuspend the pellet in 0.5 mL cold PBS by gentle pipetting.</li>
+            <li>Add 4.5 mL ice-cold 70% ethanol <strong>dropwise</strong> while vortexing gently to prevent clumping.</li>
+            <li>Fix for at least 30 minutes at &minus;20&deg;C. Cells can be stored for weeks at this stage.</li>
+            <li>Pellet fixed cells at 400 &times; g for 5 minutes and remove ethanol carefully.</li>
+            <li>Wash once in PBS to remove residual ethanol.</li>
+        </ol>
+        <div class="tip">
+            <strong>&#9989; Tip:</strong> Adding cells dropwise to ethanol (rather than pouring ethanol over the pellet) dramatically reduces cell clumping and improves histogram quality. Vortex continuously at a low speed during addition.
+        </div>
+        <h3>PI/RNase Staining</h3>
+        <ol>
+            <li>Resuspend the washed pellet in 0.5 mL PI staining solution: 50 &micro;g/mL PI + 100 &micro;g/mL RNase A in PBS.</li>
+            <li>Incubate at 37&deg;C for 30 minutes in the dark, or at room temperature for 15&ndash;20 minutes.</li>
+            <li>Analyze within 2&ndash;3 hours. Filter through a 40 &micro;m mesh immediately before acquisition to remove aggregates.</li>
+        </ol>
+        <p>For non-PI dyes such as DAPI, fixation with paraformaldehyde (1&ndash;4%) may be preferred because ethanol can extract some proteins needed for antibody co-staining.</p>
+    </section>
+
+    <!-- Section 4: Instrument Setup (red) -->
+    <section id="instrument" class="content-section accent-red">
+        <h2>4. Instrument Setup &amp; Acquisition</h2>
+        <p>Acquiring high-quality cell cycle data requires specific instrument settings that differ from typical immunophenotyping experiments.</p>
+        <h3>Critical Acquisition Parameters</h3>
+        <ul>
+            <li><strong>Linear Scale:</strong> DNA content must be displayed on a <em>linear</em> scale (not logarithmic) to properly visualize the 2:1 ratio between G2/M and G0/G1 peaks.</li>
+            <li><strong>Low Flow Rate:</strong> Use the slowest flow rate available (typically &#8804;200 events/second) to minimize the coefficient of variation (CV) of the G0/G1 peak.</li>
+            <li><strong>Voltage Optimization:</strong> Adjust the PMT voltage so the G0/G1 peak is positioned at approximately channel 200 on a 1024-channel linear scale, leaving room for the G2/M peak near channel 400.</li>
+            <li><strong>Event Count:</strong> Collect a minimum of 10,000&ndash;20,000 singlet events for reliable modeling. For rare sub-populations or sub-G1 analysis, collect 30,000&ndash;50,000 events.</li>
+        </ul>
+        <div class="key-point">
+            <strong>&#128161; Key Point:</strong> Always display DNA content on a <strong>linear</strong> scale. Logarithmic amplification compresses the G0/G1 and G2/M peaks and makes it impossible to accurately gate S-phase or perform mathematical modeling.
+        </div>
+        <h3>Doublet Discrimination</h3>
+        <p>Two G0/G1 cells passing through the laser together produce a fluorescence pulse with the same <em>area</em> as a single G2/M cell but a wider <em>width</em>. To exclude these doublets:</p>
+        <ul>
+            <li>Create a dot plot of pulse <strong>Area</strong> (y-axis) vs. pulse <strong>Width</strong> (x-axis) for the DNA parameter.</li>
+            <li>Gate on the singlet population, which forms a tight diagonal cluster. Doublets fall above and to the right.</li>
+            <li>An alternative approach uses <strong>Area vs. Height</strong>, where singlets appear along the diagonal.</li>
+        </ul>
+        <p>Doublet discrimination is essential&mdash;without it, cell doublets artificially inflate the apparent G2/M fraction.</p>
+    </section>
+
+    <!-- Section 5: The DNA Histogram (teal) -->
+    <section id="histogram" class="content-section accent-teal">
+        <h2>5. The DNA Histogram</h2>
+        <p>The DNA content histogram is the primary readout of a cell cycle experiment. It plots fluorescence intensity (proportional to DNA content) on the x-axis against cell count on the y-axis.</p>
+        <div class="diagram-container">
+            <div style="display:flex;align-items:flex-end;justify-content:center;height:200px;gap:2px;padding:0 20px 30px 40px;border-bottom:2px solid #2c3e50;border-left:2px solid #2c3e50;position:relative;">
+                <!-- Y-axis label -->
+                <div style="position:absolute;left:-35px;top:50%;transform:rotate(-90deg) translateX(50%);font-size:0.8rem;color:#7f8c8d;white-space:nowrap;">Cell Count</div>
+                <!-- Sub-G1 region -->
+                <div style="width:8px;height:25px;background:#e74c3c;border-radius:2px 2px 0 0;opacity:0.7;" title="Sub-G1"></div>
+                <div style="width:8px;height:18px;background:#e74c3c;border-radius:2px 2px 0 0;opacity:0.7;"></div>
+                <div style="width:8px;height:10px;background:#e74c3c;border-radius:2px 2px 0 0;opacity:0.7;"></div>
+                <div style="width:8px;height:5px;background:#e74c3c;border-radius:2px 2px 0 0;opacity:0.5;"></div>
+                <!-- Gap -->
+                <div style="width:6px;"></div>
+                <!-- G0/G1 peak rising -->
+                <div style="width:8px;height:20px;background:#2980b9;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:45px;background:#2980b9;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:90px;background:#2980b9;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:150px;background:#2980b9;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:180px;background:#2980b9;border-radius:2px 2px 0 0;"></div>
+                <!-- G0/G1 peak -->
+                <div style="width:8px;height:195px;background:#1a5276;border-radius:2px 2px 0 0;"></div>
+                <!-- G0/G1 falling -->
+                <div style="width:8px;height:175px;background:#2980b9;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:140px;background:#2980b9;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:80px;background:#2980b9;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:40px;background:#2980b9;border-radius:2px 2px 0 0;"></div>
+                <!-- S-phase plateau -->
+                <div style="width:8px;height:30px;background:#27ae60;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:28px;background:#27ae60;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:32px;background:#27ae60;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:35px;background:#27ae60;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:33px;background:#27ae60;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:30px;background:#27ae60;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:35px;background:#27ae60;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:38px;background:#27ae60;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:42px;background:#27ae60;border-radius:2px 2px 0 0;"></div>
+                <!-- G2/M peak rising -->
+                <div style="width:8px;height:50px;background:#e67e22;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:70px;background:#e67e22;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:95px;background:#e67e22;border-radius:2px 2px 0 0;"></div>
+                <!-- G2/M peak top -->
+                <div style="width:8px;height:105px;background:#c0392b;border-radius:2px 2px 0 0;"></div>
+                <!-- G2/M falling -->
+                <div style="width:8px;height:90px;background:#e67e22;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:60px;background:#e67e22;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:30px;background:#e67e22;border-radius:2px 2px 0 0;"></div>
+                <div style="width:8px;height:10px;background:#e67e22;border-radius:2px 2px 0 0;"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;padding:6px 60px 0 60px;">
+                <span style="font-size:0.75rem;color:#e74c3c;font-weight:600;">Sub-G1</span>
+                <span style="font-size:0.75rem;color:#1a5276;font-weight:600;">G0/G1 (2N)</span>
+                <span style="font-size:0.75rem;color:#27ae60;font-weight:600;">S Phase</span>
+                <span style="font-size:0.75rem;color:#e67e22;font-weight:600;">G2/M (4N)</span>
+            </div>
+            <div class="axis-label">DNA Content (Fluorescence Intensity) &rarr;</div>
+            <div class="caption">Figure 1: Idealized DNA content histogram showing the major cell cycle phases. The G0/G1 peak (2N) is the tallest, S-phase forms a broad plateau, and the G2/M peak (4N) appears at exactly twice the channel position of G0/G1.</div>
+        </div>
+        <h3>Histogram Quality: Coefficient of Variation</h3>
+        <p>The CV (coefficient of variation) of the G0/G1 peak is the gold standard for data quality. A CV below 3% is excellent; 3&ndash;5% is acceptable for most experiments. CVs above 8% indicate poor sample preparation or instrument issues and will compromise modeling accuracy.</p>
+        <h3>The Sub-G1 Population</h3>
+        <p>Cells with fractional (less than 2N) DNA content appear to the left of the G0/G1 peak. This sub-G1 population typically represents apoptotic cells whose DNA has undergone fragmentation. While useful as a rough apoptosis indicator, sub-G1 analysis has limitations: it can include debris, and late-stage apoptotic cells may be lost entirely during processing.</p>
+    </section>
+
+    <!-- Section 6: Cell Cycle Modeling (purple) -->
+    <section id="modeling" class="content-section accent-purple">
+        <h2>6. Cell Cycle Modeling &amp; Software</h2>
+        <p>Because the S-phase fraction overlaps with the tails of the G0/G1 and G2/M distributions, mathematical modeling is required to deconvolute the histogram and accurately estimate phase percentages.</p>
+        <h3>Common Mathematical Models</h3>
+        <ul>
+            <li><strong>Dean-Jett-Fox:</strong> Models G0/G1 and G2/M as Gaussian distributions and S-phase as a second-order polynomial (broadened trapezoid). Widely used and effective for most data sets.</li>
+            <li><strong>Watson Pragmatic:</strong> Uses a pragmatic approach that fits Gaussian peaks and a polynomial S-phase with fewer constraints. Useful when peaks are asymmetric.</li>
+            <li><strong>Multicycle (Phoenix Flow):</strong> An iterative approach that can handle samples with multiple ploidy populations and debris background.</li>
+        </ul>
+        <h3>Software Options</h3>
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h4>ModFit LT</h4>
+                <p>Dedicated cell cycle modeling software with automated and manual fitting, debris modeling, and aggregate subtraction. Considered the gold standard.</p>
+            </div>
+            <div class="comparison-card">
+                <h4>FlowJo (Cell Cycle Module)</h4>
+                <p>Built-in cell cycle platform supporting Watson and Dean-Jett-Fox models. Convenient for labs already using FlowJo for general analysis.</p>
+            </div>
+            <div class="comparison-card">
+                <h4>FCS Express</h4>
+                <p>Provides multicycle analysis with visual model fitting and batch processing capabilities for high-throughput experiments.</p>
+            </div>
+        </div>
+        <div class="caution">
+            <strong>&#9888;&#65039; Caution:</strong> Never rely on automated model fitting without visual inspection. Always verify that the fitted curves match the raw histogram data. Poor fits&mdash;especially in the S-phase region&mdash;can produce wildly inaccurate phase percentages.
+        </div>
+        <p>When reporting results, always include the model used, the CV of the G0/G1 peak, the goodness-of-fit statistic (such as RCS or chi-squared), and the percentage of events excluded as debris or aggregates.</p>
+    </section>
+
+    <!-- Section 7: BrdU & EdU (no accent) -->
+    <section id="brdu-edu" class="content-section">
+        <h2>7. BrdU &amp; EdU Incorporation Assays</h2>
+        <p>While DNA content analysis identifies cells in S-phase by their intermediate fluorescence, thymidine analog incorporation provides a direct, positive identification of cells actively synthesizing DNA.</p>
+        <h3>BrdU/PI Bivariate Analysis</h3>
+        <p>Bromodeoxyuridine (BrdU) is a synthetic thymidine analog that is incorporated into newly synthesized DNA during S-phase. After pulsing cells with BrdU, the incorporated analog is detected with an anti-BrdU antibody (typically FITC-conjugated), and total DNA is counterstained with PI.</p>
+        <ul>
+            <li>The bivariate BrdU vs. PI plot resolves all cell cycle phases: G0/G1 (2N, BrdU-negative), S-phase (intermediate DNA, BrdU-positive), and G2/M (4N, BrdU-negative).</li>
+            <li>Pulse-chase experiments allow tracking of cohort progression through the cycle over time.</li>
+            <li>Requires harsh DNA denaturation (acid or heat) for antibody access, which can damage epitopes for co-staining.</li>
+        </ul>
+        <h3>EdU Click Chemistry</h3>
+        <p>5-ethynyl-2&prime;-deoxyuridine (EdU) is a newer thymidine analog detected via a copper-catalyzed click chemistry reaction with a small fluorescent azide molecule rather than an antibody.</p>
+        <ul>
+            <li><strong>No denaturation required:</strong> The small azide molecule accesses EdU without DNA unwinding, preserving cellular structure and other epitopes.</li>
+            <li><strong>Faster protocol:</strong> The click reaction takes 30 minutes vs. several hours for BrdU staining.</li>
+            <li><strong>Better multiplexing:</strong> Compatible with a wider range of surface and intracellular antibodies.</li>
+            <li><strong>Sharper signals:</strong> Small probe size enables more uniform access and brighter staining.</li>
+        </ul>
+        <div class="tip">
+            <strong>&#9989; Tip:</strong> EdU has largely replaced BrdU in modern protocols due to its simpler workflow and superior compatibility with multiparameter panels. Consider EdU as the default choice for new experiments.
+        </div>
+    </section>
+
+    <!-- Section 8: Ki-67 and Proliferation Markers (green) -->
+    <section id="ki67" class="content-section accent-green">
+        <h2>8. Ki-67 and Other Proliferation Markers</h2>
+        <p>Nuclear proliferation antigens complement DNA content analysis by providing phase-specific information that stoichiometric DNA dyes cannot offer alone.</p>
+        <h3>Ki-67: Distinguishing G0 from G1</h3>
+        <p>Ki-67 is a nuclear protein expressed in all active phases of the cell cycle (G1, S, G2, and M) but absent in quiescent (G0) cells. A bivariate plot of Ki-67 vs. DNA content cleanly resolves G0 (Ki-67&#8315;, 2N) from G1 (Ki-67&#8314;, 2N), which is impossible with DNA staining alone.</p>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Marker</th>
+                    <th>Phase Specificity</th>
+                    <th>Key Application</th>
+                    <th>Detection Method</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ki-67</td>
+                    <td>All active phases (G1/S/G2/M); absent in G0</td>
+                    <td>Distinguishing quiescent from cycling cells</td>
+                    <td>Intracellular antibody staining</td>
+                </tr>
+                <tr>
+                    <td>PCNA</td>
+                    <td>Peaks in S-phase; low in G1/G2</td>
+                    <td>Identifying S-phase without thymidine analogs</td>
+                    <td>Intracellular antibody staining</td>
+                </tr>
+                <tr>
+                    <td>Phospho-Histone H3 (Ser10)</td>
+                    <td>M-phase specific</td>
+                    <td>Distinguishing G2 from mitosis</td>
+                    <td>Intracellular antibody (phospho-specific)</td>
+                </tr>
+                <tr>
+                    <td>Cyclin B1</td>
+                    <td>Accumulates in G2, peaks in M</td>
+                    <td>Resolving G2/M transition</td>
+                    <td>Intracellular antibody staining</td>
+                </tr>
+                <tr>
+                    <td>Cyclin E</td>
+                    <td>Late G1 / G1-S transition</td>
+                    <td>Identifying cells committed to S-phase entry</td>
+                    <td>Intracellular antibody staining</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Combining Ki-67 with DNA content is particularly valuable in immunology, where it identifies actively proliferating lymphocyte subsets within a mixed population, and in oncology, where the Ki-67 index serves as a prognostic biomarker.</p>
+    </section>
+
+    <!-- Section 9: Applications (orange) -->
+    <section id="applications" class="content-section accent-orange">
+        <h2>9. Applications &amp; Experimental Considerations</h2>
+        <p>Cell cycle analysis is foundational in cancer biology, pharmacology, and cell biology research. Understanding how experimental agents affect cell cycle distribution provides mechanistic insight into their mode of action.</p>
+        <h3>Drug-Induced Cell Cycle Arrest</h3>
+        <ul>
+            <li><strong>G1 arrest:</strong> Characteristic of CDK4/6 inhibitors (e.g., palbociclib, ribociclib). The G0/G1 peak increases while S and G2/M fractions decrease.</li>
+            <li><strong>S-phase arrest:</strong> Caused by DNA synthesis inhibitors such as hydroxyurea, aphidicolin, or nucleoside analogs (e.g., gemcitabine). S-phase broadens and accumulates.</li>
+            <li><strong>G2/M arrest:</strong> Induced by microtubule-targeting agents (nocodazole, paclitaxel, vincristine) or topoisomerase II inhibitors (etoposide). The 4N peak becomes dominant.</li>
+        </ul>
+        <h3>Combining with Surface Markers</h3>
+        <p>For heterogeneous samples (e.g., bone marrow, PBMCs, or tumors), surface antibody staining before fixation allows cell cycle analysis within defined subpopulations. For example, gating on CD34&#8314; cells to assess progenitor proliferation, or on specific T-cell subsets to measure activation-induced cycling.</p>
+        <div class="tip">
+            <strong>&#9989; Tip:</strong> Always include a time-course when evaluating drug effects on the cell cycle. A single time point may miss transient arrest followed by apoptosis, or capture cells that have not yet responded. Typical time points are 12, 24, 48, and 72 hours post-treatment.
+        </div>
+        <h3>Ploidy Analysis</h3>
+        <p>In clinical and research settings, DNA content analysis detects aneuploidy (abnormal chromosome number). Aneuploid tumors display a DNA index different from 1.0, where the DNA index is the ratio of the G0/G1 peak channel of the tumor to that of a normal diploid reference. Aneuploid populations appear as extra peaks on the histogram.</p>
+    </section>
+
+    <!-- Section 10: Troubleshooting (red) -->
+    <section id="troubleshooting" class="content-section accent-red">
+        <h2>10. Troubleshooting</h2>
+        <p>Below are common problems encountered in cell cycle analysis, their likely causes, and recommended solutions.</p>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Problem</th>
+                    <th>Likely Cause</th>
+                    <th>Solution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>High CV (&gt;8%) on G0/G1 peak</td>
+                    <td>Cell clumping during fixation; excessive flow rate</td>
+                    <td>Add cells dropwise to ethanol; reduce flow rate; filter through 40 &micro;m mesh</td>
+                </tr>
+                <tr>
+                    <td>G2/M peak at &gt;2&times; the G0/G1 channel</td>
+                    <td>PI binding to residual RNA</td>
+                    <td>Increase RNase A concentration or incubation time; verify RNase activity</td>
+                </tr>
+                <tr>
+                    <td>G2/M peak at &lt;2&times; the G0/G1 channel</td>
+                    <td>Dye saturation at high DNA concentrations</td>
+                    <td>Increase PI concentration; reduce cell number per staining volume</td>
+                </tr>
+                <tr>
+                    <td>Large debris shoulder left of G0/G1</td>
+                    <td>Apoptotic cells, mechanical damage, or over-processing</td>
+                    <td>Handle cells gently; optimize fixation; gate out debris using FSC/SSC</td>
+                </tr>
+                <tr>
+                    <td>Inflated G2/M percentage</td>
+                    <td>Doublets not excluded</td>
+                    <td>Apply pulse width/area or area/height doublet discrimination gating</td>
+                </tr>
+                <tr>
+                    <td>Dim or absent staining</td>
+                    <td>PI degraded; insufficient permeabilization</td>
+                    <td>Prepare fresh PI solution; verify ethanol fixation time; check dye concentration</td>
+                </tr>
+                <tr>
+                    <td>Two G0/G1 peaks in a single sample</td>
+                    <td>Aneuploid subpopulation or mixed cell populations</td>
+                    <td>Confirm with reference diploid cells; use surface markers to gate subpopulations</td>
+                </tr>
+                <tr>
+                    <td>S-phase fraction appears negative after modeling</td>
+                    <td>Poor model fit; overlapping peaks due to high CV</td>
+                    <td>Improve sample quality; try alternative model; manually constrain fit parameters</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="tip">
+            <strong>&#9989; Tip:</strong> The G2/G1 ratio (channel position of G2/M peak divided by G0/G1 peak) should be very close to 2.00. A ratio between 1.95 and 2.05 indicates proper stoichiometric staining. Deviations suggest issues with dye concentration, RNA contamination, or instrument linearity.
+        </div>
+        <p>When troubleshooting, always start with fresh reagents and a known positive control cell line (such as exponentially growing Jurkat or HeLa cells) before optimizing your experimental samples.</p>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer>
+    <p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p>
+    <p style="margin-top: 10px;">&copy; 2024 Flow Cytometry Hub &mdash; Educational Resource</p>
+</footer>
+
+</body>
+</html>

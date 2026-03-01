@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Immunophenotyping | Flow Cytometry Hub</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --primary-dark: #0e2f44;
+            --accent: #27ae60;
+            --accent-light: #2ecc71;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --bg: #f4f6f9;
+            --bg-card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .nav-links { display: flex; list-style: none; gap: 0; }
+        .nav-links a { color: #ccd6dd; text-decoration: none; padding: 16px 18px; display: block; font-size: 0.9rem; font-weight: 500; white-space: nowrap; transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -3px; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 60px 20px 40px; text-align: center; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
+        .content-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; margin-bottom: 30px; border-left: 4px solid var(--primary-light); }
+        .content-section.accent-green { border-left-color: var(--accent); }
+        .content-section.accent-orange { border-left-color: var(--warning); }
+        .content-section.accent-red { border-left-color: var(--danger); }
+        .content-section.accent-purple { border-left-color: #8e44ad; }
+        .content-section.accent-teal { border-left-color: #16a085; }
+        .content-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .content-section h3 { font-size: 1.15rem; color: var(--primary); margin: 20px 0 10px; }
+        .content-section p { margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
+        .content-section ul, .content-section ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; }
+        .content-section li { margin-bottom: 6px; }
+        .tip { background: #eaf7ee; border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .caution { background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .key-point { background: #eaf2f8; border-left: 3px solid var(--primary-light); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .toc { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 36px; margin-bottom: 30px; }
+        .toc h3 { color: var(--primary); margin-bottom: 14px; font-size: 1.1rem; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--primary-light); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
+        .toc a:hover { color: var(--primary); text-decoration: underline; }
+        .diagram-container { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 30px; margin: 20px 0; text-align: center; }
+        .diagram-container .caption { font-size: 0.85rem; color: var(--text-light); margin-top: 14px; font-style: italic; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .comparison-card { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+        .comparison-card h4 { color: var(--primary); margin-bottom: 8px; }
+        .comparison-card p { font-size: 0.88rem; color: var(--text-light); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 16px 0; }
+        .data-table thead { background: var(--primary-dark); color: #fff; }
+        .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: #f0f4f8; }
+        footer { background: var(--primary-dark); color: #aab7c4; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+        footer a { color: var(--accent-light); text-decoration: none; }
+        @media (max-width: 768px) {
+            .content-section { padding: 24px 20px; }
+            .hero h1 { font-size: 1.8rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+<nav class="top-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">Flow Cytometry <span>Hub</span></a>
+        <a href="index.html" class="back-link">&larr; Back to Main</a>
+    </div>
+</nav>
+<header class="hero">
+    <h1>&#127973; Immunophenotyping</h1>
+    <p>Comprehensive guide to identifying and quantifying immune cell populations using surface and intracellular markers in flow cytometry.</p>
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> &rarr; <a href="index.html#usecases">Use Cases</a> &rarr; Immunophenotyping
+    </div>
+</header>
+
+<main class="content">
+
+    <!-- Table of Contents -->
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#introduction">Introduction to Immunophenotyping</a></li>
+            <li><a href="#cell-populations">Major Immune Cell Populations</a></li>
+            <li><a href="#backbone-panel">The Backbone Panel Concept</a></li>
+            <li><a href="#cd4-hiv">CD4 Monitoring in HIV/AIDS</a></li>
+            <li><a href="#leukemia-lymphoma">Leukemia &amp; Lymphoma Immunophenotyping</a></li>
+            <li><a href="#panel-design">Multi-Color Panel Design</a></li>
+            <li><a href="#sample-prep">Sample Preparation</a></li>
+            <li><a href="#controls">Controls for Immunophenotyping</a></li>
+            <li><a href="#gating-analysis">Gating Strategy &amp; Data Analysis</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ol>
+    </div>
+
+    <!-- Section 1: Introduction to Immunophenotyping (no accent) -->
+    <section id="introduction" class="content-section">
+        <h2>1. Introduction to Immunophenotyping</h2>
+        <p>Immunophenotyping is the process of using fluorochrome-conjugated antibodies to identify and quantify cells based on the antigens expressed on their surface or within their cytoplasm and nucleus. In the context of flow cytometry, immunophenotyping enables the rapid, multiparametric analysis of individual cells in suspension, providing both the identity and the relative or absolute count of distinct cell populations within a heterogeneous sample.</p>
+
+        <h3>What Does Immunophenotyping Measure?</h3>
+        <p>Every immune cell expresses a characteristic set of proteins&mdash;receptors, adhesion molecules, enzymes, and structural components&mdash;that define its lineage, maturation stage, and functional state. Immunophenotyping leverages monoclonal antibodies that bind these proteins with high specificity. When conjugated to fluorochromes and analyzed on a flow cytometer, these antibodies reveal which antigens are present, at what density, and in what combination on each cell.</p>
+
+        <h3>The CD Nomenclature System</h3>
+        <p>The Cluster of Differentiation (CD) system provides a standardized nomenclature for cell surface molecules. Originating from the First International Workshop on Human Leukocyte Differentiation Antigens in 1982, the CD system has grown to catalog over 400 recognized molecules (as of CD371). Each CD number designates a specific surface molecule identified by a cluster of monoclonal antibodies that share reactivity with the same antigen.</p>
+
+        <div class="key-point">
+            <strong>Key Point &mdash; The CD System:</strong> CD markers are not exclusive to a single cell type. For example, CD4 is expressed on helper T cells but also on monocytes (at lower density). Immunophenotyping relies on <em>combinations</em> of markers, not individual antigens, to definitively identify cell populations. A mature helper T cell, for instance, is defined as CD45<sup>+</sup> CD3<sup>+</sup> CD4<sup>+</sup> CD8<sup>&minus;</sup>.
+        </div>
+
+        <h3>Brief History</h3>
+        <ul>
+            <li><strong>1975:</strong> K&ouml;hler and Milstein develop hybridoma technology, enabling mass production of monoclonal antibodies.</li>
+            <li><strong>1982:</strong> First International Workshop on Human Leukocyte Differentiation Antigens establishes the CD nomenclature.</li>
+            <li><strong>1980s&ndash;1990s:</strong> Clinical immunophenotyping becomes standard practice for HIV monitoring and leukemia/lymphoma diagnosis.</li>
+            <li><strong>2000s&ndash;present:</strong> Advances in fluorochrome chemistry and instrument capabilities enable panels of 20+ colors, allowing deep immunophenotyping of rare and complex populations.</li>
+        </ul>
+
+        <h3>Clinical and Research Applications</h3>
+        <p>Immunophenotyping is indispensable in a wide range of settings:</p>
+        <ul>
+            <li><strong>Clinical Diagnostics:</strong> Classification of leukemias and lymphomas, CD4 monitoring in HIV, primary immunodeficiency evaluation, and paroxysmal nocturnal hemoglobinuria (PNH) screening.</li>
+            <li><strong>Transplant Medicine:</strong> Monitoring immune reconstitution after hematopoietic stem cell transplant, detecting minimal residual disease (MRD).</li>
+            <li><strong>Immunology Research:</strong> Characterizing T cell subsets (Th1, Th2, Th17, Treg), studying B cell maturation, and analyzing innate immune populations.</li>
+            <li><strong>Drug Development:</strong> Pharmacodynamic biomarkers, immune checkpoint receptor expression, and CAR-T cell monitoring.</li>
+        </ul>
+    </section>
+
+    <!-- Section 2: Major Immune Cell Populations (accent-green) -->
+    <section id="cell-populations" class="content-section accent-green">
+        <h2>2. Major Immune Cell Populations</h2>
+        <p>Peripheral blood contains a diverse collection of immune cells, each identifiable by a characteristic combination of surface markers and light scatter properties. The table below summarizes the major leukocyte populations encountered in routine immunophenotyping.</p>
+
+        <h3>Leukocyte Lineage Overview</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Cell Type</th>
+                    <th>Key Surface Markers</th>
+                    <th>FSC/SSC Profile</th>
+                    <th>Function</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Helper T Cells</strong></td>
+                    <td>CD45<sup>+</sup> CD3<sup>+</sup> CD4<sup>+</sup></td>
+                    <td>Low FSC / Low SSC</td>
+                    <td>Coordinate adaptive immune responses; secrete cytokines to activate B cells, macrophages, and cytotoxic T cells</td>
+                </tr>
+                <tr>
+                    <td><strong>Cytotoxic T Cells</strong></td>
+                    <td>CD45<sup>+</sup> CD3<sup>+</sup> CD8<sup>+</sup></td>
+                    <td>Low FSC / Low SSC</td>
+                    <td>Kill virus-infected and tumor cells via perforin/granzyme and Fas/FasL pathways</td>
+                </tr>
+                <tr>
+                    <td><strong>B Cells</strong></td>
+                    <td>CD45<sup>+</sup> CD19<sup>+</sup> CD20<sup>+</sup></td>
+                    <td>Low FSC / Low SSC</td>
+                    <td>Produce antibodies; antigen presentation; immunological memory</td>
+                </tr>
+                <tr>
+                    <td><strong>NK Cells</strong></td>
+                    <td>CD45<sup>+</sup> CD3<sup>&minus;</sup> CD16<sup>+</sup> CD56<sup>+</sup></td>
+                    <td>Low&ndash;Mid FSC / Low SSC</td>
+                    <td>Innate cytotoxicity against tumor and virus-infected cells without prior sensitization</td>
+                </tr>
+                <tr>
+                    <td><strong>NKT Cells</strong></td>
+                    <td>CD45<sup>+</sup> CD3<sup>+</sup> CD16<sup>+</sup> CD56<sup>+</sup></td>
+                    <td>Low FSC / Low SSC</td>
+                    <td>Bridge innate and adaptive immunity; rapid cytokine production</td>
+                </tr>
+                <tr>
+                    <td><strong>Monocytes</strong></td>
+                    <td>CD45<sup>+</sup> CD14<sup>+</sup> CD33<sup>+</sup> HLA-DR<sup>+</sup></td>
+                    <td>High FSC / Mid SSC</td>
+                    <td>Phagocytosis; antigen presentation; differentiate into macrophages and dendritic cells</td>
+                </tr>
+                <tr>
+                    <td><strong>Neutrophils</strong></td>
+                    <td>CD45<sup>+</sup> CD16<sup>+</sup> CD66b<sup>+</sup></td>
+                    <td>Mid FSC / High SSC</td>
+                    <td>First responders to bacterial infection; phagocytosis, degranulation, and NET formation</td>
+                </tr>
+                <tr>
+                    <td><strong>Eosinophils</strong></td>
+                    <td>CD45<sup>+</sup> CD193<sup>+</sup> (CCR3) Siglec-8<sup>+</sup></td>
+                    <td>Mid FSC / Very High SSC</td>
+                    <td>Parasite defense; allergic inflammation; granule-mediated cytotoxicity</td>
+                </tr>
+                <tr>
+                    <td><strong>Basophils</strong></td>
+                    <td>CD45<sup>+</sup> CD123<sup>+</sup> CD203c<sup>+</sup> HLA-DR<sup>&minus;</sup></td>
+                    <td>Low FSC / Mid SSC</td>
+                    <td>Allergic responses; histamine and IL-4 release; rare population (&lt;1% of WBCs)</td>
+                </tr>
+                <tr>
+                    <td><strong>Plasmacytoid DCs</strong></td>
+                    <td>CD45<sup>+</sup> CD123<sup>+</sup> CD303<sup>+</sup> HLA-DR<sup>+</sup></td>
+                    <td>Low FSC / Low SSC</td>
+                    <td>Type I interferon (&alpha;/&beta;) production in response to viral nucleic acids</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>T Cell Subset Immunophenotyping</h3>
+        <p>Beyond the basic CD4/CD8 distinction, T cells can be further subdivided by differentiation state and functional capacity. The following markers are commonly used to define T cell maturation subsets:</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>T Cell Subset</th>
+                    <th>Phenotype</th>
+                    <th>Characteristics</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Na&iuml;ve (T<sub>N</sub>)</td>
+                    <td>CD45RA<sup>+</sup> CCR7<sup>+</sup> CD27<sup>+</sup> CD95<sup>&minus;</sup></td>
+                    <td>Antigen-inexperienced; high proliferative potential; home to secondary lymphoid organs</td>
+                </tr>
+                <tr>
+                    <td>Stem Cell Memory (T<sub>SCM</sub>)</td>
+                    <td>CD45RA<sup>+</sup> CCR7<sup>+</sup> CD27<sup>+</sup> CD95<sup>+</sup></td>
+                    <td>Self-renewing; superior reconstitution capacity; important in adoptive cell therapy</td>
+                </tr>
+                <tr>
+                    <td>Central Memory (T<sub>CM</sub>)</td>
+                    <td>CD45RA<sup>&minus;</sup> CCR7<sup>+</sup> CD27<sup>+</sup></td>
+                    <td>Home to lymph nodes; high proliferative capacity; produce IL-2 upon restimulation</td>
+                </tr>
+                <tr>
+                    <td>Effector Memory (T<sub>EM</sub>)</td>
+                    <td>CD45RA<sup>&minus;</sup> CCR7<sup>&minus;</sup> CD27<sup>&minus;</sup></td>
+                    <td>Circulate to peripheral tissues; rapid effector function; produce IFN-&gamma; and TNF-&alpha;</td>
+                </tr>
+                <tr>
+                    <td>Terminally Differentiated (T<sub>EMRA</sub>)</td>
+                    <td>CD45RA<sup>+</sup> CCR7<sup>&minus;</sup> CD27<sup>&minus;</sup></td>
+                    <td>Re-express CD45RA; high cytotoxic capacity; limited proliferation; senescence-associated</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <strong>Tip:</strong> When phenotyping T cell subsets, always include a viability dye. Dead cells bind antibodies non-specifically and can masquerade as rare memory populations, leading to significant overestimation.
+        </div>
+    </section>
+
+    <!-- Section 3: The Backbone Panel Concept (accent-orange) -->
+    <section id="backbone-panel" class="content-section accent-orange">
+        <h2>3. The Backbone Panel Concept</h2>
+        <p>A backbone panel is a standardized core set of markers used to identify major leukocyte lineages in every experiment. By keeping these markers constant across studies and timepoints, laboratories achieve consistent gating, reproducible results, and the ability to compare data longitudinally. Additional markers can be added to the backbone to address specific research or clinical questions.</p>
+
+        <h3>The TBNK Panel</h3>
+        <p>The most widely used backbone panel in clinical immunophenotyping is the TBNK panel, which identifies T cells, B cells, and NK cells in a single tube. The classic 6-color TBNK combination is:</p>
+        <ul>
+            <li><strong>CD3</strong> &mdash; Pan-T cell marker (identifies all mature T lymphocytes)</li>
+            <li><strong>CD4</strong> &mdash; Helper/inducer T cell subset</li>
+            <li><strong>CD8</strong> &mdash; Cytotoxic/suppressor T cell subset</li>
+            <li><strong>CD19</strong> &mdash; Pan-B cell marker</li>
+            <li><strong>CD16/CD56</strong> &mdash; NK cell markers (often combined in a single channel as a &ldquo;dump&rdquo; cocktail)</li>
+            <li><strong>CD45</strong> &mdash; Pan-leukocyte marker used for gating and to distinguish leukocytes from debris, platelets, and erythrocytes</li>
+        </ul>
+
+        <h3>Why CD45 Is Essential</h3>
+        <p>CD45 (leukocyte common antigen) is the cornerstone of the backbone panel. In the CD45 vs. SSC gating strategy, distinct leukocyte populations segregate into recognizable clusters:</p>
+        <ul>
+            <li><strong>Lymphocytes:</strong> CD45<sup>bright</sup> / SSC<sup>low</sup></li>
+            <li><strong>Monocytes:</strong> CD45<sup>bright</sup> / SSC<sup>intermediate</sup></li>
+            <li><strong>Granulocytes:</strong> CD45<sup>dim</sup> / SSC<sup>high</sup></li>
+            <li><strong>Blasts (if present):</strong> CD45<sup>dim</sup> / SSC<sup>low</sup></li>
+        </ul>
+
+        <div class="tip">
+            <strong>Tip:</strong> Always include CD45 and a viability dye in your backbone panel. CD45 enables a clean leukocyte gate that excludes debris, unlysed red cells, and platelet aggregates. The viability dye ensures dead cells&mdash;which bind antibodies non-specifically&mdash;are excluded before any downstream analysis. This combination is the foundation of reliable immunophenotyping data.
+        </div>
+
+        <h3>Extending the Backbone</h3>
+        <p>The backbone concept is modular. For example, a laboratory studying T regulatory cells would keep the TBNK core and add CD25, CD127, and FoxP3. A study of monocyte subsets might add CD14, CD16, and HLA-DR. The backbone stays the same, ensuring consistent lineage identification regardless of the specific research question.</p>
+
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h4>Clinical TBNK</h4>
+                <p>6 colors: CD3, CD4, CD8, CD19, CD16/56, CD45. Single tube, whole blood. Reports absolute counts and percentages.</p>
+            </div>
+            <div class="comparison-card">
+                <h4>Extended T Cell Panel</h4>
+                <p>10&ndash;14 colors: TBNK backbone + CD45RA, CCR7, CD27, CD28, CD95, CD127, CD25, PD-1. Deep T cell subset profiling.</p>
+            </div>
+            <div class="comparison-card">
+                <h4>Myeloid/DC Panel</h4>
+                <p>10&ndash;12 colors: CD45 backbone + CD14, CD16, HLA-DR, CD11c, CD123, CD303, CD1c, CD141. Monocyte and DC subsets.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: CD4 Monitoring in HIV/AIDS (accent-red) -->
+    <section id="cd4-hiv" class="content-section accent-red">
+        <h2>4. CD4 Monitoring in HIV/AIDS</h2>
+        <p>The CD4<sup>+</sup> T lymphocyte count is the single most important laboratory marker for assessing immune function in individuals living with HIV. HIV selectively infects and depletes CD4<sup>+</sup> T cells, and the rate of decline predicts progression to AIDS-defining illnesses and death. Flow cytometric CD4 counting is the gold standard method used worldwide.</p>
+
+        <h3>Clinical Significance</h3>
+        <p>CD4 counts guide critical clinical decisions: when to initiate antiretroviral therapy (ART), when to start prophylaxis against opportunistic infections (e.g., <em>Pneumocystis jirovecii</em> pneumonia at CD4 &lt;200 cells/&mu;L), and how to monitor immune reconstitution after ART initiation. While current WHO guidelines recommend treating all HIV-positive individuals regardless of CD4 count (&ldquo;treat all&rdquo; policy), CD4 monitoring remains essential for clinical management.</p>
+
+        <h3>Methods for Absolute CD4 Counting</h3>
+        <ul>
+            <li><strong>Dual-Platform Method:</strong> Flow cytometry determines the CD4 percentage of lymphocytes; a separate hematology analyzer provides the absolute lymphocyte count. The absolute CD4 count is calculated as: CD4% &times; Absolute Lymphocyte Count. This method compounds the error of two instruments.</li>
+            <li><strong>Single-Platform Method (Preferred):</strong> Uses volumetric counting or calibrated fluorescent beads (e.g., BD Trucount&trade;) within the same flow cytometry tube to directly determine the absolute CD4 count. This eliminates inter-instrument variability and is more accurate.</li>
+            <li><strong>Point-of-Care (POC) Devices:</strong> Dedicated CD4 counters (e.g., PIMA&trade;, CyFlow&trade;) designed for resource-limited settings. These devices use simplified protocols and provide results in minutes without requiring a full flow cytometer.</li>
+        </ul>
+
+        <h3>CD4 Count Interpretation</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>CD4 Count (cells/&mu;L)</th>
+                    <th>Immune Status</th>
+                    <th>Clinical Implications</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>&gt;500</td>
+                    <td>Normal / Mild Suppression</td>
+                    <td>Low risk of opportunistic infections; initiate ART per current guidelines; monitor every 6&ndash;12 months</td>
+                </tr>
+                <tr>
+                    <td>350&ndash;500</td>
+                    <td>Moderate Suppression</td>
+                    <td>Increased risk of bacterial infections; ART strongly recommended; monitor every 3&ndash;6 months</td>
+                </tr>
+                <tr>
+                    <td>200&ndash;349</td>
+                    <td>Advanced Suppression</td>
+                    <td>High risk of opportunistic infections; begin prophylaxis for <em>Pneumocystis</em>; ART urgent; monitor every 3 months</td>
+                </tr>
+                <tr>
+                    <td>&lt;200</td>
+                    <td>Severe Immunodeficiency (AIDS)</td>
+                    <td>AIDS-defining; high risk of <em>Pneumocystis</em>, toxoplasmosis, cryptococcal meningitis; start cotrimoxazole prophylaxis; urgent ART</td>
+                </tr>
+                <tr>
+                    <td>&lt;50</td>
+                    <td>Critical Immunodeficiency</td>
+                    <td>Very high mortality risk; MAC prophylaxis; CMV retinitis screening; immediate ART with close monitoring for IRIS</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="caution">
+            <strong>Caution &mdash; CD4% vs. Absolute Count:</strong> The CD4 percentage is more stable than the absolute count because it is less affected by diurnal variation, exercise, stress, and intercurrent illness. In pediatric patients (especially children under 5 years), the CD4 percentage is preferred because normal absolute CD4 counts are much higher in young children and decline with age. A CD4% &lt;25% in a child corresponds approximately to the adult threshold of &lt;350 cells/&mu;L. Always report both values.
+        </div>
+
+        <h3>WHO Staging and CD4 Correlation</h3>
+        <p>The WHO clinical staging system (Stages 1&ndash;4) broadly correlates with CD4 decline. Stage 1 (asymptomatic) typically corresponds to CD4 &gt;500; Stage 2 (mild symptoms) to 350&ndash;500; Stage 3 (advanced symptoms) to 200&ndash;350; and Stage 4 (AIDS-defining illness) to &lt;200 cells/&mu;L. However, clinical staging alone is insufficient, and CD4 counting provides objective, quantitative assessment of immunosuppression.</p>
+    </section>
+
+    <!-- Section 5: Leukemia & Lymphoma Immunophenotyping (accent-teal) -->
+    <section id="leukemia-lymphoma" class="content-section accent-teal">
+        <h2>5. Leukemia &amp; Lymphoma Immunophenotyping</h2>
+        <p>Immunophenotyping by flow cytometry is integral to the diagnosis, classification, and monitoring of hematological malignancies. The WHO classification of hematolymphoid neoplasms relies heavily on immunophenotypic data alongside morphology, cytogenetics, and molecular studies to define disease entities.</p>
+
+        <h3>Acute Lymphoblastic Leukemia (ALL)</h3>
+        <p><strong>B-cell ALL (B-ALL):</strong> The most common malignancy of childhood. Blasts express CD19, CD10 (CALLA), CD34, TdT, and cytoplasmic CD79a. They are negative for surface immunoglobulin in precursor stages. CD20 expression is variable and may be weak or absent. The presence of CD10 positivity generally confers a more favorable prognosis.</p>
+        <p><strong>T-cell ALL (T-ALL):</strong> Blasts express cytoplasmic CD3 (the earliest T lineage marker), CD7, CD2, CD5, and TdT. Surface CD3 is often negative in immature forms. CD1a expression marks cortical T-ALL, which has a relatively better prognosis. CD4 and CD8 may be co-expressed (double-positive) in cortical thymocyte stages.</p>
+
+        <h3>Acute Myeloid Leukemia (AML)</h3>
+        <p>AML blasts characteristically express CD13, CD33, CD117 (c-kit), and myeloperoxidase (MPO). HLA-DR is positive in most subtypes but notably absent in acute promyelocytic leukemia (APL, formerly M3). Additional markers help define subtypes: CD14 and CD64 for monocytic differentiation, CD41/CD61 for megakaryoblastic leukemia, and CD235a (glycophorin A) for erythroleukemia.</p>
+
+        <h3>Chronic Lymphocytic Leukemia (CLL) vs. Mantle Cell Lymphoma (MCL)</h3>
+        <p>Both CLL and MCL can present as CD5<sup>+</sup> B cell neoplasms, making immunophenotypic distinction crucial. The following markers differentiate these entities:</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Marker</th>
+                    <th>CLL</th>
+                    <th>MCL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CD5</td>
+                    <td>Positive</td>
+                    <td>Positive</td>
+                </tr>
+                <tr>
+                    <td>CD19</td>
+                    <td>Positive</td>
+                    <td>Positive</td>
+                </tr>
+                <tr>
+                    <td>CD20</td>
+                    <td>Dim / Weak</td>
+                    <td>Bright / Strong</td>
+                </tr>
+                <tr>
+                    <td>CD23</td>
+                    <td>Positive</td>
+                    <td>Negative (usually)</td>
+                </tr>
+                <tr>
+                    <td>CD200</td>
+                    <td>Positive</td>
+                    <td>Negative</td>
+                </tr>
+                <tr>
+                    <td>FMC7</td>
+                    <td>Negative / Dim</td>
+                    <td>Positive</td>
+                </tr>
+                <tr>
+                    <td>Surface Ig (sIg)</td>
+                    <td>Dim</td>
+                    <td>Moderate&ndash;Bright</td>
+                </tr>
+                <tr>
+                    <td>Cyclin D1</td>
+                    <td>Negative</td>
+                    <td>Positive (diagnostic)</td>
+                </tr>
+                <tr>
+                    <td>SOX11</td>
+                    <td>Negative</td>
+                    <td>Positive (nuclear, by immunohistochemistry)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="key-point">
+            <strong>Key Point:</strong> The Matutes scoring system assigns one point each for weak sIg, CD5+, CD23+, FMC7&minus;, and CD79b dim/negative. A score of 4&ndash;5 strongly supports CLL. Scores of 0&ndash;2 suggest a non-CLL B cell lymphoproliferative disorder and warrant further investigation including cyclin D1 and SOX11 assessment.
+        </div>
+
+        <h3>Minimal Residual Disease (MRD)</h3>
+        <p>After treatment, flow cytometry can detect residual leukemia cells at sensitivities of 10<sup>&minus;4</sup> to 10<sup>&minus;5</sup> (1 leukemic cell among 10,000&ndash;100,000 normal cells). MRD assessment uses &ge;8-color panels that exploit the aberrant antigen expression patterns of neoplastic cells&mdash;combinations not found on normal counterparts. MRD negativity is a powerful prognostic indicator and increasingly drives treatment decisions in both ALL and CLL.</p>
+    </section>
+
+    <!-- Section 6: Multi-Color Panel Design (accent-purple) -->
+    <section id="panel-design" class="content-section accent-purple">
+        <h2>6. Multi-Color Panel Design</h2>
+        <p>Designing an effective multi-color immunophenotyping panel requires balancing biological questions with the physics of fluorescence detection. The goal is to maximize signal resolution while minimizing spectral spillover between fluorochromes. Thoughtful fluorochrome-to-marker assignment is the single most important step in panel design.</p>
+
+        <h3>Fluorochrome Brightness and Assignment Rules</h3>
+        <p>The cardinal rule of panel design is: <strong>assign the brightest fluorochromes to the dimmest antigens, and the dimmest fluorochromes to the brightest antigens.</strong> This compensates for the limited number of antigen molecules on the cell surface by maximizing the signal from each bound antibody.</p>
+        <ol>
+            <li><strong>Rank your antigens by expression density</strong> &mdash; from lowest (e.g., cytokines, checkpoint receptors like PD-1) to highest (e.g., CD45, CD3, CD4).</li>
+            <li><strong>Rank your fluorochromes by brightness</strong> &mdash; PE and APC are among the brightest conventional fluorochromes; FITC and PerCP are moderate; BV421 is bright but UV-excitable alternatives exist.</li>
+            <li><strong>Minimize spectral overlap between co-expressed markers</strong> &mdash; If two markers are always on the same cell (e.g., CD3 and CD4 on helper T cells), place them on fluorochromes with minimal spillover into each other.</li>
+            <li><strong>Consider spread from compensation</strong> &mdash; Even after mathematical compensation, spreading error increases the variance of dimly stained populations. Avoid placing dim antigens in channels that receive heavy compensation from bright neighbors.</li>
+        </ol>
+
+        <h3>Example 10-Color T Cell Panel</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Fluorochrome</th>
+                    <th>Laser</th>
+                    <th>Marker</th>
+                    <th>Expression Level</th>
+                    <th>Rationale</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>BV421</td>
+                    <td>Violet (405 nm)</td>
+                    <td>CCR7</td>
+                    <td>Dim&ndash;Moderate</td>
+                    <td>Bright fluorochrome for moderately expressed chemokine receptor</td>
+                </tr>
+                <tr>
+                    <td>BV510</td>
+                    <td>Violet (405 nm)</td>
+                    <td>CD45</td>
+                    <td>Bright</td>
+                    <td>Backbone marker; bright expression tolerates a dimmer fluorochrome</td>
+                </tr>
+                <tr>
+                    <td>FITC</td>
+                    <td>Blue (488 nm)</td>
+                    <td>CD3</td>
+                    <td>Bright</td>
+                    <td>Bright antigen allows use of a moderate fluorochrome</td>
+                </tr>
+                <tr>
+                    <td>PerCP-Cy5.5</td>
+                    <td>Blue (488 nm)</td>
+                    <td>CD8</td>
+                    <td>Bright</td>
+                    <td>Good brightness, minimal spread into PE channel</td>
+                </tr>
+                <tr>
+                    <td>PE</td>
+                    <td>Blue/Yellow-Green (488/561 nm)</td>
+                    <td>PD-1</td>
+                    <td>Dim</td>
+                    <td>Brightest conventional fluorochrome assigned to dimmest antigen</td>
+                </tr>
+                <tr>
+                    <td>PE-Cy7</td>
+                    <td>Blue/Yellow-Green (488/561 nm)</td>
+                    <td>CD127</td>
+                    <td>Dim&ndash;Moderate</td>
+                    <td>Good brightness for low-density IL-7R&alpha;</td>
+                </tr>
+                <tr>
+                    <td>APC</td>
+                    <td>Red (633 nm)</td>
+                    <td>CD25</td>
+                    <td>Dim</td>
+                    <td>Bright fluorochrome needed for dim IL-2R&alpha; on Tregs</td>
+                </tr>
+                <tr>
+                    <td>APC-Cy7</td>
+                    <td>Red (633 nm)</td>
+                    <td>CD4</td>
+                    <td>Bright</td>
+                    <td>Tolerates tandem dye; bright expression compensates for higher spread</td>
+                </tr>
+                <tr>
+                    <td>BV785</td>
+                    <td>Violet (405 nm)</td>
+                    <td>CD45RA</td>
+                    <td>Bright</td>
+                    <td>Bright antigen works with higher-wavelength violet polymer dye</td>
+                </tr>
+                <tr>
+                    <td>Zombie Aqua</td>
+                    <td>Violet (405 nm)</td>
+                    <td>Viability</td>
+                    <td>N/A</td>
+                    <td>Amine-reactive viability dye; excludes dead cells from analysis</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <strong>Tip &mdash; The Spread Matrix:</strong> Before finalizing your panel, generate a spread matrix (also called a spillover spreading matrix) using single-stained controls. The spread matrix quantifies the additional variance introduced into each detector by compensation of spectral overlap from every other fluorochrome. Tools like FluoroFinder, the BD panel design tool, or Cytek&rsquo;s SpectroFlo software can model spread computationally before you run your experiment, saving time and reagents.
+        </div>
+    </section>
+
+    <!-- Section 7: Sample Preparation (no accent) -->
+    <section id="sample-prep" class="content-section">
+        <h2>7. Sample Preparation</h2>
+        <p>Proper sample preparation is essential for high-quality immunophenotyping data. The choice of method depends on the clinical or research application, the target cell population, and the downstream analysis requirements.</p>
+
+        <h3>Whole Blood Staining (Lyse/No-Wash)</h3>
+        <p>For clinical immunophenotyping, whole blood staining with subsequent red cell lysis is the preferred method because it preserves the natural distribution of leukocytes and avoids cell loss during washing steps. The lyse/no-wash approach is especially important for absolute counting.</p>
+        <ol>
+            <li>Aliquot 50&ndash;100 &mu;L of EDTA-anticoagulated whole blood into a test tube.</li>
+            <li>Add the fluorochrome-conjugated antibody cocktail at pre-titrated volumes.</li>
+            <li>Incubate for 15&ndash;20 minutes at room temperature in the dark.</li>
+            <li>Add 500 &mu;L of 1&times; lysing solution (e.g., BD FACS&trade; Lysing Solution).</li>
+            <li>Incubate for 10 minutes at room temperature to lyse red blood cells.</li>
+            <li>Acquire on the flow cytometer within 1 hour (or fix with 1% paraformaldehyde for delayed acquisition up to 24 hours).</li>
+        </ol>
+
+        <h3>PBMC Isolation</h3>
+        <p>For research applications requiring purified mononuclear cells&mdash;particularly when intracellular staining or functional assays are planned&mdash;peripheral blood mononuclear cells (PBMCs) are isolated by density gradient centrifugation using Ficoll-Paque (density 1.077 g/mL). PBMCs are then washed, counted, assessed for viability, and stained according to the surface staining protocol.</p>
+
+        <h3>Surface Staining Protocol (PBMCs or Washed Cells)</h3>
+        <ol>
+            <li>Resuspend cells at 1&ndash;5 &times; 10<sup>6</sup> cells per tube in 100 &mu;L of staining buffer (PBS + 2% FBS + 0.1% NaN<sub>3</sub>).</li>
+            <li>Add Fc receptor blocking reagent (e.g., Human TruStain FcX) and incubate for 10 minutes at 4&deg;C.</li>
+            <li>Add viability dye (amine-reactive, e.g., Zombie Aqua or LIVE/DEAD Fixable dye) and incubate for 15 minutes at 4&deg;C in the dark. Viability dyes must be added <em>before</em> any protein-containing buffer.</li>
+            <li>Without washing, add the surface antibody cocktail and incubate for 20&ndash;30 minutes at 4&deg;C in the dark.</li>
+            <li>Wash twice with 2 mL of staining buffer (300 &times; g, 5 minutes).</li>
+            <li>Resuspend in 200&ndash;400 &mu;L of staining buffer and acquire on the cytometer (or fix with 1&ndash;2% paraformaldehyde).</li>
+        </ol>
+
+        <div class="caution">
+            <strong>Caution &mdash; Viability Dye Compatibility:</strong> Amine-reactive viability dyes (e.g., Zombie, LIVE/DEAD Fixable) must be added in <strong>protein-free buffer</strong> (PBS only). If added in buffer containing FBS or BSA, the dye will react with free amines in the serum proteins rather than the cells, resulting in dramatically reduced staining of dead cells and false-negative viability results. Always stain viability first, then add protein-containing buffer with antibodies.
+        </div>
+
+        <h3>Sample Timing and Stability</h3>
+        <ul>
+            <li><strong>EDTA whole blood:</strong> Process within 6 hours for optimal results; acceptable up to 24 hours at room temperature for TBNK panels (some marker expression may decrease).</li>
+            <li><strong>Heparin whole blood:</strong> Can activate neutrophils; use EDTA for clinical immunophenotyping.</li>
+            <li><strong>Fixed samples:</strong> 1% paraformaldehyde fixation allows acquisition up to 24 hours. Note that fixation may alter some antigen epitopes and fluorochrome brightness (especially tandem dyes).</li>
+            <li><strong>Cryopreserved PBMCs:</strong> Must be thawed rapidly in a 37&deg;C water bath, washed in warm media with DNase I to prevent clumping, rested for 1&ndash;2 hours before staining, and always assessed for post-thaw viability (&gt;85% required).</li>
+        </ul>
+    </section>
+
+    <!-- Section 8: Controls for Immunophenotyping (accent-green) -->
+    <section id="controls" class="content-section accent-green">
+        <h2>8. Controls for Immunophenotyping</h2>
+        <p>Proper controls are the foundation of reliable immunophenotyping. Without appropriate controls, it is impossible to distinguish true antigen expression from non-specific binding, autofluorescence, or spectral spillover. The two principal types of gating controls are isotype controls and Fluorescence Minus One (FMO) controls.</p>
+
+        <h3>Isotype Controls</h3>
+        <p>Isotype controls use antibodies of the same immunoglobulin class, subclass, and conjugated fluorochrome as the test antibody, but directed against an irrelevant antigen not present on the cells. In theory, they account for non-specific Fc receptor binding and background fluorescence. However, isotype controls have significant limitations:</p>
+        <ul>
+            <li>They rarely match the exact concentration and fluorochrome-to-protein (F/P) ratio of the test antibody.</li>
+            <li>They do not account for spectral spillover from other fluorochromes in a multi-color panel.</li>
+            <li>They can be misleading, providing either too-permissive or too-restrictive gates.</li>
+            <li>Consensus in the field has shifted away from isotype controls for multi-color panel gating.</li>
+        </ul>
+
+        <h3>Fluorescence Minus One (FMO) Controls</h3>
+        <p>An FMO control contains all fluorochromes in the panel <em>except</em> the one being assessed. This reveals the maximum fluorescence a cell can exhibit in that channel due to spectral spillover from all other fluorochromes, defining the precise boundary between negative and positive populations for the missing marker.</p>
+
+        <div class="key-point">
+            <strong>Key Point &mdash; FMO Controls Are the Gold Standard:</strong> FMO controls are universally recommended for multi-color immunophenotyping because they account for the actual spectral environment of the experiment. They are especially critical for markers with continuous (dim-to-bright) or poorly resolved expression patterns such as CD25, CD127, CCR7, PD-1, and cytokine staining. For clearly bimodal markers with distinct positive and negative populations (e.g., CD3, CD19), FMO controls may be less essential but are still best practice. When resources are limited, prioritize FMO controls for your most problematic channels.
+        </div>
+
+        <h3>Other Essential Controls</h3>
+        <ul>
+            <li><strong>Unstained Control:</strong> Cells with no antibodies; establishes baseline autofluorescence for each detector.</li>
+            <li><strong>Single-Stained Controls:</strong> One fluorochrome per tube; required for compensation calculation. Can use cells or compensation beads (e.g., UltraComp eBeads).</li>
+            <li><strong>Viability Control:</strong> A deliberately killed aliquot (heat-killed at 65&deg;C for 5&ndash;10 minutes or fixed with ethanol) mixed with live cells; validates that the viability dye discriminates live from dead cells.</li>
+            <li><strong>Biological Positive Control:</strong> A sample known to contain the cell population of interest; confirms that the staining protocol and instrument are performing correctly.</li>
+            <li><strong>Instrument QC Beads:</strong> Calibration and tracking beads (e.g., CS&amp;T beads on BD instruments, or Spherotech 8-peak beads) run daily to ensure consistent instrument performance across time.</li>
+        </ul>
+    </section>
+
+    <!-- Section 9: Gating Strategy & Data Analysis (accent-orange) -->
+    <section id="gating-analysis" class="content-section accent-orange">
+        <h2>9. Gating Strategy &amp; Data Analysis</h2>
+        <p>A systematic gating strategy is the backbone of reproducible immunophenotyping. The standard hierarchical approach removes artifacts sequentially, narrowing focus to the cell populations of interest with high purity.</p>
+
+        <h3>Standard Gating Hierarchy</h3>
+        <p>The following sequence represents a consensus gating hierarchy for peripheral blood immunophenotyping. Each gate builds on the previous one:</p>
+        <ol>
+            <li><strong>Time Gate:</strong> Plot fluorescence (any channel) vs. time to exclude fluidic events (air bubbles, clogs, pressure fluctuations). Remove any periods where events are absent, shifted, or show sudden spikes.</li>
+            <li><strong>Scatter Gate (Debris Exclusion):</strong> FSC-A vs. SSC-A plot to exclude small debris and cellular fragments near the origin. Set a generous gate that includes all leukocyte populations.</li>
+            <li><strong>Singlet Gate (Doublet Discrimination):</strong> FSC-H vs. FSC-A (or FSC-W vs. FSC-A) to exclude cell doublets and aggregates. Doublets appear off the diagonal with disproportionately high area relative to height. This step is critical&mdash;doublets can appear as false double-positive events.</li>
+            <li><strong>Viability Gate:</strong> Viability dye vs. any other parameter; gate on the viability dye-negative (live) population. Dead cells should form a clearly separate positive population.</li>
+            <li><strong>CD45 Leukocyte Gate:</strong> CD45 vs. SSC-A to identify leukocyte clusters and exclude residual debris, unlysed red cells, and platelets (CD45<sup>negative</sup>).</li>
+            <li><strong>Lineage Gates:</strong> Apply lineage markers (CD3, CD19, CD14, etc.) to segregate populations from the clean CD45<sup>+</sup> live singlet parent gate.</li>
+            <li><strong>Subset Gates:</strong> Within each lineage, apply subset markers (e.g., CD4/CD8 within CD3<sup>+</sup> T cells; CD45RA/CCR7 within CD4<sup>+</sup> or CD8<sup>+</sup> subsets).</li>
+        </ol>
+
+        <h3>Backgating</h3>
+        <p>Backgating is a verification technique where a downstream population (e.g., CD3<sup>+</sup> T cells) is highlighted on an upstream plot (e.g., FSC vs. SSC) to confirm that the gating strategy is not inadvertently excluding events. For example, if you backgate CD14<sup>+</sup> monocytes onto the FSC/SSC scatter plot and find many monocyte events falling outside your initial leukocyte gate, the gate needs to be adjusted. Backgating should be performed routinely when establishing a new panel or analyzing unfamiliar sample types.</p>
+
+        <div class="diagram-container">
+            <p style="font-family: monospace; font-size: 0.85rem; line-height: 2; white-space: pre;">
+All Events
+  &darr;
+Time Gate (exclude fluidic anomalies)
+  &darr;
+FSC-A vs. SSC-A (exclude debris)
+  &darr;
+FSC-H vs. FSC-A (exclude doublets)
+  &darr;
+Viability Dye&minus; (exclude dead cells)
+  &darr;
+CD45+ vs. SSC (leukocyte gate)
+  &#9500;&#9472; Lymphocytes (CD45<sup>bright</sup> SSC<sup>low</sup>)
+  &boxv;     &#9500;&#9472; CD3+ T cells &rarr; CD4+ / CD8+ &rarr; subsets
+  &boxv;     &#9500;&#9472; CD19+ B cells
+  &boxv;     &boxur;&#9472; CD3&minus;CD56+ NK cells
+  &#9500;&#9472; Monocytes (CD45<sup>bright</sup> SSC<sup>mid</sup>)
+  &boxur;&#9472; Granulocytes (CD45<sup>dim</sup> SSC<sup>high</sup>)
+            </p>
+            <div class="caption">Figure: Standard immunophenotyping gating hierarchy from all events to defined lineage subsets.</div>
+        </div>
+
+        <h3>Reporting Results</h3>
+        <p>Immunophenotyping results should be reported with both relative (percentage of parent) and absolute values where applicable. Standard reports include:</p>
+        <ul>
+            <li><strong>Percentages:</strong> % of parent gate (e.g., CD4<sup>+</sup> as % of CD3<sup>+</sup> T cells, or CD3<sup>+</sup> as % of lymphocytes).</li>
+            <li><strong>Absolute Counts:</strong> Cells per microliter (cells/&mu;L), calculated from single-platform bead counts or dual-platform hematology data.</li>
+            <li><strong>Median Fluorescence Intensity (MFI):</strong> Reports antigen density on a per-cell basis; useful for tracking activation markers, receptor expression levels, or comparing expression between populations.</li>
+            <li><strong>Reference Ranges:</strong> Always compare results against age- and sex-matched reference ranges established by the laboratory using the same instrument and protocol.</li>
+        </ul>
+    </section>
+
+    <!-- Section 10: Troubleshooting (accent-red) -->
+    <section id="troubleshooting" class="content-section accent-red">
+        <h2>10. Troubleshooting</h2>
+        <p>Even with a well-designed panel and careful preparation, immunophenotyping experiments can encounter issues. The table below summarizes common problems, their likely causes, and recommended solutions.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Problem</th>
+                    <th>Likely Cause</th>
+                    <th>Solution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>High background / poor resolution of positive and negative</td>
+                    <td>Insufficient Fc receptor blocking; antibody concentration too high; inadequate washing</td>
+                    <td>Add Fc block before antibody staining; titrate antibodies to optimal concentration; add or increase wash steps</td>
+                </tr>
+                <tr>
+                    <td>Viability dye not working (dead cells not staining)</td>
+                    <td>Viability dye added in protein-containing buffer; dye expired or improperly stored</td>
+                    <td>Stain viability in protein-free PBS; use fresh aliquot of dye; include heat-killed positive control</td>
+                </tr>
+                <tr>
+                    <td>Excessive doublets in singlet gate</td>
+                    <td>Cell aggregation; sample clumping; delayed processing</td>
+                    <td>Filter sample through 40 &mu;m mesh; add DNase I for thawed PBMCs; vortex gently before acquisition</td>
+                </tr>
+                <tr>
+                    <td>Unexpected population in wrong scatter region</td>
+                    <td>Activated or apoptotic cells; sample aging; wrong tissue type</td>
+                    <td>Backgate to verify; process samples promptly; adjust gates based on CD45/SSC profile</td>
+                </tr>
+                <tr>
+                    <td>Loss of tandem dye signal (PE-Cy7, APC-Cy7)</td>
+                    <td>Tandem dye degradation from light exposure, fixation, or age</td>
+                    <td>Protect from light; minimize fixation time; use fresh reagents; match compensation controls to experimental conditions</td>
+                </tr>
+                <tr>
+                    <td>Compensation errors (over- or under-compensated)</td>
+                    <td>Single-stained controls not matching panel antibodies; beads vs. cell mismatch</td>
+                    <td>Use same antibody lots for compensation and experiment; ensure compensation controls are brighter than experimental samples; verify with FMO controls</td>
+                </tr>
+                <tr>
+                    <td>Low event count for rare population</td>
+                    <td>Insufficient cells acquired; aggressive upstream gating; low cell input</td>
+                    <td>Acquire more events (aim for &ge;100 events in target gate); relax scatter and viability gates slightly; increase starting cell number</td>
+                </tr>
+                <tr>
+                    <td>CD45 dim population overlapping with debris</td>
+                    <td>Immature cells (blasts) or nucleated RBCs present; insufficient lysis</td>
+                    <td>Use a second lysis step; extend lysis time; verify with backgating from lineage markers</td>
+                </tr>
+                <tr>
+                    <td>Inconsistent results between runs</td>
+                    <td>Instrument drift; variable sample handling; lot-to-lot reagent variation</td>
+                    <td>Run QC beads daily (CS&amp;T or equivalent); standardize sample processing SOPs; track reagent lots and MFI trends over time</td>
+                </tr>
+                <tr>
+                    <td>High autofluorescence</td>
+                    <td>Monocytes/macrophages; fixation-induced fluorescence; dead cells</td>
+                    <td>Gate out autofluorescent cells; minimize fixation; ensure viability exclusion; use red-shifted fluorochromes (less affected by autofluorescence)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip">
+            <strong>Tip &mdash; Troubleshooting Dim Staining:</strong> If a marker that should be clearly positive appears dim or poorly resolved, systematically check the following: (1) Confirm the antibody has been titrated&mdash;using too much antibody increases background without improving signal. (2) Verify the correct clone is being used for your application and species. (3) Check that the antigen is not being lost during preparation (e.g., enzymatic digestion can cleave certain surface markers like CD62L). (4) Ensure the fluorochrome assignment is appropriate&mdash;dim antigens require the brightest fluorochromes. (5) Examine FMO controls to confirm the spread from neighboring channels is not obscuring the positive population.
+        </div>
+
+        <h3>When to Repeat an Experiment</h3>
+        <p>Consider repeating the experiment if any of the following occur:</p>
+        <ul>
+            <li>Viability of the sample is below 85% (dead cells severely compromise data quality).</li>
+            <li>QC beads indicate instrument performance is out of specification.</li>
+            <li>Time gate reveals significant fluidic instability affecting &gt;10% of events.</li>
+            <li>Compensation values are dramatically different from historical norms, suggesting a reagent or instrument problem.</li>
+            <li>Key populations are missing entirely from a sample type where they should be abundant.</li>
+        </ul>
+    </section>
+
+</main>
+
+<footer>
+    <p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p>
+    <p style="margin-top: 8px;">Flow Cytometry Hub &mdash; A comprehensive educational resource for flow cytometry.</p>
+</footer>
+</body>
+</html>

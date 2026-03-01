@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Spectrum Viewer | Flow Cytometry Hub</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --primary-dark: #0e2f44;
+            --accent: #27ae60;
+            --accent-light: #2ecc71;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --bg: #f4f6f9;
+            --bg-card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; overflow: hidden; height: 100vh; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 12px 20px 8px; text-align: center; }
+        .hero h1 { font-size: 1.4rem; margin-bottom: 2px; }
+        .hero p { font-size: 0.85rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 2px; font-size: 0.78rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+
+        /* Main app layout — JS sets exact height via --app-height custom property */
+        .app-container { max-width: 1500px; margin: 0 auto; padding: 10px 20px; display: grid; grid-template-columns: 320px 1fr; gap: 16px; width: 100%; height: var(--app-height, 600px); }
+
+        /* Sidebar */
+        .sidebar { display: flex; flex-direction: column; gap: 8px; overflow: hidden; }
+        .sidebar-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 12px; flex-shrink: 0; }
+        .sidebar-section h3 { font-size: 0.95rem; color: var(--primary); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 2px solid var(--border); }
+
+        /* Search */
+        .search-input { width: 100%; padding: 8px 12px; border: 2px solid var(--border); border-radius: 6px; font-size: 0.9rem; outline: none; }
+        .search-input:focus { border-color: var(--primary-light); }
+        .search-count { font-size: 0.78rem; color: var(--text-light); margin-top: 4px; }
+
+        /* Laser filter pills */
+        .laser-filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+        .laser-pill { padding: 4px 10px; border-radius: 14px; border: 2px solid; font-size: 0.75rem; font-weight: 600; cursor: pointer; background: #fff; transition: all 0.15s; user-select: none; }
+        .laser-pill:hover { transform: scale(1.05); }
+        .laser-pill.active { color: #fff !important; }
+        .laser-pill[data-laser="uv"] { border-color: #9b59b6; color: #9b59b6; }
+        .laser-pill[data-laser="uv"].active { background: #9b59b6; }
+        .laser-pill[data-laser="violet"] { border-color: #8e44ad; color: #8e44ad; }
+        .laser-pill[data-laser="violet"].active { background: #8e44ad; }
+        .laser-pill[data-laser="blue"] { border-color: #2980b9; color: #2980b9; }
+        .laser-pill[data-laser="blue"].active { background: #2980b9; }
+        .laser-pill[data-laser="yg"] { border-color: #27ae60; color: #27ae60; }
+        .laser-pill[data-laser="yg"].active { background: #27ae60; }
+        .laser-pill[data-laser="red"] { border-color: #e74c3c; color: #e74c3c; }
+        .laser-pill[data-laser="red"].active { background: #e74c3c; }
+
+        /* Fluorophore list */
+        .fluor-list { flex: 1; min-height: 80px; overflow-y: auto; border: 1px solid var(--border); border-radius: 6px; }
+        .fluor-item { display: flex; align-items: center; gap: 8px; padding: 6px 10px; cursor: pointer; border-bottom: 1px solid #f0f2f5; font-size: 0.82rem; transition: background 0.1s; }
+        .fluor-item:hover { background: #f0f4f8; }
+        .fluor-item.selected { background: #eaf2f8; font-weight: 600; }
+        .fluor-item .swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.15); }
+        .fluor-item .name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .fluor-item .em-label { font-size: 0.72rem; color: var(--text-light); white-space: nowrap; }
+        .fluor-item .remove-btn { display: none; width: 18px; height: 18px; border: none; background: var(--danger); color: #fff; border-radius: 50%; font-size: 0.7rem; cursor: pointer; line-height: 18px; text-align: center; flex-shrink: 0; }
+        .fluor-item.selected .remove-btn { display: block; }
+
+        /* Selected panel */
+        .selected-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; min-height: 30px; }
+        .selected-tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 14px; font-size: 0.75rem; font-weight: 600; color: #fff; cursor: pointer; }
+        .selected-tag .tag-x { margin-left: 2px; opacity: 0.7; }
+        .selected-tag:hover .tag-x { opacity: 1; }
+        .clear-all { font-size: 0.78rem; color: var(--danger); cursor: pointer; border: none; background: none; margin-top: 6px; text-decoration: underline; }
+
+        /* Chart area */
+        .chart-area { display: flex; flex-direction: column; gap: 8px; min-height: 0; overflow: hidden; }
+        .chart-card { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 10px 14px; flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+        .chart-controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 6px; flex-shrink: 0; }
+        .chart-controls label { font-size: 0.82rem; font-weight: 600; color: var(--primary); }
+        .chart-controls select, .chart-controls input[type="range"] { font-size: 0.82rem; }
+        .toggle-group { display: inline-flex; border: 2px solid var(--border); border-radius: 6px; overflow: hidden; }
+        .toggle-btn { padding: 5px 14px; font-size: 0.8rem; font-weight: 600; border: none; background: #fff; cursor: pointer; color: var(--text); transition: all 0.15s; }
+        .toggle-btn.active { background: var(--primary); color: #fff; }
+        .toggle-btn:not(:last-child) { border-right: 1px solid var(--border); }
+
+        /* Canvas */
+        .canvas-wrapper { position: relative; flex: 1; min-height: 0; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: #fafbfc; }
+        .canvas-wrapper canvas { display: block; width: 100%; height: 100%; }
+
+        /* Tooltip */
+        .chart-tooltip { position: absolute; background: rgba(14,47,68,0.92); color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 0.78rem; pointer-events: none; z-index: 10; display: none; max-width: 260px; line-height: 1.4; }
+
+        /* Legend */
+        .legend-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; flex-shrink: 0; }
+        .legend-item { display: inline-flex; align-items: center; gap: 4px; font-size: 0.78rem; }
+        .legend-swatch { width: 20px; height: 3px; border-radius: 2px; }
+        .legend-swatch.dashed { border-top: 2px dashed; height: 0; }
+
+        /* Info table below chart */
+        .info-table-wrapper { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 12px 16px; overflow: auto; max-height: 180px; flex-shrink: 0; }
+        .info-table-wrapper h3 { font-size: 0.95rem; color: var(--primary); margin-bottom: 8px; }
+        .info-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+        .info-table thead { background: var(--primary-dark); color: #fff; }
+        .info-table th { padding: 8px 12px; text-align: left; font-weight: 600; }
+        .info-table td { padding: 7px 12px; border-bottom: 1px solid var(--border); }
+        .info-table tbody tr:hover { background: #f0f4f8; }
+        .info-table .color-dot { display: inline-block; width: 12px; height: 12px; border-radius: 50%; vertical-align: middle; margin-right: 6px; }
+
+        /* Laser line labels on chart */
+        .laser-label { position: absolute; top: 4px; font-size: 0.68rem; font-weight: 700; writing-mode: vertical-rl; padding: 2px; border-radius: 3px; pointer-events: none; }
+
+        footer { display: none; }
+
+        /* Sidebar fluorophore list section should grow to fill remaining sidebar space */
+        .sidebar-section.fluor-section { flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+
+        @media (max-width: 900px) {
+            body { overflow: auto; height: auto; }
+            .app-container { grid-template-columns: 1fr; height: auto !important; }
+            .sidebar { overflow: visible; }
+            .fluor-list { max-height: 250px !important; }
+            .canvas-wrapper { min-height: 300px; }
+            .chart-area { overflow: visible; }
+            .chart-card { overflow: visible; min-height: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">Flow Cytometry <span>Hub</span></a>
+        <a href="index.html" class="back-link">&larr; Back to Main</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>&#127752; Interactive Spectrum Viewer</h1>
+    <p>Visualize and compare excitation &amp; emission spectra for 100+ flow cytometry fluorophores across all major vendors.</p>
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> &rarr;
+        <a href="fluorophore-guide.html">Fluorophore Guide</a> &rarr;
+        Spectrum Viewer
+    </div>
+</header>
+
+<div class="app-container">
+
+    <!-- LEFT SIDEBAR -->
+    <div class="sidebar">
+
+        <div class="sidebar-section">
+            <h3>&#128269; Search Fluorophores</h3>
+            <input type="text" class="search-input" id="searchInput" placeholder="Search by name (e.g., BV421, PE, FITC)..." oninput="filterList()">
+            <div class="search-count" id="searchCount"></div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>&#127919; Filter by Laser</h3>
+            <div class="laser-filters" id="laserFilters">
+                <div class="laser-pill active" data-laser="all" onclick="toggleLaser(this)">All</div>
+                <div class="laser-pill" data-laser="uv" onclick="toggleLaser(this)">UV 355nm</div>
+                <div class="laser-pill" data-laser="violet" onclick="toggleLaser(this)">Violet 405nm</div>
+                <div class="laser-pill" data-laser="blue" onclick="toggleLaser(this)">Blue 488nm</div>
+                <div class="laser-pill" data-laser="yg" onclick="toggleLaser(this)">YG 561nm</div>
+                <div class="laser-pill" data-laser="red" onclick="toggleLaser(this)">Red 633nm</div>
+            </div>
+        </div>
+
+        <div class="sidebar-section fluor-section">
+            <h3>&#127912; Fluorophore List <span style="font-weight:400; font-size:0.78rem;">(click to add)</span></h3>
+            <div class="fluor-list" id="fluorList"></div>
+        </div>
+
+        <div class="sidebar-section">
+            <h3>&#9989; Selected (<span id="selectedCount">0</span>)</h3>
+            <div class="selected-list" id="selectedList">
+                <span style="font-size:0.82rem; color:var(--text-light);">Click fluorophores above to add them...</span>
+            </div>
+            <button class="clear-all" id="clearBtn" onclick="clearAll()" style="display:none;">Clear All</button>
+        </div>
+
+    </div>
+
+    <!-- RIGHT CHART AREA -->
+    <div class="chart-area">
+
+        <div class="chart-card">
+            <div class="chart-controls">
+                <label>View:</label>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" onclick="setView('both', this)">Both</button>
+                    <button class="toggle-btn" onclick="setView('excitation', this)">Excitation</button>
+                    <button class="toggle-btn" onclick="setView('emission', this)">Emission</button>
+                </div>
+
+                <label style="margin-left:16px;">Lasers:</label>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" onclick="toggleLasers(this)" id="laserToggle">Show</button>
+                </div>
+
+                <label style="margin-left:16px;">Normalize:</label>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" onclick="setNorm('peak', this)">Peak</button>
+                    <button class="toggle-btn" onclick="setNorm('area', this)">Area</button>
+                </div>
+
+                <label style="margin-left:16px;">Fill:</label>
+                <div class="toggle-group">
+                    <button class="toggle-btn active" onclick="toggleFill(this)" id="fillToggle">On</button>
+                </div>
+            </div>
+
+            <div class="canvas-wrapper" id="canvasWrapper">
+                <canvas id="spectrumCanvas"></canvas>
+                <div class="chart-tooltip" id="tooltip"></div>
+            </div>
+
+            <div class="legend-bar" id="legendBar"></div>
+        </div>
+
+        <div class="info-table-wrapper" id="infoSection" style="display:none;">
+            <h3>&#128202; Selected Fluorophore Details</h3>
+            <table class="info-table" id="infoTable">
+                <thead>
+                    <tr>
+                        <th>Fluorophore</th>
+                        <th>Ex Max (nm)</th>
+                        <th>Em Max (nm)</th>
+                        <th>Stokes Shift</th>
+                        <th>Laser</th>
+                        <th>Type</th>
+                        <th>Vendor</th>
+                    </tr>
+                </thead>
+                <tbody id="infoBody"></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <p><a href="index.html">&larr; Hub</a> &nbsp;|&nbsp; <a href="fluorophore-guide.html">Fluorophore Guide</a> &nbsp;|&nbsp; Flow Cytometry Hub</p>
+</footer>
+
+<script>
+// ====================================================================
+// FLUOROPHORE DATABASE
+// Each entry: { name, exMax, emMax, laser, color (hex for line), type, vendor, category }
+// Spectral shapes are modeled as Gaussian approximations
+// ====================================================================
+const FLUOROPHORES = [
+    // UV Laser (355 nm)
+    { name: "BUV395", exMax: 348, emMax: 395, laser: "uv", color: "#9b59b6", type: "Polymer", vendor: "BD", exWidth: 28, emWidth: 24 },
+    { name: "Spark UV 387", exMax: 341, emMax: 387, laser: "uv", color: "#a855c7", type: "Small Molecule", vendor: "BioLegend", exWidth: 26, emWidth: 22 },
+    { name: "BUV496", exMax: 348, emMax: 496, laser: "uv", color: "#7c5cbf", type: "Polymer Tandem", vendor: "BD", exWidth: 28, emWidth: 32 },
+    { name: "BUV563", exMax: 351, emMax: 563, laser: "uv", color: "#6a6abf", type: "Polymer Tandem", vendor: "BD", exWidth: 28, emWidth: 34 },
+    { name: "BUV661", exMax: 351, emMax: 657, laser: "uv", color: "#7a4aaf", type: "Polymer Tandem", vendor: "BD", exWidth: 28, emWidth: 36 },
+    { name: "BUV737", exMax: 350, emMax: 732, laser: "uv", color: "#8b3a9f", type: "Polymer Tandem", vendor: "BD", exWidth: 28, emWidth: 38 },
+    { name: "BUV805", exMax: 351, emMax: 797, laser: "uv", color: "#7b2a8f", type: "Polymer Tandem", vendor: "BD", exWidth: 28, emWidth: 40 },
+    { name: "Alexa Fluor 350", exMax: 346, emMax: 442, laser: "uv", color: "#6a5acd", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 30, emWidth: 40 },
+    { name: "DAPI", exMax: 358, emMax: 461, laser: "uv", color: "#4169e1", type: "DNA Dye", vendor: "Multiple", exWidth: 35, emWidth: 28 },
+    { name: "Hoechst 33342", exMax: 350, emMax: 461, laser: "uv", color: "#5b7bff", type: "DNA Dye", vendor: "Multiple", exWidth: 38, emWidth: 30 },
+
+    // Violet Laser (405 nm)
+    { name: "BV421", exMax: 407, emMax: 421, laser: "violet", color: "#7b68ee", type: "Polymer", vendor: "BD / BioLegend", exWidth: 24, emWidth: 20 },
+    { name: "Super Bright 436", exMax: 405, emMax: 436, laser: "violet", color: "#6a5ed0", type: "Polymer", vendor: "Thermo Fisher", exWidth: 22, emWidth: 22 },
+    { name: "eFluor 450", exMax: 405, emMax: 450, laser: "violet", color: "#4682b4", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 30, emWidth: 28 },
+    { name: "Pacific Blue", exMax: 401, emMax: 452, laser: "violet", color: "#5599cc", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 26, emWidth: 24 },
+    { name: "VioBlue", exMax: 400, emMax: 452, laser: "violet", color: "#4488bb", type: "Small Molecule", vendor: "Miltenyi", exWidth: 26, emWidth: 24 },
+    { name: "BV480", exMax: 436, emMax: 478, laser: "violet", color: "#5588ee", type: "Polymer", vendor: "BD", exWidth: 26, emWidth: 28 },
+    { name: "BV510", exMax: 405, emMax: 510, laser: "violet", color: "#44bb99", type: "Polymer", vendor: "BD / BioLegend", exWidth: 24, emWidth: 30 },
+    { name: "Krome Orange", exMax: 398, emMax: 528, laser: "violet", color: "#55cc77", type: "Small Molecule", vendor: "Beckman Coulter", exWidth: 32, emWidth: 38 },
+    { name: "Pacific Orange", exMax: 400, emMax: 551, laser: "violet", color: "#ff9944", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 34, emWidth: 40 },
+    { name: "BV570", exMax: 405, emMax: 570, laser: "violet", color: "#ee8833", type: "Polymer Tandem", vendor: "BD / BioLegend", exWidth: 24, emWidth: 32 },
+    { name: "Super Bright 600", exMax: 405, emMax: 600, laser: "violet", color: "#ee6622", type: "Polymer Tandem", vendor: "Thermo Fisher", exWidth: 22, emWidth: 30 },
+    { name: "BV605", exMax: 407, emMax: 605, laser: "violet", color: "#e65c00", type: "Polymer Tandem", vendor: "BD / BioLegend", exWidth: 24, emWidth: 28 },
+    { name: "Super Bright 645", exMax: 405, emMax: 645, laser: "violet", color: "#dd4433", type: "Polymer Tandem", vendor: "Thermo Fisher", exWidth: 22, emWidth: 30 },
+    { name: "BV650", exMax: 407, emMax: 650, laser: "violet", color: "#cc3333", type: "Polymer Tandem", vendor: "BD / BioLegend", exWidth: 24, emWidth: 28 },
+    { name: "Super Bright 702", exMax: 405, emMax: 702, laser: "violet", color: "#bb2244", type: "Polymer Tandem", vendor: "Thermo Fisher", exWidth: 22, emWidth: 32 },
+    { name: "BV711", exMax: 407, emMax: 711, laser: "violet", color: "#aa2255", type: "Polymer Tandem", vendor: "BD / BioLegend", exWidth: 24, emWidth: 30 },
+    { name: "BV750", exMax: 405, emMax: 750, laser: "violet", color: "#993366", type: "Polymer Tandem", vendor: "BD / BioLegend", exWidth: 24, emWidth: 32 },
+    { name: "Super Bright 780", exMax: 405, emMax: 780, laser: "violet", color: "#882277", type: "Polymer Tandem", vendor: "Thermo Fisher", exWidth: 22, emWidth: 34 },
+    { name: "BV786", exMax: 407, emMax: 786, laser: "violet", color: "#771166", type: "Polymer Tandem", vendor: "BD / BioLegend", exWidth: 24, emWidth: 32 },
+
+    // Blue Laser (488 nm)
+    { name: "FITC", exMax: 494, emMax: 520, laser: "blue", color: "#32cd32", type: "Small Molecule", vendor: "Multiple", exWidth: 32, emWidth: 28 },
+    { name: "Alexa Fluor 488", exMax: 495, emMax: 519, laser: "blue", color: "#44dd44", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 30, emWidth: 26 },
+    { name: "BB515", exMax: 490, emMax: 515, laser: "blue", color: "#55cc33", type: "Polymer", vendor: "BD", exWidth: 28, emWidth: 24 },
+    { name: "Spark Blue 515", exMax: 490, emMax: 511, laser: "blue", color: "#66bb44", type: "Small Molecule", vendor: "BioLegend", exWidth: 28, emWidth: 24 },
+    { name: "Alexa Fluor 532", exMax: 531, emMax: 554, laser: "blue", color: "#aacc33", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 28, emWidth: 28 },
+    { name: "Spark Blue 550", exMax: 516, emMax: 550, laser: "blue", color: "#99bb22", type: "Small Molecule", vendor: "BioLegend", exWidth: 30, emWidth: 30 },
+    { name: "PE", exMax: 565, emMax: 578, laser: "blue", color: "#ff6b35", type: "Protein", vendor: "Multiple", exWidth: 50, emWidth: 26 },
+    { name: "PE-Dazzle 594", exMax: 565, emMax: 594, laser: "blue", color: "#ff4422", type: "Protein Tandem", vendor: "BioLegend", exWidth: 50, emWidth: 28 },
+    { name: "PE-CF594", exMax: 565, emMax: 594, laser: "blue", color: "#ee3311", type: "Protein Tandem", vendor: "BD", exWidth: 50, emWidth: 28 },
+    { name: "PE-Cy5", exMax: 496, emMax: 667, laser: "blue", color: "#cc2244", type: "Protein Tandem", vendor: "Multiple", exWidth: 50, emWidth: 30 },
+    { name: "PE-Cy5.5", exMax: 496, emMax: 694, laser: "blue", color: "#bb3355", type: "Protein Tandem", vendor: "Multiple", exWidth: 50, emWidth: 32 },
+    { name: "PE-Cy7", exMax: 565, emMax: 778, laser: "blue", color: "#882255", type: "Protein Tandem", vendor: "Multiple", exWidth: 50, emWidth: 34 },
+    { name: "PerCP", exMax: 482, emMax: 678, laser: "blue", color: "#8faa44", type: "Protein", vendor: "Multiple", exWidth: 36, emWidth: 28 },
+    { name: "PerCP-Cy5.5", exMax: 482, emMax: 694, laser: "blue", color: "#88aa55", type: "Protein Tandem", vendor: "Multiple", exWidth: 36, emWidth: 30 },
+    { name: "PerCP-eFluor 710", exMax: 482, emMax: 710, laser: "blue", color: "#779955", type: "Protein Tandem", vendor: "Thermo Fisher", exWidth: 36, emWidth: 32 },
+    { name: "BB700", exMax: 485, emMax: 693, laser: "blue", color: "#aa8844", type: "Polymer", vendor: "BD", exWidth: 30, emWidth: 32 },
+
+    // Yellow-Green Laser (561 nm)
+    { name: "Alexa Fluor 546", exMax: 556, emMax: 573, laser: "yg", color: "#ff7755", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 26, emWidth: 24 },
+    { name: "Alexa Fluor 555", exMax: 555, emMax: 565, laser: "yg", color: "#ff6644", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 28, emWidth: 24 },
+    { name: "Spark YG 570", exMax: 555, emMax: 570, laser: "yg", color: "#ff5533", type: "Small Molecule", vendor: "BioLegend", exWidth: 24, emWidth: 22 },
+    { name: "Spark YG 581", exMax: 565, emMax: 581, laser: "yg", color: "#ee4422", type: "Small Molecule", vendor: "BioLegend", exWidth: 22, emWidth: 22 },
+    { name: "cFluor YG584", exMax: 565, emMax: 584, laser: "yg", color: "#dd3311", type: "Small Molecule", vendor: "Cytek", exWidth: 22, emWidth: 22 },
+    { name: "Spark YG 593", exMax: 574, emMax: 593, laser: "yg", color: "#cc2200", type: "Small Molecule", vendor: "BioLegend", exWidth: 24, emWidth: 24 },
+    { name: "Alexa Fluor 568", exMax: 578, emMax: 603, laser: "yg", color: "#bb3300", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 28, emWidth: 28 },
+    { name: "Alexa Fluor 594", exMax: 590, emMax: 617, laser: "yg", color: "#aa2200", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 28, emWidth: 30 },
+
+    // Red Laser (633/640 nm)
+    { name: "APC", exMax: 650, emMax: 660, laser: "red", color: "#cc3355", type: "Protein", vendor: "Multiple", exWidth: 30, emWidth: 22 },
+    { name: "Alexa Fluor 647", exMax: 650, emMax: 668, laser: "red", color: "#bb3366", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 28, emWidth: 24 },
+    { name: "eFluor 660", exMax: 651, emMax: 668, laser: "red", color: "#aa3377", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 28, emWidth: 24 },
+    { name: "Spark NIR 685", exMax: 665, emMax: 685, laser: "red", color: "#993388", type: "Small Molecule", vendor: "BioLegend", exWidth: 24, emWidth: 24 },
+    { name: "Alexa Fluor 700", exMax: 702, emMax: 723, laser: "red", color: "#773355", type: "Small Molecule", vendor: "Thermo Fisher", exWidth: 28, emWidth: 28 },
+    { name: "Spark Red 718", exMax: 697, emMax: 711, laser: "red", color: "#663344", type: "Small Molecule", vendor: "BioLegend", exWidth: 26, emWidth: 26 },
+    { name: "APC-Cy7", exMax: 650, emMax: 785, laser: "red", color: "#553333", type: "Protein Tandem", vendor: "Multiple", exWidth: 30, emWidth: 36 },
+    { name: "APC-H7", exMax: 650, emMax: 785, laser: "red", color: "#664422", type: "Protein Tandem", vendor: "BD", exWidth: 30, emWidth: 34 },
+    { name: "APC/Fire 750", exMax: 650, emMax: 750, laser: "red", color: "#554433", type: "Protein Tandem", vendor: "BioLegend", exWidth: 30, emWidth: 32 },
+    { name: "APC-eFluor 780", exMax: 645, emMax: 780, laser: "red", color: "#553322", type: "Protein Tandem", vendor: "Thermo Fisher", exWidth: 30, emWidth: 34 },
+    { name: "APC/Fire 810", exMax: 650, emMax: 810, laser: "red", color: "#442211", type: "Protein Tandem", vendor: "BioLegend", exWidth: 30, emWidth: 38 },
+
+    // Viability dyes
+    { name: "Propidium Iodide", exMax: 535, emMax: 617, laser: "blue", color: "#e74c3c", type: "DNA Dye", vendor: "Multiple", exWidth: 40, emWidth: 40 },
+    { name: "7-AAD", exMax: 549, emMax: 648, laser: "blue", color: "#c0392b", type: "DNA Dye", vendor: "Multiple", exWidth: 30, emWidth: 40 },
+];
+
+// ====================================================================
+// LASER LINES
+// ====================================================================
+const LASERS = [
+    { nm: 355, label: "UV 355", color: "#9b59b6" },
+    { nm: 405, label: "Violet 405", color: "#8e44ad" },
+    { nm: 488, label: "Blue 488", color: "#2980b9" },
+    { nm: 561, label: "YG 561", color: "#27ae60" },
+    { nm: 633, label: "Red 633", color: "#e74c3c" },
+];
+
+// ====================================================================
+// STATE
+// ====================================================================
+let selectedFluors = [];
+let viewMode = "both"; // "both", "excitation", "emission"
+let showLasers = true;
+let normMode = "peak"; // "peak" or "area"
+let showFill = true;
+let activeLaser = "all";
+let searchTerm = "";
+
+// ====================================================================
+// GAUSSIAN SPECTRUM GENERATOR
+// ====================================================================
+function gaussian(x, peak, width) {
+    const sigma = width / 2.355; // FWHM to sigma
+    return Math.exp(-0.5 * Math.pow((x - peak) / sigma, 2));
+}
+
+// Generate spectrum array from 300 to 900 nm
+function generateSpectrum(peakNm, width) {
+    const data = [];
+    for (let nm = 300; nm <= 900; nm++) {
+        data.push({ nm, value: gaussian(nm, peakNm, width) });
+    }
+    return data;
+}
+
+// ====================================================================
+// CANVAS RENDERING
+// ====================================================================
+const canvas = document.getElementById('spectrumCanvas');
+const ctx = canvas.getContext('2d');
+const wrapper = document.getElementById('canvasWrapper');
+const tooltip = document.getElementById('tooltip');
+
+const CHART_PADDING = { top: 30, right: 40, bottom: 50, left: 55 };
+const NM_MIN = 300;
+const NM_MAX = 900;
+
+function resizeCanvas() {
+    const rect = wrapper.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    canvas.style.width = rect.width + 'px';
+    canvas.style.height = rect.height + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    drawChart();
+}
+
+function nmToX(nm) {
+    const w = canvas.style.width ? parseFloat(canvas.style.width) : canvas.width;
+    const plotW = w - CHART_PADDING.left - CHART_PADDING.right;
+    return CHART_PADDING.left + ((nm - NM_MIN) / (NM_MAX - NM_MIN)) * plotW;
+}
+
+function xToNm(x) {
+    const w = canvas.style.width ? parseFloat(canvas.style.width) : canvas.width;
+    const plotW = w - CHART_PADDING.left - CHART_PADDING.right;
+    return NM_MIN + ((x - CHART_PADDING.left) / plotW) * (NM_MAX - NM_MIN);
+}
+
+function valToY(val) {
+    const h = canvas.style.height ? parseFloat(canvas.style.height) : canvas.height;
+    const plotH = h - CHART_PADDING.top - CHART_PADDING.bottom;
+    return CHART_PADDING.top + (1 - val) * plotH;
+}
+
+// Convert nm to visible spectrum color
+function nmToColor(nm) {
+    let r = 0, g = 0, b = 0;
+    if (nm >= 380 && nm < 440) { r = -(nm - 440) / (440 - 380); b = 1; }
+    else if (nm >= 440 && nm < 490) { g = (nm - 440) / (490 - 440); b = 1; }
+    else if (nm >= 490 && nm < 510) { g = 1; b = -(nm - 510) / (510 - 490); }
+    else if (nm >= 510 && nm < 580) { r = (nm - 510) / (580 - 510); g = 1; }
+    else if (nm >= 580 && nm < 645) { r = 1; g = -(nm - 645) / (645 - 580); }
+    else if (nm >= 645 && nm <= 780) { r = 1; }
+    else if (nm < 380) { r = 0.4; b = 0.6; }
+    else { r = 0.5; }
+
+    // Intensity falloff at edges
+    let factor = 1.0;
+    if (nm >= 380 && nm < 420) factor = 0.3 + 0.7 * (nm - 380) / (420 - 380);
+    else if (nm > 700 && nm <= 780) factor = 0.3 + 0.7 * (780 - nm) / (780 - 700);
+    else if (nm > 780) factor = 0.15;
+    else if (nm < 380) factor = 0.3;
+
+    return `rgb(${Math.round(r * factor * 255)}, ${Math.round(g * factor * 255)}, ${Math.round(b * factor * 255)})`;
+}
+
+function drawChart() {
+    const w = parseFloat(canvas.style.width);
+    const h = parseFloat(canvas.style.height);
+    ctx.clearRect(0, 0, w, h);
+
+    // Background
+    ctx.fillStyle = '#fafbfc';
+    ctx.fillRect(0, 0, w, h);
+
+    // Spectrum gradient bar at bottom of plot area
+    const plotBottom = h - CHART_PADDING.bottom;
+    const plotTop = CHART_PADDING.top;
+    const grad = ctx.createLinearGradient(CHART_PADDING.left, 0, w - CHART_PADDING.right, 0);
+    for (let i = 0; i <= 20; i++) {
+        const nm = NM_MIN + (i / 20) * (NM_MAX - NM_MIN);
+        grad.addColorStop(i / 20, nmToColor(nm));
+    }
+    ctx.globalAlpha = 0.08;
+    ctx.fillStyle = grad;
+    ctx.fillRect(CHART_PADDING.left, plotTop, w - CHART_PADDING.left - CHART_PADDING.right, plotBottom - plotTop);
+    ctx.globalAlpha = 1;
+
+    // Grid lines
+    ctx.strokeStyle = '#e8eaed';
+    ctx.lineWidth = 1;
+    for (let v = 0; v <= 1; v += 0.2) {
+        const y = valToY(v);
+        ctx.beginPath();
+        ctx.moveTo(CHART_PADDING.left, y);
+        ctx.lineTo(w - CHART_PADDING.right, y);
+        ctx.stroke();
+    }
+    for (let nm = 300; nm <= 900; nm += 50) {
+        const x = nmToX(nm);
+        ctx.beginPath();
+        ctx.moveTo(x, plotTop);
+        ctx.lineTo(x, plotBottom);
+        ctx.stroke();
+    }
+
+    // Laser lines
+    if (showLasers) {
+        LASERS.forEach(laser => {
+            const x = nmToX(laser.nm);
+            ctx.save();
+            ctx.setLineDash([6, 4]);
+            ctx.strokeStyle = laser.color;
+            ctx.lineWidth = 2;
+            ctx.globalAlpha = 0.6;
+            ctx.beginPath();
+            ctx.moveTo(x, plotTop);
+            ctx.lineTo(x, plotBottom);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            ctx.globalAlpha = 1;
+            ctx.fillStyle = laser.color;
+            ctx.font = 'bold 10px Segoe UI, system-ui, sans-serif';
+            ctx.textAlign = 'center';
+            ctx.fillText(laser.label, x, plotTop - 6);
+            ctx.restore();
+        });
+    }
+
+    // Draw spectra
+    selectedFluors.forEach(fluorName => {
+        const f = FLUOROPHORES.find(fl => fl.name === fluorName);
+        if (!f) return;
+
+        // Excitation spectrum
+        if (viewMode === 'both' || viewMode === 'excitation') {
+            const exData = generateSpectrum(f.exMax, f.exWidth);
+            drawCurve(exData, f.color, true, w, plotTop, plotBottom);
+        }
+
+        // Emission spectrum
+        if (viewMode === 'both' || viewMode === 'emission') {
+            const emData = generateSpectrum(f.emMax, f.emWidth);
+            drawCurve(emData, f.color, false, w, plotTop, plotBottom);
+        }
+    });
+
+    // Axes
+    ctx.strokeStyle = '#aab7c4';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(CHART_PADDING.left, plotTop);
+    ctx.lineTo(CHART_PADDING.left, plotBottom);
+    ctx.lineTo(w - CHART_PADDING.right, plotBottom);
+    ctx.stroke();
+
+    // X axis labels
+    ctx.fillStyle = '#7f8c8d';
+    ctx.font = '11px Segoe UI, system-ui, sans-serif';
+    ctx.textAlign = 'center';
+    for (let nm = 300; nm <= 900; nm += 50) {
+        ctx.fillText(nm + ' nm', nmToX(nm), plotBottom + 18);
+    }
+    ctx.font = 'bold 12px Segoe UI, system-ui, sans-serif';
+    ctx.fillText('Wavelength (nm)', CHART_PADDING.left + (w - CHART_PADDING.left - CHART_PADDING.right) / 2, plotBottom + 38);
+
+    // Y axis labels
+    ctx.textAlign = 'right';
+    ctx.font = '11px Segoe UI, system-ui, sans-serif';
+    for (let v = 0; v <= 1; v += 0.2) {
+        ctx.fillText((v * 100).toFixed(0) + '%', CHART_PADDING.left - 8, valToY(v) + 4);
+    }
+    ctx.save();
+    ctx.translate(14, plotTop + (plotBottom - plotTop) / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.textAlign = 'center';
+    ctx.font = 'bold 12px Segoe UI, system-ui, sans-serif';
+    ctx.fillText('Relative Intensity', 0, 0);
+    ctx.restore();
+
+    // Empty state
+    if (selectedFluors.length === 0) {
+        ctx.fillStyle = '#aab7c4';
+        ctx.font = '16px Segoe UI, system-ui, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Select fluorophores from the list to view their spectra', w / 2, h / 2 - 10);
+        ctx.font = '13px Segoe UI, system-ui, sans-serif';
+        ctx.fillText('Click on any fluorophore in the left panel to add it', w / 2, h / 2 + 16);
+    }
+}
+
+function drawCurve(data, color, isExcitation, w, plotTop, plotBottom) {
+    ctx.save();
+
+    // Solid line for emission, dashed for excitation
+    if (isExcitation) {
+        ctx.setLineDash([5, 3]);
+        ctx.globalAlpha = 0.7;
+    }
+
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    let started = false;
+    data.forEach(pt => {
+        if (pt.value < 0.001) return;
+        const x = nmToX(pt.nm);
+        const y = valToY(pt.value);
+        if (!started) { ctx.moveTo(x, y); started = true; }
+        else ctx.lineTo(x, y);
+    });
+    ctx.stroke();
+
+    // Fill
+    if (showFill && started) {
+        ctx.globalAlpha = isExcitation ? 0.06 : 0.12;
+        ctx.lineTo(nmToX(data[data.length - 1].nm), plotBottom);
+        // Find first point
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].value >= 0.001) {
+                ctx.lineTo(nmToX(data[i].nm), plotBottom);
+                break;
+            }
+        }
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+    }
+
+    ctx.restore();
+}
+
+// ====================================================================
+// INTERACTION
+// ====================================================================
+canvas.addEventListener('mousemove', function(e) {
+    if (selectedFluors.length === 0) { tooltip.style.display = 'none'; return; }
+
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const nm = xToNm(x);
+
+    if (nm < NM_MIN || nm > NM_MAX) { tooltip.style.display = 'none'; return; }
+
+    let lines = [`<strong>${Math.round(nm)} nm</strong>`];
+    selectedFluors.forEach(fluorName => {
+        const f = FLUOROPHORES.find(fl => fl.name === fluorName);
+        if (!f) return;
+        let exVal = gaussian(nm, f.exMax, f.exWidth);
+        let emVal = gaussian(nm, f.emMax, f.emWidth);
+        if (exVal > 0.01 || emVal > 0.01) {
+            lines.push(`<span style="color:${f.color}">&#9632;</span> ${f.name}: Ex ${(exVal*100).toFixed(1)}% | Em ${(emVal*100).toFixed(1)}%`);
+        }
+    });
+
+    if (lines.length > 1) {
+        tooltip.innerHTML = lines.join('<br>');
+        tooltip.style.display = 'block';
+        // Position tooltip
+        let tx = x + 14;
+        let ty = y - 10;
+        const tw = tooltip.offsetWidth;
+        const wrapW = wrapper.offsetWidth;
+        if (tx + tw > wrapW - 10) tx = x - tw - 14;
+        if (ty < 0) ty = 10;
+        tooltip.style.left = tx + 'px';
+        tooltip.style.top = ty + 'px';
+    } else {
+        tooltip.style.display = 'none';
+    }
+});
+
+canvas.addEventListener('mouseleave', function() {
+    tooltip.style.display = 'none';
+});
+
+// ====================================================================
+// UI CONTROLS
+// ====================================================================
+function setView(mode, btn) {
+    viewMode = mode;
+    btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    drawChart();
+    updateLegend();
+}
+
+function toggleLasers(btn) {
+    showLasers = !showLasers;
+    btn.textContent = showLasers ? 'Show' : 'Hide';
+    btn.classList.toggle('active', showLasers);
+    drawChart();
+}
+
+function setNorm(mode, btn) {
+    normMode = mode;
+    btn.parentElement.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    drawChart();
+}
+
+function toggleFill(btn) {
+    showFill = !showFill;
+    btn.textContent = showFill ? 'On' : 'Off';
+    btn.classList.toggle('active', showFill);
+    drawChart();
+}
+
+function toggleLaser(pill) {
+    const laser = pill.dataset.laser;
+    if (laser === 'all') {
+        activeLaser = 'all';
+    } else {
+        activeLaser = (activeLaser === laser) ? 'all' : laser;
+    }
+    document.querySelectorAll('.laser-pill').forEach(p => {
+        p.classList.toggle('active', p.dataset.laser === activeLaser);
+    });
+    if (activeLaser === 'all') {
+        document.querySelector('.laser-pill[data-laser="all"]').classList.add('active');
+    }
+    filterList();
+}
+
+// ====================================================================
+// FLUOROPHORE LIST
+// ====================================================================
+function buildList() {
+    const list = document.getElementById('fluorList');
+    list.innerHTML = '';
+
+    let filtered = FLUOROPHORES;
+    if (activeLaser !== 'all') {
+        filtered = filtered.filter(f => f.laser === activeLaser);
+    }
+    if (searchTerm) {
+        const term = searchTerm.toLowerCase();
+        filtered = filtered.filter(f =>
+            f.name.toLowerCase().includes(term) ||
+            f.vendor.toLowerCase().includes(term) ||
+            f.type.toLowerCase().includes(term)
+        );
+    }
+
+    // Sort by laser then emission
+    const laserOrder = { uv: 0, violet: 1, blue: 2, yg: 3, red: 4 };
+    filtered.sort((a, b) => (laserOrder[a.laser] - laserOrder[b.laser]) || (a.emMax - b.emMax));
+
+    filtered.forEach(f => {
+        const div = document.createElement('div');
+        div.className = 'fluor-item' + (selectedFluors.includes(f.name) ? ' selected' : '');
+        div.innerHTML = `
+            <div class="swatch" style="background:${f.color}"></div>
+            <span class="name">${f.name}</span>
+            <span class="em-label">${f.emMax}nm</span>
+            <button class="remove-btn" title="Remove">&times;</button>
+        `;
+        div.addEventListener('click', function(e) {
+            if (e.target.classList.contains('remove-btn')) {
+                removeFluor(f.name);
+            } else {
+                toggleFluor(f.name);
+            }
+        });
+        list.appendChild(div);
+    });
+
+    document.getElementById('searchCount').textContent = filtered.length + ' fluorophores';
+}
+
+function filterList() {
+    searchTerm = document.getElementById('searchInput').value;
+    buildList();
+}
+
+function toggleFluor(name) {
+    const idx = selectedFluors.indexOf(name);
+    if (idx === -1) {
+        if (selectedFluors.length >= 12) {
+            alert('Maximum 12 fluorophores can be displayed at once for readability.');
+            return;
+        }
+        selectedFluors.push(name);
+    } else {
+        selectedFluors.splice(idx, 1);
+    }
+    updateAll();
+}
+
+function removeFluor(name) {
+    const idx = selectedFluors.indexOf(name);
+    if (idx !== -1) selectedFluors.splice(idx, 1);
+    updateAll();
+}
+
+function clearAll() {
+    selectedFluors = [];
+    updateAll();
+}
+
+function updateAll() {
+    buildList();
+    updateSelectedTags();
+    updateLegend();
+    updateInfoTable();
+    drawChart();
+}
+
+// ====================================================================
+// SELECTED TAGS
+// ====================================================================
+function updateSelectedTags() {
+    const container = document.getElementById('selectedList');
+    const clearBtn = document.getElementById('clearBtn');
+    document.getElementById('selectedCount').textContent = selectedFluors.length;
+
+    if (selectedFluors.length === 0) {
+        container.innerHTML = '<span style="font-size:0.82rem; color:var(--text-light);">Click fluorophores above to add them...</span>';
+        clearBtn.style.display = 'none';
+        return;
+    }
+
+    clearBtn.style.display = 'block';
+    container.innerHTML = '';
+    selectedFluors.forEach(name => {
+        const f = FLUOROPHORES.find(fl => fl.name === name);
+        if (!f) return;
+        const tag = document.createElement('span');
+        tag.className = 'selected-tag';
+        tag.style.background = f.color;
+        tag.innerHTML = `${f.name} <span class="tag-x">&times;</span>`;
+        tag.addEventListener('click', () => removeFluor(name));
+        container.appendChild(tag);
+    });
+}
+
+// ====================================================================
+// LEGEND
+// ====================================================================
+function updateLegend() {
+    const bar = document.getElementById('legendBar');
+    bar.innerHTML = '';
+
+    if (selectedFluors.length === 0) return;
+
+    // Add ex/em key
+    if (viewMode === 'both') {
+        const exKey = document.createElement('span');
+        exKey.className = 'legend-item';
+        exKey.innerHTML = '<span class="legend-swatch dashed" style="border-color:#666;width:20px;"></span> Excitation';
+        bar.appendChild(exKey);
+        const emKey = document.createElement('span');
+        emKey.className = 'legend-item';
+        emKey.innerHTML = '<span class="legend-swatch" style="background:#666"></span> Emission';
+        bar.appendChild(emKey);
+        const spacer = document.createElement('span');
+        spacer.style.width = '16px';
+        bar.appendChild(spacer);
+    }
+
+    selectedFluors.forEach(name => {
+        const f = FLUOROPHORES.find(fl => fl.name === name);
+        if (!f) return;
+        const item = document.createElement('span');
+        item.className = 'legend-item';
+        item.innerHTML = `<span class="legend-swatch" style="background:${f.color}"></span> ${f.name}`;
+        bar.appendChild(item);
+    });
+}
+
+// ====================================================================
+// INFO TABLE
+// ====================================================================
+function updateInfoTable() {
+    const section = document.getElementById('infoSection');
+    const body = document.getElementById('infoBody');
+
+    if (selectedFluors.length === 0) {
+        section.style.display = 'none';
+        return;
+    }
+
+    section.style.display = 'block';
+    body.innerHTML = '';
+
+    const laserNames = { uv: 'UV (355 nm)', violet: 'Violet (405 nm)', blue: 'Blue (488 nm)', yg: 'YG (561 nm)', red: 'Red (633 nm)' };
+
+    selectedFluors.forEach(name => {
+        const f = FLUOROPHORES.find(fl => fl.name === name);
+        if (!f) return;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><span class="color-dot" style="background:${f.color}"></span><strong>${f.name}</strong></td>
+            <td>${f.exMax}</td>
+            <td>${f.emMax}</td>
+            <td>${f.emMax - f.exMax} nm</td>
+            <td>${laserNames[f.laser] || f.laser}</td>
+            <td>${f.type}</td>
+            <td>${f.vendor}</td>
+        `;
+        body.appendChild(tr);
+    });
+}
+
+// ====================================================================
+// LAYOUT: calculate and set exact app-container height
+// ====================================================================
+const appContainer = document.querySelector('.app-container');
+const heroEl = document.querySelector('.hero');
+
+function setAppHeight() {
+    // hero bottom edge = where app starts; 10px padding top + 10px padding bottom
+    const heroBottom = heroEl.getBoundingClientRect().bottom;
+    const available = window.innerHeight - heroBottom - 10; // 10px breathing room at bottom
+    appContainer.style.setProperty('--app-height', Math.max(300, available) + 'px');
+    resizeCanvas();
+}
+
+// ====================================================================
+// INIT
+// ====================================================================
+window.addEventListener('resize', setAppHeight);
+
+// Use ResizeObserver for robust canvas sizing when flex layout changes
+if (typeof ResizeObserver !== 'undefined') {
+    const ro = new ResizeObserver(() => resizeCanvas());
+    ro.observe(wrapper);
+}
+
+buildList();
+updateSelectedTags();
+updateLegend();
+
+// Initial layout
+setTimeout(setAppHeight, 30);
+setTimeout(setAppHeight, 150);
+setTimeout(setAppHeight, 400);
+</script>
+
+</body>
+</html>

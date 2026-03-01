@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluidics &amp; Hydrodynamic Focusing | Flow Cytometry Hub</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --primary-dark: #0e2f44;
+            --accent: #27ae60;
+            --accent-light: #2ecc71;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --bg: #f4f6f9;
+            --bg-card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .nav-links { display: flex; list-style: none; gap: 0; }
+        .nav-links a { color: #ccd6dd; text-decoration: none; padding: 16px 18px; display: block; font-size: 0.9rem; font-weight: 500; white-space: nowrap; transition: all 0.2s; border-bottom: 3px solid transparent; margin-bottom: -3px; }
+        .nav-links a:hover, .nav-links a.active { color: #fff; background: rgba(255,255,255,0.08); border-bottom-color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 60px 20px 40px; text-align: center; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
+        .content-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; margin-bottom: 30px; border-left: 4px solid var(--primary-light); }
+        .content-section.accent-green { border-left-color: var(--accent); }
+        .content-section.accent-orange { border-left-color: var(--warning); }
+        .content-section.accent-red { border-left-color: var(--danger); }
+        .content-section.accent-purple { border-left-color: #8e44ad; }
+        .content-section.accent-teal { border-left-color: #16a085; }
+        .content-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .content-section h3 { font-size: 1.15rem; color: var(--primary); margin: 20px 0 10px; }
+        .content-section p { margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
+        .content-section ul, .content-section ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; }
+        .content-section li { margin-bottom: 6px; }
+        .tip { background: #eaf7ee; border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .caution { background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .key-point { background: #eaf2f8; border-left: 3px solid var(--primary-light); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+
+        /* Table of contents */
+        .toc { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 36px; margin-bottom: 30px; }
+        .toc h3 { color: var(--primary); margin-bottom: 14px; font-size: 1.1rem; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--primary-light); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
+        .toc a:hover { color: var(--primary); text-decoration: underline; }
+
+        /* Diagrams */
+        .diagram-container { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 30px; margin: 20px 0; text-align: center; }
+        .diagram-container .caption { font-size: 0.85rem; color: var(--text-light); margin-top: 14px; font-style: italic; }
+        .diagram-label { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+
+        /* Hydrodynamic focusing diagram */
+        .hd-diagram { display: flex; align-items: center; justify-content: center; gap: 0; margin: 10px auto; max-width: 500px; }
+        .hd-nozzle { position: relative; width: 200px; height: 260px; margin: 0 auto; }
+        .hd-outer { position: absolute; left: 50%; transform: translateX(-50%); width: 120px; height: 260px; background: linear-gradient(180deg, #d5f5e3 0%, #a9dfbf 100%); border-radius: 60px 60px 20px 20px; border: 2px solid #27ae60; }
+        .hd-core { position: absolute; left: 50%; transform: translateX(-50%); bottom: 0; width: 16px; height: 180px; background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%); border-radius: 8px 8px 4px 4px; z-index: 2; }
+        .hd-label-sheath { position: absolute; right: -100px; top: 60px; font-size: 0.82rem; color: #27ae60; font-weight: 700; }
+        .hd-label-core { position: absolute; left: -90px; top: 140px; font-size: 0.82rem; color: #e74c3c; font-weight: 700; }
+        .hd-arrow { font-size: 1rem; color: var(--text-light); }
+
+        /* Flow cell comparison */
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .comparison-card { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+        .comparison-card h4 { color: var(--primary); margin-bottom: 8px; }
+        .comparison-card p { font-size: 0.88rem; color: var(--text-light); }
+        .comparison-card .icon-box { width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 1.5rem; }
+
+        /* Data table */
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 16px 0; }
+        .data-table thead { background: var(--primary-dark); color: #fff; }
+        .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: #f0f4f8; }
+
+        footer { background: var(--primary-dark); color: #aab7c4; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+        footer a { color: var(--accent-light); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .content-section { padding: 24px 20px; }
+            .hero h1 { font-size: 1.8rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">Flow<span>Cytometry</span>Hub</a>
+        <ul class="nav-links">
+            <li><a href="index.html#learning">Learning</a></li>
+            <li><a href="index.html#usecases">Use Cases</a></li>
+            <li><a href="index.html#instruments">Instruments</a></li>
+            <li><a href="index.html#reagents">Reagents</a></li>
+            <li><a href="index.html#protocols">Protocols</a></li>
+        </ul>
+        <a href="index.html" class="back-link">&larr; Back to Hub</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>&#128300; Fluidics &amp; Hydrodynamic Focusing</h1>
+    <p>A comprehensive deep-dive into the fluidics system &mdash; the foundation that enables single-cell analysis in every flow cytometer.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rarr; <a href="index.html#learning">Learning</a> &rarr; Fluidics</div>
+</header>
+
+<div class="content">
+
+    <div class="toc">
+        <h3>&#128218; Table of Contents</h3>
+        <ol>
+            <li><a href="#intro">Introduction to Fluidics</a></li>
+            <li><a href="#hydrodynamic">Hydrodynamic Focusing in Detail</a></li>
+            <li><a href="#sheath">Sheath Fluid</a></li>
+            <li><a href="#injection">Sample Injection &amp; Differential Pressure</a></li>
+            <li><a href="#flowcell">Flow Cell Design</a></li>
+            <li><a href="#rates">Flow Rate &amp; Acquisition Speed</a></li>
+            <li><a href="#maintenance">Fluidics Maintenance</a></li>
+            <li><a href="#troubleshooting">Common Problems &amp; Troubleshooting</a></li>
+            <li><a href="#sorting">Advanced: Droplet Generation for Cell Sorting</a></li>
+        </ol>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="content-section" id="intro">
+        <h2>1. Introduction to Fluidics</h2>
+        <p>The fluidics system is the mechanical heart of a flow cytometer. Its job is deceptively simple: deliver cells one at a time through a focused laser beam. In practice, achieving this requires precise engineering of fluid dynamics, pressure regulation, and nozzle geometry.</p>
+        <p>Every measurement a flow cytometer makes &mdash; scatter, fluorescence, imaging &mdash; depends on cells being precisely positioned in the laser interrogation point. If a cell is off-center, the signal will be weak or inconsistent. If two cells arrive simultaneously (a "coincident event"), the data will be corrupted. The fluidics system prevents both problems.</p>
+        <h3>Historical Context</h3>
+        <p>The concept of hydrodynamic focusing for cell analysis was pioneered in the 1960s by Mack Fulwyler (who built the first cell sorter at Los Alamos National Laboratory in 1965) and Wolfgang G&ouml;hde (who created the first fluorescence-based flow cytometer in 1968). The fundamental fluid dynamics principles haven't changed since &mdash; modern instruments simply execute them with greater precision and reliability.</p>
+        <div class="key-point"><strong>Key Principle:</strong> The fluidics system uses the physics of laminar flow to align cells into a single-file stream approximately 10 &micro;m in diameter &mdash; roughly the width of a single cell.</div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="content-section accent-green" id="hydrodynamic">
+        <h2>2. Hydrodynamic Focusing in Detail</h2>
+        <p>Hydrodynamic focusing is the process by which a slower-moving sample stream is compressed and accelerated by a faster-moving sheath fluid, producing a narrow, centered core stream of cells.</p>
+
+        <h3>Laminar Flow Principles</h3>
+        <p>The fluidics system operates entirely in the <strong>laminar flow regime</strong>. In laminar flow, fluid moves in smooth, parallel layers with no turbulent mixing between them. This is critical: if the sample and sheath fluid mixed turbulently, cells would scatter randomly rather than forming a single-file line.</p>
+        <p>The <strong>Reynolds number (Re)</strong> characterizes the flow regime. In a typical flow cytometer nozzle:</p>
+        <ul>
+            <li>Re is typically between 10 and 500 (well below the turbulent threshold of ~2,300)</li>
+            <li>Flow velocities range from 1&ndash;10 m/s depending on instrument and settings</li>
+            <li>Nozzle diameters range from 70&ndash;200 &micro;m</li>
+        </ul>
+
+        <h3>Coaxial Flow Design</h3>
+        <p>The sample stream is injected through a needle (sample injection tube or SIT) into the center of a flowing sheath fluid column. Because both streams are laminar, they flow side-by-side without mixing. The faster sheath fluid compresses the sample core through a converging nozzle, accelerating cells and reducing the core diameter.</p>
+
+        <div class="diagram-container">
+            <h4 style="color: var(--primary); margin-bottom: 16px;">Hydrodynamic Focusing Cross-Section</h4>
+            <div style="display: inline-block; position: relative; width: 220px; height: 300px;">
+                <!-- Outer sheath -->
+                <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 140px; height: 280px; background: linear-gradient(180deg, rgba(39,174,96,0.15), rgba(39,174,96,0.25)); border: 2px solid #27ae60; border-radius: 70px 70px 30px 30px;"></div>
+                <!-- Inner core -->
+                <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 50px; top: 10px; height: 80px; background: linear-gradient(180deg, rgba(231,76,60,0.3), rgba(231,76,60,0.4)); border: 2px dashed #e74c3c; border-radius: 25px 25px 10px 10px;"></div>
+                <!-- Narrowed core -->
+                <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 12px; top: 90px; height: 190px; background: linear-gradient(180deg, rgba(231,76,60,0.5), rgba(231,76,60,0.7)); border-radius: 6px;"></div>
+                <!-- Cells -->
+                <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: #c0392b; border-radius: 50%; top: 120px;"></div>
+                <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: #c0392b; border-radius: 50%; top: 160px;"></div>
+                <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: #c0392b; border-radius: 50%; top: 200px;"></div>
+                <div style="position: absolute; left: 50%; transform: translateX(-50%); width: 8px; height: 8px; background: #c0392b; border-radius: 50%; top: 240px;"></div>
+                <!-- Labels -->
+                <div style="position: absolute; right: -110px; top: 40px; font-size: 0.78rem; color: #27ae60; font-weight: 700;">Sheath Fluid &rarr;</div>
+                <div style="position: absolute; left: -100px; top: 30px; font-size: 0.78rem; color: #e74c3c; font-weight: 700;">&larr; Sample Core</div>
+                <div style="position: absolute; left: -120px; top: 170px; font-size: 0.78rem; color: #c0392b; font-weight: 700;">&larr; Focused Cells</div>
+                <!-- Laser line -->
+                <div style="position: absolute; left: -30px; right: -30px; top: 200px; height: 3px; background: #3498db; opacity: 0.7;"></div>
+                <div style="position: absolute; right: -90px; top: 192px; font-size: 0.75rem; color: #3498db; font-weight: 700;">Laser Beam</div>
+            </div>
+            <div class="caption">Cross-section of hydrodynamic focusing. The sample core (red) is compressed by surrounding sheath fluid (green) into a narrow stream. Cells pass single-file through the laser interrogation point.</div>
+        </div>
+
+        <h3>The Mathematics of Core Diameter</h3>
+        <p>The diameter of the focused sample core is governed by the volumetric flow rate ratio between sample and sheath:</p>
+        <div class="key-point">
+            <strong>Core diameter &asymp; Nozzle diameter &times; &radic;(Q<sub>sample</sub> / Q<sub>total</sub>)</strong><br>
+            Where Q<sub>sample</sub> is sample flow rate and Q<sub>total</sub> = Q<sub>sample</sub> + Q<sub>sheath</sub>
+        </div>
+        <p>For example, with a 100 &micro;m nozzle, a sample-to-sheath ratio of 1:100 gives a core diameter of ~10 &micro;m. Increasing sample pressure widens the core, degrading resolution but increasing throughput.</p>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="content-section accent-orange" id="sheath">
+        <h2>3. Sheath Fluid</h2>
+        <p>The sheath fluid is the carrier liquid that surrounds the sample core. Its selection and preparation are critical to instrument performance.</p>
+
+        <h3>Common Sheath Fluids</h3>
+        <table class="data-table">
+            <thead>
+                <tr><th>Sheath Type</th><th>Common Use</th><th>Notes</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>PBS (Phosphate-Buffered Saline)</td><td>Most research instruments</td><td>Isotonic; maintains cell viability; most versatile</td></tr>
+                <tr><td>Manufacturer-supplied (e.g., BD FACS Flow, Beckman IsoFlow)</td><td>Clinical &amp; standardized use</td><td>Optimized for specific instruments; includes preservatives</td></tr>
+                <tr><td>Deionized (DI) Water</td><td>Some non-biological applications</td><td>Hypotonic &mdash; will lyse cells; only for beads/particles</td></tr>
+                <tr><td>Saline (0.9% NaCl)</td><td>Basic applications</td><td>Isotonic but lacks buffering capacity</td></tr>
+            </tbody>
+        </table>
+
+        <h3>Sheath Fluid Requirements</h3>
+        <ul>
+            <li><strong>Particle-free:</strong> Must be filtered through 0.22 &micro;m or finer filters. Any particles will register as events ("noise").</li>
+            <li><strong>Degassed:</strong> Dissolved air can form micro-bubbles that scatter light and cause false events. Many instruments include inline degassers.</li>
+            <li><strong>Isotonic</strong> (for cell work): Prevents osmotic stress that could alter cell size/scatter.</li>
+            <li><strong>Low fluorescence:</strong> Must not contain autofluorescent contaminants that increase background.</li>
+            <li><strong>Stable pH:</strong> Buffered to physiological pH (~7.2&ndash;7.4) for cell viability and fluorochrome stability.</li>
+        </ul>
+
+        <h3>Flow Rates</h3>
+        <p>Typical sheath flow rates range from <strong>6&ndash;15 mL/min</strong> depending on the instrument. The sheath tank typically holds 2&ndash;20 L, providing 2&ndash;12+ hours of continuous operation. Some instruments (like the Thermo Fisher Attune) use acoustic focusing and consume significantly less sheath fluid (~0.2 mL/min).</p>
+
+        <h3>Pressure Systems</h3>
+        <p>Sheath fluid is pressurized using one of two methods:</p>
+        <ul>
+            <li><strong>Air-over-fluid pressure:</strong> Compressed air or nitrogen pressurizes the sheath tank (common in BD instruments). Typical pressure: 5&ndash;70 psi depending on application (analysis vs. sorting).</li>
+            <li><strong>Syringe pump / peristaltic pump:</strong> Mechanical pumps provide precise volumetric control (common in Beckman Coulter CytoFLEX, some benchtop instruments).</li>
+        </ul>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="content-section accent-red" id="injection">
+        <h2>4. Sample Injection &amp; Differential Pressure</h2>
+        <p>The sample is introduced into the sheath stream via a <strong>sample injection tube (SIT)</strong> &mdash; a narrow-bore needle centered inside the flow cell chamber. The differential pressure between the sample and sheath determines the core stream width and event rate.</p>
+
+        <h3>Differential Pressure</h3>
+        <p>The sample must be at slightly higher pressure than the sheath fluid to flow into the nozzle. The magnitude of this difference controls:</p>
+        <table class="data-table">
+            <thead>
+                <tr><th>Parameter</th><th>Low &Delta;P (Low Flow Rate)</th><th>High &Delta;P (High Flow Rate)</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Core diameter</td><td>~5&ndash;8 &micro;m (narrow)</td><td>~20&ndash;40 &micro;m (wide)</td></tr>
+                <tr><td>Events per second</td><td>200&ndash;2,000</td><td>5,000&ndash;50,000+</td></tr>
+                <tr><td>Resolution (CV)</td><td>Excellent (narrow CV)</td><td>Degraded (wider CV)</td></tr>
+                <tr><td>Doublet/coincidence rate</td><td>Very low</td><td>Higher</td></tr>
+                <tr><td>Cell positioning precision</td><td>Optimal</td><td>Variable (cells may be off-center)</td></tr>
+                <tr><td>Best for</td><td>DNA cell cycle, precise MFI, rare events</td><td>Quick screening, large sample volumes</td></tr>
+            </tbody>
+        </table>
+
+        <div class="caution"><strong>Caution:</strong> Running sample pressure too high is one of the most common beginner mistakes. High event rates come at the cost of resolution (wider CVs), increased doublet rates, and reduced sensitivity. For quantitative assays like DNA cell cycle analysis, always use low sample pressure.</div>
+
+        <h3>Abort Rate &amp; Coincidence</h3>
+        <p>When two cells arrive at the laser interrogation point simultaneously (within the same electronic processing window), the instrument can either:</p>
+        <ul>
+            <li><strong>Record a coincident event:</strong> The combined signal from both cells is recorded as one event (resulting in corrupted data appearing between populations)</li>
+            <li><strong>Abort the event:</strong> Some sorters detect the coincidence and discard the event entirely (reported as the "abort rate")</li>
+        </ul>
+        <p>Keep the abort rate below 2&ndash;5% for quality data. If it exceeds this, reduce sample concentration or decrease sample pressure.</p>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="content-section accent-teal" id="flowcell">
+        <h2>5. Flow Cell Design</h2>
+        <p>The flow cell (also called the flow chamber or cuvette) is where hydrodynamic focusing occurs and where the laser interrogates cells. There are three major design philosophies:</p>
+
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <div class="icon-box" style="background: #d5f5e3;">&#128300;</div>
+                <h4>Jet-in-Air</h4>
+                <p>Sample exits the nozzle as a free-flowing stream in air. The laser hits this stream directly. Used in cell sorters (BD FACSAria, FACSymphony S6) because droplet formation requires a free stream. Excellent signal-to-noise but sensitive to vibration.</p>
+            </div>
+            <div class="comparison-card">
+                <div class="icon-box" style="background: #d6eaf8;">&#128302;</div>
+                <h4>Cuvette (Enclosed)</h4>
+                <p>The stream flows through a sealed quartz or glass channel. The laser passes through the cuvette walls. More stable than jet-in-air; less sensitive to vibration. Used in most analyzers (BD FACSymphony A-series, Sony ID7000). Cannot be used for droplet-based sorting.</p>
+            </div>
+            <div class="comparison-card">
+                <div class="icon-box" style="background: #fdebd0;">&#129516;</div>
+                <h4>Gel-Coupled Cuvette</h4>
+                <p>An optical gel bonds the cuvette to the collection lens, eliminating the air-glass interface and reducing light loss. Used in BD FACSMelody. Provides improved sensitivity with fixed optical alignment &mdash; no daily alignment needed.</p>
+            </div>
+        </div>
+
+        <h3>Special Flow Cell Designs</h3>
+        <ul>
+            <li><strong>Acoustic Focusing (Thermo Fisher Attune):</strong> Uses ultrasonic waves to pre-focus cells before hydrodynamic focusing. This allows a much wider core stream (and therefore much faster flow rates up to 12.5 &micro;L/min) while maintaining single-cell precision. Achieves up to 35,000 events/sec with good CV.</li>
+            <li><strong>Microfluidic Chip Sorting (Sony SH800S, MA900):</strong> Disposable microfluidic chips replace the traditional nozzle/flow cell. Eliminates cross-contamination between experiments and simplifies setup. Sorting is achieved by actuating a microvalve rather than electrostatic deflection.</li>
+            <li><strong>Microcapillary Fluidics (Cytek Guava easyCyte):</strong> Uses microcapillary flow cells that aspirate a precise, known volume, enabling absolute cell counting without calibration beads.</li>
+        </ul>
+
+        <h3>Flow Cell Materials</h3>
+        <p>Most cuvettes are made from <strong>fused quartz</strong> or <strong>optical glass</strong> because these materials:</p>
+        <ul>
+            <li>Have excellent UV transmission (important for UV laser excitation)</li>
+            <li>Have low autofluorescence</li>
+            <li>Are chemically resistant to cleaning reagents</li>
+            <li>Can be optically polished to sub-micron smoothness</li>
+        </ul>
+    </div>
+
+    <!-- Section 6 -->
+    <div class="content-section" id="rates">
+        <h2>6. Flow Rate &amp; Acquisition Speed</h2>
+        <p>Most flow cytometers offer adjustable sample flow rates, typically presented as "Low," "Medium," and "High" settings or as a continuous slider.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>Setting</th><th>Typical Flow Rate (&micro;L/min)</th><th>Events/Second</th><th>Core Diameter</th><th>Recommended Use</th></tr>
+            </thead>
+            <tbody>
+                <tr><td><strong>Low</strong></td><td>10&ndash;12</td><td>200&ndash;1,000</td><td>~5&ndash;8 &micro;m</td><td>DNA cell cycle, precise MFI quantitation, rare event detection</td></tr>
+                <tr><td><strong>Medium</strong></td><td>30&ndash;60</td><td>1,000&ndash;5,000</td><td>~10&ndash;15 &micro;m</td><td>General immunophenotyping, most routine analyses</td></tr>
+                <tr><td><strong>High</strong></td><td>60&ndash;120</td><td>5,000&ndash;20,000+</td><td>~15&ndash;30 &micro;m</td><td>Screening, large panels, high-throughput plate-based assays</td></tr>
+            </tbody>
+        </table>
+
+        <h3>How Many Events to Collect?</h3>
+        <ul>
+            <li><strong>10,000&ndash;50,000 events:</strong> Routine immunophenotyping (if target population is &ge;5%)</li>
+            <li><strong>100,000&ndash;500,000 events:</strong> Multicolor panels with subpopulations at 0.5&ndash;5%</li>
+            <li><strong>500,000&ndash;5,000,000 events:</strong> Rare event detection (MRD, antigen-specific T cells at 0.01&ndash;0.1%)</li>
+        </ul>
+        <div class="tip"><strong>Rule of thumb:</strong> To statistically resolve a population at frequency <em>f</em>, you need at least 100/f total events (e.g., to reliably detect a 0.1% population, collect at least 100,000 events).</div>
+    </div>
+
+    <!-- Section 7 -->
+    <div class="content-section accent-green" id="maintenance">
+        <h2>7. Fluidics Maintenance</h2>
+        <p>Proper fluidics maintenance is essential for data quality and instrument longevity. Most problems in flow cytometry can be traced back to fluidics issues.</p>
+
+        <h3>Daily Startup Procedure</h3>
+        <ol>
+            <li>Check sheath fluid level and waste container.</li>
+            <li>Run startup/priming procedure (instrument-specific).</li>
+            <li>Run DI water or cleaning solution for 5&ndash;10 minutes to clear overnight residue.</li>
+            <li>Run QC beads (CS&T beads for BD, CytoFLEX Daily QC beads for Beckman Coulter).</li>
+            <li>Verify baseline MFI, CV, and laser delay are within specification.</li>
+        </ol>
+
+        <h3>Daily Shutdown Procedure</h3>
+        <ol>
+            <li>Run 10% bleach or cleaning solution for 5&ndash;10 minutes.</li>
+            <li>Run DI water for 5 minutes to remove bleach.</li>
+            <li>Some instruments require air purge to prevent fluid sitting in lines overnight.</li>
+            <li>Empty and rinse waste container.</li>
+        </ol>
+
+        <h3>Weekly/Monthly Maintenance</h3>
+        <ul>
+            <li><strong>Deep clean:</strong> Run enzymatic cleaner (e.g., BD FACSClean, Beckman Coulter Contrad 70) to dissolve protein deposits.</li>
+            <li><strong>Backflush:</strong> Reverse flow through the SIT to dislodge clogs.</li>
+            <li><strong>Filter replacement:</strong> Change inline filters on sheath and sample lines.</li>
+            <li><strong>Tubing inspection:</strong> Check for cracks, discoloration, or biofilm in tubing.</li>
+        </ul>
+    </div>
+
+    <!-- Section 8 -->
+    <div class="content-section accent-red" id="troubleshooting">
+        <h2>8. Common Problems &amp; Troubleshooting</h2>
+
+        <table class="data-table">
+            <thead>
+                <tr><th>Problem</th><th>Symptoms</th><th>Likely Cause</th><th>Solution</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Air bubbles</strong></td>
+                    <td>Erratic event rate; spikes in time vs. parameter plots; sudden FSC/SSC shifts</td>
+                    <td>Air leak in sample line, low sheath fluid, improperly loaded tube</td>
+                    <td>Check tube seating; de-bubble the sample line; backflush; verify sheath level</td>
+                </tr>
+                <tr>
+                    <td><strong>Clog</strong></td>
+                    <td>No events or very low event rate; high backpressure alarm</td>
+                    <td>Cell clumps, debris, protein aggregates in sample or SIT</td>
+                    <td>Filter sample through 40 &micro;m strainer; backflush; sonicate SIT; clean with enzymatic cleaner</td>
+                </tr>
+                <tr>
+                    <td><strong>Unstable stream</strong></td>
+                    <td>Fluctuating event rate; drifting FSC signal; poor CV on QC beads</td>
+                    <td>Worn nozzle, air in sheath lines, pressure regulator malfunction</td>
+                    <td>Prime fluidics; replace nozzle (if jet-in-air); check pressure regulators</td>
+                </tr>
+                <tr>
+                    <td><strong>High background</strong></td>
+                    <td>Excessive "noise" events; high event rate with no sample loaded</td>
+                    <td>Contaminated sheath fluid; dirty flow cell; biofilm</td>
+                    <td>Replace sheath with fresh, filtered fluid; deep clean flow cell; run bleach</td>
+                </tr>
+                <tr>
+                    <td><strong>Doublets/coincidence</strong></td>
+                    <td>Events between populations on dot plots; high abort rate on sorters</td>
+                    <td>Sample concentration too high; flow rate too high; poor sample prep (clumps)</td>
+                    <td>Dilute sample; reduce flow rate; add EDTA or DNase; filter through 40 &micro;m mesh</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip"><strong>Pro Tip:</strong> Always check the <strong>time parameter</strong> first when troubleshooting. Plot any parameter vs. time &mdash; if you see spikes, dropouts, or drift, it's almost always a fluidics issue, not an optical or staining problem.</div>
+    </div>
+
+    <!-- Section 9 -->
+    <div class="content-section accent-purple" id="sorting">
+        <h2>9. Advanced: Droplet Generation for Cell Sorting</h2>
+        <p>In fluorescence-activated cell sorting (FACS), the fluidics system must perform an additional critical function: generating a stable stream of droplets containing single cells that can be electrostatically deflected into collection tubes.</p>
+
+        <h3>How Droplet Sorting Works</h3>
+        <ol>
+            <li><strong>Stream Formation:</strong> Cells exit the nozzle in a jet-in-air stream at high velocity (typically 10&ndash;30 m/s).</li>
+            <li><strong>Piezoelectric Vibration:</strong> A piezo crystal vibrates the nozzle at a specific frequency (typically 20,000&ndash;100,000 Hz), creating regular undulations in the stream.</li>
+            <li><strong>Droplet Break-off:</strong> These undulations grow until the stream breaks into individual droplets at a predictable distance below the nozzle (the "break-off point").</li>
+            <li><strong>Drop Delay Calibration:</strong> The instrument calculates the exact time delay between laser interrogation (where the cell is identified) and the break-off point (where the droplet is formed). This "drop delay" must be calibrated precisely &mdash; typically to within 1/10th of a drop.</li>
+            <li><strong>Charge &amp; Deflection:</strong> When the target droplet containing the desired cell reaches the break-off point, the stream is given an electrical charge (+/&minus; voltage). The charged droplet then passes between deflection plates and is steered into the appropriate collection vessel.</li>
+            <li><strong>Multi-way Sorting:</strong> By varying the charge polarity and magnitude, droplets can be deflected left or right at different angles, enabling 2-way, 4-way, or even 6-way sorting.</li>
+        </ol>
+
+        <h3>Critical Sorting Parameters</h3>
+        <ul>
+            <li><strong>Nozzle size:</strong> 70 &micro;m (standard, higher sort speed), 85 &micro;m (larger cells), 100&ndash;130 &micro;m (very large cells, gentle sorting). Smaller nozzles = faster sort speed but higher pressure.</li>
+            <li><strong>Drop drive frequency:</strong> Determines drops/second. Must be optimized for the specific nozzle and sheath pressure.</li>
+            <li><strong>Sort envelope:</strong> The number of droplets assigned per sort decision (1-drop, 1.5-drop, 2-drop envelope). Wider envelopes increase yield but decrease purity.</li>
+            <li><strong>Sort modes:</strong>
+                <ul>
+                    <li><em>Purity:</em> Aborts sort decision if another cell is within the sort envelope (high purity, lower yield)</li>
+                    <li><em>Yield:</em> Sorts the target cell regardless of nearby cells (high yield, lower purity)</li>
+                    <li><em>Single-cell:</em> Maximum purity for plate sorting; only sorts when exactly one cell is detected (for clonal isolation, single-cell genomics)</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>Sort Speed Considerations</h3>
+        <p>Maximum sort speed is limited by:</p>
+        <ul>
+            <li>Drop drive frequency (e.g., 30 kHz = maximum 30,000 sort decisions/sec)</li>
+            <li>Target population frequency (sorting a 1% population from 30,000 events/sec yields ~300 cells/sec)</li>
+            <li>Sort purity requirements (stricter modes have more aborts)</li>
+            <li>Stream stability and nozzle clogging at high concentrations</li>
+        </ul>
+        <p>Modern high-end sorters (BD FACSymphony S6, Cytek Aurora CS, Thermo Fisher Bigfoot) can process 50,000&ndash;70,000 events/sec with multiple sort streams.</p>
+
+        <div class="caution"><strong>Biosafety Note:</strong> Cell sorting generates aerosols. All sorting must be performed in an appropriate biosafety enclosure (BSC) when working with human samples or infectious agents. Many institutions require sorter-specific biosafety training and risk assessment.</div>
+    </div>
+
+</div>
+
+<footer>
+    <p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p>
+    <p style="margin-top: 8px;">Flow Cytometry Hub &mdash; A comprehensive educational resource for flow cytometry.</p>
+</footer>
+
+</body>
+</html>

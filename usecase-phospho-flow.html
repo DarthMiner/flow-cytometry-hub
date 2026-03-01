@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signal Transduction / Phospho-Flow | Flow Cytometry Hub</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --primary-dark: #0e2f44;
+            --accent: #27ae60;
+            --accent-light: #2ecc71;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --bg: #f4f6f9;
+            --bg-card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 60px 20px 40px; text-align: center; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+        .content { max-width: 1000px; margin: 0 auto; padding: 40px 20px 60px; }
+        .content-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; margin-bottom: 30px; border-left: 4px solid var(--primary-light); }
+        .content-section.accent-green { border-left-color: var(--accent); }
+        .content-section.accent-orange { border-left-color: var(--warning); }
+        .content-section.accent-red { border-left-color: var(--danger); }
+        .content-section.accent-purple { border-left-color: #8e44ad; }
+        .content-section.accent-teal { border-left-color: #16a085; }
+        .content-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .content-section h3 { font-size: 1.15rem; color: var(--primary); margin: 20px 0 10px; }
+        .content-section p { margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
+        .content-section ul, .content-section ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; }
+        .content-section li { margin-bottom: 6px; }
+        .tip { background: #eaf7ee; border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .caution { background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .key-point { background: #eaf2f8; border-left: 3px solid var(--primary-light); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .toc { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 36px; margin-bottom: 30px; }
+        .toc h3 { color: var(--primary); margin-bottom: 14px; font-size: 1.1rem; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--primary-light); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
+        .toc a:hover { color: var(--primary); text-decoration: underline; }
+        .diagram-container { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 30px; margin: 20px 0; text-align: center; }
+        .diagram-container .caption { font-size: 0.85rem; color: var(--text-light); margin-top: 14px; font-style: italic; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .comparison-card { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+        .comparison-card h4 { color: var(--primary); margin-bottom: 8px; }
+        .comparison-card p { font-size: 0.88rem; color: var(--text-light); }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 16px 0; }
+        .data-table thead { background: var(--primary-dark); color: #fff; }
+        .data-table th { padding: 10px 14px; text-align: left; font-weight: 600; }
+        .data-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: #f0f4f8; }
+        footer { background: var(--primary-dark); color: #aab7c4; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+        footer a { color: var(--accent-light); text-decoration: none; }
+        @media (max-width: 768px) {
+            .content-section { padding: 24px 20px; }
+            .hero h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">Flow Cytometry <span>Hub</span></a>
+        <a href="index.html" class="back-link">&larr; Back to Main</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>&#128172; Signal Transduction / Phospho-Flow</h1>
+    <p>Measuring intracellular phosphoprotein signaling at the single-cell level to map pathway activation in heterogeneous populations.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &gt; Use Cases &gt; Phospho-Flow</div>
+</header>
+
+<main class="content">
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#introduction">Introduction to Phospho-Flow Cytometry</a></li>
+            <li><a href="#pathways">Key Signaling Pathways Measurable by Flow</a></li>
+            <li><a href="#fixation">Fixation &amp; Permeabilization for Phospho-Epitopes</a></li>
+            <li><a href="#stimulation">Stimulation &amp; Kinetics</a></li>
+            <li><a href="#antibody-selection">Antibody Selection &amp; Validation</a></li>
+            <li><a href="#panel-design">Panel Design Considerations</a></li>
+            <li><a href="#barcoding">Fluorescent Cell Barcoding (FCB)</a></li>
+            <li><a href="#data-analysis">Data Analysis &amp; Visualization</a></li>
+            <li><a href="#applications">Applications of Phospho-Flow</a></li>
+            <li><a href="#troubleshooting">Troubleshooting Phospho-Flow</a></li>
+        </ol>
+    </div>
+
+    <!-- Section 1: Introduction (no accent) -->
+    <section id="introduction" class="content-section">
+        <h2>1. Introduction to Phospho-Flow Cytometry</h2>
+        <p>Phospho-flow cytometry (also called phosphospecific flow cytometry or intracellular phosphoprotein staining) is a powerful technique that detects the phosphorylation state of intracellular signaling proteins in individual cells. By using antibodies that specifically recognize phosphorylated epitopes on kinases, transcription factors, and adaptor proteins, researchers can measure signaling pathway activation at single-cell resolution.</p>
+        <p>The technique was pioneered in the early 2000s by the laboratory of Garry Nolan at Stanford University. The Nolan lab demonstrated that phosphorylation-specific antibodies could be combined with multiparametric flow cytometry to simultaneously profile multiple signaling nodes across defined cell subsets within heterogeneous samples such as peripheral blood or bone marrow.</p>
+
+        <h3>Advantage over Traditional Methods</h3>
+        <p>Western blotting, the traditional method for measuring protein phosphorylation, provides only a population-level average. If 50% of cells are fully activated and 50% are unresponsive, a Western blot shows a moderate signal&mdash;obscuring the true biology. Phospho-flow reveals this heterogeneity directly, showing bimodal distributions when a subset of cells responds while others do not.</p>
+
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h4>Western Blot</h4>
+                <p>Population average; no single-cell resolution; requires large cell numbers (~10<sup>6</sup>); limited to one pathway at a time</p>
+            </div>
+            <div class="comparison-card">
+                <h4>Phospho-Flow</h4>
+                <p>Single-cell resolution; reveals heterogeneity; correlates signaling with surface phenotype; multiplexed pathway profiling</p>
+            </div>
+            <div class="comparison-card">
+                <h4>Mass Cytometry (CyTOF)</h4>
+                <p>Highest multiplexing (~40+ parameters); no spectral overlap; lower throughput; cells are vaporized (no sorting)</p>
+            </div>
+        </div>
+
+        <div class="key-point"><strong>Key Point:</strong> Bimodal vs. uniform activation matters. A shift in the entire population MFI indicates uniform signaling (e.g., cytokine-driven JAK/STAT). A bimodal distribution (two distinct peaks) indicates that only a subpopulation responds, which is common in heterogeneous samples like PBMCs. Understanding this distinction is essential for correct data interpretation.</div>
+    </section>
+
+    <!-- Section 2: Key Signaling Pathways (green) -->
+    <section id="pathways" class="content-section accent-green">
+        <h2>2. Key Signaling Pathways Measurable by Flow</h2>
+        <p>Phospho-flow cytometry can interrogate a wide range of intracellular signaling cascades. Below are the most commonly studied pathways, along with representative stimuli, phospho-targets, and downstream biological effects.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Pathway</th>
+                    <th>Stimulus</th>
+                    <th>Key Phospho-Targets</th>
+                    <th>Clone / Antibody</th>
+                    <th>Downstream Effects</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>JAK/STAT</td>
+                    <td>IFN-&alpha;, IFN-&gamma;, IL-6, IL-2, IL-7, IL-10, IL-21</td>
+                    <td>pSTAT1 (Y701), pSTAT3 (Y705), pSTAT5 (Y694)</td>
+                    <td>4a (BD), D3A7 (CST)</td>
+                    <td>Gene transcription, proliferation, differentiation</td>
+                </tr>
+                <tr>
+                    <td>MAPK/ERK</td>
+                    <td>PMA, EGF, TCR cross-linking, FLT3 ligand</td>
+                    <td>pERK1/2 (T202/Y204), pMEK1/2 (S217/S221)</td>
+                    <td>20A (BD), D13.14.4E (CST)</td>
+                    <td>Proliferation, survival, differentiation</td>
+                </tr>
+                <tr>
+                    <td>PI3K/AKT/mTOR</td>
+                    <td>Insulin, IL-3, CD28 co-stimulation, growth factors</td>
+                    <td>pAKT (S473), pS6 (S235/S236), p4E-BP1 (T37/T46)</td>
+                    <td>D9E (CST), D57.2.2E (CST)</td>
+                    <td>Metabolism, growth, protein synthesis</td>
+                </tr>
+                <tr>
+                    <td>NF-&kappa;B</td>
+                    <td>TNF-&alpha;, LPS, CD40L, PMA + ionomycin</td>
+                    <td>p-NF-&kappa;B p65 (S529/S536), p-I&kappa;B&alpha; (S32/S36)</td>
+                    <td>K10-895.12.50 (BD)</td>
+                    <td>Inflammation, survival, cytokine production</td>
+                </tr>
+                <tr>
+                    <td>TCR Signaling</td>
+                    <td>Anti-CD3/CD28, SEB, peptide-MHC</td>
+                    <td>pZAP-70 (Y319), pLAT (Y171), pPLC&gamma;2 (Y759)</td>
+                    <td>17A/P-ZAP70 (BD)</td>
+                    <td>T cell activation, calcium flux, NFAT translocation</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="tip"><strong>Tip:</strong> When studying cytokine-driven JAK/STAT signaling, distinct cytokines activate different STAT proteins. For example, IFN-&gamma; primarily induces pSTAT1, while IL-6 primarily drives pSTAT3. Use this specificity to design biologically meaningful panels.</div>
+    </section>
+
+    <!-- Section 3: Fixation & Permeabilization (orange) -->
+    <section id="fixation" class="content-section accent-orange">
+        <h2>3. Fixation &amp; Permeabilization for Phospho-Epitopes</h2>
+        <p>Proper fixation and permeabilization are the most critical steps in phospho-flow. Phosphatases are active within seconds of removing a stimulus, so rapid fixation is essential to preserve the phosphorylation state at the moment of interest.</p>
+
+        <h3>Why Immediate Fixation Matters</h3>
+        <p>Intracellular phosphatases (e.g., SHP-1, PP2A, PTEN) continuously dephosphorylate signaling proteins. Any delay between the end of stimulation and fixation allows phosphatase activity to erase the signal. Best practice is to add pre-warmed paraformaldehyde (PFA) directly to the stimulated cells.</p>
+
+        <h3>The Methanol Permeabilization Approach</h3>
+        <p>Most phospho-epitopes require methanol-based permeabilization for antibody access. After fixation with 1.5&ndash;4% PFA (10&ndash;20 minutes at 37&deg;C or room temperature), cells are permeabilized with 90% ice-cold methanol at &minus;20&deg;C for at least 30 minutes (can be stored overnight or longer).</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Buffer System</th>
+                    <th>Fixative</th>
+                    <th>Permeabilization</th>
+                    <th>Best For</th>
+                    <th>Limitations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PFA + Methanol</td>
+                    <td>1.5&ndash;4% PFA, 10&ndash;20 min</td>
+                    <td>90% MeOH, &minus;20&deg;C, &ge;30 min</td>
+                    <td>Most phospho-epitopes (pSTAT, pERK, pAKT, pS6)</td>
+                    <td>Destroys many surface epitopes &amp; fluorescent proteins</td>
+                </tr>
+                <tr>
+                    <td>BD Phosflow Fix Buffer I</td>
+                    <td>4.2% PFA-based</td>
+                    <td>BD Phosflow Perm Buffer III (methanol-based)</td>
+                    <td>pSTAT1, pSTAT3, pSTAT5, pSTAT6</td>
+                    <td>Optimized for STATs; may not suit all targets</td>
+                </tr>
+                <tr>
+                    <td>BD Phosflow Lyse/Fix + Perm III</td>
+                    <td>Lyse/Fix (PFA + lysis agent)</td>
+                    <td>Perm Buffer III</td>
+                    <td>Whole blood assays; combined RBC lysis &amp; fixation</td>
+                    <td>Fixed lysis concentration; less flexible</td>
+                </tr>
+                <tr>
+                    <td>Saponin-based (e.g., Perm/Wash)</td>
+                    <td>4% PFA</td>
+                    <td>0.1% saponin</td>
+                    <td>Cytokines, some cytoplasmic proteins</td>
+                    <td>Insufficient for most nuclear phospho-targets</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="caution"><strong>Caution:</strong> Methanol permeabilization destroys most fluorescent proteins (GFP, RFP, YFP) and quenches tandem dyes (PE-Cy7, APC-Cy7). It also strips many surface epitopes. Always stain surface markers with methanol-resistant antibody clones <em>before</em> fixation, or identify clones validated for post-methanol staining.</div>
+    </section>
+
+    <!-- Section 4: Stimulation & Kinetics (red) -->
+    <section id="stimulation" class="content-section accent-red">
+        <h2>4. Stimulation &amp; Kinetics</h2>
+        <p>Signal transduction events occur on the order of seconds to minutes. Designing a proper stimulation protocol requires careful attention to timing, temperature, and stimulus concentration.</p>
+
+        <h3>General Stimulation Protocol</h3>
+        <ol>
+            <li>Pre-warm cells to 37&deg;C for 10 minutes in a water bath to equilibrate basal signaling.</li>
+            <li>Add stimulus at the optimized concentration directly to the pre-warmed cell suspension.</li>
+            <li>Incubate at 37&deg;C for the appropriate time (pathway dependent, typically 2&ndash;15 minutes).</li>
+            <li>Fix immediately by adding pre-warmed PFA (final 1.5&ndash;4%) directly to the tube&mdash;do not wash first.</li>
+            <li>Incubate fixative for 10&ndash;20 minutes at 37&deg;C or room temperature.</li>
+        </ol>
+
+        <h3>Kinetics by Pathway</h3>
+        <ul>
+            <li><strong>JAK/STAT (cytokine-driven):</strong> Peak pSTAT typically at 15&ndash;30 minutes for most cytokines. IFN-&alpha;-induced pSTAT1 peaks within 15 min.</li>
+            <li><strong>MAPK/ERK:</strong> Very rapid. PMA-induced pERK1/2 peaks at 5&ndash;10 minutes and may decline by 30 minutes.</li>
+            <li><strong>PI3K/AKT:</strong> pAKT (S473) peaks within 5&ndash;15 minutes depending on stimulus. pS6 is slightly delayed (10&ndash;30 min) as it is further downstream.</li>
+            <li><strong>NF-&kappa;B:</strong> p-I&kappa;B&alpha; peaks rapidly (5&ndash;10 min) as I&kappa;B is phosphorylated and then degraded. p-p65 appears 10&ndash;30 min after stimulus.</li>
+            <li><strong>TCR proximal:</strong> pZAP-70 peaks within 2&ndash;5 minutes; very transient signal.</li>
+        </ul>
+
+        <div class="tip"><strong>Tip:</strong> Phosphorylation events are transient and pathway-specific. Always perform a time-course experiment (e.g., 0, 2, 5, 10, 15, 30, 60 min) when establishing a new assay to identify the optimal stimulation time for your target of interest.</div>
+
+        <h3>Temperature Control</h3>
+        <p>Stimulate cells at 37&deg;C to reflect physiological signaling kinetics. Stimulation at room temperature will delay and dampen responses. After stimulation, add fixative immediately&mdash;do not place cells on ice first, as cooling can alter phosphatase activity and introduce artifacts.</p>
+    </section>
+
+    <!-- Section 5: Antibody Selection & Validation (teal) -->
+    <section id="antibody-selection" class="content-section accent-teal">
+        <h2>5. Antibody Selection &amp; Validation</h2>
+        <p>Phospho-specific antibodies must be carefully selected and validated. Not all phospho-antibodies that work for Western blot will perform in flow cytometry, as the fixation and permeabilization conditions alter epitope presentation.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Target</th>
+                    <th>Phospho-Site</th>
+                    <th>Clone</th>
+                    <th>Vendor</th>
+                    <th>Validated Species</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>pSTAT1</td>
+                    <td>Y701</td>
+                    <td>4a</td>
+                    <td>BD Biosciences</td>
+                    <td>Human, Mouse</td>
+                </tr>
+                <tr>
+                    <td>pSTAT3</td>
+                    <td>Y705</td>
+                    <td>4/P-STAT3</td>
+                    <td>BD Biosciences</td>
+                    <td>Human, Mouse</td>
+                </tr>
+                <tr>
+                    <td>pSTAT5</td>
+                    <td>Y694</td>
+                    <td>47/Stat5(pY694)</td>
+                    <td>BD Biosciences</td>
+                    <td>Human, Mouse</td>
+                </tr>
+                <tr>
+                    <td>pERK1/2</td>
+                    <td>T202/Y204</td>
+                    <td>20A</td>
+                    <td>BD Biosciences</td>
+                    <td>Human, Mouse, Rat</td>
+                </tr>
+                <tr>
+                    <td>pAKT</td>
+                    <td>S473</td>
+                    <td>D9E</td>
+                    <td>Cell Signaling Technology</td>
+                    <td>Human, Mouse, Rat</td>
+                </tr>
+                <tr>
+                    <td>pS6</td>
+                    <td>S235/S236</td>
+                    <td>D57.2.2E</td>
+                    <td>Cell Signaling Technology</td>
+                    <td>Human, Mouse, Rat, Monkey</td>
+                </tr>
+                <tr>
+                    <td>p-p38 MAPK</td>
+                    <td>T180/Y182</td>
+                    <td>36/p38 (pT180/pY182)</td>
+                    <td>BD Biosciences</td>
+                    <td>Human, Mouse</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Validation Strategy</h3>
+        <ul>
+            <li><strong>Positive control:</strong> Use a known stimulus at a saturating dose (e.g., IFN-&alpha; for pSTAT1, PMA for pERK).</li>
+            <li><strong>Negative control:</strong> Unstimulated cells processed identically serve as the baseline.</li>
+            <li><strong>Inhibitor control:</strong> Pre-treat with a pathway-specific inhibitor (e.g., ruxolitinib for JAK/STAT, U0126 for MEK/ERK) to confirm signal specificity.</li>
+            <li><strong>Isotype/FMO control:</strong> Matched isotype controls help assess non-specific binding, although FMO controls are generally preferred for gating.</li>
+        </ul>
+
+        <div class="key-point"><strong>Key Point:</strong> Always use antibody clones that have been specifically validated for phospho-flow (intracellular flow after PFA fixation + methanol perm). A clone that works on Western blot may fail in flow due to epitope masking by fixation or conformational differences.</div>
+    </section>
+
+    <!-- Section 6: Panel Design (purple) -->
+    <section id="panel-design" class="content-section accent-purple">
+        <h2>6. Panel Design Considerations</h2>
+        <p>Designing a phospho-flow panel presents unique challenges compared to standard immunophenotyping. Methanol permeabilization restricts the surface markers and fluorochrome conjugates that can be used.</p>
+
+        <h3>Methanol-Resistant Surface Marker Clones</h3>
+        <p>Only certain antibody clones retain binding capacity after methanol treatment. The following clones have been widely validated for post-methanol staining:</p>
+        <ul>
+            <li><strong>CD3:</strong> UCHT1 (many vendors)</li>
+            <li><strong>CD4:</strong> SK3 / RPA-T4</li>
+            <li><strong>CD8:</strong> SK1 / RPA-T8</li>
+            <li><strong>CD20:</strong> 2H7 / H1 (in some conjugates)</li>
+            <li><strong>CD33:</strong> WM53 / P67.6</li>
+            <li><strong>CD45:</strong> HI30 / 2D1</li>
+        </ul>
+
+        <h3>Fluorochrome Considerations</h3>
+        <p>Methanol quenches tandem dyes (PE-Cy7, PE-Cy5.5, APC-Cy7, PerCP-Cy5.5 partially) and destroys fluorescent proteins. Recommended fluorochromes for phospho-flow panels include:</p>
+        <ul>
+            <li>Alexa Fluor dyes (AF488, AF647, AF700)&mdash;highly methanol-resistant</li>
+            <li>Pacific Blue, Brilliant Violet 421&mdash;generally stable</li>
+            <li>PE and APC&mdash;partially retained; intensity may decrease ~20&ndash;40%</li>
+            <li>FITC&mdash;stable after methanol</li>
+        </ul>
+
+        <h3>DNA Barcoding Strategy</h3>
+        <p>When many conditions must be compared (e.g., multiple stimuli, time points, or donors), fluorescent cell barcoding (FCB) dramatically improves throughput and reduces variability. Cells from different conditions are labeled with unique combinations of amine-reactive dyes, pooled, and then stained together in a single tube. This approach is covered in detail in the next section.</p>
+
+        <div class="key-point"><strong>Key Point:</strong> Fluorescent cell barcoding reduces inter-tube staining variability to near zero, because all conditions are stained in the same tube. This is critical for phospho-flow, where fold-changes between stimulated and unstimulated samples may be subtle.</div>
+    </section>
+
+    <!-- Section 7: Fluorescent Cell Barcoding (no accent) -->
+    <section id="barcoding" class="content-section">
+        <h2>7. Fluorescent Cell Barcoding (FCB)</h2>
+        <p>Fluorescent cell barcoding is a multiplexing technique that enables the simultaneous processing of multiple experimental conditions within a single sample tube. Developed by Krutzik and Nolan, FCB leverages amine-reactive (NHS-ester) dyes at different concentrations to create unique fluorescent signatures for each condition.</p>
+
+        <h3>Principle</h3>
+        <p>Cells from each experimental condition (e.g., stimulated, unstimulated, inhibitor-treated) are fixed and permeabilized, then labeled with a unique combination and concentration of NHS-ester dyes. Common dyes include Pacific Blue NHS ester, Pacific Orange NHS ester, and Alexa Fluor 488 NHS ester. Using 3 dyes at 3 intensity levels each yields up to 3<sup>3</sup> = 27 unique barcodes.</p>
+
+        <h3>Protocol Steps</h3>
+        <ol>
+            <li><strong>Stimulate &amp; Fix:</strong> Stimulate each condition separately, then fix immediately with PFA.</li>
+            <li><strong>Permeabilize:</strong> Permeabilize all conditions with 90% methanol at &minus;20&deg;C.</li>
+            <li><strong>Barcode:</strong> Wash cells into PBS, then incubate each condition with a unique dye combination (NHS-ester dyes at 0, low, and high concentration) for 15&ndash;30 minutes at room temperature.</li>
+            <li><strong>Quench &amp; Pool:</strong> Quench excess dye with protein-containing buffer (e.g., 1% BSA/PBS). Pool all barcoded conditions into a single tube.</li>
+            <li><strong>Stain:</strong> Stain the pooled sample with phospho-specific and surface marker antibodies in one reaction.</li>
+            <li><strong>Acquire &amp; Debarcode:</strong> Acquire on the cytometer. During analysis, separate populations by their barcode dye intensities to recover individual conditions.</li>
+        </ol>
+
+        <div class="tip"><strong>Tip:</strong> Leave sufficient intensity gaps between barcode levels (at least a 5-fold concentration difference between levels) to ensure clean debarcoding. Test barcode dye concentrations on your specific cell type, as labeling efficiency varies with cell size and protein content.</div>
+    </section>
+
+    <!-- Section 8: Data Analysis (green) -->
+    <section id="data-analysis" class="content-section accent-green">
+        <h2>8. Data Analysis &amp; Visualization</h2>
+        <p>Phospho-flow data analysis requires careful consideration of metrics, transformations, and visualization approaches. Unlike surface marker staining where populations are discretely positive or negative, phospho-protein signals are often continuous shifts in fluorescence intensity.</p>
+
+        <h3>Key Metrics</h3>
+        <ul>
+            <li><strong>Fold-Change in MFI:</strong> Calculated as MFI<sub>stimulated</sub> / MFI<sub>unstimulated</sub> for each cell population. Simple and intuitive but sensitive to instrument settings.</li>
+            <li><strong>Percent Responding:</strong> The percentage of cells above a threshold (often set by the unstimulated control). Useful for bimodal responses.</li>
+            <li><strong>Arcsinh Ratio:</strong> arcsinh(MFI<sub>stim</sub> / cofactor) &minus; arcsinh(MFI<sub>unstim</sub> / cofactor). The arcsinh (inverse hyperbolic sine) transformation linearizes the data at low values while compressing high values, providing a more robust metric than simple fold-change.</li>
+        </ul>
+
+        <h3>High-Dimensional Visualization</h3>
+        <p>When measuring multiple phospho-proteins simultaneously, traditional bivariate plots become insufficient. Modern dimensionality reduction and clustering approaches are invaluable:</p>
+        <ul>
+            <li><strong>SPADE (Spanning-tree Progression Analysis of Density-normalized Events):</strong> Creates hierarchical trees of cell populations, useful for mapping signaling across a continuum of cell states.</li>
+            <li><strong>viSNE / tSNE:</strong> Non-linear dimensionality reduction that preserves local structure. Phospho-protein intensities can be overlaid as color maps on tSNE plots to reveal signaling patterns across cell subsets.</li>
+            <li><strong>UMAP:</strong> Uniform Manifold Approximation and Projection provides faster computation and better preservation of global structure compared to tSNE. Increasingly the method of choice for large phospho-flow datasets.</li>
+            <li><strong>Heatmaps:</strong> Signaling response heatmaps display fold-change or arcsinh ratio values for each phospho-protein (columns) across cell subsets or conditions (rows), providing a compact overview of signaling architecture.</li>
+        </ul>
+
+        <div class="key-point"><strong>Key Point:</strong> Always gate on specific cell populations (e.g., CD4+ T cells, CD20+ B cells) before calculating phospho-protein metrics. Analyzing the bulk population masks subset-specific signaling differences, which is the entire advantage of phospho-flow.</div>
+    </section>
+
+    <!-- Section 9: Applications (orange) -->
+    <section id="applications" class="content-section accent-orange">
+        <h2>9. Applications of Phospho-Flow</h2>
+        <p>Phospho-flow cytometry has broad applications across basic research, translational science, and clinical diagnostics. Its ability to measure signaling at single-cell resolution within phenotypically defined subsets makes it uniquely powerful.</p>
+
+        <h3>Cancer Research</h3>
+        <p>In hematologic malignancies, aberrant signaling is a hallmark of disease. Phospho-flow enables the detection of constitutive or hyper-responsive signaling in leukemic cells. In acute myeloid leukemia (AML), profiling basal and cytokine-induced pSTAT5, pSTAT3, pERK, and pAKT across immunophenotypic subsets has identified signaling architectures associated with prognosis. In chronic lymphocytic leukemia (CLL), BCR-induced signaling profiles can distinguish aggressive from indolent disease.</p>
+
+        <h3>Drug Mechanism of Action</h3>
+        <p>Phospho-flow directly measures target engagement in the relevant cell type. For example, treatment with a JAK inhibitor (e.g., ruxolitinib) should abolish cytokine-induced pSTAT3 and pSTAT5 in the target cells. Dose-response curves can be generated by stimulating drug-treated cells across a concentration range and measuring residual phosphorylation.</p>
+
+        <h3>Immunology &amp; Immune Monitoring</h3>
+        <ul>
+            <li>Mapping cytokine responsiveness across immune cell subsets in healthy donors to establish reference signaling profiles.</li>
+            <li>Detecting immune signaling defects in primary immunodeficiency patients (e.g., absent pSTAT3 response in Hyper-IgE syndrome due to STAT3 mutations).</li>
+            <li>Monitoring immune reconstitution and signaling competence after hematopoietic stem cell transplantation.</li>
+        </ul>
+
+        <h3>Clinical Prediction &amp; Drug Screening</h3>
+        <p>Phospho-flow has been explored as a predictive biomarker platform. Patient-derived samples can be stimulated with a panel of cytokines and assessed for pathway activation, creating a &ldquo;signaling profile&rdquo; that may predict clinical response to targeted therapies. High-throughput drug screening using phospho-flow in 96-well or 384-well plate formats enables functional profiling of primary patient samples against libraries of signaling inhibitors.</p>
+
+        <div class="tip"><strong>Tip:</strong> For drug screening applications, fluorescent cell barcoding is essential. Barcoding each drug concentration or condition minimizes inter-well variability and reduces antibody consumption by orders of magnitude.</div>
+    </section>
+
+    <!-- Section 10: Troubleshooting (red) -->
+    <section id="troubleshooting" class="content-section accent-red">
+        <h2>10. Troubleshooting Phospho-Flow</h2>
+        <p>Phospho-flow is technically demanding. Below are common problems, their likely causes, and recommended solutions.</p>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Problem</th>
+                    <th>Likely Cause</th>
+                    <th>Solution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>No phospho-signal in stimulated cells</td>
+                    <td>Delay between stimulation and fixation; phosphatase activity</td>
+                    <td>Fix immediately after stimulation; use pre-warmed PFA; do not place on ice before fixation</td>
+                </tr>
+                <tr>
+                    <td>High background / poor separation</td>
+                    <td>Insufficient permeabilization; non-specific antibody binding</td>
+                    <td>Ensure methanol incubation is &ge;30 min at &minus;20&deg;C; increase wash steps; titrate antibody</td>
+                </tr>
+                <tr>
+                    <td>Loss of surface marker staining</td>
+                    <td>Methanol destroying epitopes or fluorescent conjugates</td>
+                    <td>Use methanol-resistant clones; stain surface pre-fixation with validated clones; avoid tandem dyes</td>
+                </tr>
+                <tr>
+                    <td>Variable results between experiments</td>
+                    <td>Inconsistent timing, temperature, or staining conditions</td>
+                    <td>Use fluorescent cell barcoding; standardize all incubation times; use a timer</td>
+                </tr>
+                <tr>
+                    <td>Weak signal despite positive stimulation</td>
+                    <td>Suboptimal antibody clone or concentration; wrong time point</td>
+                    <td>Titrate antibody; perform a time-course; try an alternative clone or vendor</td>
+                </tr>
+                <tr>
+                    <td>Bimodal signal in unstimulated control</td>
+                    <td>Cell stress during handling; partial activation during isolation</td>
+                    <td>Minimize processing time; avoid vortexing; rest cells at 37&deg;C before stimulation</td>
+                </tr>
+                <tr>
+                    <td>Increased cell loss after methanol perm</td>
+                    <td>Cell clumping; inadequate fixation before methanol</td>
+                    <td>Fix cells thoroughly before adding methanol; filter through a 70 &micro;m strainer before acquisition</td>
+                </tr>
+                <tr>
+                    <td>Tandem dye degradation</td>
+                    <td>Methanol cleaving the tandem bond</td>
+                    <td>Avoid PE-Cy7, APC-Cy7 in methanol-based protocols; use Alexa Fluor dyes or BV alternatives</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="caution"><strong>Caution:</strong> The single most common cause of failed phospho-flow experiments is a delay between stimulation and fixation. Even 30&ndash;60 seconds of delay at room temperature allows phosphatases to significantly reduce the signal. Develop a workflow where PFA is added directly to the stimulation tube without any intermediate wash or centrifugation steps.</div>
+
+        <h3>Quality Control Checklist</h3>
+        <ul>
+            <li>Include an unstimulated control processed identically for every experiment.</li>
+            <li>Include a known positive stimulus as a biological positive control.</li>
+            <li>Verify that the unstimulated control has low, uniform background (no unexpected bimodal peaks).</li>
+            <li>Monitor instrument PMT voltages and use tracking beads for longitudinal consistency.</li>
+            <li>Record fixation and permeabilization lot numbers, as batch variation can affect results.</li>
+        </ul>
+    </section>
+
+</main>
+
+<footer>
+    <p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p>
+    <p style="margin-top: 8px;">Flow Cytometry Hub &mdash; A comprehensive educational resource for flow cytometry.</p>
+</footer>
+
+</body>
+</html>

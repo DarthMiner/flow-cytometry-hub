@@ -1,0 +1,1819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluorophore Selection Guide | Flow Cytometry Hub</title>
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --primary-dark: #0e2f44;
+            --accent: #27ae60;
+            --accent-light: #2ecc71;
+            --warning: #e67e22;
+            --danger: #e74c3c;
+            --bg: #f4f6f9;
+            --bg-card: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #dce1e8;
+            --shadow: 0 2px 12px rgba(0,0,0,0.08);
+            --shadow-hover: 0 6px 24px rgba(0,0,0,0.12);
+            --radius: 10px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .top-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: var(--primary-dark); border-bottom: 3px solid var(--accent); }
+        .nav-container { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; padding: 0 20px; }
+        .nav-logo { color: #fff; font-size: 1.3rem; font-weight: 700; padding: 14px 0; margin-right: 30px; white-space: nowrap; text-decoration: none; }
+        .nav-logo span { color: var(--accent-light); }
+        .back-link { color: var(--accent-light); text-decoration: none; font-size: 0.9rem; font-weight: 500; padding: 16px 18px; display: block; }
+        .back-link:hover { color: #fff; }
+        .hero { margin-top: 56px; background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 50%, var(--primary-light) 100%); color: #fff; padding: 60px 20px 40px; text-align: center; position: relative; overflow: hidden; }
+        .hero h1 { font-size: 2.4rem; margin-bottom: 12px; }
+        .hero p { font-size: 1.1rem; opacity: 0.9; max-width: 750px; margin: 0 auto; }
+        .breadcrumb { margin-top: 10px; font-size: 0.9rem; opacity: 0.7; }
+        .breadcrumb a { color: var(--accent-light); text-decoration: none; }
+        .content { max-width: 1400px; margin: 0 auto; padding: 40px 20px 60px; }
+        .content-section { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 36px 40px; margin-bottom: 30px; border-left: 4px solid var(--primary-light); }
+        .content-section.accent-green { border-left-color: var(--accent); }
+        .content-section.accent-orange { border-left-color: var(--warning); }
+        .content-section.accent-red { border-left-color: var(--danger); }
+        .content-section.accent-purple { border-left-color: #8e44ad; }
+        .content-section.accent-teal { border-left-color: #16a085; }
+        .content-section h2 { font-size: 1.5rem; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid var(--border); }
+        .content-section h3 { font-size: 1.15rem; color: var(--primary); margin: 20px 0 10px; }
+        .content-section p { margin-bottom: 14px; color: var(--text); font-size: 0.95rem; }
+        .content-section ul, .content-section ol { padding-left: 24px; margin-bottom: 14px; font-size: 0.95rem; }
+        .content-section li { margin-bottom: 6px; }
+        .tip { background: #eaf7ee; border-left: 3px solid var(--accent); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .caution { background: #fef5e7; border-left: 3px solid var(--warning); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .key-point { background: #eaf2f8; border-left: 3px solid var(--primary-light); padding: 12px 16px; margin: 16px 0; border-radius: 4px; font-size: 0.92rem; }
+        .toc { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 28px 36px; margin-bottom: 30px; }
+        .toc h3 { color: var(--primary); margin-bottom: 14px; font-size: 1.1rem; }
+        .toc ol { padding-left: 20px; }
+        .toc li { margin-bottom: 6px; }
+        .toc a { color: var(--primary-light); text-decoration: none; font-size: 0.93rem; font-weight: 500; }
+        .toc a:hover { color: var(--primary); text-decoration: underline; }
+        .table-wrapper { overflow-x: auto; margin: 16px 0; }
+        .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin: 16px 0; }
+        .data-table thead { background: var(--primary-dark); color: #fff; }
+        .data-table th { padding: 10px 12px; text-align: left; font-weight: 600; white-space: nowrap; }
+        .data-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+        .data-table tbody tr:hover { background: #f0f4f8; }
+        .comparison-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .comparison-card { background: #f8fafb; border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-align: center; }
+        .comparison-card h4 { color: var(--primary); margin-bottom: 8px; }
+        .comparison-card p { font-size: 0.88rem; color: var(--text-light); }
+
+        /* Laser filter tabs */
+        .filter-bar { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; align-items: center; }
+        .filter-bar label { font-weight: 600; font-size: 0.9rem; margin-right: 8px; color: var(--primary); }
+        .filter-btn { padding: 6px 16px; border-radius: 20px; border: 2px solid var(--border); background: #fff; cursor: pointer; font-size: 0.82rem; font-weight: 600; transition: all 0.2s; }
+        .filter-btn:hover { border-color: var(--primary-light); background: #eaf2f8; }
+        .filter-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+        .filter-btn.uv { border-color: #9b59b6; }
+        .filter-btn.uv.active { background: #9b59b6; border-color: #9b59b6; }
+        .filter-btn.violet { border-color: #8e44ad; }
+        .filter-btn.violet.active { background: #8e44ad; border-color: #8e44ad; }
+        .filter-btn.blue { border-color: #2980b9; }
+        .filter-btn.blue.active { background: #2980b9; border-color: #2980b9; }
+        .filter-btn.yg { border-color: #27ae60; }
+        .filter-btn.yg.active { background: #27ae60; border-color: #27ae60; }
+        .filter-btn.red { border-color: #e74c3c; }
+        .filter-btn.red.active { background: #e74c3c; border-color: #e74c3c; }
+
+        /* Search bar */
+        .search-bar { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+        .search-bar input { flex: 1; max-width: 400px; padding: 10px 16px; border: 2px solid var(--border); border-radius: 8px; font-size: 0.95rem; outline: none; transition: border-color 0.2s; }
+        .search-bar input:focus { border-color: var(--primary-light); }
+        .search-bar .result-count { font-size: 0.85rem; color: var(--text-light); }
+
+        /* Brightness indicators */
+        .brightness { display: inline-flex; gap: 2px; }
+        .brightness .dot { width: 10px; height: 10px; border-radius: 50%; background: #ddd; }
+        .brightness .dot.filled { background: var(--accent); }
+        .brightness-1 .dot:nth-child(1) { background: #e74c3c; }
+        .brightness-2 .dot:nth-child(-n+2) { background: var(--warning); }
+        .brightness-3 .dot:nth-child(-n+3) { background: #f1c40f; }
+        .brightness-4 .dot:nth-child(-n+4) { background: #2ecc71; }
+        .brightness-5 .dot:nth-child(-n+5) { background: #27ae60; }
+
+        /* Color swatch */
+        .color-swatch { display: inline-block; width: 16px; height: 16px; border-radius: 3px; vertical-align: middle; margin-right: 6px; border: 1px solid rgba(0,0,0,0.15); }
+
+        /* Vendor badges */
+        .badge-vendor { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; margin: 1px 2px; white-space: nowrap; }
+        .badge-thermo { background: #e8f5e9; color: #2e7d32; }
+        .badge-bd { background: #e3f2fd; color: #1565c0; }
+        .badge-biolegend { background: #f3e5f5; color: #7b1fa2; }
+        .badge-beckman { background: #fff3e0; color: #e65100; }
+        .badge-cytek { background: #e0f7fa; color: #00838f; }
+        .badge-biorad { background: #fce4ec; color: #c62828; }
+        .badge-generic { background: #f5f5f5; color: #616161; }
+        .badge-sony { background: #ede7f6; color: #4527a0; }
+        .badge-miltenyi { background: #e8eaf6; color: #283593; }
+
+        /* Dye type badges */
+        .badge-type { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 0.72rem; font-weight: 600; }
+        .type-small { background: #e3f2fd; color: #1565c0; }
+        .type-protein { background: #e8f5e9; color: #2e7d32; }
+        .type-polymer { background: #f3e5f5; color: #7b1fa2; }
+        .type-tandem { background: #fff3e0; color: #e65100; }
+        .type-nanoparticle { background: #e0f7fa; color: #00838f; }
+        .type-viability { background: #fce4ec; color: #c62828; }
+        .type-dna { background: #f1f8e9; color: #558b2f; }
+
+        /* Quick links */
+        .quick-links { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+        .quick-link { display: inline-block; padding: 6px 16px; background: var(--primary); color: #fff; border-radius: 20px; text-decoration: none; font-size: 0.82rem; font-weight: 500; transition: all 0.2s; }
+        .quick-link:hover { background: var(--primary-light); transform: translateY(-1px); }
+
+        /* Spectrum viewer link */
+        .spectrum-link { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: #fff; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: all 0.3s; margin: 10px 0; }
+        .spectrum-link:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+
+        footer { background: var(--primary-dark); color: #aab7c4; padding: 30px 20px; text-align: center; font-size: 0.9rem; }
+        footer a { color: var(--accent-light); text-decoration: none; }
+        @media (max-width: 768px) {
+            .content-section { padding: 24px 20px; }
+            .hero h1 { font-size: 1.8rem; }
+            .data-table { font-size: 0.78rem; }
+            .data-table th, .data-table td { padding: 6px 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <div class="nav-container">
+        <a href="index.html" class="nav-logo">Flow Cytometry <span>Hub</span></a>
+        <a href="index.html" class="back-link">&larr; Back to Main</a>
+    </div>
+</nav>
+
+<header class="hero">
+    <h1>&#127752; Comprehensive Fluorophore Selection Guide</h1>
+    <p>A vendor-neutral reference for 100+ fluorophores used in flow cytometry &mdash; organized by laser line with excitation/emission data, relative brightness, and vendor availability.</p>
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> &rarr;
+        <a href="index.html#reagents">Reagents</a> &rarr;
+        Fluorophore Selection Guide
+    </div>
+</header>
+
+<div class="content">
+
+    <div class="toc">
+        <h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#overview">How to Use This Guide</a></li>
+            <li><a href="#uv-laser">UV Laser (355 nm) Fluorophores</a></li>
+            <li><a href="#violet-laser">Violet Laser (405 nm) Fluorophores</a></li>
+            <li><a href="#blue-laser">Blue Laser (488 nm) Fluorophores</a></li>
+            <li><a href="#yg-laser">Yellow-Green Laser (561 nm) Fluorophores</a></li>
+            <li><a href="#red-laser">Red Laser (633/640 nm) Fluorophores</a></li>
+            <li><a href="#viability">Viability &amp; DNA-Binding Dyes</a></li>
+            <li><a href="#tandem-dyes">Tandem Dye Reference</a></li>
+            <li><a href="#brightness-guide">Brightness Ranking &amp; Panel Design</a></li>
+            <li><a href="#cross-reference">Cross-Vendor Equivalents</a></li>
+            <li><a href="#spectrum-tool">Interactive Spectrum Viewer Tool</a></li>
+            <li><a href="#troubleshooting">Troubleshooting &amp; Tips</a></li>
+        </ol>
+    </div>
+
+    <!-- Section 1: Overview -->
+    <div class="content-section" id="overview">
+        <h2>&#128218; How to Use This Guide</h2>
+        <p>This comprehensive, vendor-neutral fluorophore selection guide covers dyes from all major manufacturers including Thermo Fisher/Invitrogen, BD Biosciences, BioLegend, Beckman Coulter, Cytek, Bio-Rad, Miltenyi Biotec, and Sony. Fluorophores are organized by their primary excitation laser line.</p>
+
+        <h3>Key Information for Each Fluorophore</h3>
+        <ul>
+            <li><strong>Excitation Max (nm):</strong> Peak absorption wavelength</li>
+            <li><strong>Emission Max (nm):</strong> Peak fluorescence emission wavelength</li>
+            <li><strong>Laser:</strong> Recommended laser line for excitation</li>
+            <li><strong>Relative Brightness:</strong> Approximate brightness on a 1&ndash;5 scale (instrument-dependent)</li>
+            <li><strong>Dye Type:</strong> Small molecule, protein, polymer, tandem, or nanoparticle</li>
+            <li><strong>Vendor(s):</strong> Primary manufacturer(s) offering this fluorophore</li>
+        </ul>
+
+        <div class="key-point"><strong>&#128161; Key Point:</strong> Brightness rankings are approximate and can vary by instrument, laser power, detector sensitivity, and filter configuration. Always validate fluorophore performance on your specific cytometer.</div>
+
+        <h3>Brightness Scale</h3>
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h4>&#11088;&#11088;&#11088;&#11088;&#11088; (5)</h4>
+                <p><strong>Very Bright</strong><br>Best for low-expression markers. Examples: PE, BV421, PE-Cy7</p>
+            </div>
+            <div class="comparison-card">
+                <h4>&#11088;&#11088;&#11088;&#11088; (4)</h4>
+                <p><strong>Bright</strong><br>Good for low-to-medium markers. Examples: APC, BV605, BV711</p>
+            </div>
+            <div class="comparison-card">
+                <h4>&#11088;&#11088;&#11088; (3)</h4>
+                <p><strong>Medium</strong><br>Suitable for medium markers. Examples: APC-Cy7, PerCP-Cy5.5</p>
+            </div>
+            <div class="comparison-card">
+                <h4>&#11088;&#11088; (2)</h4>
+                <p><strong>Dim</strong><br>Reserve for high-expression markers. Examples: FITC, BV510</p>
+            </div>
+            <div class="comparison-card">
+                <h4>&#11088; (1)</h4>
+                <p><strong>Very Dim</strong><br>Only for very high-expression markers. Examples: PerCP, BUV395</p>
+            </div>
+        </div>
+
+        <a href="spectrum-viewer.html" class="spectrum-link">&#127752; Open Interactive Spectrum Viewer Tool &rarr;</a>
+    </div>
+
+    <!-- Section 2: UV Laser -->
+    <div class="content-section accent-green" id="uv-laser">
+        <h2>&#128316; UV Laser (355 nm) Fluorophores</h2>
+        <p>Ultraviolet-excitable dyes are essential for expanding multicolor panels beyond what violet, blue, and red lasers alone can achieve. Many UV dyes are polymer-based and offer minimal spillover into other laser channels.</p>
+
+        <div class="quick-links">
+            <a href="#uv-table" class="quick-link">UV Dye Table</a>
+        </div>
+
+        <div class="table-wrapper" id="uv-table">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fluorophore</th>
+                        <th>Ex Max (nm)</th>
+                        <th>Em Max (nm)</th>
+                        <th>Brightness</th>
+                        <th>Type</th>
+                        <th>Vendor(s)</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#c8a2ff"></span><strong>BUV395</strong></td>
+                        <td>348</td>
+                        <td>395</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span></td>
+                        <td>Base polymer; minimal spillover. Filter: 379/28</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#9370db"></span><strong>Spark UV 387</strong></td>
+                        <td>341</td>
+                        <td>387</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Alternative to Alexa Fluor 350 for UV laser</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#dda0ff"></span><strong>cFluor UV395</strong></td>
+                        <td>~350</td>
+                        <td>395</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Equivalent to BUV395</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#b8a9e0"></span><strong>BUV496</strong></td>
+                        <td>348</td>
+                        <td>496</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span></td>
+                        <td>BUV395 + acceptor. Filter: 515/30</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#90b0ff"></span><strong>cFluor UV440</strong></td>
+                        <td>~350</td>
+                        <td>440</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>UV laser tandem</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#80c0ff"></span><strong>cFluor UV515</strong></td>
+                        <td>~350</td>
+                        <td>515</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>UV laser tandem</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#70d0a0"></span><strong>BUV563</strong></td>
+                        <td>351</td>
+                        <td>563</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span></td>
+                        <td>BUV395 + acceptor. Filter: 562/40</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#60d090"></span><strong>cFluor UV570</strong></td>
+                        <td>~350</td>
+                        <td>570</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>UV laser tandem</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ff9090"></span><strong>BUV661</strong></td>
+                        <td>351</td>
+                        <td>657</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span></td>
+                        <td>BUV395 + acceptor. Filter: 670/30</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#e07070"></span><strong>cFluor UV610</strong></td>
+                        <td>~350</td>
+                        <td>610</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>UV laser tandem</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#d06060"></span><strong>cFluor UV670</strong></td>
+                        <td>~350</td>
+                        <td>670</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>UV laser tandem</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#cc5050"></span><strong>BUV737</strong></td>
+                        <td>350</td>
+                        <td>732</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span></td>
+                        <td>BUV395 + acceptor. Filter: 740/35</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#b04040"></span><strong>cFluor UV745</strong></td>
+                        <td>~350</td>
+                        <td>745</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>UV laser tandem</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#903030"></span><strong>cFluor UV790</strong></td>
+                        <td>~350</td>
+                        <td>790</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>UV laser tandem</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#882020"></span><strong>BUV805</strong></td>
+                        <td>351</td>
+                        <td>797</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span></td>
+                        <td>BUV395 + acceptor. Filter: 820/60</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#6a5acd"></span><strong>Alexa Fluor 350</strong></td>
+                        <td>346</td>
+                        <td>442</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Coumarin derivative; UV-excitable classic</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#4169e1"></span><strong>DAPI</strong></td>
+                        <td>358</td>
+                        <td>461</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-dna">DNA Dye</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>DNA-binding; also excited at 405 nm. ~20x brighter when bound to DNA</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#5b7bff"></span><strong>Hoechst 33342</strong></td>
+                        <td>350</td>
+                        <td>461</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-dna">DNA Dye</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Cell-permeable DNA dye; also excited at 405 nm</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip"><strong>&#128161; Tip:</strong> UV laser dyes (355 nm) are ideal for expanding panels because they have minimal spectral overlap with violet laser-excited dyes. Instruments need a dedicated UV laser to use BUV and cFluor UV dyes.</div>
+    </div>
+
+    <!-- Section 3: Violet Laser -->
+    <div class="content-section accent-orange" id="violet-laser">
+        <h2>&#128316; Violet Laser (405 nm) Fluorophores</h2>
+        <p>The violet laser offers an enormous number of polymer and tandem dyes spanning 420&ndash;780 nm emission, making it the most versatile single laser for multicolor panels. Brilliant Violet (BV), Super Bright (SB), and cFluor V dyes all use this laser.</p>
+
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fluorophore</th>
+                        <th>Ex Max (nm)</th>
+                        <th>Em Max (nm)</th>
+                        <th>Brightness</th>
+                        <th>Type</th>
+                        <th>Vendor(s)</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#8f7ae5"></span><strong>Alexa Fluor 405</strong></td>
+                        <td>402</td>
+                        <td>421</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Cascade Blue equivalent</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#7b68ee"></span><strong>BV421</strong></td>
+                        <td>407</td>
+                        <td>421</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span> <span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>One of the brightest fluorophores; ~10x brighter than Pacific Blue. Filter: 450/40</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#7b68dd"></span><strong>Spark Violet 423</strong></td>
+                        <td>~405</td>
+                        <td>423</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Similar to Super Bright 436</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#7060dd"></span><strong>Super Bright 436</strong></td>
+                        <td>405</td>
+                        <td>436</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Base donor polymer dye. Filter: 450/50</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#6050cc"></span><strong>cFluor V420</strong></td>
+                        <td>405</td>
+                        <td>420</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Similar to Alexa Fluor 405</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#5a50cc"></span><strong>cFluor V435</strong></td>
+                        <td>405</td>
+                        <td>436</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-nanoparticle">Nanoparticle</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Equivalent to Super Bright 436</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#4682b4"></span><strong>eFluor 450</strong></td>
+                        <td>405</td>
+                        <td>450</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Similar to Pacific Blue, V450. Filter: 450/50</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#4682c4"></span><strong>Pacific Blue</strong></td>
+                        <td>401</td>
+                        <td>452</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Classic violet-excitable dye</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#3a72b4"></span><strong>cFluor V450</strong></td>
+                        <td>405</td>
+                        <td>450</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Equivalent to Pacific Blue / eFluor 450</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#3a72cc"></span><strong>VioBlue</strong></td>
+                        <td>400</td>
+                        <td>452</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-miltenyi">Miltenyi</span></td>
+                        <td>Miltenyi equivalent to Pacific Blue</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#5588dd"></span><strong>cFluor V475</strong></td>
+                        <td>405</td>
+                        <td>479</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-nanoparticle">Nanoparticle</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Similar to BV480</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#5588ee"></span><strong>BV480</strong></td>
+                        <td>436</td>
+                        <td>478</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span></td>
+                        <td>Polymer dye between BV421 and BV510</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#55aacc"></span><strong>Spark Violet 500</strong></td>
+                        <td>393</td>
+                        <td>500</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Similar to V500, AmCyan</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#44bb99"></span><strong>BV510</strong></td>
+                        <td>405</td>
+                        <td>510</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span> <span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Brighter than V500. Filter: 525/40</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#44bbaa"></span><strong>cFluor V505</strong></td>
+                        <td>405</td>
+                        <td>505</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Similar to BV510, VioGreen</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#44cc88"></span><strong>eFluor 506</strong></td>
+                        <td>405</td>
+                        <td>506</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Similar spectra to AmCyan and V500</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#55cc77"></span><strong>Krome Orange</strong></td>
+                        <td>398</td>
+                        <td>528</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-beckman">Beckman Coulter</span></td>
+                        <td>Unique violet-excitable dye with green-yellow emission</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#55cc66"></span><strong>Spark Violet 538</strong></td>
+                        <td>405</td>
+                        <td>~545</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Similar to Pacific Orange, Krome Orange</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ff9944"></span><strong>Pacific Orange</strong></td>
+                        <td>400</td>
+                        <td>551</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Violet-excited with yellow-orange emission</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ff9933"></span><strong>cFluor V547</strong></td>
+                        <td>405</td>
+                        <td>547</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>CF405L equivalent; similar to Pacific Orange</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ee8833"></span><strong>BV570</strong></td>
+                        <td>405</td>
+                        <td>570</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span> <span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>BV421 + acceptor</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ee7722"></span><strong>Super Bright 600</strong></td>
+                        <td>405</td>
+                        <td>600</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>SB436 + acceptor. Filter: 610/20</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ee7733"></span><strong>BV605</strong></td>
+                        <td>407</td>
+                        <td>605</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span> <span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>BV421 + acceptor. Very bright. Filter: 610/20</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#dd6633"></span><strong>cFluor V605</strong></td>
+                        <td>405</td>
+                        <td>605</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Equivalent to BV605</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#dd5533"></span><strong>Super Bright 645</strong></td>
+                        <td>405</td>
+                        <td>645</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>SB436 + acceptor. Filter: 660/20</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#cc4433"></span><strong>BV650</strong></td>
+                        <td>407</td>
+                        <td>650</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span> <span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>BV421 + acceptor. Filter: 660/20</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#cc3333"></span><strong>cFluor V670</strong></td>
+                        <td>405</td>
+                        <td>670</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>StarBright Violet equivalent</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#bb3333"></span><strong>Super Bright 702</strong></td>
+                        <td>405</td>
+                        <td>702</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>SB436 + acceptor. Filter: 710/50</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#aa2222"></span><strong>BV711</strong></td>
+                        <td>407</td>
+                        <td>711</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span> <span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>BV421 + DY-682. Very bright. Filter: 710/50</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#aa3344"></span><strong>cFluor V715</strong></td>
+                        <td>405</td>
+                        <td>715</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Equivalent to BV711</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#993355"></span><strong>BV750</strong></td>
+                        <td>405</td>
+                        <td>750</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span> <span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>BV421 + acceptor</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#882266"></span><strong>Super Bright 780</strong></td>
+                        <td>405</td>
+                        <td>780</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>SB436 + acceptor. Filter: 785/60</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#881155"></span><strong>BV786</strong></td>
+                        <td>407</td>
+                        <td>786</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span> <span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>BV421 + acceptor. Filter: 780/60</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#771144"></span><strong>cFluor V780</strong></td>
+                        <td>405</td>
+                        <td>780</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Equivalent to BV786</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="caution"><strong>&#9888; Caution:</strong> When using multiple polymer dyes (BV, SB, cFluor V) in the same panel, you <strong>must</strong> use a Brilliant Stain Buffer (BD) or equivalent to prevent polymer-polymer interactions that cause increased background staining.</div>
+    </div>
+
+    <!-- Section 4: Blue Laser -->
+    <div class="content-section accent-red" id="blue-laser">
+        <h2>&#128316; Blue Laser (488 nm) Fluorophores</h2>
+        <p>The 488 nm blue laser is the most common laser in flow cytometry. It excites classic dyes like FITC, PE, and PerCP, as well as newer polymer alternatives like BB515 and Spark Blue dyes.</p>
+
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fluorophore</th>
+                        <th>Ex Max (nm)</th>
+                        <th>Em Max (nm)</th>
+                        <th>Brightness</th>
+                        <th>Type</th>
+                        <th>Vendor(s)</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#88ff88"></span><strong>Alexa Fluor 488</strong></td>
+                        <td>495</td>
+                        <td>519</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Brighter, more photostable FITC alternative</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#77ff77"></span><strong>FITC</strong></td>
+                        <td>494</td>
+                        <td>520</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Most widely used dye; pH-sensitive, photobleaches. EC: 78,000; QY: 0.50</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#66ee66"></span><strong>BB515</strong></td>
+                        <td>490</td>
+                        <td>515</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span></td>
+                        <td>Brighter than FITC, less PE spillover. Filter: 530/30</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#55dd55"></span><strong>cFluor B515</strong></td>
+                        <td>~490</td>
+                        <td>515</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Equivalent to BB515, VioBright B515</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#44cc44"></span><strong>Spark Blue 515</strong></td>
+                        <td>490</td>
+                        <td>511</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Blue laser FITC alternative</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#88dd44"></span><strong>Alexa Fluor 514</strong></td>
+                        <td>518</td>
+                        <td>540</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Rhodamine derivative</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#aadd44"></span><strong>Spark Blue 550</strong></td>
+                        <td>516</td>
+                        <td>550</td>
+                        <td>&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Alternative to Alexa Fluor 532</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#bbdd33"></span><strong>Alexa Fluor 532</strong></td>
+                        <td>531</td>
+                        <td>554</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Green-yellow emission</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ff8844"></span><strong>PE (R-Phycoerythrin)</strong></td>
+                        <td>565</td>
+                        <td>578</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-protein">Protein</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Brightest common fluorochrome. EC: 1,960,000; QY: 0.84. Also excited by 561 nm</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ff6644"></span><strong>PE-Dazzle 594</strong></td>
+                        <td>565</td>
+                        <td>594</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>PE tandem with unique spectral signature</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ff5533"></span><strong>PE-CF594</strong></td>
+                        <td>565</td>
+                        <td>594</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span></td>
+                        <td>PE + CF594 acceptor dye</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#dd4422"></span><strong>PE-Cy5</strong></td>
+                        <td>496</td>
+                        <td>667</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Very bright; significant spillover into APC channel</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#cc3344"></span><strong>PE-Cy5.5</strong></td>
+                        <td>496</td>
+                        <td>694</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>PE tandem to far-red</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#882255"></span><strong>PE-Cy7</strong></td>
+                        <td>565</td>
+                        <td>778</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Very bright but Cy7 is light-sensitive. Protect from light!</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#773366"></span><strong>PE/Fire 810</strong></td>
+                        <td>565</td>
+                        <td>810</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Far near-IR PE tandem</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#88aa44"></span><strong>PerCP</strong></td>
+                        <td>482</td>
+                        <td>678</td>
+                        <td>&#11088;</td>
+                        <td><span class="badge-type type-protein">Protein</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Photobleaches on high-power lasers (&gt;25 mW)</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#88aa55"></span><strong>PerCP-Cy5.5</strong></td>
+                        <td>482</td>
+                        <td>694</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Much more photostable than PerCP alone. Common in panels</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#99aa66"></span><strong>PerCP-eFluor 710</strong></td>
+                        <td>482</td>
+                        <td>710</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>PerCP tandem shifted further red</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#aa8844"></span><strong>BB700</strong></td>
+                        <td>485</td>
+                        <td>693</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-polymer">Polymer</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span></td>
+                        <td>Brighter than PerCP-Cy5.5 with less cross-laser excitation</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#aa7755"></span><strong>cFluor B690</strong></td>
+                        <td>~488</td>
+                        <td>690</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Equivalent to PerCP-Cy5.5, BB700</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip"><strong>&#128161; Tip:</strong> PE is the brightest common fluorochrome &mdash; always assign it to your lowest-expressed antigen. FITC is relatively dim; reserve it for highly expressed markers like CD3, CD45, or viability dyes.</div>
+    </div>
+
+    <!-- Section 5: Yellow-Green Laser -->
+    <div class="content-section accent-teal" id="yg-laser">
+        <h2>&#128316; Yellow-Green Laser (561 nm) Fluorophores</h2>
+        <p>The 561 nm yellow-green laser provides superior excitation of PE and its tandems compared to the 488 nm laser. It also enables use of unique dyes like Spark YG and cFluor YG that are spectrally distinct from PE.</p>
+
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fluorophore</th>
+                        <th>Ex Max (nm)</th>
+                        <th>Em Max (nm)</th>
+                        <th>Brightness</th>
+                        <th>Type</th>
+                        <th>Vendor(s)</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ff8866"></span><strong>PE (via YG)</strong></td>
+                        <td>565</td>
+                        <td>578</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-protein">Protein</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Better excited by 561 nm than 488 nm; even brighter signal</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ff7755"></span><strong>Alexa Fluor 546</strong></td>
+                        <td>556</td>
+                        <td>573</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Rhodamine derivative; PE alternative on YG laser</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ff6644"></span><strong>Alexa Fluor 555</strong></td>
+                        <td>555</td>
+                        <td>565</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Cyanine-based; Cy3 alternative</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ff5533"></span><strong>Spark YG 570</strong></td>
+                        <td>555</td>
+                        <td>570</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Alternative to Alexa Fluor 555 and Cy3</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ff4422"></span><strong>Spark YG 581</strong></td>
+                        <td>565</td>
+                        <td>581</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Minimal blue laser excitation; unmixes from PE</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#ee4411"></span><strong>cFluor YG584</strong></td>
+                        <td>~565</td>
+                        <td>584</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Spectrally unique from PE; primarily YG-excited</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#dd3300"></span><strong>Spark YG 593</strong></td>
+                        <td>574</td>
+                        <td>593</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Similar to BD RealYellow 586</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#cc2200"></span><strong>Alexa Fluor 568</strong></td>
+                        <td>578</td>
+                        <td>603</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Rhodamine derivative; orange-red</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#bb2200"></span><strong>Alexa Fluor 594</strong></td>
+                        <td>590</td>
+                        <td>617</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Texas Red alternative; very photostable</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#aa1100"></span><strong>PE-Cy5 (via YG)</strong></td>
+                        <td>496</td>
+                        <td>667</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Better excited on YG laser than blue</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#991155"></span><strong>PE-Cy7 (via YG)</strong></td>
+                        <td>565</td>
+                        <td>778</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Optimal excitation on YG laser. Protect from light!</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="key-point"><strong>&#128161; Key Point:</strong> In spectral cytometry, the YG laser (561 nm) allows PE and its tandems to be unmixed separately from blue laser-excited dyes, effectively doubling the number of usable dyes in that emission range.</div>
+    </div>
+
+    <!-- Section 6: Red Laser -->
+    <div class="content-section accent-purple" id="red-laser">
+        <h2>&#128316; Red Laser (633/640 nm) Fluorophores</h2>
+        <p>Red laser-excitable dyes fill the far-red and near-infrared spectrum. APC is the anchor fluorophore, and numerous tandems and alternatives extend coverage to &gt;800 nm.</p>
+
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Fluorophore</th>
+                        <th>Ex Max (nm)</th>
+                        <th>Em Max (nm)</th>
+                        <th>Brightness</th>
+                        <th>Type</th>
+                        <th>Vendor(s)</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#cc3355"></span><strong>APC (Allophycocyanin)</strong></td>
+                        <td>650</td>
+                        <td>660</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-protein">Protein</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Primary red laser dye; very bright for far-red</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#bb3366"></span><strong>Alexa Fluor 647</strong></td>
+                        <td>650</td>
+                        <td>668</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>APC alternative; extremely photostable</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#bb3377"></span><strong>eFluor 660</strong></td>
+                        <td>651</td>
+                        <td>668</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Alternative to APC and Alexa Fluor 647</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#aa3388"></span><strong>cFluor R659</strong></td>
+                        <td>~640</td>
+                        <td>659</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-protein">Protein</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>APC equivalent</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#993399"></span><strong>cFluor R668</strong></td>
+                        <td>~640</td>
+                        <td>668</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>CF647 equivalent; similar to Alexa Fluor 647</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#993388"></span><strong>Spark NIR 685</strong></td>
+                        <td>665</td>
+                        <td>685</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Fills gap between APC and Alexa Fluor 700</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#883377"></span><strong>cFluor R685</strong></td>
+                        <td>~640</td>
+                        <td>685</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Similar to APC-Cy5.5, Spark NIR 685</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#883366"></span><strong>Alexa Fluor 660</strong></td>
+                        <td>663</td>
+                        <td>690</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Cyanine-based far-red dye</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#773355"></span><strong>Alexa Fluor 700</strong></td>
+                        <td>702</td>
+                        <td>723</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>Near-IR; dimmer than APC. Good for high-expression markers</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#773344"></span><strong>cFluor R720</strong></td>
+                        <td>~640</td>
+                        <td>720</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>CF700 equivalent; brighter than Alexa Fluor 700</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#663344"></span><strong>Spark Red 718</strong></td>
+                        <td>697</td>
+                        <td>711</td>
+                        <td>&#11088;&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-small">Small Molecule</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Brighter alternative to Alexa Fluor 700</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#663333"></span><strong>APC-Cy7</strong></td>
+                        <td>650</td>
+                        <td>785</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-generic">Multiple</span></td>
+                        <td>Cy7 is light-sensitive. Protect from light!</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#553333"></span><strong>APC-H7</strong></td>
+                        <td>650</td>
+                        <td>785</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-bd">BD</span></td>
+                        <td>More stable than APC-Cy7. BD proprietary</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#553322"></span><strong>APC/Fire 750</strong></td>
+                        <td>650</td>
+                        <td>750</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>More stable APC-Cy7 alternative</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#553311"></span><strong>APC-eFluor 780</strong></td>
+                        <td>645</td>
+                        <td>780</td>
+                        <td>&#11088;&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-thermo">Thermo Fisher</span></td>
+                        <td>High-performance APC tandem</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#442211"></span><strong>cFluor R780</strong></td>
+                        <td>~640</td>
+                        <td>780</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>APC-based tandem. Light-sensitive</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#442200"></span><strong>APC/Fire 810</strong></td>
+                        <td>650</td>
+                        <td>810</td>
+                        <td>&#11088;&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-biolegend">BioLegend</span></td>
+                        <td>Furthest-red APC tandem from BioLegend</td>
+                    </tr>
+                    <tr>
+                        <td><span class="color-swatch" style="background:#441100"></span><strong>cFluor R840</strong></td>
+                        <td>~640</td>
+                        <td>840</td>
+                        <td>&#11088;</td>
+                        <td><span class="badge-type type-tandem">Protein Tandem</span></td>
+                        <td><span class="badge-vendor badge-cytek">Cytek</span></td>
+                        <td>Furthest near-IR APC tandem. Light-sensitive</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="caution"><strong>&#9888; Caution:</strong> All Cy7-containing tandems (PE-Cy7, APC-Cy7) and many near-IR tandems degrade with light exposure and fixation. Protect samples from light during staining and run quickly.</div>
+    </div>
+
+    <!-- Section 7: Viability & DNA Dyes -->
+    <div class="content-section" id="viability">
+        <h2>&#9760; Viability &amp; DNA-Binding Dyes</h2>
+        <p>Viability dyes distinguish live from dead cells, and DNA-binding dyes are used for cell cycle analysis. Choosing the right viability dye depends on whether you need to fix your samples.</p>
+
+        <h3>Viability Dyes</h3>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Dye</th>
+                        <th>Ex Max (nm)</th>
+                        <th>Em Max (nm)</th>
+                        <th>Laser</th>
+                        <th>Fix-Compatible?</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Propidium Iodide (PI)</strong></td>
+                        <td>535</td>
+                        <td>617</td>
+                        <td>488 / 561 nm</td>
+                        <td>No (unfixed only)</td>
+                        <td>DNA-intercalating; bright. Not for fixed samples</td>
+                    </tr>
+                    <tr>
+                        <td><strong>7-AAD</strong></td>
+                        <td>549</td>
+                        <td>648</td>
+                        <td>488 nm</td>
+                        <td>No (unfixed only)</td>
+                        <td>Large Stokes shift; less overlap with FITC/PE than PI</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DAPI</strong></td>
+                        <td>358</td>
+                        <td>461</td>
+                        <td>355 / 405 nm</td>
+                        <td>No (unfixed only)</td>
+                        <td>20x fluorescence enhancement when DNA-bound</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SYTOX Blue</strong></td>
+                        <td>431</td>
+                        <td>480</td>
+                        <td>405 nm</td>
+                        <td>No</td>
+                        <td>Dead cell stain; good for violet laser setups</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LIVE/DEAD Aqua (FVD eFluor 506)</strong></td>
+                        <td>367</td>
+                        <td>526</td>
+                        <td>405 nm</td>
+                        <td>Yes</td>
+                        <td>Amine-reactive fixable dye. Violet-excited</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LIVE/DEAD Violet (FVD eFluor 450)</strong></td>
+                        <td>416</td>
+                        <td>451</td>
+                        <td>405 nm</td>
+                        <td>Yes</td>
+                        <td>Amine-reactive fixable dye</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LIVE/DEAD Near-IR (FVD eFluor 780)</strong></td>
+                        <td>753</td>
+                        <td>785</td>
+                        <td>633 nm</td>
+                        <td>Yes</td>
+                        <td>Amine-reactive fixable dye; minimizes spectral overlap</td>
+                    </tr>
+                    <tr>
+                        <td><strong>LIVE/DEAD Yellow</strong></td>
+                        <td>400</td>
+                        <td>575</td>
+                        <td>405 nm</td>
+                        <td>Yes</td>
+                        <td>Amine-reactive fixable; broad emission</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Zombie Aqua</strong></td>
+                        <td>~400</td>
+                        <td>516</td>
+                        <td>405 nm</td>
+                        <td>Yes</td>
+                        <td>BioLegend fixable viability dye</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Zombie NIR</strong></td>
+                        <td>~640</td>
+                        <td>746</td>
+                        <td>633 nm</td>
+                        <td>Yes</td>
+                        <td>BioLegend fixable viability dye</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Zombie Violet</strong></td>
+                        <td>~400</td>
+                        <td>423</td>
+                        <td>405 nm</td>
+                        <td>Yes</td>
+                        <td>BioLegend fixable viability dye</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ViaDye Red</strong></td>
+                        <td>~640</td>
+                        <td>~660</td>
+                        <td>633 nm</td>
+                        <td>Yes</td>
+                        <td>Cytek fixable viability dye</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>DNA / Cell Cycle Dyes</h3>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Dye</th>
+                        <th>Ex Max (nm)</th>
+                        <th>Em Max (nm)</th>
+                        <th>Laser</th>
+                        <th>DNA Binding</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Propidium Iodide</strong></td>
+                        <td>535</td>
+                        <td>617</td>
+                        <td>488 / 561 nm</td>
+                        <td>Intercalator</td>
+                        <td>Gold standard for cell cycle; requires permeabilization or fixation</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DAPI</strong></td>
+                        <td>358</td>
+                        <td>461</td>
+                        <td>355 / 405 nm</td>
+                        <td>Minor groove (AT)</td>
+                        <td>Can be used on UV or violet laser. Cell-impermeant</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hoechst 33342</strong></td>
+                        <td>350</td>
+                        <td>461</td>
+                        <td>355 nm</td>
+                        <td>Minor groove (AT)</td>
+                        <td>Cell-permeable; live-cell compatible</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Hoechst 33258</strong></td>
+                        <td>352</td>
+                        <td>461</td>
+                        <td>355 nm</td>
+                        <td>Minor groove (AT)</td>
+                        <td>Cell-impermeant version</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DRAQ5</strong></td>
+                        <td>647</td>
+                        <td>681</td>
+                        <td>488 / 633 nm</td>
+                        <td>Intercalator</td>
+                        <td>Cell-permeable; red-excited DNA dye</td>
+                    </tr>
+                    <tr>
+                        <td><strong>FxCycle Violet</strong></td>
+                        <td>369</td>
+                        <td>437</td>
+                        <td>405 nm</td>
+                        <td>Intercalator</td>
+                        <td>Thermo Fisher cell cycle dye for violet laser</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip"><strong>&#128161; Tip:</strong> If you need to fix and permeabilize cells (e.g., for intracellular staining), use a fixable viability dye <em>before</em> fixation. Non-fixable dyes like PI and 7-AAD will dissociate during permeabilization.</div>
+    </div>
+
+    <!-- Section 8: Tandem Dyes -->
+    <div class="content-section accent-green" id="tandem-dyes">
+        <h2>&#128279; Tandem Dye Reference</h2>
+        <p>Tandem dyes combine a donor fluorophore with an acceptor dye via FRET (fluorescence resonance energy transfer). They extend the emission range of a single laser line but require careful handling.</p>
+
+        <h3>Common Tandem Dye Families</h3>
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h4>PE Tandems</h4>
+                <p>PE-Cy5, PE-Cy5.5, PE-Cy7, PE-CF594, PE-Dazzle 594, PE/Fire 810</p>
+                <p><em>Donor: PE (488/561 nm)</em></p>
+            </div>
+            <div class="comparison-card">
+                <h4>APC Tandems</h4>
+                <p>APC-Cy7, APC-H7, APC/Fire 750, APC-eFluor 780, APC/Fire 810</p>
+                <p><em>Donor: APC (633 nm)</em></p>
+            </div>
+            <div class="comparison-card">
+                <h4>PerCP Tandems</h4>
+                <p>PerCP-Cy5.5, PerCP-eFluor 710</p>
+                <p><em>Donor: PerCP (488 nm)</em></p>
+            </div>
+            <div class="comparison-card">
+                <h4>BV Tandems</h4>
+                <p>BV570, BV605, BV650, BV711, BV750, BV786</p>
+                <p><em>Donor: BV421 (405 nm)</em></p>
+            </div>
+            <div class="comparison-card">
+                <h4>BUV Tandems</h4>
+                <p>BUV496, BUV563, BUV661, BUV737, BUV805</p>
+                <p><em>Donor: BUV395 (355 nm)</em></p>
+            </div>
+            <div class="comparison-card">
+                <h4>SB Tandems</h4>
+                <p>SB600, SB645, SB702, SB780</p>
+                <p><em>Donor: SB436 (405 nm)</em></p>
+            </div>
+        </div>
+
+        <div class="caution"><strong>&#9888; Tandem Dye Handling Rules:</strong>
+            <ul style="margin-top: 8px;">
+                <li>Protect from prolonged light exposure during staining and acquisition</li>
+                <li>Tandem degradation causes increased donor emission and decreased acceptor emission</li>
+                <li>Lot-to-lot variability is common &mdash; always titrate and match compensation controls to the same lot</li>
+                <li>Fixation can alter tandem spectra; run compensation controls under the same conditions as samples</li>
+                <li>Use BD Brilliant Stain Buffer when combining multiple polymer-based tandems</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 9: Brightness Guide -->
+    <div class="content-section accent-orange" id="brightness-guide">
+        <h2>&#127775; Brightness Ranking &amp; Panel Design Tips</h2>
+        <p>When building multicolor panels, match fluorophore brightness to antigen expression level. Here is a general brightness ranking for common dyes.</p>
+
+        <h3>Brightness Tiers (General Guide)</h3>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tier</th>
+                        <th>Fluorophores</th>
+                        <th>Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>&#11088;&#11088;&#11088;&#11088;&#11088; Very Bright</strong></td>
+                        <td>PE, BV421, PE-Cy7, PE-Cy5, BV711, BV605</td>
+                        <td>Low-expression markers (cytokines, transcription factors, rare subsets)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>&#11088;&#11088;&#11088;&#11088; Bright</strong></td>
+                        <td>APC, BV650, PE-Dazzle 594, Super Bright 436, Spark Red 718</td>
+                        <td>Low-to-medium expression markers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>&#11088;&#11088;&#11088; Medium</strong></td>
+                        <td>PerCP-Cy5.5, APC-Cy7, BV570, BV786, BB515, BB700, Pacific Blue, eFluor 450</td>
+                        <td>Medium expression markers (CD4, CD8, CD19)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>&#11088;&#11088; Dim</strong></td>
+                        <td>FITC, BV510, Alexa Fluor 700, Alexa Fluor 488, Pacific Orange</td>
+                        <td>Highly expressed markers (CD3, CD45, lineage markers)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>&#11088; Very Dim</strong></td>
+                        <td>PerCP, BUV395, Spark Blue 550</td>
+                        <td>Very highly expressed markers only</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Panel Design Principles</h3>
+        <ol>
+            <li><strong>Match brightness to expression:</strong> Brightest dye &rarr; lowest expressed antigen</li>
+            <li><strong>Minimize spectral overlap:</strong> Avoid pairing dyes with similar emission on the same laser</li>
+            <li><strong>Spread across lasers:</strong> Use all available lasers to reduce compensation requirements</li>
+            <li><strong>Consider spillover spreading:</strong> Bright dyes cause more spreading into neighboring channels</li>
+            <li><strong>Titrate all antibodies:</strong> Use the optimal concentration, not the vendor-recommended amount</li>
+            <li><strong>Use polymer staining buffer:</strong> Required when combining BV/SB/polymer dyes</li>
+            <li><strong>Run proper controls:</strong> Single-stain compensation controls, FMO controls for gating</li>
+        </ol>
+
+        <div class="key-point"><strong>&#128161; Key Point:</strong> Brightness depends on your specific instrument's laser power, detector sensitivity, and filter configuration. Always benchmark fluorophores on your own cytometer using titrated antibodies against positive controls.</div>
+    </div>
+
+    <!-- Section 10: Cross-Vendor Equivalents -->
+    <div class="content-section accent-red" id="cross-reference">
+        <h2>&#128260; Cross-Vendor Fluorophore Equivalents</h2>
+        <p>Different vendors often produce fluorophores with nearly identical spectral properties but different names. Use this table to find equivalents across brands.</p>
+
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Spectral Region</th>
+                        <th>BD Biosciences</th>
+                        <th>Thermo Fisher</th>
+                        <th>BioLegend</th>
+                        <th>Cytek</th>
+                        <th>Beckman Coulter</th>
+                        <th>Miltenyi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>UV ~395 nm</strong></td>
+                        <td>BUV395</td>
+                        <td>&mdash;</td>
+                        <td>Spark UV 387</td>
+                        <td>cFluor UV395</td>
+                        <td>&mdash;</td>
+                        <td>&mdash;</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Violet ~421 nm</strong></td>
+                        <td>BV421</td>
+                        <td>Super Bright 436</td>
+                        <td>Brilliant Violet 421</td>
+                        <td>cFluor V435</td>
+                        <td>&mdash;</td>
+                        <td>VioBlue</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Violet ~450 nm</strong></td>
+                        <td>V450</td>
+                        <td>eFluor 450 / Pacific Blue</td>
+                        <td>&mdash;</td>
+                        <td>cFluor V450</td>
+                        <td>&mdash;</td>
+                        <td>VioBlue</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Violet ~510 nm</strong></td>
+                        <td>BV510</td>
+                        <td>eFluor 506</td>
+                        <td>Brilliant Violet 510</td>
+                        <td>cFluor V505</td>
+                        <td>Krome Orange</td>
+                        <td>VioGreen</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Violet ~605 nm</strong></td>
+                        <td>BV605</td>
+                        <td>Super Bright 600</td>
+                        <td>Brilliant Violet 605</td>
+                        <td>cFluor V605</td>
+                        <td>&mdash;</td>
+                        <td>&mdash;</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Violet ~650 nm</strong></td>
+                        <td>BV650</td>
+                        <td>Super Bright 645</td>
+                        <td>Brilliant Violet 650</td>
+                        <td>cFluor V670</td>
+                        <td>&mdash;</td>
+                        <td>&mdash;</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Violet ~711 nm</strong></td>
+                        <td>BV711</td>
+                        <td>Super Bright 702</td>
+                        <td>Brilliant Violet 711</td>
+                        <td>cFluor V715</td>
+                        <td>&mdash;</td>
+                        <td>&mdash;</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Violet ~786 nm</strong></td>
+                        <td>BV786</td>
+                        <td>Super Bright 780</td>
+                        <td>Brilliant Violet 785</td>
+                        <td>cFluor V780</td>
+                        <td>&mdash;</td>
+                        <td>&mdash;</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Blue ~520 nm</strong></td>
+                        <td>BB515</td>
+                        <td>Alexa Fluor 488</td>
+                        <td>Spark Blue 515</td>
+                        <td>cFluor B515</td>
+                        <td>&mdash;</td>
+                        <td>VioBright FITC</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Blue ~578 nm (PE)</strong></td>
+                        <td>PE</td>
+                        <td>PE</td>
+                        <td>PE</td>
+                        <td>PE</td>
+                        <td>PE</td>
+                        <td>PE</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Blue ~690 nm</strong></td>
+                        <td>BB700</td>
+                        <td>PerCP-eFluor 710</td>
+                        <td>PerCP-Cy5.5</td>
+                        <td>cFluor B690</td>
+                        <td>&mdash;</td>
+                        <td>&mdash;</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Red ~660 nm</strong></td>
+                        <td>APC</td>
+                        <td>eFluor 660 / AF647</td>
+                        <td>APC</td>
+                        <td>cFluor R659</td>
+                        <td>APC</td>
+                        <td>APC</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Red ~720 nm</strong></td>
+                        <td>APC-R700</td>
+                        <td>Alexa Fluor 700</td>
+                        <td>Spark Red 718</td>
+                        <td>cFluor R720</td>
+                        <td>&mdash;</td>
+                        <td>&mdash;</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Red ~780 nm</strong></td>
+                        <td>APC-H7</td>
+                        <td>APC-eFluor 780</td>
+                        <td>APC/Fire 750</td>
+                        <td>cFluor R780</td>
+                        <td>APC-AF750</td>
+                        <td>APC-Vio 770</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="tip"><strong>&#128161; Tip:</strong> While spectrally similar, cross-vendor dyes may have different polymer compositions that affect staining performance. Always validate an equivalent dye on your instrument before substituting in a panel.</div>
+    </div>
+
+    <!-- Section 11: Spectrum Viewer Link -->
+    <div class="content-section accent-teal" id="spectrum-tool">
+        <h2>&#127752; Interactive Spectrum Viewer Tool</h2>
+        <p>Want to visually compare fluorophore excitation and emission spectra? Our interactive Spectrum Viewer lets you:</p>
+        <ul>
+            <li>Overlay excitation and emission spectra for multiple fluorophores simultaneously</li>
+            <li>Visualize laser lines and see which dyes each laser can excite</li>
+            <li>Identify spectral overlap between fluorophores in your panel</li>
+            <li>Toggle between excitation and emission views</li>
+            <li>Search and filter from 100+ fluorophores across all vendors</li>
+        </ul>
+        <a href="spectrum-viewer.html" class="spectrum-link">&#127752; Launch Interactive Spectrum Viewer &rarr;</a>
+    </div>
+
+    <!-- Section 12: Troubleshooting -->
+    <div class="content-section accent-purple" id="troubleshooting">
+        <h2>&#128295; Troubleshooting &amp; Tips</h2>
+
+        <h3>Common Issues</h3>
+        <div class="table-wrapper">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Problem</th>
+                        <th>Likely Cause</th>
+                        <th>Solution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>High background with polymer dyes</td>
+                        <td>Polymer-polymer aggregation</td>
+                        <td>Add Brilliant Stain Buffer (BD) or equivalent to staining cocktail</td>
+                    </tr>
+                    <tr>
+                        <td>Tandem dye degradation</td>
+                        <td>Light exposure during staining</td>
+                        <td>Stain in the dark; minimize time between staining and acquisition</td>
+                    </tr>
+                    <tr>
+                        <td>Compensation errors</td>
+                        <td>Wrong compensation controls</td>
+                        <td>Use same antibody conjugate (or equivalent) on compensation beads; match lots</td>
+                    </tr>
+                    <tr>
+                        <td>Dim staining on expected positive</td>
+                        <td>Sub-optimal titration or wrong clone</td>
+                        <td>Titrate antibody; try brighter fluorophore for low-expression markers</td>
+                    </tr>
+                    <tr>
+                        <td>Spread from bright neighbors</td>
+                        <td>Spectral overlap spillover spreading</td>
+                        <td>Use fluorescence-minus-one (FMO) controls; rearrange panel to separate overlapping dyes</td>
+                    </tr>
+                    <tr>
+                        <td>Inconsistent tandem emission</td>
+                        <td>Lot-to-lot variability</td>
+                        <td>Always match compensation bead lot to antibody lot; do not mix lots</td>
+                    </tr>
+                    <tr>
+                        <td>Viability dye not working after fixation</td>
+                        <td>Used non-fixable dye (PI, 7-AAD)</td>
+                        <td>Switch to fixable viability dye (Zombie, LIVE/DEAD, FVD eFluor); stain before fixation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Quick Reference: Key Rules</h3>
+        <ol>
+            <li>Always titrate your antibodies to find the optimal concentration</li>
+            <li>Use FMO controls to set accurate gates for dim populations</li>
+            <li>Protect tandem dyes from light at all times</li>
+            <li>Use Brilliant Stain Buffer when combining multiple polymer dyes</li>
+            <li>Run compensation controls under the same fixation conditions as your samples</li>
+            <li>Assign your brightest fluorophores to your dimmest antigens</li>
+            <li>Verify cross-vendor equivalents on your own instrument before swapping in a panel</li>
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p>
+    <p>Flow Cytometry Hub &mdash; Educational Resource for Researchers and Clinicians</p>
+</footer>
+
+</body>
+</html>

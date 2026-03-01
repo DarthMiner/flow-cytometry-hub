@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q2TCYGV0LY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag("js", new Date());
+        gtag("config", "G-Q2TCYGV0LY");
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platelet &amp; RBC Analysis | Flow Cytometry Hub</title>
+    <style>
+        :root{--primary:#1a5276;--primary-light:#2980b9;--primary-dark:#0e2f44;--accent:#27ae60;--accent-light:#2ecc71;--warning:#e67e22;--danger:#e74c3c;--bg:#f4f6f9;--bg-card:#fff;--text:#2c3e50;--text-light:#7f8c8d;--border:#dce1e8;--shadow:0 2px 12px rgba(0,0,0,.08);--shadow-hover:0 6px 24px rgba(0,0,0,.12);--radius:10px}
+        *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+        .top-nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:var(--primary-dark);border-bottom:3px solid var(--accent)}.nav-container{max-width:1400px;margin:0 auto;display:flex;align-items:center;padding:0 20px}.nav-logo{color:#fff;font-size:1.3rem;font-weight:700;padding:14px 0;margin-right:30px;white-space:nowrap;text-decoration:none}.nav-logo span{color:var(--accent-light)}.back-link{color:var(--accent-light);text-decoration:none;font-size:.9rem;font-weight:500;padding:16px 18px;display:block}.back-link:hover{color:#fff}
+        .hero{margin-top:56px;background:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 50%,var(--primary-light) 100%);color:#fff;padding:60px 20px 40px;text-align:center;position:relative;overflow:hidden}.hero h1{font-size:2.4rem;margin-bottom:12px}.hero p{font-size:1.1rem;opacity:.9;max-width:750px;margin:0 auto}.breadcrumb{margin-top:10px;font-size:.9rem;opacity:.7}.breadcrumb a{color:var(--accent-light);text-decoration:none}
+        .content{max-width:1000px;margin:0 auto;padding:40px 20px 60px}.content-section{background:var(--bg-card);border-radius:var(--radius);box-shadow:var(--shadow);padding:36px 40px;margin-bottom:30px;border-left:4px solid var(--primary-light)}.content-section.accent-green{border-left-color:var(--accent)}.content-section.accent-orange{border-left-color:var(--warning)}.content-section.accent-red{border-left-color:var(--danger)}.content-section.accent-purple{border-left-color:#8e44ad}.content-section.accent-teal{border-left-color:#16a085}
+        .content-section h2{font-size:1.5rem;color:var(--primary);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border)}.content-section h3{font-size:1.15rem;color:var(--primary);margin:20px 0 10px}.content-section p{margin-bottom:14px;color:var(--text);font-size:.95rem}.content-section ul,.content-section ol{padding-left:24px;margin-bottom:14px;font-size:.95rem}.content-section li{margin-bottom:6px}
+        .tip{background:#eaf7ee;border-left:3px solid var(--accent);padding:12px 16px;margin:16px 0;border-radius:4px;font-size:.92rem}.caution{background:#fef5e7;border-left:3px solid var(--warning);padding:12px 16px;margin:16px 0;border-radius:4px;font-size:.92rem}.key-point{background:#eaf2f8;border-left:3px solid var(--primary-light);padding:12px 16px;margin:16px 0;border-radius:4px;font-size:.92rem}
+        .toc{background:var(--bg-card);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px 36px;margin-bottom:30px}.toc h3{color:var(--primary);margin-bottom:14px;font-size:1.1rem}.toc ol{padding-left:20px}.toc li{margin-bottom:6px}.toc a{color:var(--primary-light);text-decoration:none;font-size:.93rem;font-weight:500}.toc a:hover{color:var(--primary);text-decoration:underline}
+        .data-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:16px 0}.data-table thead{background:var(--primary-dark);color:#fff}.data-table th{padding:10px 14px;text-align:left;font-weight:600}.data-table td{padding:10px 14px;border-bottom:1px solid var(--border)}.data-table tbody tr:hover{background:#f0f4f8}
+        footer{background:var(--primary-dark);color:#aab7c4;padding:30px 20px;text-align:center;font-size:.9rem}footer a{color:var(--accent-light);text-decoration:none}
+        @media(max-width:768px){.content-section{padding:24px 20px}.hero h1{font-size:1.8rem}}
+    </style>
+</head>
+<body>
+
+<nav class="top-nav"><div class="nav-container"><a href="index.html" class="nav-logo">Flow Cytometry <span>Hub</span></a><a href="index.html" class="back-link">&larr; Back to Main</a></div></nav>
+
+<header class="hero">
+    <h1>&#128167; Platelet &amp; RBC Analysis</h1>
+    <p>Flow cytometric analysis of platelets, red blood cells, and reticulocytes for hematologic diagnostics and research.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> &rarr; <a href="index.html#usecases">Use Cases</a> &rarr; Platelets &amp; RBCs</div>
+</header>
+
+<main class="content">
+
+    <div class="toc"><h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#intro">Introduction: Non-Nucleated Cell Analysis</a></li>
+            <li><a href="#platelet-id">Platelet Identification &amp; Gating</a></li>
+            <li><a href="#activation">Platelet Activation Markers</a></li>
+            <li><a href="#function">Platelet Function Testing</a></li>
+            <li><a href="#reticulocytes">Reticulocyte Counting</a></li>
+            <li><a href="#pnh">Paroxysmal Nocturnal Hemoglobinuria (PNH)</a></li>
+            <li><a href="#fmh">Fetal-Maternal Hemorrhage (FMH)</a></li>
+            <li><a href="#rbc-disorders">RBC Disorders &amp; Diagnostics</a></li>
+            <li><a href="#microparticles">Microparticles &amp; Extracellular Vesicles</a></li>
+            <li><a href="#troubleshooting">Troubleshooting</a></li>
+        </ol>
+    </div>
+
+    <div class="content-section" id="intro">
+        <h2>1. Introduction: Non-Nucleated Cell Analysis</h2>
+        <p>Platelets and red blood cells (RBCs) present unique challenges for flow cytometry. Platelets are the smallest circulating cells (2&ndash;4 &mu;m diameter), highly sensitive to activation artifacts, and easily confused with cellular debris or microparticles. RBCs (6&ndash;8 &mu;m biconcave discs) lack nuclei and have minimal internal complexity, producing distinctive low-SSC scatter profiles.</p>
+        <p>Despite these challenges, flow cytometry provides rapid, quantitative, multiparameter characterization that is superior to many traditional hematology methods for specialized applications such as platelet activation studies, PNH diagnosis, reticulocyte quantification, and fetal-maternal hemorrhage detection.</p>
+        <div class="key-point"><strong>Key Concept:</strong> Platelets are extremely sensitive to artifactual activation during sample handling. Use sodium citrate anticoagulant (not EDTA for activation studies), avoid vortexing, minimize centrifugation speed and time, keep samples at room temperature, and analyze within 1&ndash;2 hours of collection. Even gentle pipetting can trigger degranulation.</div>
+    </div>
+
+    <div class="content-section accent-green" id="platelet-id">
+        <h2>2. Platelet Identification &amp; Gating</h2>
+        <p>Reliable platelet analysis requires proper identification using platelet-specific markers rather than scatter gating alone.</p>
+        <h3>Platelet-Specific Markers</h3>
+        <ul>
+            <li><strong>CD41 (GPIIb, integrin &alpha;IIb):</strong> constitutively expressed on platelets; part of the GPIIb/IIIa fibrinogen receptor</li>
+            <li><strong>CD42b (GPIb&alpha;):</strong> constitutively expressed; part of the von Willebrand factor receptor; not upregulated by activation</li>
+            <li><strong>CD61 (GPIIIa, integrin &beta;3):</strong> constitutively expressed; also found on endothelial cells (less platelet-specific)</li>
+        </ul>
+        <p>The recommended gating strategy uses log-scale FSC and SSC to resolve platelets from noise, followed by a CD41+ or CD42b+ gate to confirm platelet identity. CD42b is preferred for activation studies because its expression is constitutive and not affected by activation state (unlike CD62P or PAC-1).</p>
+
+        <h3>Platelet-Leukocyte Aggregates (PLAs)</h3>
+        <p>Activated platelets adhere to leukocytes, forming platelet-leukocyte aggregates that are elevated in thrombotic and inflammatory conditions. PLAs are detected as CD41+/CD45+ events in the leukocyte scatter gate. Platelet-monocyte aggregates (CD41+/CD14+) are particularly sensitive markers of in vivo platelet activation.</p>
+
+        <div class="tip"><strong>Tip:</strong> Always gate platelets using a specific platelet marker (CD41 or CD42b) rather than scatter alone. Scatter-only gates miss activated platelets (which increase in size and granularity) and include debris or microparticles that overlap in scatter profile.</div>
+    </div>
+
+    <div class="content-section accent-orange" id="activation">
+        <h2>3. Platelet Activation Markers</h2>
+        <table class="data-table">
+            <thead><tr><th>Marker</th><th>What It Detects</th><th>Activation Event</th><th>Clinical Significance</th></tr></thead>
+            <tbody>
+                <tr><td>CD62P (P-selectin)</td><td>&alpha;-granule membrane fusion with plasma membrane</td><td>&alpha;-granule release</td><td>Elevated in ACS, DVT, diabetes, pre-eclampsia</td></tr>
+                <tr><td>PAC-1</td><td>Activated conformation of GPIIb/IIIa</td><td>Conformational change exposing fibrinogen-binding site</td><td>Assesses GPIIb/IIIa inhibitor efficacy</td></tr>
+                <tr><td>CD63</td><td>Lysosome / dense-granule membrane</td><td>Lysosomal/dense-granule release</td><td>Marker of full activation; less sensitive than CD62P</td></tr>
+                <tr><td>Annexin V</td><td>Phosphatidylserine on platelet surface</td><td>PS externalization (procoagulant activity)</td><td>Procoagulant platelet formation; Scott syndrome diagnosis</td></tr>
+                <tr><td>Fibrinogen binding</td><td>Fibrinogen bound to activated GPIIb/IIIa</td><td>Receptor-ligand interaction</td><td>Alternative to PAC-1 using anti-fibrinogen antibody</td></tr>
+            </tbody>
+        </table>
+        <h3>Agonist Stimulation Protocols</h3>
+        <p>To assess platelet reactivity, whole blood samples are stimulated with agonists at defined concentrations before staining:</p>
+        <ul>
+            <li><strong>ADP</strong> (1&ndash;20 &mu;M): P2Y1 and P2Y12 receptor activation; blocked by clopidogrel</li>
+            <li><strong>TRAP-6</strong> (10&ndash;25 &mu;M): PAR-1 thrombin receptor peptide</li>
+            <li><strong>Collagen</strong> (1&ndash;10 &mu;g/mL): GPVI-mediated activation</li>
+            <li><strong>Epinephrine</strong> (1&ndash;10 &mu;M): &alpha;2-adrenergic receptor; synergizes with other agonists</li>
+            <li><strong>Ristocetin</strong> (0.5&ndash;1.5 mg/mL): activates GPIb-VWF binding; used for von Willebrand disease evaluation</li>
+        </ul>
+    </div>
+
+    <div class="content-section accent-red" id="function">
+        <h2>4. Platelet Function Testing</h2>
+        <p>Flow cytometry offers significant advantages over traditional light transmission aggregometry (LTA) for platelet function testing:</p>
+        <ul>
+            <li>Works with very low platelet counts (thrombocytopenia)</li>
+            <li>Requires minimal sample volume (5&ndash;20 &mu;L whole blood)</li>
+            <li>Provides multiparameter data (activation + phenotype simultaneously)</li>
+            <li>Can assess individual platelet responses rather than population averages</li>
+        </ul>
+
+        <h3>Monitoring Antiplatelet Therapy</h3>
+        <table class="data-table">
+            <thead><tr><th>Drug</th><th>Target</th><th>Flow Cytometry Readout</th><th>Expected Result if Effective</th></tr></thead>
+            <tbody>
+                <tr><td>Aspirin</td><td>COX-1 (TxA2 synthesis)</td><td>Reduced CD62P/PAC-1 response to arachidonic acid</td><td>Reduced activation to AA but normal to ADP/TRAP</td></tr>
+                <tr><td>Clopidogrel / Prasugrel</td><td>P2Y12 receptor</td><td>Reduced CD62P response to ADP; VASP phosphorylation (PRI)</td><td>PRI &lt;50% indicates adequate inhibition</td></tr>
+                <tr><td>GPIIb/IIIa inhibitors</td><td>GPIIb/IIIa</td><td>Reduced PAC-1 / fibrinogen binding</td><td>&gt;80% receptor occupancy at therapeutic doses</td></tr>
+                <tr><td>Ticagrelor</td><td>P2Y12 receptor (reversible)</td><td>VASP phosphorylation assay</td><td>PRI &lt;50%; reversible effect unlike thienopyridines</td></tr>
+            </tbody>
+        </table>
+
+        <h3>VASP Phosphorylation Assay</h3>
+        <p>The vasodilator-stimulated phosphoprotein (VASP) assay specifically measures P2Y12 receptor inhibition. PGE1 stimulation phosphorylates VASP (positive control), while ADP via P2Y12 dephosphorylates VASP. The Platelet Reactivity Index (PRI) is calculated from the ratio of phospho-VASP levels with and without ADP. This assay is available as a standardized kit (BioCytex PLT VASP/P2Y12).</p>
+    </div>
+
+    <div class="content-section accent-teal" id="reticulocytes">
+        <h2>5. Reticulocyte Counting</h2>
+        <p>Reticulocytes are immature RBCs that retain residual RNA for 1&ndash;2 days after enucleation. Their count reflects bone marrow erythropoietic activity and is a critical parameter for evaluating anemia, monitoring treatment response, and detecting early engraftment after transplantation.</p>
+        <h3>RNA-Binding Dyes for Reticulocyte Detection</h3>
+        <ul>
+            <li><strong>Thiazole orange:</strong> most commonly used; bright RNA staining; excitation 488 nm</li>
+            <li><strong>SYTO dyes (SYTO 13, 16):</strong> cell-permeant nucleic acid dyes; alternatives with different spectral properties</li>
+            <li><strong>Auramine O:</strong> used in some automated hematology analyzers</li>
+            <li><strong>New methylene blue:</strong> traditional supravital stain; used for manual reticulocyte counts</li>
+        </ul>
+
+        <h3>Immature Reticulocyte Fraction (IRF)</h3>
+        <p>Reticulocytes are subdivided by RNA content into low-fluorescence (LFR), medium-fluorescence (MFR), and high-fluorescence (HFR) categories. The IRF = MFR + HFR and represents the youngest, most immature reticulocytes. IRF rises 2&ndash;3 days before the absolute reticulocyte count increases, making it the earliest indicator of marrow recovery after chemotherapy or transplantation.</p>
+
+        <div class="key-point"><strong>Key Concept:</strong> The IRF is clinically the most valuable reticulocyte parameter because it responds faster than the absolute reticulocyte count. An increasing IRF is the earliest sign of marrow engraftment post-transplant, often preceding the neutrophil recovery by 1&ndash;3 days.</div>
+    </div>
+
+    <div class="content-section accent-purple" id="pnh">
+        <h2>6. Paroxysmal Nocturnal Hemoglobinuria (PNH)</h2>
+        <p>PNH is caused by somatic mutations in the <em>PIG-A</em> gene in hematopoietic stem cells, resulting in deficiency of glycosylphosphatidylinositol (GPI)-anchored proteins on the cell surface. Flow cytometry is the gold standard for PNH diagnosis.</p>
+
+        <h3>GPI-Anchored Markers</h3>
+        <table class="data-table">
+            <thead><tr><th>Cell Type</th><th>Markers Tested</th><th>Method</th><th>Sensitivity</th></tr></thead>
+            <tbody>
+                <tr><td>Granulocytes (neutrophils)</td><td>FLAER + CD24</td><td>FLAER binds GPI anchor directly; CD24 is GPI-linked</td><td>0.01% (high-sensitivity)</td></tr>
+                <tr><td>Monocytes</td><td>FLAER + CD14</td><td>FLAER + GPI-linked CD14</td><td>0.01%</td></tr>
+                <tr><td>RBCs</td><td>CD235a (gating) + CD59</td><td>CD59 is GPI-linked; loss indicates PNH RBCs</td><td>0.1&ndash;1% (limited by transfusions)</td></tr>
+            </tbody>
+        </table>
+
+        <p><strong>FLAER (Fluorescent Aerolysin):</strong> An Alexa Fluor 488-labeled inactive variant of the bacterial toxin aerolysin that binds directly to the GPI anchor. FLAER is the most specific reagent for PNH detection on WBCs because it detects the anchor itself, not just one linked protein.</p>
+
+        <h3>High-Sensitivity PNH Testing</h3>
+        <p>Clinical guidelines recommend acquiring a minimum of 100,000&ndash;500,000 events per lineage to achieve 0.01% sensitivity. This level of sensitivity is needed for monitoring clone size in patients on complement inhibitor therapy (eculizumab/ravulizumab) and for detecting small PNH clones in aplastic anemia or MDS patients.</p>
+
+        <div class="caution"><strong>Caution:</strong> PNH testing on RBCs alone is insufficient because transfused normal RBCs dilute the PNH clone, and complement-mediated lysis preferentially destroys PNH RBCs. Always test both RBCs (CD59) <em>and</em> WBCs (FLAER + lineage markers) for accurate clone size assessment. The WBC clone size reflects the true stem cell burden.</div>
+    </div>
+
+    <div class="content-section" id="fmh">
+        <h2>7. Fetal-Maternal Hemorrhage (FMH)</h2>
+        <p>Fetal-maternal hemorrhage occurs when fetal red blood cells enter the maternal circulation, most commonly during delivery. Accurate quantification is essential for determining the appropriate dose of Rh immunoglobulin (RhIg, anti-D) to prevent Rh alloimmunization in Rh-negative mothers.</p>
+
+        <h3>Methods Compared</h3>
+        <table class="data-table">
+            <thead><tr><th>Method</th><th>Principle</th><th>Sensitivity</th><th>Precision (CV)</th></tr></thead>
+            <tbody>
+                <tr><td>Kleihauer-Betke (KB)</td><td>Acid elution of adult HbA; fetal HbF resists acid</td><td>~0.1% fetal cells</td><td>40&ndash;100% (very poor)</td></tr>
+                <tr><td>Flow cytometry (anti-HbF)</td><td>Intracellular staining with anti-HbF antibody after fix/perm</td><td>0.01&ndash;0.1%</td><td>5&ndash;10% (excellent)</td></tr>
+                <tr><td>Flow cytometry (anti-D)</td><td>Surface staining of RhD+ fetal cells in RhD&minus; mother</td><td>0.1%</td><td>10&ndash;15% (good)</td></tr>
+            </tbody>
+        </table>
+
+        <div class="key-point"><strong>Key Concept:</strong> Flow cytometry-based FMH quantification using anti-HbF is significantly more precise than the Kleihauer-Betke test (CV of 5&ndash;10% vs. 40&ndash;100%). Professional guidelines (AABB, BCSH) increasingly recommend flow cytometry, especially for quantifying hemorrhages &gt;30 mL where precise RhIg dosing is critical. One standard RhIg dose (300 &mu;g) covers approximately 30 mL of fetal whole blood.</div>
+    </div>
+
+    <div class="content-section accent-green" id="rbc-disorders">
+        <h2>8. RBC Disorders &amp; Diagnostics</h2>
+        <h3>Eosin-5-Maleimide (EMA) Binding Test</h3>
+        <p>The EMA binding test is a rapid flow cytometric screening test for hereditary spherocytosis (HS) and other RBC membrane disorders. EMA binds to Band 3 protein (anion exchanger 1) and related membrane proteins. HS red cells show reduced EMA fluorescence (typically &lt;80% of normal mean) due to loss of membrane surface area.</p>
+
+        <h3>HbF Quantification</h3>
+        <p>Flow cytometry quantifies the percentage of F-cells (RBCs containing detectable HbF) and is used to monitor hydroxyurea therapy in sickle cell disease. Hydroxyurea increases HbF production, and rising F-cell percentages correlate with clinical improvement. Intracellular anti-HbF staining after RBC fixation and permeabilization is the standard method.</p>
+
+        <h3>Other RBC Applications</h3>
+        <ul>
+            <li><strong>G6PD deficiency screening:</strong> Fluorescent substrate-based assays detect reduced enzyme activity</li>
+            <li><strong>RBC membrane protein analysis:</strong> Spectrin, Band 3, protein 4.2 for diagnosing hereditary elliptocytosis, pyropoikilocytosis</li>
+            <li><strong>Hemoglobin variant screening:</strong> Combined with HPLC for thalassemia evaluation</li>
+        </ul>
+    </div>
+
+    <div class="content-section accent-orange" id="microparticles">
+        <h2>9. Microparticles &amp; Extracellular Vesicles</h2>
+        <p>Microparticles (MPs) are submicron membrane vesicles (0.1&ndash;1 &mu;m) shed from activated or apoptotic cells. Platelet-derived microparticles (PMPs) are the most abundant in blood and play important roles in coagulation, inflammation, and intercellular communication.</p>
+        <h3>Detection Challenges</h3>
+        <ul>
+            <li>Most MPs fall at or below the scatter detection limit of conventional flow cytometers</li>
+            <li>&ldquo;Swarm detection&rdquo; can occur when multiple small vesicles are detected as a single event</li>
+            <li>Instrument noise and background particles overlap with true MP signals</li>
+            <li>Standardization is lacking: results are instrument-dependent</li>
+        </ul>
+        <p><strong>Solutions:</strong> Use fluorescence triggering (trigger on Annexin V-FITC or cell-type specific markers rather than scatter). Use size-calibration beads (Megamix-Plus SSC/FSC). Follow ISTH/ISEV standardization guidelines. Consider dedicated small-particle instruments (Apogee, CytoFLEX with VSSC).</p>
+        <div class="caution"><strong>Caution:</strong> Microparticle analysis by flow cytometry is technically challenging and poorly standardized across laboratories and instruments. Results are highly dependent on pre-analytical variables (centrifugation protocol, freeze-thaw, anticoagulant) and analytical variables (trigger channel, threshold, flow rate). Follow ISTH Scientific Subcommittee guidelines strictly and include size-calibration beads in every experiment.</div>
+    </div>
+
+    <div class="content-section accent-red" id="troubleshooting">
+        <h2>10. Troubleshooting Platelet &amp; RBC Analysis</h2>
+        <table class="data-table">
+            <thead><tr><th>Problem</th><th>Possible Cause</th><th>Solution</th></tr></thead>
+            <tbody>
+                <tr><td>Platelet activation artifacts (high CD62P in unstimulated)</td><td>EDTA anticoagulant; vortexing; delayed processing; cold storage</td><td>Use citrate tubes; handle gently; analyze within 1&ndash;2 h; keep at room temperature</td></tr>
+                <tr><td>Poor reticulocyte resolution</td><td>Insufficient dye concentration; old dye; RBC autofluorescence overlap</td><td>Optimize thiazole orange concentration; use fresh dye stock; adjust PMT voltage</td></tr>
+                <tr><td>PNH clone underestimated</td><td>Testing only RBCs; recent transfusion dilution; complement lysis destroying PNH cells</td><td>Always test WBCs (FLAER); note transfusion history; test granulocytes for true clone size</td></tr>
+                <tr><td>Microparticle &ldquo;swarm effect&rdquo;</td><td>Too many MPs passing simultaneously at high flow rate</td><td>Dilute sample; reduce flow rate; use fluorescence triggering</td></tr>
+                <tr><td>Platelet-leukocyte aggregate artifacts</td><td>In vitro activation during sample processing</td><td>Fix whole blood immediately with 1% PFA; use no-wash staining protocol; analyze promptly</td></tr>
+                <tr><td>High background in FMH (anti-HbF)</td><td>Maternal F-cells (hereditary persistence of HbF, pregnancy-related HbF increase)</td><td>Establish maternal F-cell baseline before delivery; use HbF + carbonic anhydrase dual staining</td></tr>
+            </tbody>
+        </table>
+        <div class="tip"><strong>Tip:</strong> For platelet activation studies, prepare platelet-rich plasma (PRP) by centrifuging citrated whole blood at 150&ndash;200 &times; g for 10&ndash;15 min (no brake). Never use EDTA, which chelates calcium and prevents GPIIb/IIIa conformational change (PAC-1 binding). For whole-blood assays, stain directly without centrifugation to minimize artifactual activation.</div>
+    </div>
+
+</main>
+
+<footer>
+    <p><a href="index.html">&larr; Back to Flow Cytometry Hub</a></p>
+    <p style="margin-top: 8px;">Flow Cytometry Hub &mdash; A comprehensive educational resource for flow cytometry.</p>
+</footer>
+</body>
+</html>
