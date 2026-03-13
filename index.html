@@ -96,6 +96,21 @@
         }
         .hero h1 { font-size: 2.8rem; margin-bottom: 16px; position: relative; }
         .hero p { font-size: 1.2rem; opacity: 0.9; max-width: 700px; margin: 0 auto; position: relative; }
+        .hero-cta {
+            display: inline-flex; align-items: center; gap: 10px;
+            margin-top: 28px; padding: 14px 32px;
+            background: linear-gradient(135deg, #8e44ad, #9b59b6);
+            color: #fff; text-decoration: none;
+            font-size: 1.1rem; font-weight: 600;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(142, 68, 173, 0.4);
+            transition: all 0.3s;
+            position: relative;
+        }
+        .hero-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(142, 68, 173, 0.55);
+        }
 
         /* Section layout */
         .section {
@@ -493,6 +508,7 @@
             <li><a href="#instruments">Instruments</a></li>
             <li><a href="#reagents">Reagents</a></li>
             <li><a href="#protocols">Protocols</a></li>
+            <li><a href="spectrum-viewer.html" style="color: #bb8fce;">Spectrum Viewer</a></li>
         </ul>
     </div>
 </nav>
@@ -501,6 +517,7 @@
 <header class="hero">
     <h1>Flow Cytometry Resource Center</h1>
     <p>Your comprehensive guide to flow cytometry technology &mdash; from fundamentals and instrument selection to reagents and step-by-step protocols.</p>
+    <a href="spectrum-viewer.html" class="hero-cta">&#128202; Interactive Spectrum Viewer</a>
 </header>
 
 <!-- ============================================================ -->
